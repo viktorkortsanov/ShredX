@@ -24,7 +24,7 @@ authController.post('/login', async (req, res) => {
         res.cookie(AUTH_COOKIE_NAME, token);
         res.status(200).json(token.user);
     } catch (err) {
-        res.status(400).json(err.message);
+        res.status(400).json({err: err.message});
     }
 });
 
