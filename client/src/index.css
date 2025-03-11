@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  background-color: black;
+  background-size: cover;  /* Покрива цялата ширина и височина */
+  background-position: center center; /* Центрира изображението */
+  background-repeat: no-repeat;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

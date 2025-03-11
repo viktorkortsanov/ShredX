@@ -1,0 +1,18 @@
+.custom-card-title {
+    color: #006CFA;
+}
+
+.custom-card-text {
+    color: white;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    width: 200px;
+
+}
+
+.custom-card-prop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

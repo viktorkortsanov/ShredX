@@ -1,0 +1,12 @@
+#features-section {
+    width: 100%;
+    height: 35vh;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0px auto;
+    background-color: #18181A;
+    flex-wrap: wrap;
+}
