@@ -1,0 +1,37 @@
+.not-found-container {
+    text-align: center;
+    padding: 190px;
+    background-image: url(https://i.pinimg.com/736x/2a/a7/8a/2aa78a2c8fbe91b37bfed0fbb32fae82.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.not-found-container h1 {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.not-found-container p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.not-found-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.not-found-button:hover {
+    background-color: #0056b3;
+}
