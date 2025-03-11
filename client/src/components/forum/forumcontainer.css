@@ -1,0 +1,38 @@
+/* Стилове за ForumContainer */
+.forum-container {
+    display: flex;
+    flex-direction: column;  /* Подреждаме постовете вертикално */
+    align-items: center;  /* Центрираме контейнера */
+    padding: 100px;
+    background-color: #fafafa;  /* Светъл фон за контейнера */
+    min-height: 100vh;  /* Минимална височина за контейнера */
+    background-image: url(https://i.pinimg.com/736x/2a/a7/8a/2aa78a2c8fbe91b37bfed0fbb32fae82.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.forum-container h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.forum-container .post-item {
+    width: 80%;  /* Широчината на постовете */
+    max-width: 800px;  /* Ограничаваме максималната ширина */
+    margin-bottom: 20px;  /* Разстояние между постовете */
+}
+
+@media (max-width: 768px) {
+    /* За мобилни екрани */
+    .forum-container .post-item {
+        width: 100%;  /* Постовете да заемат 100% ширина на екрана */
+    }
+
+    .forum-container h1 {
+        font-size: 1.5rem;  /* Намаляваме размера на заглавието за мобилни екрани */
+    }
+}

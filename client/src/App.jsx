@@ -6,6 +6,7 @@ import Register from "./components/register/Register.jsx";
 import Login from "./components/login/Login.jsx";
 import { AuthProvider } from "./contexts/authContext.jsx";
 import NotFound from "./components/notfound/NotFound.jsx";
+import ForumContainer from "./components/forum/ForumContainer.jsx"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<MainContent />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forum" element={<ForumContainer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
