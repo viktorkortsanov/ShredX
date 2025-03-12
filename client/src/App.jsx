@@ -8,6 +8,7 @@ import { AuthProvider } from "./contexts/authContext.jsx";
 import NotFound from "./components/notfound/NotFound.jsx";
 import ForumContainer from "./components/forum/ForumContainer.jsx"
 import CreatePost from "./components/createPost/CreatePost.jsx";
+import PostDetails from "./components/postDetails/PostDetails.jsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/forum" element={<ForumContainer />} />
           <Route path="/create" element={<CreatePost />} />
+          <Route path="/forum/:postId/details" element={<PostDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

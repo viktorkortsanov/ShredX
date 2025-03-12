@@ -15,9 +15,7 @@ export default function ForumContainer() {
                 if (!response.ok) {
                     throw new Error('Error fetching posts');
                 }
-                const data = await response.json();
-                console.log(data);
-                
+                const data = await response.json();                
                 setPosts(data);
             } catch (error) {
                 console.error(error);

@@ -1,0 +1,88 @@
+.post-details {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* За да не центрираме всичко */
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Разстояние между името на потребителя и датата */
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.user-logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.post-date {
+    font-size: 14px;
+    color: #888;
+}
+
+.post-content {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.post-content h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.post-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.post-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.like-comment-actions,
+.edit-delete-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.like-comment-actions a,
+.edit-delete-actions a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.like-comment-actions img,
+.edit-delete-actions img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.like-comment-actions a:hover,
+.edit-delete-actions a:hover {
+    color: #0056b3;
+}
+

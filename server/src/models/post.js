@@ -20,6 +20,11 @@ const forumPostSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    owner: {
+        type: Types.ObjectId,
+        ref: 'User',  // Това ще сочи към модел User в MongoDB
+        required: true
+    },
     likes: [{
         type: Types.ObjectId,
         ref: 'User'

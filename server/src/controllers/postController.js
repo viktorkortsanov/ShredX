@@ -91,7 +91,7 @@ postController.put('/forum/:postId/edit', isAuth, async (req, res) => {
 postController.post('/create', isAuth, async (req, res) => {
     const postData = req.body;
     const userId = req.user._id;
-    
+
     try {
         const auhtor = await User.findById(userId);
         await postService.create(postData, userId, auhtor);
