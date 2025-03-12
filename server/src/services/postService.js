@@ -9,8 +9,8 @@ const postService = {
         return Post.findById(postId);
     },
 
-    create(postData, userId) {
-        return Post.create({ ...postData, owner: userId, author: userId});
+    create(postData, userId, auhtor) {
+        return Post.create({ ...postData, owner: userId, author: auhtor.username});
     },
 
     delete(postId) {

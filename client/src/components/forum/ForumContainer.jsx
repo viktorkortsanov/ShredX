@@ -1,30 +1,47 @@
 import PostItem from "./postItem/PostItem.jsx";
 import './forumcontainer.css';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/authContext.jsx";
 import { Link } from "react-router-dom";
 
 export default function ForumContainer() {
-    const { isAuthenticated } = useContext(AuthContext)
+    const { isAuthenticated } = useContext(AuthContext);
+    const [posts, setPosts] = useState([]);
 
-    const posts = [
-        { username: 'JohnDoe', title: 'My First Post', content: 'This is the content of my first post!' },
-        { username: 'JaneDoe', title: 'Another Post', content: 'Here is some more content.' },
-    ];
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await fetch('http://localhost:3030/forum');
+                if (!response.ok) {
+                    throw new Error('Error fetching posts');
+                }
+                const data = await response.json();
+                console.log(data);
+                
+                setPosts(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchPosts();
+    }, []);
 
     return (
         <div className="forum-container">
-            {/* Бутон за добавяне на пост, вижда се само за auth user-и */}
             {isAuthenticated && (
                 <Link to="/create" className="add-post-link">
                     +
                 </Link>
             )}
 
-            {/* Мапване на постовете */}
-            {posts.map((post, index) => (
-                <PostItem key={index} post={post} />
-            ))}
+            {posts.length > 0 ? (
+                posts.map((post, index) => (
+                    <PostItem key={index} post={post} />
+                ))
+            ) : (
+                <p>No posts available.</p>
+            )}
         </div>
     );
 }

@@ -1,19 +1,20 @@
 import { Router } from "express";
 import postService from "../services/postService.js";
 import { isAuth } from "../middlewares/authMiddleware.js";
+import User from "../models/user.js";
 
 const postController = Router();
 
-postController.get('/posts', async (req, res) => {
+postController.get('/forum', async (req, res) => {
     try {
         const posts = await postService.getAll().lean();
-        res.json({ posts });
+        res.json(posts);
     } catch (err) {
         res.status(500).json({ error: 'Failed to fetch posts.' });
     }
 });
 
-postController.get('/posts/:postId/details', async (req, res) => {
+postController.get('/forum/:postId/details', async (req, res) => {
     try {
         const post = await postService.getOne(req.params.postId).lean();
         const isOwner = post.owner.toString() === req.user?._id;
@@ -23,7 +24,7 @@ postController.get('/posts/:postId/details', async (req, res) => {
     }
 });
 
-postController.post('/posts/:postId/like', isAuth, async (req, res) => {
+postController.post('/forum/:postId/like', isAuth, async (req, res) => {
     const postId = req.params.postId;
     const userId = req.user._id;
 
@@ -41,7 +42,7 @@ postController.post('/posts/:postId/like', isAuth, async (req, res) => {
     }
 });
 
-postController.post('/posts/:postId/comment', isAuth, async (req, res) => {
+postController.post('/forum/:postId/comment', isAuth, async (req, res) => {
     const postId = req.params.postId;
     const { content } = req.body;
     const userId = req.user._id;
@@ -58,7 +59,7 @@ postController.post('/posts/:postId/comment', isAuth, async (req, res) => {
     }
 });
 
-postController.delete('/posts/:postId/delete', isAuth, async (req, res) => {
+postController.delete('/forum/:postId/delete', isAuth, async (req, res) => {
     if (!isPostOwner(req.params.postId, req.user?._id)) {
         return res.status(403).json({ error: 'Not authorized to delete this post.' });
     }
@@ -71,7 +72,7 @@ postController.delete('/posts/:postId/delete', isAuth, async (req, res) => {
     }
 });
 
-postController.put('/posts/:postId/edit', isAuth, async (req, res) => {
+postController.put('/forum/:postId/edit', isAuth, async (req, res) => {
     const postData = req.body;
     const postId = req.params.postId;
 
@@ -91,9 +92,9 @@ postController.post('/create', isAuth, async (req, res) => {
     const postData = req.body;
     const userId = req.user._id;
     
-
     try {
-        await postService.create(postData, userId);
+        const auhtor = await User.findById(userId);
+        await postService.create(postData, userId, auhtor);
         res.status(201).json({ message: 'Post created successfully.' });
     } catch (err) {
         console.log(err);
