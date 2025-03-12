@@ -1,16 +1,16 @@
-/* Стилове за ForumContainer */
 .forum-container {
     display: flex;
-    flex-direction: column;  /* Подреждаме постовете вертикално */
-    align-items: center;  /* Центрираме контейнера */
+    flex-direction: column;
+    align-items: center;
     padding: 100px;
-    background-color: #fafafa;  /* Светъл фон за контейнера */
-    min-height: 100vh;  /* Минимална височина за контейнера */
+    background-color: #fafafa;
+    min-height: 100vh;
     background-image: url(https://i.pinimg.com/736x/2a/a7/8a/2aa78a2c8fbe91b37bfed0fbb32fae82.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: multiply;
     background-color: rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 .forum-container h1 {
@@ -21,18 +21,48 @@
 }
 
 .forum-container .post-item {
-    width: 80%;  /* Широчината на постовете */
-    max-width: 800px;  /* Ограничаваме максималната ширина */
-    margin-bottom: 20px;  /* Разстояние между постовете */
+    width: 80%;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+.add-post-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.add-post-link:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
-    /* За мобилни екрани */
     .forum-container .post-item {
-        width: 100%;  /* Постовете да заемат 100% ширина на екрана */
+        width: 100%;
     }
 
     .forum-container h1 {
-        font-size: 1.5rem;  /* Намаляваме размера на заглавието за мобилни екрани */
+        font-size: 1.5rem;
+    }
+
+    .add-post-link {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        top: 10px;
+        right: 10px;
     }
 }
