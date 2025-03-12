@@ -1,40 +1,32 @@
-import { useState } from "react";
+import useForm from "../../hooks/useForm";
 import "./createpost.css";
 
 export default function CreatePost() {
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [error, setError] = useState("");
+    const { values, handleChange, handleSubmit, error, setError } = useForm({
+        title: "",
+        content: "",
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (!title.trim() || !content.trim()) {
-            setError("Title and content are required.");
-            return;
-        }
-
-        console.log("New Post:", { title, content });
-
-        setTitle("");
-        setContent("");
+    const submitPost = (postData) => {
+        console.log("New Post:", postData);
         setError("");
     };
 
     return (
         <div className="create-post-container">
-            <form className="create-post-form" onSubmit={handleSubmit} method="POST">
+            <form className="create-post-form" onSubmit={handleSubmit(submitPost)} method="POST">
                 <h2>Create a New Post</h2>
-                
+
                 {error && <p className="error-message">{error}</p>}
-                
+
                 <div className="input-group">
                     <label htmlFor="title">Title:</label>
                     <input
                         id="title"
                         type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        name="title"
+                        value={values.title}
+                        onChange={handleChange}
                         placeholder="Enter post title"
                     />
                 </div>
@@ -43,8 +35,9 @@ export default function CreatePost() {
                     <label htmlFor="content">Content:</label>
                     <textarea
                         id="content"
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
+                        name="content"
+                        value={values.content}
+                        onChange={handleChange}
                         placeholder="Write your post content"
                     ></textarea>
                 </div>

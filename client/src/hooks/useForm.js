@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function useForm(initialState) {
     const [values, setValues] = useState(initialState);
-    const [error, setError] = useState("");  // За грешки
+    const [error, setError] = useState("");
 
     const handleChange = (e) => {
         setValues({
@@ -22,11 +22,11 @@ export default function useForm(initialState) {
         }
 
         try {
-            await callback(values);  // Извикване на колбек с данни
+            await callback(values);
         } catch (err) {
-            setError(err.message);  // Обработване на грешки от сървъра
+            setError(err.message);
         }
     };
 
-    return { values, handleChange, handleSubmit, error, setError };  // Връщаме setError тук
+    return { values, handleChange, handleSubmit, error, setError };
 }

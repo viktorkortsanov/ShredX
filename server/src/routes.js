@@ -1,9 +1,9 @@
 import { Router } from "express";
 import authController from "./controllers/authController.js";
-import volcanoController from "./controllers/volcanoController.js";
+import postController from "./controllers/postController.js";
 
 const routes = Router();
 
 routes.use(authController);
-routes.use(volcanoController);
+routes.use(postController);
 export default routes

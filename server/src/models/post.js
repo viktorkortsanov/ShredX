@@ -43,6 +43,6 @@ const forumPostSchema = new Schema({
     }]
 });
 
-const ForumPost = model('ForumPost', forumPostSchema);
+const Post = model('Post', forumPostSchema);
 
-export default ForumPost;
+export default Post;
