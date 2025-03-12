@@ -1,33 +1,18 @@
 import './register.css';
-import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import useForm from '../../hooks/useForm.js';
 
 export default function Register() {
-    const [formData, setFormData] = useState({
+    const navigate = useNavigate();
+
+    const { values, handleChange, handleSubmit, error, setError } = useForm({
         username: '',
         email: '',
         password: '',
         rePassword: ''
     });
 
-    const navigate = useNavigate();
-
-    const [error, setError] = useState('');
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-    
-        const userData = {
-            username: formData.username,
-            email: formData.email,
-            password: formData.password,
-            rePassword: formData.rePassword
-        };
-            
+    const submitRegistration = async (userData) => {
         try {
             const response = await fetch('http://localhost:3030/register', {
                 method: 'POST',
@@ -40,18 +25,18 @@ export default function Register() {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.err)
+                throw new Error(errorData.err);
             }
+            
             navigate('/');
         } catch (err) {
             setError(err.message);
         }
     };
-    
 
     return (
         <div className="register-container">
-            <form className="register-form" method="POST" onSubmit={handleSubmit}>
+            <form className="register-form" method="POST" onSubmit={handleSubmit(submitRegistration)}>
                 <h2>Create an Account</h2>
 
                 {error && <p className="error">{error}</p>}
@@ -62,7 +47,7 @@ export default function Register() {
                         type="text"
                         id="username"
                         name="username"
-                        value={formData.username}
+                        value={values.username}
                         placeholder='Enter your username'
                         onChange={handleChange}
                     />
@@ -74,7 +59,7 @@ export default function Register() {
                         type="email"
                         id="email"
                         name="email"
-                        value={formData.email}
+                        value={values.email}
                         placeholder='Enter your email'
                         onChange={handleChange}
                     />
@@ -86,7 +71,7 @@ export default function Register() {
                         type="password"
                         id="password"
                         name="password"
-                        value={formData.password}
+                        value={values.password}
                         placeholder='Enter your password'
                         onChange={handleChange}
                     />
@@ -98,7 +83,7 @@ export default function Register() {
                         type="password"
                         id="rePassword"
                         name="rePassword"
-                        value={formData.rePassword}
+                        value={values.rePassword}
                         placeholder='Confirm your password'
                         onChange={handleChange}
                     />

@@ -33,7 +33,7 @@ const authService = {
         const isValid = await bcrypt.compare(password, user.password);
 
         if (!isValid) {
-            throw new Error('Invalid user or password');
+            throw new Error('Invalid email or password');
         }
 
         return this.generateToken(user);
