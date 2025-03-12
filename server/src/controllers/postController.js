@@ -29,7 +29,7 @@ postController.post('/posts/:postId/like', isAuth, async (req, res) => {
 
     try {
         const post = await postService.getOne(postId);
-        
+
         if (post.likes.includes(userId)) {
             return res.status(400).json({ error: 'You have already liked this post.' });
         }
@@ -90,11 +90,13 @@ postController.put('/posts/:postId/edit', isAuth, async (req, res) => {
 postController.post('/create', isAuth, async (req, res) => {
     const postData = req.body;
     const userId = req.user._id;
+    
 
     try {
-        const newPost = await postService.create(postData, userId);
-        res.status(201).json({ message: 'Post created successfully.', post: newPost });
+        await postService.create(postData, userId);
+        res.status(201).json({ message: 'Post created successfully.' });
     } catch (err) {
+        console.log(err);
         res.status(500).json({ error: 'Failed to create post.' });
     }
 });

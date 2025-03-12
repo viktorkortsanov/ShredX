@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 import "./createpost.css";
 
@@ -7,9 +8,28 @@ export default function CreatePost() {
         content: "",
     });
 
-    const submitPost = (postData) => {
-        console.log("New Post:", postData);
-        setError("");
+    const navigate = useNavigate();
+
+    const submitPost = async (postData) => {
+        try {
+            const response = await fetch("http://localhost:3030/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(postData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.err);
+            }
+            navigate('/forum');
+            setError("");
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     return (

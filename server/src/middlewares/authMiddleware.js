@@ -23,7 +23,7 @@ export const authMiddleware = async (req, res, next) => {
 
 export const isAuth = (req, res, next) => {
     if (!req.user) {
-        return res.redirect('/login');
+        return res.json({ message: 'Error' });
     }
 
     next();
@@ -31,7 +31,7 @@ export const isAuth = (req, res, next) => {
 
 export const isGuest = (req, res, next) => {
     if (req.user) {
-        return res.redirect('404');
+        return res.json({ message: 'Error' });
     };
 
     next();

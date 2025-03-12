@@ -10,7 +10,7 @@ const postService = {
     },
 
     create(postData, userId) {
-        return Post.create({ ...postData, owner: userId, likes: [], comments: [] });
+        return Post.create({ ...postData, owner: userId, author: userId});
     },
 
     delete(postId) {
