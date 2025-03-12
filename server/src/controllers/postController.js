@@ -15,7 +15,7 @@ postController.get('/forum', async (req, res) => {
 });
 
 postController.get('/forum/:postId/details', async (req, res) => {
-    try {
+    try { 
         const post = await postService.getOne(req.params.postId).lean();
         const isOwner = post.owner.toString() === req.user?._id;
         res.json({ post, isOwner });

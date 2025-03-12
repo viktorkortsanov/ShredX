@@ -22,7 +22,7 @@ const forumPostSchema = new Schema({
     },
     owner: {
         type: Types.ObjectId,
-        ref: 'User',  // Това ще сочи към модел User в MongoDB
+        ref: 'User',
         required: true
     },
     likes: [{

@@ -4,24 +4,25 @@ import { AuthContext } from '../../contexts/authContext';
 import './PostDetails.css';
 
 const PostDetails = () => {
-    const { postId } = useParams();    
+    const { postId } = useParams();
     const [post, setPost] = useState(null);
-    const { isAuthenticated, userId } = useContext(AuthContext);
+    const [isOwner, setIsOwner] = useState(false);
+    const { isAuthenticated } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await fetch(`http://localhost:3030/forum/${postId}/details`);
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log(data);
-                    
-                    setPost(data);
-                } else {
-                    console.error('Failed to fetch post');
+                const response = await fetch(`http://localhost:3030/forum/${postId}/details`, {
+                    credentials: 'include'
+                });
+                if (!response.ok) {
+                    throw new Error('Error fetching post');
                 }
+                const data = await response.json();
+                setPost(data.post);
+                setIsOwner(data.isOwner);
             } catch (error) {
-                console.error('Error fetching post:', error);
+                console.error(error);
             }
         };
 
@@ -29,47 +30,42 @@ const PostDetails = () => {
     }, [postId]);
 
     if (!post) {
-        return null; // Можеш да добавиш loading състояние тук, ако искаш
+        return <div>Loading...</div>;
     }
-
-    const isOwner = post.authorId === userId;
 
     return (
         <div className="post-details">
             <div className="post-header">
-                <div className="user-logo">
-                    <img src="/images/user-logo.png" alt="user-logo" />
+                <div className="user-info">
+                    <img src="/images/user-logo.png" alt="User Logo" className="user-logo" />
+                    <span className="username">{post.author}</span>
                 </div>
-                <span className="username">{post.author}</span>
                 <span className="post-date">{new Date(post.createdAt).toLocaleDateString()}</span>
             </div>
-            <div className="post-content">
-                <h2>{post.title}</h2>
-                <p>{post.content}</p>
-                <div className="post-actions">
-                    {/* Ако потребителят е автентикиран и не е собственик на поста, показваме Like и Comment */}
-                    {isAuthenticated && !isOwner && (
-                        <div className="like-comment-actions">
-                            <Link to={`/like/${postId}`} className="like">
-                                <img src="/images/like.png" alt="like" />
-                            </Link>
-                            <Link to={`/comment/${postId}`} className="comment">
-                                <img src="/images/comment.png" alt="comment" />
-                            </Link>
-                        </div>
-                    )}
-                    {/* Ако потребителят е собственик на поста, показваме Edit и Delete */}
-                    {isOwner && (
-                        <div className="edit-delete-actions">
-                            <Link to={`/edit/${postId}`} className="edit">
-                                Edit
-                            </Link>
-                            <Link to={`/delete/${postId}`} className="delete">
-                                Delete
-                            </Link>
-                        </div>
-                    )}
-                </div>
+
+            <div className="details-container">
+                <div className="detail-item">Title: {post.title}</div>
+                <div className="detail-item">Content: {post.content}</div>
+            </div>
+
+            <div className="post-actions">
+                {isAuthenticated && !isOwner && (
+                    <div className="like-comment-actions">
+                        <Link to={`/forum/${postId}/like`} className="action-btn">
+                            <img src="/images/like.png" alt="Like" className="action-img" />
+                        </Link>
+                        <Link to={`/forum/${postId}/comment`} className="action-btn">
+                            <img src="/images/comment.png" alt="Comment" className="action-img" />
+                        </Link>
+                    </div>
+                )}
+
+                {isOwner && (
+                    <div className="edit-delete-actions">
+                        <Link to={`/forum/${postId}/edit`} className="action-btn edit">Edit</Link>
+                        <Link to={`/forum/${postId}/delete`} className="action-btn delete">Delete</Link>
+                    </div>
+                )}
             </div>
         </div>
     );

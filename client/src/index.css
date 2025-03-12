@@ -3,10 +3,11 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  background-color: black;
-  background-size: cover;  /* Покрива цялата ширина и височина */
-  background-position: center center; /* Центрира изображението */
+  background-image: url(https://i.pinimg.com/736x/2a/a7/8a/2aa78a2c8fbe91b37bfed0fbb32fae82.jpg);
   background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+  background-color: rgba(0, 0, 0, 0.5);
   font-weight: bold;
   display: flex;
   flex-direction: column;

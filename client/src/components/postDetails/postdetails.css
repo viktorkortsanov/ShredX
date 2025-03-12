@@ -1,88 +1,135 @@
+/* Основен контейнер за детайлите на поста */
 .post-details {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* За да не центрираме всичко */
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    margin: 123px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
 }
 
+/* Хедър с логото, автора и датата */
 .post-header {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Разстояние между името на потребителя и датата */
+    justify-content: space-between;
     width: 100%;
-    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
 }
 
-.user-logo img {
-    width: 40px;
-    height: 40px;
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-logo {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    margin-right: 10px;
 }
 
 .username {
-    font-weight: bold;
     font-size: 18px;
+    font-weight: bold;
 }
 
 .post-date {
     font-size: 14px;
-    color: #888;
+    color: #777;
 }
 
-.post-content {
-    margin-top: 15px;
-    width: 100%;
-}
-
-.post-content h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.post-content p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-}
-
-.post-actions {
-    margin-top: 20px;
+/* Контейнер с детайлите на поста */
+.details-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
     width: 100%;
+    padding: 20px;
+    background-color: #f7f7f7; /* Лек сив фон */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Лека сянка за ефект */
 }
 
-.like-comment-actions,
+/* Детайлите на поста */
+.detail-item {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Бутони за действия */
+.post-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Стилове за линковете, които съдържат изображения (Like, Comment) */
+.action-btn {
+    display: inline-block;  /* Това позволява изображенията да се държат като бутони */
+    transition: opacity 0.3s ease; /* Плавно затъмняване при hover */
+    margin-right: 20px;  /* Добавено разстояние между бутоните */
+}
+
+/* Позициониране на изображенията */
+.action-img {
+    width: 40px; /* Размер на изображението */
+    height: 40px; /* Размер на изображението */
+    object-fit: cover; /* За да се избегнат изкривявания на изображението */
+}
+
+/* Плавно затъмняване при hover */
+.action-btn:hover .action-img {
+    opacity: 0.7; /* Намаляваме незначително непрозрачността при hover */
+}
+
+/* За последния линк да няма margin */
+.action-btn:last-child {
+    margin-right: 0;
+}
+
+/* Стилове за Edit и Delete бутоните */
 .edit-delete-actions {
     display: flex;
     gap: 15px;
 }
 
-.like-comment-actions a,
-.edit-delete-actions a {
+/* Текстови бутони за Edit и Delete */
+.action-btn.edit, .action-btn.delete {
     text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
+    font-size: 16px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.like-comment-actions img,
-.edit-delete-actions img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+.edit {
+    background-color: #006CFA;
 }
 
-.like-comment-actions a:hover,
-.edit-delete-actions a:hover {
-    color: #0056b3;
+.edit:hover {
+    background-color: #0056b3;
 }
 
+.delete {
+    background-color: #dc3545;
+}
+
+.delete:hover {
+    background-color: #c82333;
+}
