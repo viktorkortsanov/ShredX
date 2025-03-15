@@ -1,19 +1,16 @@
-export const logout = async (navigate) => {
+export const logout = async (setIsAuthenticated, navigate) => {
     try {
-        const response = await fetch('http://localhost:3030/logout', {
-            method: 'GET',
+        await fetch("http://localhost:3030/logout", {
+            method: "GET",
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'aplication/json'
             },
-            credentials: 'include',
+            credentials: "include",
         });
 
-        if (!response.ok) {
-            throw new Error('Logout failed');
-        }
-
-        navigate('/');
-    } catch (error) {
-        console.error('Error during logout:', error);
+        setIsAuthenticated(false);
+        navigate("/");
+    } catch (err) {
+        console.error("Logout error:", err);
     }
 };

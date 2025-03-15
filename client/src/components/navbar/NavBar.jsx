@@ -5,7 +5,7 @@ import { AuthContext } from "../../contexts/authContext.jsx";
 import { logout } from "../../utils/logout.js";
 
 export default function NavBar() {
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ export default function NavBar() {
 
     const handleLogout = async (e) => {
         e.preventDefault();
-        await logout(navigate);
+        await logout(setIsAuthenticated, navigate);
     };
 
     return (
