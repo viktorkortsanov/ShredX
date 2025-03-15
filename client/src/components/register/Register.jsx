@@ -1,12 +1,12 @@
-import { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/authSlice';
+import { Link, useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
-import { AuthContext } from '../../contexts/authContext.jsx';
 import './register.css';
 
 export default function Register() {
     const navigate = useNavigate();
-    const { setIsAuthenticated } = useContext(AuthContext);
+    const dispatch = useDispatch();
     const { values, handleChange, handleSubmit, error, setError } = useForm({
         username: '',
         email: '',
@@ -14,39 +14,32 @@ export default function Register() {
         rePassword: ''
     });
 
-    const [userData, setUserData] = useState(null);
+    const submitRegistration = async (userData) => {
+        try {
+            const response = await fetch('http://localhost:3030/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(userData)
+            });
 
-    useEffect(() => {
-        if (!userData) return;
-        const submitRegistration = async () => {
-            try {
-                const response = await fetch('http://localhost:3030/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify(userData)
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.err);
-                }
-
-                setIsAuthenticated(true);
-                navigate('/');
-            } catch (err) {
-                setError(err.message);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.err);
             }
-        };
 
-        submitRegistration();
-    }, [userData, navigate, setError, setIsAuthenticated]);
+            dispatch(login());
+            navigate('/');
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
     return (
         <div className="register-container">
-            <form className="register-form" method="POST" onSubmit={handleSubmit(setUserData)}>
+            <form className="register-form" method="POST" onSubmit={handleSubmit(submitRegistration)}>
                 <h2>Create an Account</h2>
 
                 {error && <p className="error">{error}</p>}
@@ -58,7 +51,7 @@ export default function Register() {
                         id="username"
                         name="username"
                         value={values.username}
-                        placeholder='Enter your username'
+                        placeholder="Enter your username"
                         onChange={handleChange}
                     />
                 </div>
@@ -70,7 +63,7 @@ export default function Register() {
                         id="email"
                         name="email"
                         value={values.email}
-                        placeholder='Enter your email'
+                        placeholder="Enter your email"
                         onChange={handleChange}
                     />
                 </div>
@@ -82,7 +75,7 @@ export default function Register() {
                         id="password"
                         name="password"
                         value={values.password}
-                        placeholder='Enter your password'
+                        placeholder="Enter your password"
                         onChange={handleChange}
                     />
                 </div>
@@ -94,7 +87,7 @@ export default function Register() {
                         id="rePassword"
                         name="rePassword"
                         value={values.rePassword}
-                        placeholder='Confirm your password'
+                        placeholder="Confirm your password"
                         onChange={handleChange}
                     />
                 </div>

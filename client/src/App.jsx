@@ -4,16 +4,17 @@ import MainContent from "./components/mainContent/MainContent.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Register from "./components/register/Register.jsx";
 import Login from "./components/login/Login.jsx";
-import { AuthProvider } from "./contexts/authContext.jsx";
 import NotFound from "./components/notfound/NotFound.jsx";
 import ForumContainer from "./components/forum/ForumContainer.jsx"
 import CreatePost from "./components/createPost/CreatePost.jsx";
 import PostDetails from "./components/postDetails/PostDetails.jsx";
+import store from "./store/store.js";
+import { Provider } from "react-redux"
 
 function App() {
   return (
     <>
-      <AuthProvider>
+      <Provider store={store}>
         <NavBar />
         <Routes>
           <Route path="/" element={<MainContent />} />
@@ -25,7 +26,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
-      </AuthProvider>
+      </Provider>
     </>
   );
 }

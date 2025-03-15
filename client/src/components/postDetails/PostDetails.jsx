@@ -1,13 +1,13 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
-import { AuthContext } from '../../contexts/authContext';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './PostDetails.css';
 
 const PostDetails = () => {
     const { postId } = useParams();
     const [post, setPost] = useState(null);
     const [isOwner, setIsOwner] = useState(false);
-    const { isAuthenticated } = useContext(AuthContext);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -59,7 +59,6 @@ const PostDetails = () => {
                         </Link>
                     </div>
                 )}
-
                 {isOwner && (
                     <div className="edit-delete-actions">
                         <Link to={`/forum/${postId}/edit`} className="action-btn edit">Edit</Link>

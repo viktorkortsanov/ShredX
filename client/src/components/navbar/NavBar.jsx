@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './navbar.css';
-import { AuthContext } from "../../contexts/authContext.jsx";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../utils/logout.js";
+import { logout as logoutAction } from "../../store/authSlice.js";
 
 export default function NavBar() {
-    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const dispatch = useDispatch();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -15,7 +17,9 @@ export default function NavBar() {
 
     const handleLogout = async (e) => {
         e.preventDefault();
-        await logout(setIsAuthenticated, navigate);
+        await logout();
+        dispatch(logoutAction());
+        navigate('/');
     };
 
     return (
@@ -24,7 +28,7 @@ export default function NavBar() {
                 <ul>
                     <li>
                         <Link to="/" id="nav-logo">
-                            <img src="../../public/images/shredx-logo.png" />
+                            <img src="../../public/images/shredx-logo.png" alt="Logo" />
                         </Link>
                     </li>
                     <li><Link to="/">Home</Link></li>
@@ -33,7 +37,7 @@ export default function NavBar() {
                         <>
                             <li><Link to="/programs">Programs</Link></li>
                             <li className="user-icon" onClick={toggleMenu}>
-                                <img src="../../public/images/personalization.png" />
+                                <img src="../../public/images/personalization.png" alt="User Icon" />
                                 {isMenuOpen && (
                                     <ul className="dropdown-menu">
                                         <li><Link to="/profile">Profile</Link></li>
