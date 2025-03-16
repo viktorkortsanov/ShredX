@@ -20,7 +20,7 @@ const userApi = {
             throw new Error(err.message);
         }
     },
-    
+
     login: async (userData) => {
         try {
             const response = await fetch('http://localhost:3030/login', {
@@ -37,7 +37,11 @@ const userApi = {
                 throw new Error(errorData.err);
             }
 
-            return true;
+            const { token, user } = await response.json();
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('token', token);
+
+            return { token, user };
         } catch (err) {
             throw new Error(err.message);
         }
@@ -52,10 +56,11 @@ const userApi = {
                 },
                 credentials: "include",
             });
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
         } catch (err) {
             console.error("Logout error:", err);
         }
     }
 };
-
 export default userApi;

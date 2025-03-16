@@ -1,13 +1,10 @@
-import { useDispatch } from 'react-redux';
-import { login } from '../../store/authSlice.js';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
 import userApi from '../../api/userApi.js';
 import './login.css';
 
 export default function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { values, handleChange, handleSubmit, error, setError } = useForm({
     email: '',
     password: '',
@@ -15,9 +12,12 @@ export default function Login() {
 
   const submitLogin = async (userData) => {
     try {
-      await userApi.login(userData);
-      dispatch(login(userData));
-      navigate('/');
+      const { token, user } = await userApi.login(userData);
+      if (user && token) {
+        navigate('/');
+      } else {
+        setError('Invalid login credentials');
+      }
     } catch (err) {
       setError(err.message);
     }

@@ -1,7 +1,7 @@
 import User from "../models/user.js";
-import bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 import { JWT_SECRET } from "../constants.js";
+import bcrypt from 'bcrypt'
 
 const authService = {
     async register(username, email, password, rePassword) {
@@ -21,8 +21,13 @@ const authService = {
             password
         });
 
-        return this.generateToken(newUser);
+        const token = await this.generateToken(newUser);
+        return {
+            token,
+            user: { _id: newUser._id, email: newUser.email, username: newUser.username }
+        };
     },
+
     async login(email, password) {
         const user = await User.findOne({ email });
 
@@ -30,13 +35,18 @@ const authService = {
             throw new Error('Invalid user');
         }
 
-        const isValid = await bcrypt.compare(password, user.password);
+        const isValid = await bcrypt.compare(password, user.password)
 
         if (!isValid) {
             throw new Error('Invalid email or password');
         }
 
-        return this.generateToken(user);
+        const token = await this.generateToken(user);
+
+        return {
+            token,
+            user: { _id: user._id, email: user.email, username: user.username }
+        };
     },
 
     async generateToken(user) {

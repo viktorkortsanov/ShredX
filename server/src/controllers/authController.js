@@ -20,13 +20,18 @@ authController.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const token = await authService.login(email, password);
-        res.cookie(AUTH_COOKIE_NAME, token);
-        res.status(200).json(token.user);
+        const { token, user } = await authService.login(email, password);
+
+        // Увери се, че токенът се записва правилно в cookie с правилното име
+        res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true }); // Внимавай за опцията httpOnly
+
+        // Връщай user данни, за да ги получи клиента
+        res.status(200).json({ token, user });
     } catch (err) {
-        res.status(400).json({err: err.message});
+        res.status(400).json({ err: err.message });
     }
 });
+
 
 authController.get('/logout', (req, res) => {
     res.clearCookie(AUTH_COOKIE_NAME);
