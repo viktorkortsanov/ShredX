@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/authSlice';
+import { login } from '../../store/authSlice.js';
 import { Link, useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
+import userApi from '../../api/userApi.js';
 import './register.css';
 
 export default function Register() {
@@ -14,22 +15,9 @@ export default function Register() {
         rePassword: ''
     });
 
-    const submitRegistration = async (userData) => {
+    const handleRegister = async (userData) => {
         try {
-            const response = await fetch('http://localhost:3030/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify(userData)
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.err);
-            }
-
+            await userApi.register(userData);
             dispatch(login());
             navigate('/');
         } catch (err) {
@@ -39,7 +27,7 @@ export default function Register() {
 
     return (
         <div className="register-container">
-            <form className="register-form" method="POST" onSubmit={handleSubmit(submitRegistration)}>
+            <form className="register-form" method="POST" onSubmit={handleSubmit(handleRegister)}>
                 <h2>Create an Account</h2>
 
                 {error && <p className="error">{error}</p>}

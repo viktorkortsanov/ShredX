@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 import "./createpost.css";
+import postApi from "../../api/postApi.js";
 
 export default function CreatePost() {
     const { values, handleChange, handleSubmit, error, setError } = useForm({
@@ -12,19 +13,7 @@ export default function CreatePost() {
 
     const submitPost = async (postData) => {
         try {
-            const response = await fetch("http://localhost:3030/create", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify(postData),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.err);
-            }
+            await postApi.create(postData);
             navigate('/forum');
             setError("");
         } catch (err) {

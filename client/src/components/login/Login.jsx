@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../store/authSlice.js';
 import { Link, useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
+import userApi from '../../api/userApi.js';
 import './login.css';
 
 export default function Login() {
@@ -14,20 +15,7 @@ export default function Login() {
 
   const submitLogin = async (userData) => {
     try {
-      const response = await fetch('http://localhost:3030/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.err);
-      }
-
+      await userApi.login(userData);
       dispatch(login());
       navigate('/');
     } catch (err) {

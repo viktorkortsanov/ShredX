@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './navbar.css';
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../utils/logout.js";
+import userApi from "../../api/userApi.js";
 import { logout as logoutAction } from "../../store/authSlice.js";
 
 export default function NavBar() {
@@ -17,7 +17,7 @@ export default function NavBar() {
 
     const handleLogout = async (e) => {
         e.preventDefault();
-        await logout();
+        await userApi.logout();
         dispatch(logoutAction());
         navigate('/');
     };
