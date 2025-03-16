@@ -9,23 +9,23 @@ header {
 }
 
 nav {
-    margin: 1px auto;
     width: 100%;
     border: 1px solid rgb(146, 146, 146);
     background-color: #18181A;
-    padding-top: 15px;
+    padding: 15px 0; /* Добавяне на padding */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Центриране на съдържанието */
     align-items: center;
 }
 
 ul {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center; /* Центриране на елементите в списъка */
     list-style-type: none;
     flex-wrap: wrap;
     gap: 50px;
     align-items: center;
+    padding: 0; /* Премахване на неструктуриран padding */
 }
 
 nav a {

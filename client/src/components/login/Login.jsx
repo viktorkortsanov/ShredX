@@ -16,7 +16,7 @@ export default function Login() {
   const submitLogin = async (userData) => {
     try {
       await userApi.login(userData);
-      dispatch(login());
+      dispatch(login(userData));
       navigate('/');
     } catch (err) {
       setError(err.message);

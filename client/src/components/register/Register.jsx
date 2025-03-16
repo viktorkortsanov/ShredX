@@ -18,7 +18,7 @@ export default function Register() {
     const handleRegister = async (userData) => {
         try {
             await userApi.register(userData);
-            dispatch(login());
+            dispatch(login(userData));
             navigate('/');
         } catch (err) {
             setError(err.message);

@@ -72,7 +72,17 @@ postController.delete('/forum/:postId/delete', isAuth, async (req, res) => {
     }
 });
 
-postController.put('/forum/:postId/edit', isAuth, async (req, res) => {
+postController.get('/forum/:postId/edit', isAuth, async (req, res) => {
+    try {
+        const post = await postService.getOne(req.params.postId).lean();
+        res.status(200).json(post);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch post.' });
+    }
+});
+
+
+postController.post('/forum/:postId/edit', isAuth, async (req, res) => {
     const postData = req.body;
     const postId = req.params.postId;
 
