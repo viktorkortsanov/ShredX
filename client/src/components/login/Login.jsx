@@ -2,8 +2,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
 import userApi from '../../api/userApi.js';
 import './login.css';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/authSlice.js';
 
 export default function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { values, handleChange, handleSubmit, error, setError } = useForm({
     email: '',
@@ -13,11 +16,8 @@ export default function Login() {
   const submitLogin = async (userData) => {
     try {
       const { token, user } = await userApi.login(userData);
-      if (user && token) {
-        navigate('/');
-      } else {
-        setError('Invalid login credentials');
-      }
+      dispatch(login({ _id: user._id, email: user.email, token }));
+      navigate('/');
     } catch (err) {
       setError(err.message);
     }

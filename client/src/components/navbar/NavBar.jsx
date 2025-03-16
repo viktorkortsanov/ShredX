@@ -28,7 +28,7 @@ export default function NavBar() {
                 <ul>
                     <li>
                         <Link to="/" id="nav-logo">
-                            <img src="../../public/images/shredx-logo.png" alt="Logo" />
+                            <img src="/images/shredx-logo.png" alt="Logo" />
                         </Link>
                     </li>
                     <li><Link to="/">Home</Link></li>
@@ -37,7 +37,7 @@ export default function NavBar() {
                         <>
                             <li><Link to="/programs">Programs</Link></li>
                             <li className="user-icon" onClick={toggleMenu}>
-                                <img src="../../public/images/personalization.png" alt="User Icon" />
+                                <img src="/images/personalization.png" alt="User Icon" />
                                 {isMenuOpen && (
                                     <ul className="dropdown-menu">
                                         <li><Link to="/profile">Profile</Link></li>
