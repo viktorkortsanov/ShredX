@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../../store/authSlice.js';
+import { login } from '../../store/authSlice.js';
 import { Link, useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
 import userApi from '../../api/userApi.js';
@@ -18,8 +18,7 @@ export default function Register() {
     const handleRegister = async (userData) => {
         try {
             await userApi.register(userData);
-            dispatch(loginSuccess(userData));
-            localStorage.setItem('user', JSON.stringify(userData));
+            dispatch(login(userData));
             navigate('/');
         } catch (err) {
             setError(err.message);
