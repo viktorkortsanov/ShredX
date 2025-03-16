@@ -9,7 +9,6 @@ import ForumContainer from "./components/forum/ForumContainer.jsx"
 import CreatePost from "./components/createPost/CreatePost.jsx";
 import PostDetails from "./components/postDetails/PostDetails.jsx";
 import EditPost from "./components/editPost/EditPost.jsx";
-import AuthChecker from "./utils/AuthCheker.jsx";
 import store from "./store/store.js";
 import { Provider } from "react-redux"
 
@@ -17,7 +16,6 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <AuthChecker />
         <NavBar />
         <Routes>
           <Route path="/" element={<MainContent />} />
