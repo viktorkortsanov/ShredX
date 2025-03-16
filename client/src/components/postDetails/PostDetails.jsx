@@ -1,13 +1,17 @@
-import { useParams, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './PostDetails.css';
+import ConfirmationDialog from '../confirmDialog/ConfirmDialog.jsx';
+import postApi from '../../api/postApi';  // Импортираме postApi
 
 const PostDetails = () => {
     const { postId } = useParams();
     const [post, setPost] = useState(null);
     const [isOwner, setIsOwner] = useState(false);
+    const [showDialog, setShowDialog] = useState(false);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -32,6 +36,23 @@ const PostDetails = () => {
     if (!post) {
         return <div>Loading...</div>;
     }
+
+    const handleDelete = async () => {
+        try {
+            const response = await postApi.delete(postId);
+            if (response) {
+                navigate('/forum');
+            }
+        } catch (error) {
+            console.error('Error deleting post:', error);
+        } finally {
+            setShowDialog(false);
+        }
+    };
+
+    const handleCancel = () => {
+        setShowDialog(false);
+    };
 
     return (
         <div className="post-details">
@@ -62,12 +83,15 @@ const PostDetails = () => {
                 {isOwner && (
                     <div className="edit-delete-actions">
                         <Link to={`/forum/${postId}/edit`} className="action-btn edit">Edit</Link>
-                        <Link to={`/forum/${postId}/delete`} className="action-btn delete">Delete</Link>
+                        <button className="action-btn delete" onClick={() => setShowDialog(true)}>Delete</button>
                     </div>
                 )}
             </div>
+            
+            {showDialog && (
+                <ConfirmationDialog onCancel={handleCancel} onConfirm={handleDelete} />
+            )}
         </div>
     );
 };
-
 export default PostDetails;

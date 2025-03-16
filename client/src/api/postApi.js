@@ -29,17 +29,17 @@ const postApi = {
                 },
                 credentials: "include",
             });
-    
+
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.err);
             }
-    
+
             return await response.json();
         } catch (err) {
             throw new Error(err.message);
         }
-    },    
+    },
     edit: async (id, postData) => {
         try {
             const response = await fetch(`http://localhost:3030/forum/${id}/edit`, {
@@ -60,7 +60,26 @@ const postApi = {
         } catch (err) {
             throw new Error(err.message);
         }
-    }
-}
+    },
+    delete: async (id) => {
+        try {
+            const response = await fetch(`http://localhost:3030/forum/${id}/delete`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
 
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.err);
+            }
+
+            return true;
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    }
+};
 export default postApi;

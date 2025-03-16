@@ -59,7 +59,7 @@ postController.post('/forum/:postId/comment', isAuth, async (req, res) => {
     }
 });
 
-postController.delete('/forum/:postId/delete', isAuth, async (req, res) => {
+postController.get('/forum/:postId/delete', isAuth, async (req, res) => {
     if (!isPostOwner(req.params.postId, req.user?._id)) {
         return res.status(403).json({ error: 'Not authorized to delete this post.' });
     }
