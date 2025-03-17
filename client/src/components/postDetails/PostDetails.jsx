@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './PostDetails.css';
 import ConfirmationDialog from '../confirmDialog/ConfirmDialog.jsx';
-import postApi from '../../api/postApi';  // Импортираме postApi
+import postApi from '../../api/postApi.js';
 
 const PostDetails = () => {
     const { postId } = useParams();

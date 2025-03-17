@@ -16,9 +16,6 @@ const userApi = {
             }
 
             const { token, user } = await response.json();
-            localStorage.setItem('user', JSON.stringify({ id: user._id, email: user.email }));
-            localStorage.setItem('token', token);
-
             return { token, user };
         } catch (err) {
             throw new Error(err.message);
@@ -42,9 +39,6 @@ const userApi = {
             }
 
             const { token, user } = await response.json();
-            localStorage.setItem('user', JSON.stringify({ id: user._id, email: user.email }));
-            localStorage.setItem('token', token);
-
             return { token, user };
         } catch (err) {
             throw new Error(err.message);
@@ -60,9 +54,6 @@ const userApi = {
                 },
                 credentials: 'include',
             });
-
-            localStorage.removeItem('user');
-            localStorage.removeItem('token');
         } catch (err) {
             console.error('Logout error:', err);
         }

@@ -2,6 +2,7 @@ import { Router } from "express";
 import postService from "../services/postService.js";
 import { isAuth } from "../middlewares/authMiddleware.js";
 import User from "../models/user.js";
+import Post from "../models/post.js";
 
 const postController = Router();
 
@@ -109,6 +110,16 @@ postController.post('/create', isAuth, async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: 'Failed to create post.' });
+    }
+});
+
+postController.get('/user/posts', isAuth, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const posts = await Post.find({ owner: userId }).lean();
+        res.json(posts);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch user posts' });
     }
 });
 

@@ -80,6 +80,27 @@ const postApi = {
         } catch (err) {
             throw new Error(err.message);
         }
+    },
+    getUserPosts: async () => {
+        try {
+            const response = await fetch(`http://localhost:3030/user/posts`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.err);
+            }
+
+            const posts = await response.json();
+            return posts;
+        } catch (err) {
+            throw new Error(err.message);
+        }
     }
 };
 export default postApi;
