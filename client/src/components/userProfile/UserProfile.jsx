@@ -26,7 +26,7 @@ const UserProfile = () => {
         <div className="user-profile">
             <div className="profile-header">
                 <img src="../../../public/images/personalization.png" alt="User Avatar" className="user-avatar" />
-                <h2>Welcome 👋</h2><h2>{username}</h2>
+                <h2>Welcome, {username} !</h2>
             </div>
 
             <div className="posts-section">
