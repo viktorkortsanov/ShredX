@@ -13,6 +13,8 @@ import { AuthProvider } from "./contexts/authContext.jsx";
 import UserProfile from "./components/userProfile/UserProfile.jsx";
 import store from "./store/store.js";
 import { Provider } from "react-redux"
+import PrivateGuard from "./components/PrivetRoute.jsx";
+import PublicGuard from "./components/PublicRoute.jsx";
 
 function App() {
   return (
@@ -22,14 +24,19 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<MainContent />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/forum" element={<ForumContainer />} />
-          <Route path="/create" element={<CreatePost />} />
-          <Route path="/forum/:postId/details" element={<PostDetails />} />
-          <Route path="/forum/:postId/edit" element={<EditPost />} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route element={<PublicGuard />}>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
+          <Route element={<PrivateGuard />}>
+            <Route path="/create" element={<CreatePost />} />
+            <Route path="/forum/:postId/details" element={<PostDetails />} />
+            <Route path="/forum/:postId/edit" element={<EditPost />} />
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
         <Footer />
         <AuthProvider />

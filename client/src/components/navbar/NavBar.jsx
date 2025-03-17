@@ -8,7 +8,7 @@ import '../../../public/images/profile.png';
 
 export default function NavBar() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const user = useSelector((state) => state.auth.user); // Потребителски данни от Redux
+    const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
