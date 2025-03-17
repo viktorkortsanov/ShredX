@@ -1,15 +1,14 @@
-/* UserProfile Container */
 .user-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 30px;
     background-color: #18181A;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 800px;
-    margin: 20px auto;
+    margin: 126px auto;
     border: 1px solid rgb(146, 146, 146);
 }
 
@@ -35,7 +34,6 @@
     color: #ffffff;
 }
 
-/* Posts section */
 .posts-section {
     width: 100%;
 }
@@ -66,7 +64,6 @@
     color: #ffffff;
 }
 
-/* No posts found message */
 .no-posts {
     text-align: center;
     font-size: 18px;

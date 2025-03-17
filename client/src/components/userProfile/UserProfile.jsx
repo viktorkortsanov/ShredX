@@ -18,7 +18,7 @@ const UserProfile = () => {
                 console.error(err);
             }
         }
-    
+
         fetchUserPosts();
     }, []);
 
@@ -32,9 +32,7 @@ const UserProfile = () => {
             <div className="posts-section">
                 <h3>Posts in forum</h3>
                 <div className="posts-list">
-                    {userPosts.length === 0 ? (
-                        <p>Няма публикации в форума.</p>
-                    ) : (
+                    {userPosts.length === 0 ? null : (
                         userPosts.map((post, index) => (
                             <PostItem key={index} post={post} />
                         ))
