@@ -17,8 +17,8 @@ import { Provider } from "react-redux"
 function App() {
   return (
     <>
-    <AuthProvider />
       <Provider store={store}>
+        <AuthProvider />
         <NavBar />
         <Routes>
           <Route path="/" element={<MainContent />} />
@@ -32,8 +32,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <AuthProvider />
       </Provider>
-      <AuthProvider />
     </>
   );
 }

@@ -100,6 +100,7 @@ nav a:hover::after {
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease;
+    width: 200px;
 }
 
 .user-icon:hover .dropdown-menu {

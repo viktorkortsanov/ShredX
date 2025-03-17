@@ -4,9 +4,11 @@ import './navbar.css';
 import { useDispatch, useSelector } from "react-redux";
 import userApi from "../../api/userApi.js";
 import { logout as logoutAction } from "../../store/authSlice.js";
+import '../../../public/images/profile.png';
 
 export default function NavBar() {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);    
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const user = useSelector((state) => state.auth.user); // Потребителски данни от Redux
     const dispatch = useDispatch();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
@@ -40,8 +42,29 @@ export default function NavBar() {
                                 <img src="/images/personalization.png" alt="User Icon" />
                                 {isMenuOpen && (
                                     <ul className="dropdown-menu">
-                                        <li><Link to="/profile">Profile</Link></li>
-                                        <li><Link to="/logout" onClick={handleLogout}>Logout</Link></li>
+                                        <li className="user-info">
+                                            <img 
+                                                src="../../../public/images/user-logo.png"
+                                                alt="User Logo" 
+                                                className="user-logo" 
+                                            />
+                                            <div className="user-details">
+                                                <p className="username">{user?.username}</p>
+                                                <p className="email">{user?.email}</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <Link to="/profile">
+                                                <img src="../../../public/images/profile.png" alt="Profile Icon" />
+                                                Profile
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/logout" onClick={handleLogout}>
+                                                <img src="../../../public/images/logout.png" alt="Logout Icon" />
+                                                Logout
+                                            </Link>
+                                        </li>
                                     </ul>
                                 )}
                             </li>
