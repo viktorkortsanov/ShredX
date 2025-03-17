@@ -6,7 +6,7 @@ import userApi from "../../api/userApi.js";
 import { logout as logoutAction } from "../../store/authSlice.js";
 
 export default function NavBar() {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);    
     const dispatch = useDispatch();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();

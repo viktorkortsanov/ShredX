@@ -4,10 +4,10 @@ const userApi = {
             const response = await fetch('http://localhost:3030/register', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 credentials: 'include',
-                body: JSON.stringify(userData)
+                body: JSON.stringify(userData),
             });
 
             if (!response.ok) {
@@ -15,7 +15,11 @@ const userApi = {
                 throw new Error(errorData.err);
             }
 
-            return true;
+            const { token, user } = await response.json();
+            localStorage.setItem('user', JSON.stringify({ id: user._id, email: user.email }));
+            localStorage.setItem('token', token);
+
+            return { token, user };
         } catch (err) {
             throw new Error(err.message);
         }
@@ -38,7 +42,7 @@ const userApi = {
             }
 
             const { token, user } = await response.json();
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify({ id: user._id, email: user.email }));
             localStorage.setItem('token', token);
 
             return { token, user };
@@ -49,18 +53,20 @@ const userApi = {
 
     logout: async () => {
         try {
-            await fetch("http://localhost:3030/logout", {
-                method: "GET",
+            await fetch('http://localhost:3030/logout', {
+                method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                credentials: "include",
+                credentials: 'include',
             });
+
             localStorage.removeItem('user');
             localStorage.removeItem('token');
         } catch (err) {
-            console.error("Logout error:", err);
+            console.error('Logout error:', err);
         }
     }
 };
+
 export default userApi;

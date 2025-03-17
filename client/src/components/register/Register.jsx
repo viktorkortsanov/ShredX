@@ -17,8 +17,9 @@ export default function Register() {
 
     const handleRegister = async (userData) => {
         try {
-            await userApi.register(userData);
-            dispatch(login(userData));
+            const { token, user } = await userApi.register(userData);
+            dispatch(login({ id: user._id, email: user.email, username: user.username }));
+            localStorage.setItem('token', token);
             navigate('/');
         } catch (err) {
             setError(err.message);

@@ -16,7 +16,8 @@ export default function Login() {
   const submitLogin = async (userData) => {
     try {
       const { token, user } = await userApi.login(userData);
-      dispatch(login({ _id: user._id, email: user.email, token }));
+      dispatch(login({ _id: user._id, email: user.email, username: user.username}));
+      localStorage.setItem('token', token);
       navigate('/');
     } catch (err) {
       setError(err.message);

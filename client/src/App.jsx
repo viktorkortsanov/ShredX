@@ -9,12 +9,14 @@ import ForumContainer from "./components/forum/ForumContainer.jsx"
 import CreatePost from "./components/createPost/CreatePost.jsx";
 import PostDetails from "./components/postDetails/PostDetails.jsx";
 import EditPost from "./components/editPost/EditPost.jsx";
+import { AuthProvider } from "./contexts/authContext.jsx";
 import store from "./store/store.js";
 import { Provider } from "react-redux"
 
 function App() {
   return (
     <>
+    <AuthProvider />
       <Provider store={store}>
         <NavBar />
         <Routes>
@@ -29,6 +31,7 @@ function App() {
         </Routes>
         <Footer />
       </Provider>
+      <AuthProvider />
     </>
   );
 }
