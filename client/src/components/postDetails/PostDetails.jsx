@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import ConfirmationDialog from '../confirmDialog/ConfirmDialog.jsx';
 import './postdetails.css';
 import postApi from '../../api/postApi.js';
 
@@ -10,9 +11,11 @@ const PostDetails = () => {
     const [likesCount, setLikesCount] = useState(0);
     const [isLiked, setIsLiked] = useState(false);
     const [isOwner, setIsOwner] = useState(false);
+    const [showDialog, setShowDialog] = useState(false);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const userId = useSelector(state => state.auth.userId);
     const navigate = useNavigate();
+
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -20,7 +23,7 @@ const PostDetails = () => {
                 const data = await postApi.getDetails(postId);
                 setPost(data.post);
                 setLikesCount(data.post.likes.length);
-                
+
                 const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || {};
                 setIsLiked(likedPosts[postId] || data.post.likes.includes(userId));
 
@@ -51,6 +54,23 @@ const PostDetails = () => {
             console.error('Error toggling like on post:', error);
         }
     };
+
+    const handleDelete = async () => {
+        try {
+            const response = await postApi.delete(postId);
+            if (response) {
+                navigate('/forum');
+            }
+        } catch (error) {
+            console.error('Error deleting post:', error)
+        } finally {
+            setShowDialog(false);
+        }
+    };
+
+    const handleCancel = () => {
+        setShowDialog(false);
+    }
 
     if (!post) {
         return <div>Loading...</div>;
@@ -90,8 +110,12 @@ const PostDetails = () => {
                 {isOwner && (
                     <div className="edit-delete-actions">
                         <Link to={`/forum/${postId}/edit`} className="action-btn edit">Edit</Link>
-                        <button className="action-btn delete" onClick={() => navigate(`/forum/${postId}/delete`)}>Delete</button>
+                        <button className="action-btn delete" onClick={() => setShowDialog(true)}>Delete</button>
                     </div>
+                )}
+
+                {showDialog && (
+                    <ConfirmationDialog onCancel={handleCancel} onConfirm={handleDelete} />
                 )}
             </div>
         </div>

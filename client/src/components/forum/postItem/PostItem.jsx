@@ -2,13 +2,6 @@ import { Link } from 'react-router-dom';
 import './PostItem.css';
 
 const PostItem = ({ post }) => {
-    const formattedDate = new Date(post.createdAt).toLocaleDateString("en-GB", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-    });
-
     return (
         <div className="post-item">
             <div className="post-header">
@@ -16,7 +9,7 @@ const PostItem = ({ post }) => {
                     <img src="/images/user-logo.png" alt="user-logo" />
                 </div>
                 <span className="username">{post.author}</span>
-                <span className="post-date">{formattedDate}</span>
+                <span className="post-date">{new Date(post.createdAt).toLocaleDateString()}</span>
             </div>
             <div className="post-content">
                 <h2>{post.title}</h2>
