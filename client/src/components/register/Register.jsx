@@ -3,6 +3,7 @@ import { login } from '../../store/authSlice.js';
 import { Link, useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
 import userApi from '../../api/userApi.js';
+import emailjs from 'emailjs-com'
 import './register.css';
 
 export default function Register() {
@@ -20,11 +21,26 @@ export default function Register() {
             const { token, user } = await userApi.register(userData);
             dispatch(login({ id: user._id, email: user.email, username: user.username }));
             localStorage.setItem('token', token);
+    
+            const templateParams = {
+                username: user.username,
+                email: user.email,
+            };
+
+            const response = await emailjs.send(
+                'service_b98xzqr',
+                'template_6flqxas',
+                templateParams,
+                'mxz5zqh2O_h0HA_5_'
+            );
+            console.log('Имейл изпратен успешно:', response);
+    
             navigate('/');
         } catch (err) {
             setError(err.message);
         }
     };
+    
 
     return (
         <div className="register-container">
