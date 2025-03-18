@@ -22,7 +22,7 @@ const postApi = {
     },
     get: async (id) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${id}/edit`, {
+            const response = await fetch(`http://localhost:3030/forum/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -81,6 +81,29 @@ const postApi = {
             throw new Error(err.message);
         }
     },
+    like: async (postId, userId) => {
+        try {
+            const response = await fetch(`http://localhost:3030/forum/${postId}/like`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({ userId }),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.err);
+            }
+    
+            const updatedPost = await response.json();
+            return updatedPost.likes;
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    },    
+
     getUserPosts: async () => {
         try {
             const response = await fetch(`http://localhost:3030/user/posts`, {
@@ -101,6 +124,47 @@ const postApi = {
         } catch (err) {
             throw new Error(err.message);
         }
-    }
+    },
+    getDetails: async (id) => {
+        try {
+            const response = await fetch(`http://localhost:3030/forum/${id}/details`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.err);
+            }
+
+            return await response.json();
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    },
+
+    likeToggle: async (id) => {
+        try {
+            const response = await fetch(`http://localhost:3030/forum/${id}/like-toggle`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to toggle like');
+            }
+    
+            return await response.json();
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    },    
 };
 export default postApi;

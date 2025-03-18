@@ -15,6 +15,15 @@ postController.get('/forum', async (req, res) => {
     }
 });
 
+postController.get('/forum/:postId', async(req,res) => {
+    try{
+        const post = await postService.getOne(req.params.postId).lean();
+        res.json(post);        
+    }catch(err){
+        res.status(500).json({error: 'Failed to fetch post.'});
+    }
+})
+
 postController.get('/forum/:postId/details', async (req, res) => {
     try { 
         const post = await postService.getOne(req.params.postId).lean();
@@ -42,6 +51,25 @@ postController.post('/forum/:postId/like', isAuth, async (req, res) => {
         res.status(500).json({ error: 'Failed to like post.' });
     }
 });
+
+postController.post('/forum/:postId/like-toggle', isAuth, async (req, res) => {
+    const postId = req.params.postId;
+    const userId = req.user._id;
+
+    try {
+        const post = await postService.getOne(postId);
+        if (post.likes.includes(userId)) {
+            await postService.unlike(postId, userId);
+            return res.status(200).json({ message: 'Post unliked successfully.' });
+        } else {
+            await postService.like(postId, userId);
+            return res.status(200).json({ message: 'Post liked successfully.' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to toggle like on post.' });
+    }
+});
+
 
 postController.post('/forum/:postId/comment', isAuth, async (req, res) => {
     const postId = req.params.postId;
