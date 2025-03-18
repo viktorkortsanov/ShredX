@@ -14,17 +14,15 @@ const PostDetails = () => {
     const userId = useSelector(state => state.auth.userId);
     const navigate = useNavigate();
 
-    // Функция за зареждане на поста
     useEffect(() => {
         const fetchPost = async () => {
             try {
                 const data = await postApi.getDetails(postId);
-
-
                 setPost(data.post);
                 setLikesCount(data.post.likes.length);
-                setIsLiked(data.post.likes.includes(userId));
-                console.log(isLiked);
+                
+                const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || {};
+                setIsLiked(likedPosts[postId] || data.post.likes.includes(userId));
 
                 setIsOwner(data.isOwner);
             } catch (error) {
@@ -43,7 +41,11 @@ const PostDetails = () => {
             } else {
                 setLikesCount(prevCount => prevCount + 1);
             }
+
             setIsLiked(prevIsLiked => !prevIsLiked);
+            const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || {};
+            likedPosts[postId] = !isLiked;
+            localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
 
         } catch (error) {
             console.error('Error toggling like on post:', error);
@@ -85,7 +87,7 @@ const PostDetails = () => {
                     </>
                 )}
 
-                {isOwner && ( // Проверка дали потребителят е автор на поста
+                {isOwner && (
                     <div className="edit-delete-actions">
                         <Link to={`/forum/${postId}/edit`} className="action-btn edit">Edit</Link>
                         <button className="action-btn delete" onClick={() => navigate(`/forum/${postId}/delete`)}>Delete</button>

@@ -26,13 +26,13 @@ function App() {
           <Route path="/" element={<MainContent />} />
           <Route path="/forum" element={<ForumContainer />} />
           <Route path="/404" element={<NotFound />} />
+          <Route path="/forum/:postId/details" element={<PostDetails />} />
           <Route element={<PublicGuard />}>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Route>
           <Route element={<PrivateGuard />}>
             <Route path="/create" element={<CreatePost />} />
-            <Route path="/forum/:postId/details" element={<PostDetails />} />
             <Route path="/forum/:postId/edit" element={<EditPost />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="*" element={<NotFound />} />
