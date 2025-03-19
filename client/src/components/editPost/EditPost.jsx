@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 export default function EditPost() {
     const { postId } = useParams();
     const navigate = useNavigate();
-    const userId = useSelector(state => state.auth.userId);
+    const userId = useSelector(state => state.auth.user?._id);
     const { values, setValues, handleChange, handleSubmit, error, setError } = useForm({
         title: "",
         content: "",
@@ -18,8 +18,7 @@ export default function EditPost() {
         async function fetchPost() {
             try {
                 const post = await postApi.get(postId);
-                
-                // Проверяваме дали потребителят има право да редактира поста
+
                 if (post.owner !== userId) {
                     navigate('/404');
                     return;

@@ -13,9 +13,8 @@ const PostDetails = () => {
     const [isOwner, setIsOwner] = useState(false);
     const [showDialog, setShowDialog] = useState(false);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-    const userId = useSelector(state => state.auth.userId);
+    const userId = useSelector(state => state.auth.user?._id);    
     const navigate = useNavigate();
-
 
     useEffect(() => {
         const fetchPost = async () => {
