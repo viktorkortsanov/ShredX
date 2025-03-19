@@ -31,7 +31,6 @@ The pages accessible to logged-in users are:
 
 ---
 ### Follow these steps to get the ShredX application up and running on your local machine for development and testing purposes.
-
 ---
 
 ### **Client Application Setup**
@@ -78,6 +77,12 @@ The pages accessible to logged-in users are:
 ---
 
 ### **Server Part Setup**
+
+## Before setup the server part download MongoDB
+
+The file **[C:\Users\Viktor Kortsanov\Desktop\MongoDB-Installation-Guide-for-Windows.docx]**.
+
+All rights and ownership of the document remain with @SoftUni.
 
 1. **Navigate to the Server Directory**:  
    Go to the server directory:
