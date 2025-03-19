@@ -78,11 +78,10 @@ The pages accessible to logged-in users are:
 
 ### **Server Part Setup**
 
-## Before setup the server part download MongoDB
+**Before setup the server part download MongoDB**
 
-The file **[C:\Users\Viktor Kortsanov\Desktop\MongoDB-Installation-Guide-for-Windows.docx]**.
+Download from here **[](https://www.mongodb.com/try/download/community)**.
 
-All rights and ownership of the document remain with @SoftUni.
 
 1. **Navigate to the Server Directory**:  
    Go to the server directory:
