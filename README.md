@@ -80,8 +80,7 @@ The pages accessible to logged-in users are:
 
 **Before setup the server part download MongoDB**
 
-Download from here **[](https://www.mongodb.com/try/download/community)**.
-
+Download from here **[MongoDB Community Edition](https://www.mongodb.com/try/download/community)**.
 
 1. **Navigate to the Server Directory**:  
    Go to the server directory:
