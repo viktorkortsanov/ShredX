@@ -15,17 +15,17 @@ postController.get('/forum', async (req, res) => {
     }
 });
 
-postController.get('/forum/:postId', async(req,res) => {
-    try{
+postController.get('/forum/:postId', async (req, res) => {
+    try {
         const post = await postService.getOne(req.params.postId).lean();
-        res.json(post);        
-    }catch(err){
-        res.status(500).json({error: 'Failed to fetch post.'});
+        res.json(post);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch post.' });
     }
 })
 
 postController.get('/forum/:postId/details', async (req, res) => {
-    try { 
+    try {
         const post = await postService.getOne(req.params.postId).lean();
         const isOwner = post.owner.toString() === req.user?._id;
         res.json({ post, isOwner });
@@ -143,11 +143,21 @@ postController.post('/create', isAuth, async (req, res) => {
 
 postController.get('/user/posts', isAuth, async (req, res) => {
     try {
-        const userId = req.user._id;
+        const userId = req.user._id;;
         const posts = await Post.find({ owner: userId }).lean();
         res.json(posts);
     } catch (err) {
         res.status(500).json({ error: 'Failed to fetch user posts' });
+    }
+});
+
+postController.get('/user/posts/liked', isAuth, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const likedPosts = await Post.find({ likes: userId }).lean();
+        res.json(likedPosts);
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching liked posts' });
     }
 });
 

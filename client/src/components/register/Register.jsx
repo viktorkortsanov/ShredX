@@ -33,8 +33,7 @@ export default function Register() {
                 templateParams,
                 'mxz5zqh2O_h0HA_5_'
             );
-            console.log('Имейл изпратен успешно:', response);
-    
+                
             navigate('/');
         } catch (err) {
             setError(err.message);
