@@ -1,0 +1,89 @@
+/* Центриране на формата в средата на страницата */
+.comment-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh; /* Височина на цялата страница */
+    background-image: url(https://i.pinimg.com/736x/2a/a7/8a/2aa78a2c8fbe91b37bfed0fbb32fae82.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.comment-form h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.comment-input:focus {
+    border-color: #006CFA;
+    outline: none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #006CFA;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+.submit-btn:hover {
+    background-color: #004196;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .comment-form {
+        padding: 20px;
+    }
+
+    .comment-input {
+        font-size: 14px;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+    }
+}

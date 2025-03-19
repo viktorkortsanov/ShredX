@@ -30,12 +30,16 @@ const forumPostSchema = new Schema({
         ref: 'User'
     }],
     comments: [{
-        user: {
+        owner: {
             type: Types.ObjectId,
             ref: 'User',
             required: true
         },
-        text: {
+        author: {
+            type: String,
+            required: true
+        },
+        content: {
             type: String,
             required: true,
             minLength: 2

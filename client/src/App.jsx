@@ -15,6 +15,7 @@ import store from "./store/store.js";
 import { Provider } from "react-redux"
 import PrivateGuard from "./components/PrivetRoute.jsx";
 import PublicGuard from "./components/PublicRoute.jsx";
+import CommentForm from "./components/postComment/CommentForm.jsx";
 
 function App() {
   return (
@@ -34,7 +35,8 @@ function App() {
           <Route element={<PrivateGuard />}>
             <Route path="/create" element={<CreatePost />} />
             <Route path="/forum/:postId/edit" element={<EditPost />} />
-            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/forum/:postId/comment" element={<CommentForm />} />
+            <Route path="/profile" element={<CommentForm />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

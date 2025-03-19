@@ -10,7 +10,7 @@ const postService = {
     },
 
     create(postData, userId, auhtor) {
-        return Post.create({ ...postData, owner: userId, author: auhtor.username});
+        return Post.create({ ...postData, owner: userId, author: auhtor.username });
     },
 
     delete(postId) {
@@ -29,8 +29,8 @@ const postService = {
         return Post.findByIdAndUpdate(postId, { $pull: { likes: userId } });
     },
 
-    comment(postId, userId, content) {
-        return Post.findByIdAndUpdate(postId, { $push: { comments: { userId, content, createdAt: new Date() } } });
+    comment(postId, userId, author, content) {
+        return Post.findByIdAndUpdate(postId, { $push: { comments: { owner: userId, author: author.username, content: content } } });
     }
 };
 

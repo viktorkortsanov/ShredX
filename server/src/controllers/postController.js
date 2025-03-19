@@ -75,13 +75,10 @@ postController.post('/forum/:postId/comment', isAuth, async (req, res) => {
     const postId = req.params.postId;
     const { content } = req.body;
     const userId = req.user._id;
-
-    if (!content.trim()) {
-        return res.status(400).json({ error: 'Comment content is required.' });
-    }
+    const auhtor = await User.findById(userId);
 
     try {
-        await postService.comment(postId, userId, content);
+        await postService.comment(postId, userId, auhtor, content);
         res.status(200).json({ message: 'Comment added successfully.' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to add comment.' });
