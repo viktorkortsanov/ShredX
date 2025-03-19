@@ -14,8 +14,6 @@ const UserProfile = () => {
             try {
                 const userPosts = await postApi.getUserPosts();
                 const likedPosts = await postApi.getLikedPosts();
-                console.log(likedPosts);
-
                 setUserPosts(userPosts);
                 setLikedPosts(likedPosts);
             } catch (err) {

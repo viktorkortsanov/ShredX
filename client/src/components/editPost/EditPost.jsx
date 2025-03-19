@@ -3,25 +3,36 @@ import { useNavigate, useParams } from "react-router-dom";
 import useForm from "../../hooks/useForm.js";
 import postApi from "../../api/postApi.js";
 import "./editpost.css";
+import { useSelector } from "react-redux";
 
 export default function EditPost() {
     const { postId } = useParams();
     const navigate = useNavigate();
-
+    const userId = useSelector(state => state.auth.userId);
     const { values, setValues, handleChange, handleSubmit, error, setError } = useForm({
         title: "",
         content: "",
     });
 
     useEffect(() => {
-        postApi.get(postId)
-            .then(post => {
+        async function fetchPost() {
+            try {
+                const post = await postApi.get(postId);
+                
+                // Проверяваме дали потребителят има право да редактира поста
+                if (post.owner !== userId) {
+                    navigate('/404');
+                    return;
+                }
+
                 setValues({ title: post.title, content: post.content });
-            })
-            .catch(err => {
+            } catch (err) {
                 setError(err.message);
-            });
-    }, [postId, setValues, setError]);
+            }
+        }
+
+        fetchPost();
+    }, [postId, setValues, setError, userId, navigate]);
 
     const submitPost = async (postData) => {
         try {
