@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import ConfirmationDialog from '../confirmDialog/ConfirmDialog.jsx';
-import './postdetails.css';
-import postApi from '../../api/postApi.js';
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import ConfirmationDialog from "../confirmDialog/ConfirmDialog.jsx";
+import Comment from "../comment/Comment.jsx";
+import "./postdetails.css";
+import postApi from "../../api/postApi.js";
 
 const PostDetails = () => {
     const { postId } = useParams();
@@ -12,8 +13,9 @@ const PostDetails = () => {
     const [isLiked, setIsLiked] = useState(false);
     const [isOwner, setIsOwner] = useState(false);
     const [showDialog, setShowDialog] = useState(false);
+    const [comments, setComments] = useState([]);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-    const userId = useSelector(state => state.auth.user?._id);    
+    const userId = useSelector(state => state.auth.user?._id);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,10 +24,9 @@ const PostDetails = () => {
                 const data = await postApi.getDetails(postId);
                 setPost(data.post);
                 setLikesCount(data.post.likes.length);
-
+                setComments(data.post.comments);
                 const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || {};
                 setIsLiked(likedPosts[postId] || data.post.likes.includes(userId));
-
                 setIsOwner(data.isOwner);
             } catch (error) {
                 console.error('Error fetching post:', error);
@@ -38,17 +39,11 @@ const PostDetails = () => {
     const handleLikeToggle = async () => {
         try {
             await postApi.likeToggle(postId);
-            if (isLiked) {
-                setLikesCount(prevCount => prevCount - 1);
-            } else {
-                setLikesCount(prevCount => prevCount + 1);
-            }
-
+            setLikesCount(prevCount => isLiked ? prevCount - 1 : prevCount + 1);
             setIsLiked(prevIsLiked => !prevIsLiked);
             const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || {};
             likedPosts[postId] = !isLiked;
             localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-
         } catch (error) {
             console.error('Error toggling like on post:', error);
         }
@@ -61,15 +56,28 @@ const PostDetails = () => {
                 navigate('/forum');
             }
         } catch (error) {
-            console.error('Error deleting post:', error)
+            console.error('Error deleting post:', error);
         } finally {
             setShowDialog(false);
         }
     };
 
+    const handleDeleteComment = async (commentId) => {
+        try {
+            const response = await postApi.deleteComment(postId, commentId);
+
+            if (response) {
+                setComments(prevComments => prevComments.filter(comment => comment._id !== commentId));
+            }
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+        }
+    };
+
+
     const handleCancel = () => {
         setShowDialog(false);
-    }
+    };
 
     if (!post) {
         return <div>Loading...</div>;
@@ -117,8 +125,28 @@ const PostDetails = () => {
                     <ConfirmationDialog onCancel={handleCancel} onConfirm={handleDelete} />
                 )}
             </div>
+
+            <div className="comments-section">
+                <h3>Comments</h3>
+
+                <div className="comments-list">
+                    {comments.length > 0 ? (
+                        comments.map((comment) => (
+                            <Comment
+                                key={comment._id}
+                                comment={comment}
+                                postId={postId}
+                                userId={userId}
+                                isAuthenticated={isAuthenticated}
+                                onDelete={() => handleDeleteComment(comment._id)}
+                            />
+                        ))
+                    ) : (
+                        <p>No comments yet.</p>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };
-
 export default PostDetails;

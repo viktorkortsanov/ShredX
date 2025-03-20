@@ -1,0 +1,76 @@
+.comment-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.comments-section {
+    width: 100%;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+}
+
+.like {
+    background-color: #006CFA;
+    color: white;
+}
+
+.like:hover {
+    background-color: #004196;
+}
+
+.edit {
+    background-color: #FFA500;
+    color: white;
+}
+
+.edit:hover {
+    background-color: #CC8400;
+}
+
+.delete {
+    background-color: #FF4D4D;
+    color: white;
+}
+
+.delete:hover {
+    background-color: #CC0000;
+}

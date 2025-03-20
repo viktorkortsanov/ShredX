@@ -14,7 +14,7 @@ const CommentForm = () => {
 
     const handleFormSubmit = async (values) => {
         try {
-            const response = await postApi.comment(paramPostId, values.content);
+            const response = await postApi.comment(paramPostId, values.content);            
             if (response) {
                 navigate(`/forum/${paramPostId}/details`);
             }
@@ -35,7 +35,7 @@ const CommentForm = () => {
                     onChange={handleChange}
                     placeholder="Type a comment..."
                 />
-                <button type="submit" className="submit-btn">Публикувай</button>
+                <button type="submit" className="submit-btn">Post</button>
             </form>
         </div>
     );

@@ -75,13 +75,46 @@ postController.post('/forum/:postId/comment', isAuth, async (req, res) => {
     const postId = req.params.postId;
     const { content } = req.body;
     const userId = req.user._id;
-    const auhtor = await User.findById(userId);
+    const author = await User.findById(userId);
 
     try {
-        await postService.comment(postId, userId, auhtor, content);
+        const updatedPost = await postService.comment(postId, userId, author, content);
+        if (!updatedPost) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
         res.status(200).json({ message: 'Comment added successfully.' });
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: 'Failed to add comment.' });
+    }
+});
+
+postController.post('/forum/:postId/comment/:commentId/edit', isAuth, async (req, res) => {
+    const postId = req.params.postId;
+    const commentId = req.params.commentId;
+    const { content } = req.body;
+    console.log(commentId);
+
+    try {
+        await postService.editComment(postId, commentId, content);
+        res.status(200).json({ message: 'Comment updated successfully.' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to update comment.' });
+    }
+});
+
+postController.get('/forum/:postId/comment/:commentId/delete', isAuth, async (req, res) => {
+    const { postId, commentId } = req.params;
+    console.log(postId, commentId);
+
+
+    try {
+        await postService.deleteComment(postId, commentId);
+        res.status(200).json({ message: 'Comment deleted successfully.' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to delete comment.' });
     }
 });
 

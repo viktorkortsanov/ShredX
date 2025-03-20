@@ -31,6 +31,20 @@ const postService = {
 
     comment(postId, userId, author, content) {
         return Post.findByIdAndUpdate(postId, { $push: { comments: { owner: userId, author: author.username, content: content } } });
+    },
+
+    editComment(postId, commentId, content) {
+        return Post.findOneAndUpdate(
+            { _id: postId, 'comments._id': commentId },
+            { $set: { 'comments.$.content': content } },
+        );
+    },
+
+    deleteComment(postId, commentId) {
+        return Post.findOneAndUpdate(
+            { _id: postId, 'comments._id': commentId },
+            { $pull: { comments: { _id: commentId } } },
+        );
     }
 };
 
