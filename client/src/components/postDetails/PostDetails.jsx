@@ -124,7 +124,6 @@ const PostDetails = () => {
                 <div className="detail-item">Content: {post.content}</div>
             </div>
     
-            {/* Добавяме иконка за лайк и броя на лайковете */}
             <div className="likes-count">
                 <div className="like-img-container">
                     <img src="/images/like.png" alt="Like" className="like-img" />

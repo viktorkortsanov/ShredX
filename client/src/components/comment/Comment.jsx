@@ -4,7 +4,7 @@ import "./comment.css";
 
 const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike }) => {
     const isOwner = userId === comment.owner;
-    const isLiked = comment.likes.includes(userId); // Проверка дали е харесан
+    const isLiked = comment.likes.includes(userId);
 
     return (
         <div className="comment-card">
@@ -41,7 +41,6 @@ const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike })
                 )}
             </div>
 
-            {/* Like count в долния десен ъгъл */}
             <div className="comment-likes">
                 <img 
                     src="/images/like.png" 

@@ -1,9 +1,8 @@
-/* Центриране на формата в средата на страницата */
 .comment-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 75vh; /* Височина на цялата страница */
+    min-height: 75vh;
     background-image: url(https://i.pinimg.com/736x/2a/a7/8a/2aa78a2c8fbe91b37bfed0fbb32fae82.jpg);
     background-repeat: no-repeat;
     background-size: cover;

@@ -1,16 +1,15 @@
-/* Стилове за диалоговия прозорец */
 .confirmation-dialog {
     position: fixed;
-    top: 22%; /* Преместваме прозореца малко по-нагоре */
+    top: 22%;
     left: 50%;
-    transform: translate(-50%, -50%);  /* Центрираме по хоризонтала */
+    transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1001;
     opacity: 0;
-    animation: fadeIn 0.3s forwards;  /* Плавно появяване */
+    animation: fadeIn 0.3s forwards;
 }
 
 .confirmation-dialog p {
@@ -19,11 +18,10 @@
     text-align: center;
 }
 
-/* Стилове за бутоните в диалога */
 .buttons {
     display: flex;
-    justify-content: space-evenly;  /* Центрираме бутоните с разстояние между тях */
-    gap: 5px;  /* Разстояние между бутоните */
+    justify-content: space-evenly;
+    gap: 5px;
 }
 
 .confirm-btn,
@@ -33,28 +31,27 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease; /* Плавен преход само за цвета */
+    transition: background-color 0.3s ease;
 }
 
 .confirm-btn {
-    background-color: #006CFA;  /* Синия цвят за потвърждение */
+    background-color: #006CFA;
     color: white;
 }
 
 .confirm-btn:hover {
-    background-color: #0056b3;  /* Плавно затъмняване при ховър */
+    background-color: #0056b3;
 }
 
 .cancel-btn {
-    background-color: #e74c3c;  /* Червен цвят за отменяне */
+    background-color: #e74c3c;
     color: white;
 }
 
 .cancel-btn:hover {
-    background-color: #c0392b;  /* Плавно затъмняване при ховър */
+    background-color: #c0392b;
 }
 
-/* Замагляне на фона */
 .overlay {
     position: fixed;
     top: 0;
@@ -63,10 +60,9 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    animation: fadeInOverlay 0.3s forwards;  /* Плавно замагляне на фона */
+    animation: fadeInOverlay 0.3s forwards;
 }
 
-/* Плавни анимации */
 @keyframes fadeIn {
     from {
         opacity: 0;

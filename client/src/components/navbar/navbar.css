@@ -12,20 +12,20 @@ nav {
     width: 100%;
     border: 1px solid rgb(146, 146, 146);
     background-color: #18181A;
-    padding: 15px 0; /* Добавяне на padding */
+    padding: 15px 0;
     display: flex;
-    justify-content: center; /* Центриране на съдържанието */
+    justify-content: center;
     align-items: center;
 }
 
 ul {
     display: flex;
-    justify-content: center; /* Центриране на елементите в списъка */
+    justify-content: center;
     list-style-type: none;
     flex-wrap: wrap;
     gap: 50px;
     align-items: center;
-    padding: 0; /* Премахване на неструктуриран padding */
+    padding: 0;
 }
 
 nav a {

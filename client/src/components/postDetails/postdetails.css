@@ -108,14 +108,13 @@
     transition: background-color 0.3s ease;
 }
 
-/* Likes count styles */
 .likes-count {
-    font-size: 18px;  /* Увеличавам размера на шрифта */
+    font-size: 18px;
     font-weight: 500;
     margin-top: 10px;
     display: flex;
     align-items: center;
-    gap: 40px;  /* Увеличавам разстоянието между иконата и броя */
+    gap: 40px;
 }
 
 .likes-count span {
@@ -125,7 +124,7 @@
 }
 
 .like-img {
-    width: 30px;  /* Увеличавам размера на иконата */
+    width: 30px;
     height: 30px;
 }
 
