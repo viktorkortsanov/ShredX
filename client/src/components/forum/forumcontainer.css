@@ -50,6 +50,9 @@
     transform: scale(1.1);
 }
 
+.no-posts {
+    color: white;
+}
 @media (max-width: 768px) {
     .forum-container .post-item {
         width: 100%;

@@ -1,0 +1,55 @@
+.programs-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 71px;
+}
+
+.program-card {
+    width: 250px;
+    height: 350px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.program-info {
+    text-align: center;
+    color: white;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+.program-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.program-price {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.buy-button {
+    padding: 10px 20px;
+    background-color: #006CFA;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+    background-color: #0056b3;
+}

@@ -38,7 +38,7 @@ export default function ForumContainer() {
           <PostItem key={index} post={post} />
         ))
       ) : (
-        <p>No posts available.</p>
+        <p className="no-posts">No posts available.</p>
       )}
     </div>
   );

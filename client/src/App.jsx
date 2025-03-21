@@ -17,6 +17,7 @@ import PrivateGuard from "./components/PrivetRoute.jsx";
 import PublicGuard from "./components/PublicRoute.jsx";
 import CommentForm from "./components/postComment/CommentForm.jsx";
 import EditCommentForm from "./components/еditComment/EditComment.jsx";
+import ProgramsContainer from "./components/programs/programsContainer.jsx";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/forum/:postId/edit" element={<EditPost />} />
             <Route path="/forum/:postId/comment" element={<CommentForm />} />
             <Route path="/profile" element={<UserProfile />} />
+            <Route path="/programs" element={<ProgramsContainer />} />
             <Route path="/forum/:postId/comment/:commentId/edit" element={<EditCommentForm />} />
             <Route path="*" element={<NotFound />} />
           </Route>
