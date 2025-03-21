@@ -44,6 +44,10 @@ const forumPostSchema = new Schema({
             required: true,
             minLength: 2
         },
+        likes: [{
+            type: Types.ObjectId,
+            ref: 'User'
+        }],
         createdAt: {
             type: Date,
             default: Date.now

@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./comment.css";
 
-const Comment = ({ comment, userId, isAuthenticated, postId, onDelete }) => {
+const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike }) => {
     const isOwner = userId === comment.owner;
-   
+    const isLiked = comment.likes.includes(userId); // Проверка дали е харесан
+
     return (
         <div className="comment-card">
             <div className="comment-header">
@@ -34,12 +35,23 @@ const Comment = ({ comment, userId, isAuthenticated, postId, onDelete }) => {
                 ) : (
                     isAuthenticated && (
                         <button className="action-btn like" onClick={() => onLike(comment._id)}>
-                            Like
+                            {isLiked ? "Unlike" : "Like"}
                         </button>
                     )
                 )}
             </div>
+
+            {/* Like count в долния десен ъгъл */}
+            <div className="comment-likes">
+                <img 
+                    src="/images/like.png" 
+                    alt="Like" 
+                    className="like-img"
+                />
+                <span className="like-count">{comment.likes.length}</span>
+            </div>
         </div>
     );
 };
+
 export default Comment;

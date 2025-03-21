@@ -108,13 +108,14 @@
     transition: background-color 0.3s ease;
 }
 
+/* Likes count styles */
 .likes-count {
-    font-size: 16px;
+    font-size: 18px;  /* Увеличавам размера на шрифта */
     font-weight: 500;
     margin-top: 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 40px;  /* Увеличавам разстоянието между иконата и броя */
 }
 
 .likes-count span {
@@ -122,6 +123,12 @@
     display: inline-flex;
     align-items: center;
 }
+
+.like-img {
+    width: 30px;  /* Увеличавам размера на иконата */
+    height: 30px;
+}
+
 
 .comments-container {
     margin-top: 40px;
@@ -142,8 +149,6 @@ h3 {
     font-weight: bold;
     margin-bottom: 20px;
 }
-
-
 
 .edit {
     background-color: #006CFA;

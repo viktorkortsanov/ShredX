@@ -45,7 +45,22 @@ const postService = {
             { _id: postId, 'comments._id': commentId },
             { $pull: { comments: { _id: commentId } } },
         );
+    },
+
+    likeComment(postId, commentId, userId) {
+        return Post.findOneAndUpdate(
+            { _id: postId, "comments._id": commentId },
+            { $addToSet: { "comments.$.likes": userId } },
+        );
+    },
+
+    unlikeComment(postId, commentId, userId) {
+        return Post.findOneAndUpdate(
+            { _id: postId, "comments._id": commentId },
+            { $pull: { "comments.$.likes": userId } },
+        );
     }
+
 };
 
 export default postService;

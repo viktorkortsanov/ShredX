@@ -70,6 +70,30 @@ postController.post('/forum/:postId/like-toggle', isAuth, async (req, res) => {
     }
 });
 
+postController.post(`/forum/:postId/comment/:commentId/like`, isAuth, async (req, res) => {
+    const { postId, commentId } = req.params;
+    const userId = req.user._id;
+
+    try {
+        const post = await postService.getOne(postId);
+        const comment = post.comments.find(c => c._id.toString() === commentId);
+
+        if (!comment) {
+            return res.status(404).json({ error: "Comment not found" });
+        }
+
+        if (comment.likes.includes(userId)) {
+            await postService.unlikeComment(postId, commentId, userId);
+            return res.status(200).json({ message: "Comment unliked successfully." });
+        } else {
+            await postService.likeComment(postId, commentId, userId);
+            return res.status(200).json({ message: "Comment liked successfully." });
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Failed to like/unlike comment." });
+    }
+});
+
 
 postController.post('/forum/:postId/comment', isAuth, async (req, res) => {
     const postId = req.params.postId;

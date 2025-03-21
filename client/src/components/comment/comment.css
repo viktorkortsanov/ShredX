@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: relative;
 }
 
 .comment-header {
@@ -40,30 +41,49 @@ h3 {
     margin-bottom: 20px;
 }
 
-.action-btn {
+.action-btn.like {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #006CFA;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     padding: 5px 10px;
-    border-radius: 4px;
     cursor: pointer;
-    border: none;
-    font-size: 14px;
+    transition: background 0.3s;
 }
 
-.like {
+.action-btn.like:hover {
+    background: #004196;
+}
+
+.comment-likes {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.like-img {
+    width: 20px;
+    height: 20px;
+}
+
+.like-count {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
+.edit {
     background-color: #006CFA;
     color: white;
 }
 
-.like:hover {
-    background-color: #004196;
-}
-
-.edit {
-    background-color: #FFA500;
-    color: white;
-}
-
 .edit:hover {
-    background-color: #CC8400;
+    background-color: #004196;
 }
 
 .delete {

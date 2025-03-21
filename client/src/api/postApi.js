@@ -91,12 +91,12 @@ const postApi = {
                 credentials: "include",
                 body: JSON.stringify({ userId }),
             });
-    
+
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.err);
             }
-    
+
             const updatedPost = await response.json();
             return updatedPost.likes;
         } catch (err) {
@@ -119,14 +119,14 @@ const postApi = {
                 const errorData = await response.json();
                 throw new Error(errorData.err);
             }
-    
+
             return true;
         } catch (err) {
             throw new Error(err.message);
         }
     },
 
-    editComment: async (postId, commentId ,content) => {
+    editComment: async (postId, commentId, content) => {
         try {
             const response = await fetch(`http://localhost:3030/forum/${postId}/comment/${commentId}/edit`, {
                 method: "POST",
@@ -141,7 +141,7 @@ const postApi = {
                 const errorData = await response.json();
                 throw new Error(errorData.err);
             }
-    
+
             return true;
         } catch (err) {
             throw new Error(err.message);
@@ -162,7 +162,7 @@ const postApi = {
                 const errorData = await response.json();
                 throw new Error(errorData.err);
             }
-    
+
             return true;
         } catch (err) {
             throw new Error(err.message);
@@ -220,18 +220,39 @@ const postApi = {
                 },
                 credentials: "include",
             });
-    
+
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.error || 'Failed to toggle like');
             }
-    
+
             return await response.json();
         } catch (err) {
             throw new Error(err.message);
         }
     },
-    
+
+    likeComment: async (postId, commentId) => {
+        try {
+            const response = await fetch(`http://localhost:3030/forum/${postId}/comment/${commentId}/like`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to toggle like');
+            }
+
+            return await response.json();
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    },
+
     getLikedPosts: async () => {
         try {
             const response = await fetch(`http://localhost:3030/user/posts/liked`, {
