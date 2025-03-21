@@ -6,8 +6,8 @@ import './programscontainer.css'
 const ProgramsContainer = () => {
   return (
     <div className="programs-container">
-      {programs.map((program, index) => (
-        <Program key={index} program={program} />
+      {programs.map((program) => (
+        <Program key={program.id} program={program} />
       ))}
     </div>
   );

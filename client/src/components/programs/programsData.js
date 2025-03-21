@@ -1,5 +1,6 @@
 const programs = [
     {
+        id: 1,
         name: "Push, Pull, Legs",
         image: "/images/ppl.webp",
         price: "29,99",
@@ -77,6 +78,7 @@ const programs = [
         ]
     },
     {
+        id: 2,
         name: "Upper Lower",
         image: "/images/ul.webp",
         price: "19,99",
@@ -160,6 +162,7 @@ const programs = [
         ]
     },
     {
+        id: 3,
         name: "Full Body (Weekly)",
         image: "/images/fb.webp",
         price: "39,99",

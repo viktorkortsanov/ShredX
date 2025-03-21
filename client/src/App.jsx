@@ -18,6 +18,7 @@ import PublicGuard from "./components/PublicRoute.jsx";
 import CommentForm from "./components/postComment/CommentForm.jsx";
 import EditCommentForm from "./components/еditComment/EditComment.jsx";
 import ProgramsContainer from "./components/programs/programsContainer.jsx";
+import PaymentForm from "./components/programs/paymentForm/PaymentForm.jsx";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/programs" element={<ProgramsContainer />} />
             <Route path="/forum/:postId/comment/:commentId/edit" element={<EditCommentForm />} />
+            <Route path="/programs/pay/:programId" element={<PaymentForm />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

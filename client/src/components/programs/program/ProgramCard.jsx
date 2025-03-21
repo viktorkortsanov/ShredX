@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import './ProgramCard.css';
 
 const ProgramCard = ({ program }) => {
@@ -7,7 +7,9 @@ const ProgramCard = ({ program }) => {
             <div className="program-info">
                 <h3 className="program-name">{program.name}</h3>
                 <p className="program-price">${program.price}</p>
-                <button className="buy-button">Buy</button>
+                <Link to={`/programs/pay/${program.id}`} className="buy-btn">
+                    Buy
+                </Link>
             </div>
         </div>
     );
