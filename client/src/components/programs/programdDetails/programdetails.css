@@ -29,15 +29,15 @@
 }
 
 .program-details-training-day {
-    background-color: #434343;  /* Светло-сив фон за всеки тренировъчен ден */
+    background-color: #434343;
     padding: 20px;
-    margin-bottom: 20px;  /* Разстояние между тренировъчните дни */
+    margin-bottom: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  /* Сенки за отделеност */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .program-details-training-day h3 {
-    font-size: 26px;  /* По-голям размер за заглавията на тренировъчните дни */
+    font-size: 26px;
     font-weight: bold;
     color: #fff;
     margin-bottom: 15px;
