@@ -8,14 +8,14 @@ const PaymentForm = () => {
     const { programId } = useParams();
     const program = programs.find(prog => prog.id.toString() === programId.toString());
 
-    const { values, handleChange, handleSubmit, error } = useForm({
+    const { values, handleChange, handleSubmit, error, setError } = useForm({
         cardNumber: '',
         expirationDate: '',
         cvv: '',
         nameOnCard: '',
         securityCode: '',
     });
-
+    
     const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
 
     const submitPayment = async (paymentData) => {
