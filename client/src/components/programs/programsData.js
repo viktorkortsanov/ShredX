@@ -67,13 +67,27 @@ const programs = [
         recipes: [
             {
                 name: "Protein Smoothie",
+                image: "/images/protein-smoothie.jpg",
                 ingredients: ["1 banana", "1 scoop whey protein", "200 ml almond milk"],
-                instructions: "Blend all ingredients together for a delicious smoothie."
+                instructions: "Blend all ingredients together for a delicious smoothie.",
+                macros: {
+                    calories: 250,
+                    protein: 20,
+                    fat: 7,
+                    carbs: 30,
+                }
             },
             {
                 name: "Grilled Chicken Salad",
+                image:"/imgaes/grilled-chicken-salad.jpg",
                 ingredients: ["200g chicken breast", "mixed greens", "olive oil"],
-                instructions: "Grill the chicken, chop veggies, and mix together with olive oil."
+                instructions: "Grill the chicken, chop veggies, and mix together with olive oil.",
+                macros: {
+                    calories: 350,
+                    protein: 30,
+                    fat: 18,
+                    carbs: 10,
+                }
             }
         ]
     },
@@ -151,15 +165,30 @@ const programs = [
         recipes: [
             {
                 name: "Oats with Berries",
+                image: "/images/oats-with-berries.jpg",
                 ingredients: ["1 cup oats", "100g mixed berries", "honey"],
-                instructions: "Cook the oats and top with fresh berries and a drizzle of honey."
+                instructions: "Cook the oats and top with fresh berries and a drizzle of honey.",
+                macros: {
+                    calories: 300,
+                    protein: 6,
+                    fat: 5,
+                    carbs: 50,
+                }
             },
             {
                 name: "Grilled Salmon with Veggies",
+                image: "/images/grilled-salmon-with-veggies.jpg",
                 ingredients: ["200g salmon", "mixed veggies", "olive oil"],
-                instructions: "Grill salmon and veggies with olive oil, salt, and pepper."
+                instructions: "Grill salmon and veggies with olive oil, salt, and pepper.",
+                macros: {
+                    calories: 450,
+                    protein: 35,
+                    fat: 28,
+                    carbs: 10,
+                }
             }
         ]
+
     },
     {
         id: 3,
@@ -227,7 +256,32 @@ const programs = [
                 day: "Sunday - Rest Day",
                 exercises: []
             },
-        ]
-}]
+        ],
+        recipes: [
+            {
+                name: "Avocado Toast",
+                image: "/images/avocado-toast.jpg",
+                ingredients: ["1 slice whole-grain bread", "1/2 avocado", "salt", "pepper", "lemon juice"],
+                instructions: "Toast the bread, mash the avocado, and spread it on the toast. Season with salt, pepper, and a squeeze of lemon juice.",
+                macros: {
+                    calories: 250,
+                    protein: 6,
+                    fat: 18,
+                    carbs: 20,
+                }
+            },
+            {
+                name: "Chicken Stir-Fry",
+                image: "/images/chicken-stir-fry.jpg",
+                ingredients: ["200g chicken breast", "mixed veggies", "soy sauce", "olive oil", "garlic"],
+                instructions: "Cook the chicken in olive oil with garlic, then add the veggies and soy sauce, and stir-fry until everything is cooked through.",
+                macros: {
+                    calories: 350,
+                    protein: 30,
+                    fat: 18,
+                    carbs: 15,
+                }
+            }]
+        }]
 
 export default programs;
