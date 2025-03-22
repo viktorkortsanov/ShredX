@@ -19,6 +19,7 @@ import CommentForm from "./components/postComment/CommentForm.jsx";
 import EditCommentForm from "./components/еditComment/EditComment.jsx";
 import ProgramsContainer from "./components/programs/programsContainer.jsx";
 import PaymentForm from "./components/programs/paymentForm/PaymentForm.jsx";
+import ProgramDetails from "./components/programs/programdDetails/ProgramDetails.jsx";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/programs" element={<ProgramsContainer />} />
             <Route path="/forum/:postId/comment/:commentId/edit" element={<EditCommentForm />} />
             <Route path="/programs/pay/:programId" element={<PaymentForm />} />
+            <Route path="/programs/:programId/details" element={<ProgramDetails />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

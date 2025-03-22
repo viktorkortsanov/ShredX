@@ -79,7 +79,7 @@ const programs = [
             },
             {
                 name: "Grilled Chicken Salad",
-                image:"/imgaes/grilled-chicken-salad.jpg",
+                image:"/images/grilled-chicken-salad.jpg",
                 ingredients: ["200g chicken breast", "mixed greens", "olive oil"],
                 instructions: "Grill the chicken, chop veggies, and mix together with olive oil.",
                 macros: {

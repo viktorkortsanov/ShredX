@@ -39,7 +39,7 @@ const PaymentForm = () => {
                 >
                     <div className="program-info">
                         <h2 className="program-name">{program.name}</h2>
-                        <p className="program-price">{program.price}</p>
+                        <p className="program-price">${program.price}</p>
                     </div>
                 </div>
             </div>

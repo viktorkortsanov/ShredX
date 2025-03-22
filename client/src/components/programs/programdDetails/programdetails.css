@@ -1,0 +1,91 @@
+.program-details-container {
+    padding: 20px;
+    background-color: #18181A;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.program-details-info {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.program-details-name {
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.program-details-training-days {
+    margin-top: 40px;
+}
+
+.program-details-training-day {
+    background-color: #434343;  /* Светло-сив фон за всеки тренировъчен ден */
+    padding: 20px;
+    margin-bottom: 20px;  /* Разстояние между тренировъчните дни */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  /* Сенки за отделеност */
+}
+
+.program-details-training-day h3 {
+    font-size: 26px;  /* По-голям размер за заглавията на тренировъчните дни */
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.program-details-training-day ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.program-details-training-day li {
+    font-size: 18px;
+    color: #ddd;
+    margin-bottom: 8px;
+}
+
+.program-details-recipes-container {
+    margin-top: 40px;
+}
+
+.program-details-recipe {
+    background-color: #333;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.program-details-recipe-image {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.program-details-recipe-macros,
+.program-details-recipe-ingredients {
+    font-size: 16px;
+    color: #bbb;
+    margin-top: 12px;
+    text-align: center;
+}
