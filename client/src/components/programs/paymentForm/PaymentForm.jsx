@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import useForm from '../../../hooks/useForm.js';
 import programs from '../programsData.js';
 import './PaymentForm.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const PaymentForm = () => {
     const { programId } = useParams();
     const program = programs.find(prog => prog.id.toString() === programId.toString());
+    const navigate = useNavigate();
 
     const { values, handleChange, handleSubmit, error, setError } = useForm({
         cardNumber: '',
@@ -15,13 +16,19 @@ const PaymentForm = () => {
         nameOnCard: '',
         securityCode: '',
     });
-    
+
     const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
 
-    const submitPayment = async (paymentData) => {
-        console.log(paymentData);
+    const submitPayment = async () => {
         setIsPaymentSuccessful(true);
+        let purchasedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
+        purchasedPrograms.push(programId);
+        localStorage.setItem('purchasedPrograms', JSON.stringify(purchasedPrograms));
+        setTimeout(() => {
+            navigate(`/programs`);
+        }, 2000);
     };
+
 
     return (
         <div className="payment-container">
