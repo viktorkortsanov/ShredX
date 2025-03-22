@@ -82,6 +82,27 @@
     outline: none;
 }
 
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inline-fields {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.inline-fields input {
+    width: 30%;
+    min-width: 70px;
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+
 .submit-btn {
     padding: 10px;
     background-color: #006CFA;

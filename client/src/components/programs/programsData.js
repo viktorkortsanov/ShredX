@@ -163,7 +163,7 @@ const programs = [
     },
     {
         id: 3,
-        name: "Full Body (Weekly)",
+        name: "Full Body",
         image: "/images/fb.webp",
         price: "39,99",
         days: [
