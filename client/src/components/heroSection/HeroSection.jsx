@@ -7,7 +7,7 @@ export default function HeroSection() {
                 <div className="hero-content">
                     <h1 className='hero-title'>Welcome to ShredX</h1>
                     <p>The Ultimate Fitness App for Workouts and Community Support.</p>
-                    <Link to="/programs" className="cta-btn">Get Started</Link>
+                    <Link to="/programs" className="cta-btn">GET STARTED</Link>
                 </div>
             </section>
     );

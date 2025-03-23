@@ -20,6 +20,7 @@ import EditCommentForm from "./components/еditComment/EditComment.jsx";
 import ProgramsContainer from "./components/programs/programsContainer.jsx";
 import PaymentForm from "./components/programs/paymentForm/PaymentForm.jsx";
 import ProgramDetails from "./components/programs/programdDetails/ProgramDetails.jsx";
+import OurTeam from "./components/ourTeam/OurTeam.jsx";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/forum" element={<ForumContainer />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="/forum/:postId/details" element={<PostDetails />} />
+          <Route path="/ourteam" element={<OurTeam />} />
           <Route element={<PublicGuard />}>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />

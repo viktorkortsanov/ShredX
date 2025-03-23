@@ -33,11 +33,12 @@ export default function NavBar() {
                             <img src="/images/shredx-logo.png" alt="Logo" />
                         </Link>
                     </li>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/forum">Forum</Link></li>
+                    <li><Link to="/">HOME</Link></li>
+                    <li><Link to="/forum">FORUM</Link></li>
+                    <li><Link to="/ourteam">OUR TEAM</Link></li>
                     {isAuthenticated ? (
                         <>
-                            <li><Link to="/programs">Programs</Link></li>
+                            <li><Link to="/programs">PROGRAMS</Link></li>
                             <li className="user-icon" onClick={toggleMenu}>
                                 <img src="/images/personalization.png" alt="User Icon" />
                                 {isMenuOpen && (
@@ -56,13 +57,13 @@ export default function NavBar() {
                                         <li>
                                             <Link to="/profile">
                                                 <img src="../../../public/images/profile.png" alt="Profile Icon" />
-                                                Profile
+                                                PROFILE
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/logout" onClick={handleLogout}>
                                                 <img src="../../../public/images/logout.png" alt="Logout Icon" />
-                                                Logout
+                                                LOGOUT
                                             </Link>
                                         </li>
                                     </ul>
@@ -71,8 +72,8 @@ export default function NavBar() {
                         </>
                     ) : (
                         <>
-                            <li><Link to="/login">Login</Link></li>
-                            <li><Link to="/register">Register</Link></li>
+                            <li><Link to="/login">LOGIN</Link></li>
+                            <li><Link to="/register">REGISTER</Link></li>
                         </>
                     )}
                 </ul>

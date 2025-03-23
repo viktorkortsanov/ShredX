@@ -3,6 +3,7 @@ footer {
     width: 100%;
     padding: 20px;
     background-color: #18181A;
+    border: 1px solid rgb(146, 146, 146);
     color: white;
     text-align: center;
   }
@@ -19,18 +20,28 @@ footer {
     font-size: 1rem;
 }
 
-.footer-links {
-    margin-top: 10px;
-}
-
 .footer-links a {
+    position: relative;
     color: #fff;
     margin: 0 15px;
     text-decoration: none;
     font-size: 1rem;
+    display: inline-block;
+    padding-bottom: 5px; /* Оставя място за линията */
 }
 
-.footer-links a:hover {
-    text-decoration: underline;
-    color: #ff6347;
+.footer-links a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+    left: 0;
 }

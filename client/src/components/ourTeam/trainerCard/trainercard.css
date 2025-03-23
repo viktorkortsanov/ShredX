@@ -1,0 +1,47 @@
+.trainer-card {
+    background-color: #1f1f1f;
+    color: white;
+    padding: 33px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 320px;
+    margin: 16px;
+}
+
+.trainer-image {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #333;
+}
+
+.trainer-name {
+    font-size: 1.25rem;
+    margin-top: 12px;
+}
+
+.trainer-description {
+    font-size: 0.875rem;
+    color: #b0b0b0;
+    margin-top: 8px;
+}
+
+.trainer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.social-icon {
+    width: 24px; /* Размер на иконките */
+    height: 24px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2); /* Увеличаване при hover */
+}
