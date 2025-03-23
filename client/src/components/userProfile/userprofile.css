@@ -64,6 +64,10 @@
     color: #ffffff;
 }
 
+.posts-list p {
+    color: white;
+}
+
 .no-posts {
     text-align: center;
     font-size: 18px;

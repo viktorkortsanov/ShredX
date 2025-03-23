@@ -35,7 +35,7 @@ const UserProfile = () => {
                 <h3>Your Posts</h3>
                 <div className="posts-list">
                     {userPosts.length === 0 ? (
-                        <p>No posts yet.</p>
+                        <p color='white'>No posts yet.</p>
                     ) : (
                         userPosts.map((post, index) => <PostItem key={index} post={post} />)
                     )}
