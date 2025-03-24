@@ -21,6 +21,9 @@ import ProgramsContainer from "./components/programs/programsContainer.jsx";
 import PaymentForm from "./components/programs/paymentForm/PaymentForm.jsx";
 import ProgramDetails from "./components/programs/programdDetails/ProgramDetails.jsx";
 import OurTeam from "./components/ourTeam/OurTeam.jsx";
+import AdminPanel from "./components/adminPanel/AdminPanel.jsx";
+import UserManagement from "./components/adminPanel/userManagement/UserManagement.jsx";
+import ForumManagement from "./components/adminPanel/forumManagement/ForumManagement.jsx";
 
 function App() {
   return (
@@ -47,6 +50,10 @@ function App() {
             <Route path="/forum/:postId/comment/:commentId/edit" element={<EditCommentForm />} />
             <Route path="/programs/pay/:programId" element={<PaymentForm />} />
             <Route path="/programs/:programId/details" element={<ProgramDetails />} />
+            <Route path="/adminpanel" element={<AdminPanel />} />
+            <Route path="/adminpanel/usersmanagement" element={<UserManagement />} />
+            <Route path="/adminpanel/forummanagement" element={<ForumManagement />} />
+            <Route path="/adminpanel/posts/:postId/edit" element={<EditPost />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

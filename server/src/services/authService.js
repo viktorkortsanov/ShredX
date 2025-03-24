@@ -59,7 +59,7 @@ const authService = {
             username: user.username
         };
 
-        const token = await jsonwebtoken.sign(payload, JWT_SECRET, { expiresIn: '2h' });
+        const token = await jsonwebtoken.sign(payload, JWT_SECRET, { expiresIn: '14d' });
         return token;
     }
 };

@@ -9,6 +9,7 @@ import '../../../public/images/profile.png';
 export default function NavBar() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const user = useSelector((state) => state.auth.user);
+    const isAdmin = user?.isAdmin;
     const dispatch = useDispatch();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
@@ -39,6 +40,7 @@ export default function NavBar() {
                     {isAuthenticated ? (
                         <>
                             <li><Link to="/programs">PROGRAMS</Link></li>
+                            {isAdmin && <li><Link to="/adminpanel">ADMIN</Link></li>}
                             <li className="user-icon" onClick={toggleMenu}>
                                 <img src="/images/personalization.png" alt="User Icon" />
                                 {isMenuOpen && (

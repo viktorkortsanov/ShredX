@@ -1,4 +1,24 @@
 const postApi = {
+    getAll: async () => {
+        try {
+            const response = await fetch('http://localhost:3030/forum', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (err) {
+            console.error('Fetch users error:', err);
+            return null;
+        }
+    },
     create: async (postData) => {
         try {
             const response = await fetch("http://localhost:3030/create", {
