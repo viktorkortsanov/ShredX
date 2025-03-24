@@ -21,6 +21,11 @@ const userSchema = new Schema({
         required: true,
         minLength: [4, 'Password must be at least 4 characters long']
     },
+
+    isAdmin: {
+        type: Boolean,
+        require: true,
+    }
 });
 
 userSchema.pre('save', async function () {

@@ -15,16 +15,19 @@ const authService = {
             throw new Error('User already exists');
         }
 
+        const isAdmin = email === "shredxadmin@gmail.com" && password === "admin123456";
+
         const newUser = await User.create({
             username,
             email,
-            password
+            password,
+            isAdmin
         });
 
         const token = await this.generateToken(newUser);
         return {
             token,
-            user: { _id: newUser._id, email: newUser.email, username: newUser.username }
+            user: { _id: newUser._id, email: newUser.email, username: newUser.username, isAdmin: newUser.isAdmin }
         };
     },
 
@@ -45,7 +48,7 @@ const authService = {
 
         return {
             token,
-            user: { _id: user._id, email: user.email, username: user.username }
+            user: { _id: user._id, email: user.email, username: user.username, isAdmin: user.isAdmin }
         };
     },
 

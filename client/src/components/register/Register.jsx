@@ -19,9 +19,9 @@ export default function Register() {
     const handleRegister = async (userData) => {
         try {
             const { token, user } = await userApi.register(userData);
-            dispatch(login({ id: user._id, email: user.email, username: user.username }));
+            dispatch(login({ id: user._id, email: user.email, username: user.username, isAdmin: user.isAdmin }));
             localStorage.setItem('token', token);
-    
+
             const templateParams = {
                 username: user.username,
                 email: user.email,
@@ -33,13 +33,13 @@ export default function Register() {
                 templateParams,
                 'mxz5zqh2O_h0HA_5_'
             );
-                
+
             navigate('/');
         } catch (err) {
             setError(err.message);
         }
     };
-    
+
 
     return (
         <div className="register-container">
