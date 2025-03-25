@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import DeleteUserDialog from "../../deleteUserDialog/DeleteUserDialog";
 import userApi from "../../../api/userApi";
 import "./usermanagement.css";
 
 export default function UserManagement() {
     const [users, setUsers] = useState([]);
-    const [showDialog, setShowDialog] = useState(false);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -22,14 +20,6 @@ export default function UserManagement() {
         fetchUsers();
     }, []);
 
-    const handleCancel = () => {
-        setShowDialog(false);
-    }
-
-    const deleteUser = () => {
-
-    }
-
     return (
         <div className="admin-panel">
             <h2>User Management</h2>
@@ -42,15 +32,8 @@ export default function UserManagement() {
                         <Link to={`/adminpanel/${user._id}/info`} className="delete-link">
                             <img src="/images/info.png" alt="Delete User" className="delete-icon" />
                         </Link>
-                        <Link className="delete-link" onClick={() => setShowDialog(true)}>
-                            <img src="/images/delete.png" alt="Delete User" className="delete-icon" />
-                        </Link>
                     </div>
-                ))}
-
-                {showDialog && (
-                    <DeleteUserDialog onCancel={handleCancel} onConfirm={deleteUser}/>
-                )}
+                ))}с
             </div>
         </div>
     );

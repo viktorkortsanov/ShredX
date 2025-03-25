@@ -4,8 +4,6 @@ import './ProgramCard.css';
 const ProgramCard = ({ program }) => {
     const purchasedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
     const isPurchased = purchasedPrograms.includes(program.id.toString());
-    console.log(isPurchased);
-    
 
     return (
         <div className="program-card" style={{ backgroundImage: `url(${program.image})` }}>

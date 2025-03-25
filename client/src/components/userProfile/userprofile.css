@@ -59,17 +59,14 @@
     margin-bottom: 10px;
 }
 
-.post-item p {
-    font-size: 16px;
-    color: #ffffff;
-}
-
-.posts-list p {
-    color: white;
-}
-
-.no-posts {
-    text-align: center;
+.no-items {
     font-size: 18px;
-    color: #ffffff;
+    color: #7f7373;
+}
+
+.programs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
 }
