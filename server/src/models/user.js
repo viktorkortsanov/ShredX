@@ -22,17 +22,28 @@ const userSchema = new Schema({
         minLength: [4, 'Password must be at least 4 characters long']
     },
 
+    purchasedPrograms: {
+        type: Array,
+        default: [],
+    },
+
     isAdmin: {
         type: Boolean,
         require: true,
     }
 });
 
-userSchema.pre('save', async function () {
-    const hash = await bcrypt.hash(this.password, SALT_ROUNDS);
-    this.password = hash;
+userSchema.pre('save', async function(next) {
+    if (this.isModified('password') && !this.password.startsWith('$2a$')) {
+        try {
+            const hash = await bcrypt.hash(this.password, SALT_ROUNDS);
+            this.password = hash;
+        } catch (error) {
+            return next(error);
+        }
+    }
+    next();
 });
 
 const User = model('User', userSchema);
-
 export default User;

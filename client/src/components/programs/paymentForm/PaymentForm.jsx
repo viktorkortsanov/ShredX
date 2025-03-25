@@ -20,15 +20,27 @@ const PaymentForm = () => {
     const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
 
     const submitPayment = async () => {
-        setIsPaymentSuccessful(true);
-        let purchasedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
-        purchasedPrograms.push(programId);
-        localStorage.setItem('purchasedPrograms', JSON.stringify(purchasedPrograms));
-        setTimeout(() => {
-            navigate(`/programs`);
-        }, 2000);
-    };
+        try {
+            const response = await fetch(`http://localhost:3030/programs/pay/${programId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({ programId }),
+            });
 
+            if (response.ok) {
+                setIsPaymentSuccessful(true);
+                navigate('/programs');
+            } else {
+                setError('Payment failed');
+            }
+        } catch (err) {
+            console.error(err);
+            setError('Error purchasing program');
+        }
+    };
 
     return (
         <div className="payment-container">
@@ -44,7 +56,7 @@ const PaymentForm = () => {
                 </div>
             </div>
 
-            <form className="payment-form" onSubmit={handleSubmit(submitPayment)}>
+            <form className="payment-form" onSubmit={handleSubmit(submitPayment)} method="POST">
                 <div className="card-icons">
                     <img src="/images/visa.png" alt="Visa" className="card-icon" />
                     <img src="/images/mastercard.png" alt="MasterCard" className="card-icon" />
@@ -99,7 +111,7 @@ const PaymentForm = () => {
                             </div>
                         </div>
 
-                        <button type="submit" className="submit-btn">Submit Payment</button>
+                        <button className="submit-btn">Submit Payment</button>
                     </>
                 )}
             </form>

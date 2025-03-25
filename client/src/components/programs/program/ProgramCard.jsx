@@ -1,9 +1,47 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ProgramCard.css';
 
 const ProgramCard = ({ program }) => {
-    const purchasedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
+    const [loading, setLoading] = useState(true);
+    const [purchasedPrograms, setPurchasedPrograms] = useState([]);
+
+    useEffect(() => {
+        const fetchPurchasedPrograms = async () => {
+            try {
+                const response = await fetch('http://localhost:3030/programs/purchased', {
+                    method: 'GET',
+                    credentials: "include",
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data);
+                    
+                    const programs = data || [];
+                    setPurchasedPrograms(programs);
+                    if (programs.length > 0) {
+                        localStorage.setItem('purchasedPrograms', JSON.stringify(programs));
+                    }
+                } else {
+                    console.error('Error fetching purchased programs');
+                }
+            } catch (err) {
+                console.error('Error fetching purchased programs:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPurchasedPrograms();
+    }, []);
+
+    // Проверяваме дали програмата е в списъка с купени
     const isPurchased = purchasedPrograms.includes(program.id.toString());
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="program-card" style={{ backgroundImage: `url(${program.image})` }}>
@@ -23,4 +61,5 @@ const ProgramCard = ({ program }) => {
         </div>
     );
 };
+
 export default ProgramCard;
