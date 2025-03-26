@@ -49,25 +49,29 @@ export default function ForumManagement() {
 
     return (
         <div className="forum-admin-panel">
+            <Link to="/adminpanel" className="back-link">
+                <img src="/images/back.png" alt="Back Arrow" className="back-arrow" />
+                <span className="back-text">Back to Admin Panel</span>
+            </Link>
             <h2>Forum Management</h2>
             <div className="forum-posts-list">
                 {posts.length === 0 ? (
                     <h2 className="no-posts">No posts available.</h2>
                 ) : (
                     posts.map(post => (
-                <div key={post._id} className="forum-post-container">
-                    <span className="forum-post-id">ID: {post._id}</span>
-                    <span className="forum-post-author">Author: {post.author}</span>
-                    <span className="forum-post-title">Title: {post.title}</span>
-                    <span className="forum-post-created-at">Created At: {new Date(post.createdAt).toLocaleDateString()}</span>
-                    <Link to={`/adminpanel/posts/${post._id}/edit`} className="forum-edit-link">
-                        <img src="/images/edit.png" alt="Edit Post" className="forum-edit-icon" />
-                    </Link>
-                    <Link className="forum-delete-link" onClick={() => handleDeleteClick(post._id)}>
-                        <img src="/images/delete.png" alt="Delete Post" className="forum-delete-icon" />
-                    </Link>
-                </div>
-                ))
+                        <div key={post._id} className="forum-post-container">
+                            <span className="forum-post-id">ID: {post._id}</span>
+                            <span className="forum-post-author">Author: {post.author}</span>
+                            <span className="forum-post-title">Title: {post.title}</span>
+                            <span className="forum-post-created-at">Created At: {new Date(post.createdAt).toLocaleDateString()}</span>
+                            <Link to={`/adminpanel/posts/${post._id}/edit`} className="forum-edit-link">
+                                <img src="/images/edit.png" alt="Edit Post" className="forum-edit-icon" />
+                            </Link>
+                            <Link className="forum-delete-link" onClick={() => handleDeleteClick(post._id)}>
+                                <img src="/images/delete.png" alt="Delete Post" className="forum-delete-icon" />
+                            </Link>
+                        </div>
+                    ))
                 )}
 
                 {showDialog && (

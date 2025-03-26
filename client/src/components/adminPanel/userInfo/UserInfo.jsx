@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import userApi from "../../../api/userApi";
 import { useParams } from "react-router-dom";
 import ProgramCard from "../../programs/program/ProgramCard.jsx";
 import postApi from "../../../api/postApi";
 import programsData from "../../programs/programsData";
 import PostItem from "../../forum/postItem/PostItem";
+import { Link } from "react-router-dom";
 import './userinfo.css';
 
 export default function UserInfo() {
@@ -26,7 +27,7 @@ export default function UserInfo() {
                 setLikedPosts(likedPosts);
                 setUserPosts(userPosts);
                 setPurchasedProgramIds(purchasedIdsData);
-                
+
             } catch (error) {
                 console.log(error);
             }
@@ -34,16 +35,20 @@ export default function UserInfo() {
         getUserInfo();
     }, [userId]);
 
-    const purchasedPrograms = programsData.filter(program => 
+    const purchasedPrograms = programsData.filter(program =>
         purchasedProgramIds.includes(program.id.toString())
     );
 
     return (
         <div className="user-profile">
+            <Link to="/adminpanel/usersmanagement" className="back-link">
+                <img src="/images/back.png" alt="Back Arrow" className="back-arrow" />
+                <span className="back-text">Back to Users Management</span>
+            </Link>
             <div className="profile-header">
                 <img src="../../../public/images/personalization.png" alt="User Avatar" className="user-avatar" />
             </div>
-            
+
             <div className="user-info-container">
                 <p className="user-id">id: {user.id}</p>
                 <p className="user-email">email: {user.email}</p>

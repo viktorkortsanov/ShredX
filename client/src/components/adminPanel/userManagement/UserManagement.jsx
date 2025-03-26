@@ -20,6 +20,10 @@ export default function UserManagement() {
 
     return (
         <div className="admin-panel">
+            <Link to="/adminpanel" className="back-link">
+                <img src="/images/back.png" alt="Back Arrow" className="back-arrow" />
+                <span className="back-text">Back to Admin Panel</span>
+            </Link>
             <h2>User Management</h2>
             <div className="user-list">
                 {users.map(user => (
