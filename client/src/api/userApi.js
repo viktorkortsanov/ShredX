@@ -96,7 +96,23 @@ const userApi = {
             console.error('Fetch users error:', err);
             return null;
         }
-    }
+    },
+
+    getPurchasedPrograms: async (userId) => {
+        try {
+            const response = await fetch(`${baseUrl}/programs/${userId}/purchased`);
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.err);
+            }
+
+            return response;
+        } catch (error) {
+            console.error('Fetch users error:', err);
+            return null;
+        }
+    },
 
 };
 

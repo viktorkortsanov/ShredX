@@ -1,23 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ProgramCard.css';
+import { useSelector } from 'react-redux';
+import userApi from '../../../api/userApi';
 
 const ProgramCard = ({ program }) => {
     const [loading, setLoading] = useState(true);
     const [purchasedPrograms, setPurchasedPrograms] = useState([]);
+    const userId = useSelector(state => state.auth.user?._id);    
 
     useEffect(() => {
         const fetchPurchasedPrograms = async () => {
             try {
-                const response = await fetch('http://localhost:3030/programs/purchased', {
-                    method: 'GET',
-                    credentials: "include",
-                });
+                const response = await userApi.getPurchasedPrograms(userId);
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data);
-                    
                     const programs = data || [];
                     setPurchasedPrograms(programs);
                     if (programs.length > 0) {
@@ -36,7 +34,6 @@ const ProgramCard = ({ program }) => {
         fetchPurchasedPrograms();
     }, []);
 
-    // Проверяваме дали програмата е в списъка с купени
     const isPurchased = purchasedPrograms.includes(program.id.toString());
 
     if (loading) {

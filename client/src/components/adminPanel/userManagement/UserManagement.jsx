@@ -10,8 +10,6 @@ export default function UserManagement() {
         const fetchUsers = async () => {
             try {
                 const data = await userApi.getAll();
-                console.log(data);
-                
                 setUsers(data);
             } catch (error) {
                 console.error("Error fetching users:", error);

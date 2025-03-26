@@ -24,6 +24,7 @@ import AdminPanel from "./components/adminPanel/AdminPanel.jsx";
 import UserManagement from "./components/adminPanel/userManagement/UserManagement.jsx";
 import ForumManagement from "./components/adminPanel/forumManagement/ForumManagement.jsx";
 import AdminGuard from "./components/routes/AdminRoute.jsx";
+import UserInfo from "./components/adminPanel/userInfo/UserInfo.jsx";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
             <Route path="/adminpanel/usersmanagement" element={<UserManagement />} />
             <Route path="/adminpanel/forummanagement" element={<ForumManagement />} />
             <Route path="/adminpanel/posts/:postId/edit" element={<EditPost />} />
+            <Route path="/adminpanel/:userId/info" element={<UserInfo />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

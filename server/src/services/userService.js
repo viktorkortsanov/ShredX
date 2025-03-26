@@ -4,6 +4,9 @@ const userService = {
     getAll() {
         return User.find();
     },
+    getOne(userId) {
+        return User.findById(userId);
+    }
 };
 
 export default userService;

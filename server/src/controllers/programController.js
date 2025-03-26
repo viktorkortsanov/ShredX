@@ -25,8 +25,8 @@ programController.post('/programs/pay/:programId', async (req, res) => {
     }
 });
 
-programController.get('/programs/purchased', async (req, res) => {
-    const userId = req.user?._id;
+programController.get('/programs/:userId/purchased', async (req, res) => {
+    const userId = req.params.userId;
 
     try {
         const user = await User.findById(userId).populate('purchasedPrograms');

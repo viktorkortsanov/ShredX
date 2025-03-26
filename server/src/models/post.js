@@ -4,13 +4,11 @@ const forumPostSchema = new Schema({
     title: {
         type: String,
         required: true,
-        minLength: 5,
         maxLength: 100
     },
     content: {
         type: String,
         required: true,
-        minLength: 20
     },
     author: {
         type: String,
