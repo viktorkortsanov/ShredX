@@ -25,6 +25,7 @@ import UserManagement from "./components/adminPanel/userManagement/UserManagemen
 import ForumManagement from "./components/adminPanel/forumManagement/ForumManagement.jsx";
 import AdminGuard from "./components/routes/AdminRoute.jsx";
 import UserInfo from "./components/adminPanel/userInfo/UserInfo.jsx";
+import PrivacyPolicy from "./components/privacyPolicy/PrivacyPolicy.jsx";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/404" element={<NotFound />} />
           <Route path="/forum/:postId/details" element={<PostDetails />} />
           <Route path="/ourteam" element={<OurTeam />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
           <Route element={<PublicGuard />}>
             <Route path="/register" element={<Register />} />

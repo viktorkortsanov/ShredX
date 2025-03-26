@@ -1,0 +1,39 @@
+.legal-doc-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #18181A;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.legal-doc-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #006CFA;
+}
+
+.legal-doc-subtitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #006CFA;
+}
+
+.legal-doc-text {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #e2e8f0;
+}
+
+.legal-doc-list {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #c4c5c7;
+}
+
+.legal-doc-list li {
+    margin-bottom: 10px;
+}
