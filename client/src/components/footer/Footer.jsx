@@ -1,5 +1,6 @@
 import React from 'react';
 import './footer.css';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
     return (
@@ -7,9 +8,9 @@ export default function Footer() {
             <div className="footer-content">
                 <p>&copy; 2025 ShredX. All rights reserved.</p>
                 <div className="footer-links">
-                    <a href="/privacy-policy">Privacy Policy</a>
-                    <a href="/terms-of-service">Terms of Service</a>
-                    <a href="/contact">Contact</a>
+                    <Link to="/privacy-policy">Privacy Policy</Link>
+                    <Link to="/terms-of-service">Terms of Service</Link>
+                    <Link to="/contact">Contact</Link>
                 </div>
             </div>
         </footer>
