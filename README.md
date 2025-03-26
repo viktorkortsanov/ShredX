@@ -23,9 +23,22 @@ The pages accessible to logged-in users are:
 - User Profile (View posts in forum an liked posts)
 - Logout
 
+---
+🔐 **Admin Part**  
+The pages accessible to guests (admin users) are:
+- Admin Panel
+- Forum Management(edit and delete posts)
+- Users Management(access to user info)'
+
+To access the admin panel, you first need to create a user profile with the following credentials:
+
+- **Email:** shredxadmin@gmail.com
+- **Password:** admin123456
+---
+
 🧑 **User Features**  
 - Access to fitness programs
-- View user profile(Posts in forum, liked posts);
+- View user profile(Posts in forum, liked posts and bought programs);
 - Forum participation(Create post, like post and comment);
 - Logout functionality
 
