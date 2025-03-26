@@ -27,6 +27,7 @@ import AdminGuard from "./components/routes/AdminRoute.jsx";
 import UserInfo from "./components/adminPanel/userInfo/UserInfo.jsx";
 import PrivacyPolicy from "./components/privacyPolicy/PrivacyPolicy.jsx";
 import TermsOfService from "./components/termsOfService/TermsOfService.jsx";
+import Contact from "./components/contacts/Contacts.jsx";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/ourteam" element={<OurTeam />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/contact" element={<Contact />} />
 
           <Route element={<PublicGuard />}>
             <Route path="/register" element={<Register />} />
