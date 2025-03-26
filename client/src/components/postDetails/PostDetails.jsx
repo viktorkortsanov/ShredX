@@ -77,7 +77,7 @@ const PostDetails = () => {
     const handleLikeComment = async (commentId) => {
         try {
             await postApi.likeComment(postId, commentId);
-    
+
             setComments(prevComments =>
                 prevComments.map(comment =>
                     comment._id === commentId
@@ -90,15 +90,15 @@ const PostDetails = () => {
                         : comment
                 )
             );
-    
+
             const likedComments = JSON.parse(localStorage.getItem('likedComments')) || {};
             likedComments[commentId] = !likedComments[commentId];
             localStorage.setItem('likedComments', JSON.stringify(likedComments));
-    
+
         } catch (error) {
             console.error('Error toggling like on comment:', error);
         }
-    };    
+    };
 
 
     const handleCancel = () => {
@@ -110,7 +110,12 @@ const PostDetails = () => {
     }
 
     return (
+
         <div className="post-details">
+            <Link to="/forum" className="back-link">
+                <img src="/images/back.png" alt="Back Arrow" className="back-arrow" />
+                <span className="back-text">Back to Forum</span>
+            </Link>
             <div className="post-header">
                 <div className="user-info">
                     <img src="/images/user-logo.png" alt="User Logo" className="user-logo" />
@@ -118,19 +123,19 @@ const PostDetails = () => {
                 </div>
                 <span className="post-date">{new Date(post.createdAt).toLocaleDateString()}</span>
             </div>
-    
+
             <div className="details-container">
                 <div className="detail-item">Title: {post.title}</div>
                 <div className="detail-item">Content: {post.content}</div>
             </div>
-    
+
             <div className="likes-count">
                 <div className="like-img-container">
                     <img src="/images/like.png" alt="Like" className="like-img" />
                     <span className="like-count">{likesCount}</span>
                 </div>
             </div>
-    
+
             <div className="post-actions">
                 {isAuthenticated && !isOwner && (
                     <>
@@ -142,22 +147,22 @@ const PostDetails = () => {
                         </Link>
                     </>
                 )}
-    
+
                 {isOwner && (
                     <div className="edit-delete-actions">
                         <Link to={`/forum/${postId}/edit`} className="action-btn edit">Edit</Link>
                         <button className="action-btn delete" onClick={() => setShowDialog(true)}>Delete</button>
                     </div>
                 )}
-    
+
                 {showDialog && (
                     <ConfirmationDialog onCancel={handleCancel} onConfirm={handleDelete} />
                 )}
             </div>
-    
+
             <div className="comments-section">
                 <h3>Comments</h3>
-    
+
                 <div className="comments-list">
                     {comments.length > 0 ? (
                         comments.map((comment) => (
@@ -177,6 +182,6 @@ const PostDetails = () => {
                 </div>
             </div>
         </div>
-    );    
+    );
 };
 export default PostDetails;

@@ -164,3 +164,25 @@ h3 {
 .delete:hover {
     background-color: #c82333;
 }
+
+.back-link {
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    text-decoration: none;
+    color: rgb(189, 189, 189);
+    font-weight: bold;
+}
+
+.back-arrow {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.back-text {
+    font-size: 16px;
+}
