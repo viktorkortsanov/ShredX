@@ -11,12 +11,13 @@ const UserProfile = () => {
     const [likedPosts, setLikedPosts] = useState([]);
     const [purchasedPrograms, setPurchasedPrograms] = useState([]);
     const username = useSelector(state => state.auth.user?.username);
+    const userId = useSelector(state => state.auth.user?._id);
 
     useEffect(() => {
         async function fetchUserData() {
             try {
-                const userPosts = await postApi.getUserPosts();
-                const likedPosts = await postApi.getLikedPosts();
+                const userPosts = await postApi.getUserPosts(userId);
+                const likedPosts = await postApi.getLikedPosts(userId);                
                 setUserPosts(userPosts);
                 setLikedPosts(likedPosts);
             } catch (err) {

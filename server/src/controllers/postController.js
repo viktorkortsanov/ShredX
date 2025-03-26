@@ -195,9 +195,10 @@ postController.post('/create', isAuth, async (req, res) => {
     }
 });
 
-postController.get('/user/posts', isAuth, async (req, res) => {
+postController.get('/user/:userId/posts', isAuth, async (req, res) => {
+    const userId = req.params.userId;
+
     try {
-        const userId = req.user._id;;
         const posts = await Post.find({ owner: userId }).lean();
         res.json(posts);
     } catch (err) {
@@ -205,9 +206,9 @@ postController.get('/user/posts', isAuth, async (req, res) => {
     }
 });
 
-postController.get('/user/posts/liked', isAuth, async (req, res) => {
+postController.get('/users/:userId/posts/liked', isAuth, async (req, res) => {
     try {
-        const userId = req.user._id;
+        const userId = req.params.userId;
         const likedPosts = await Post.find({ likes: userId }).lean();
         res.json(likedPosts);
     } catch (err) {

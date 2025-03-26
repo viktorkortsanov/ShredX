@@ -189,9 +189,9 @@ const postApi = {
         }
     },
 
-    getUserPosts: async () => {
+    getUserPosts: async (userId) => {
         try {
-            const response = await fetch(`http://localhost:3030/user/posts`, {
+            const response = await fetch(`http://localhost:3030/user/${userId}/posts`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -273,9 +273,9 @@ const postApi = {
         }
     },
 
-    getLikedPosts: async () => {
+    getLikedPosts: async (userId) => {
         try {
-            const response = await fetch(`http://localhost:3030/user/posts/liked`, {
+            const response = await fetch(`http://localhost:3030/users/${userId}/posts/liked`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
