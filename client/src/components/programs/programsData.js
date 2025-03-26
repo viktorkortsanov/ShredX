@@ -281,7 +281,187 @@ const programs = [
                     fat: 18,
                     carbs: 15,
                 }
-            }]
-        }]
-
+            }],
+        },
+        {
+            id: 4,
+            name: "Bro Split",
+            image: "/images/brosplit.webp",
+            price: "29,99",
+            days: [
+                {
+                    day: "Monday - Chest",
+                    exercises: [
+                        { name: "Bench Press", sets: 4, reps: 8 },
+                        { name: "Incline Dumbbell Press", sets: 3, reps: 10 },
+                        { name: "Cable Flys", sets: 3, reps: 12 },
+                        { name: "Dips", sets: 3, reps: 12 },
+                        { name: "Push-Ups", sets: 3, reps: 15 }
+                    ]
+                },
+                {
+                    day: "Tuesday - Back",
+                    exercises: [
+                        { name: "Pull-Ups", sets: 4, reps: 8 },
+                        { name: "Barbell Rows", sets: 4, reps: 8 },
+                        { name: "Lat Pulldown", sets: 3, reps: 10 },
+                        { name: "Face Pulls", sets: 3, reps: 12 },
+                        { name: "Deadlift", sets: 3, reps: 6 }
+                    ]
+                },
+                {
+                    day: "Wednesday - Shoulders",
+                    exercises: [
+                        { name: "Overhead Press", sets: 4, reps: 8 },
+                        { name: "Lateral Raises", sets: 3, reps: 12 },
+                        { name: "Rear Delt Flys", sets: 3, reps: 12 },
+                        { name: "Shrugs", sets: 3, reps: 15 }
+                    ]
+                },
+                {
+                    day: "Thursday - Arms",
+                    exercises: [
+                        { name: "Bicep Curls", sets: 4, reps: 10 },
+                        { name: "Triceps Dips", sets: 3, reps: 12 },
+                        { name: "Hammer Curls", sets: 3, reps: 10 },
+                        { name: "Close-Grip Bench Press", sets: 3, reps: 12 }
+                    ]
+                },
+                {
+                    day: "Friday - Legs",
+                    exercises: [
+                        { name: "Squats", sets: 4, reps: 8 },
+                        { name: "Leg Press", sets: 4, reps: 10 },
+                        { name: "Romanian Deadlifts", sets: 3, reps: 8 },
+                        { name: "Leg Curls", sets: 3, reps: 12 },
+                        { name: "Calf Raises", sets: 3, reps: 15 }
+                    ]
+                },
+                {
+                    day: "Saturday - Rest",
+                    exercises: []
+                },
+                {
+                    day: "Sunday - Rest",
+                    exercises: []
+                }
+            ],
+            recipes: [
+                {
+                    name: "Grilled Salmon with Garlic and Lemon",
+                    image: "/images/grilled-salmon.jpg",
+                    ingredients: ["200g salmon", "1 garlic clove", "1/2 lemon", "1 tsp olive oil"],
+                    instructions: "Brush salmon with olive oil, lemon juice, and minced garlic, then grill until cooked.",
+                    macros: {
+                        calories: 450,
+                        protein: 40,
+                        fat: 25,
+                        carbs: 5,
+                    }
+                },
+                {
+                    name: "Golden Rice with Vegetables and Chicken",
+                    image: "/images/golden-rice.jpg",
+                    ingredients: ["100g golden rice", "150g chicken breast", "1/2 red bell pepper", "1/2 carrot", "1 tsp turmeric"],
+                    instructions: "Cook golden rice with turmeric, then sauté chicken and vegetables. Mix everything together.",
+                    macros: {
+                        calories: 500,
+                        protein: 45,
+                        fat: 10,
+                        carbs: 60,
+                    }
+                }
+            ]
+        },
+        {
+            id: 5,
+            name: "Arnold Split",
+            image: "/images/arnold.webp",
+            price: "29,99",
+            days: [
+                {
+                    day: "Monday - Chest",
+                    exercises: [
+                        { name: "Bench Press", sets: 4, reps: 8 },
+                        { name: "Incline Dumbbell Press", sets: 3, reps: 10 },
+                        { name: "Cable Flys", sets: 3, reps: 12 },
+                        { name: "Dips", sets: 3, reps: 12 },
+                        { name: "Push-Ups", sets: 3, reps: 15 }
+                    ]
+                },
+                {
+                    day: "Tuesday - Back",
+                    exercises: [
+                        { name: "Pull-Ups", sets: 4, reps: 8 },
+                        { name: "Barbell Rows", sets: 4, reps: 8 },
+                        { name: "Lat Pulldown", sets: 3, reps: 10 },
+                        { name: "Face Pulls", sets: 3, reps: 12 },
+                        { name: "Deadlift", sets: 3, reps: 6 }
+                    ]
+                },
+                {
+                    day: "Wednesday - Shoulders",
+                    exercises: [
+                        { name: "Overhead Press", sets: 4, reps: 8 },
+                        { name: "Lateral Raises", sets: 3, reps: 12 },
+                        { name: "Rear Delt Flys", sets: 3, reps: 12 },
+                        { name: "Shrugs", sets: 3, reps: 15 }
+                    ]
+                },
+                {
+                    day: "Thursday - Arms",
+                    exercises: [
+                        { name: "Bicep Curls", sets: 4, reps: 10 },
+                        { name: "Triceps Dips", sets: 3, reps: 12 },
+                        { name: "Hammer Curls", sets: 3, reps: 10 },
+                        { name: "Close-Grip Bench Press", sets: 3, reps: 12 }
+                    ]
+                },
+                {
+                    day: "Friday - Legs",
+                    exercises: [
+                        { name: "Squats", sets: 4, reps: 8 },
+                        { name: "Leg Press", sets: 4, reps: 10 },
+                        { name: "Romanian Deadlifts", sets: 3, reps: 8 },
+                        { name: "Leg Curls", sets: 3, reps: 12 },
+                        { name: "Calf Raises", sets: 3, reps: 15 }
+                    ]
+                },
+                {
+                    day: "Saturday - Rest",
+                    exercises: []
+                },
+                {
+                    day: "Sunday - Rest",
+                    exercises: []
+                }
+            ],
+            recipes: [
+                {
+                    name: "Steak with Sweet Potatoes",
+                    image: "/images/steak-potates.jpg",
+                    ingredients: ["200g beef steak", "1 medium sweet potato", "olive oil"],
+                    instructions: "Grill the steak and bake the sweet potato.",
+                    macros: {
+                        calories: 500,
+                        protein: 45,
+                        fat: 20,
+                        carbs: 40,
+                    }
+                },
+                {
+                    name: "Oatmeal with Peanut Butter",
+                    image: "/images/oat-meal-butter.jfif",
+                    ingredients: ["50g oats", "1 tbsp peanut butter", "200ml milk"],
+                    instructions: "Cook the oats and mix with peanut butter.",
+                    macros: {
+                        calories: 350,
+                        protein: 15,
+                        fat: 12,
+                        carbs: 40,
+                    }
+                }
+            ]
+        },
+    ]
 export default programs;
