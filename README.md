@@ -30,7 +30,7 @@ The pages accessible to guests (admin users) are:
 - Forum Management(edit and delete posts)
 - Users Management(access to user info)'
 
-To access the admin panel, you first need to create a user profile with the following credentials:
+**❗ To access the admin panel, you first need to create a user profile with the following credentials:**
 
 - **Email:** shredxadmin@gmail.com
 - **Password:** admin123456
