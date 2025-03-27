@@ -6,7 +6,11 @@ import programsData from '../programs/programsData.js';
 import postApi from '../../api/postApi.js';
 import userApi from '../../api/userApi.js';
 import './userprofile.css';
- 
+
+import { storage } from '../../config/firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { getAuth } from "firebase/auth";
+
 const UserProfile = () => {
     const [userPosts, setUserPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
@@ -14,35 +18,35 @@ const UserProfile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
- 
+
     const fileInputRef = useRef(null);
     const username = useSelector(state => state.auth.user?.username);
     const userId = useSelector(state => state.auth.user?._id);
- 
+
     useEffect(() => {
         async function fetchUserData() {
             try {
                 const userPosts = await postApi.getUserPosts(userId);
-                const likedPosts = await postApi.getLikedPosts(userId);                
+                const likedPosts = await postApi.getLikedPosts(userId);
                 setUserPosts(userPosts);
                 setLikedPosts(likedPosts);
             } catch (err) {
                 console.error(err);
             }
         }
- 
+
         const storedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
         const purchasedProgramsData = programsData.filter(program =>
             storedPrograms.includes(program.id.toString())
         );
         setPurchasedPrograms(purchasedProgramsData);
         fetchUserData();
-    }, []);
- 
+    }, [userId]);
+
     const handleAvatarClick = () => {
         fileInputRef.current.click();
     };
- 
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -54,14 +58,17 @@ const UserProfile = () => {
             reader.readAsDataURL(file);
         }
     };
- 
+
     const handleSaveImage = async () => {
         if (!selectedFile) return;
- 
+        
         setIsUploading(true);
         try {
-            await userApi.uploadProfileImage(userId, selectedFile);
-           //смени го на английски ако искаш 
+            const imageRef = ref(storage, `profileImages/${userId}/${selectedFile.name}`);
+            await uploadBytes(imageRef, selectedFile);
+            const downloadURL = await getDownloadURL(imageRef);
+            console.log('Uploaded image URL:', downloadURL);
+            await userApi.updateProfileImage(userId, downloadURL);
             alert('Профилната снимка е обновена успешно!');
         } catch (error) {
             console.error('Error uploading image:', error);
@@ -70,7 +77,7 @@ const UserProfile = () => {
             setIsUploading(false);
         }
     };
- 
+
     return (
         <div className="user-profile">
             <div className="profile-header">
@@ -100,7 +107,7 @@ const UserProfile = () => {
                 </div>
                 <h2>Welcome, {username}!</h2>
             </div>
- 
+
             <div className="posts-section">
                 <h3>Your Posts</h3>
                 <div className="posts-list">
@@ -111,7 +118,7 @@ const UserProfile = () => {
                     )}
                 </div>
             </div>
- 
+
             <div className="posts-section">
                 <h3>Liked Posts</h3>
                 <div className="posts-list">
@@ -122,7 +129,7 @@ const UserProfile = () => {
                     )}
                 </div>
             </div>
- 
+
             <div className="posts-section">
                 <h3>Bought Programs</h3>
                 <div className="programs-list">
@@ -138,5 +145,5 @@ const UserProfile = () => {
         </div>
     );
 };
- 
+
 export default UserProfile;

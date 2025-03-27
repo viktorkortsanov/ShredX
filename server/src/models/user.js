@@ -22,6 +22,11 @@ const userSchema = new Schema({
         minLength: [4, 'Password must be at least 4 characters long']
     },
 
+    profileImage: {
+        type: String,
+        default: null
+    },
+
     purchasedPrograms: {
         type: Array,
         default: [],
