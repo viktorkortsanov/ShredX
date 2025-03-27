@@ -22,12 +22,29 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.info-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
 .program-info {
     text-align: center;
+    padding: 10px;
     color: white;
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+
+.program-description {
+    margin-top: 15px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 .program-name {

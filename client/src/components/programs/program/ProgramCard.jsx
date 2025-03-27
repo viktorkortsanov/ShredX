@@ -7,13 +7,13 @@ import userApi from '../../../api/userApi';
 const ProgramCard = ({ program }) => {
     const [loading, setLoading] = useState(true);
     const [purchasedPrograms, setPurchasedPrograms] = useState([]);
+    const [showInfo, setShowInfo] = useState(false);
     const userId = useSelector(state => state.auth.user?._id);    
 
     useEffect(() => {
         const fetchPurchasedPrograms = async () => {
             try {
                 const response = await userApi.getPurchasedPrograms(userId);
-
                 if (response.ok) {
                     const data = await response.json();
                     const programs = data || [];
@@ -32,7 +32,7 @@ const ProgramCard = ({ program }) => {
         };
 
         fetchPurchasedPrograms();
-    }, []);
+    }, [userId]);
 
     const isPurchased = purchasedPrograms.includes(program.id.toString());
 
@@ -45,14 +45,30 @@ const ProgramCard = ({ program }) => {
             <div className="program-info">
                 <h3 className="program-name">{program.name}</h3>
                 <p className="program-price">${program.price}</p>
-                {isPurchased ? (
-                    <Link to={`/programs/${program.id}/details`} className="buy-btn">
-                        Show Program
-                    </Link>
-                ) : (
-                    <Link to={`/programs/pay/${program.id}`} className="buy-btn">
-                        Buy
-                    </Link>
+
+                <div className="buttons">
+                    {isPurchased ? (
+                        <Link to={`/programs/${program.id}/details`} className="buy-btn">
+                            Show Program
+                        </Link>
+                    ) : (
+                        <Link to={`/programs/pay/${program.id}`} className="buy-btn">
+                            Buy
+                        </Link>
+                    )}
+                    
+                    <img 
+                        src="/images/program-info.svg" 
+                        alt="Info" 
+                        className="info-icon"
+                        onClick={() => setShowInfo(!showInfo)}
+                    />
+                </div>
+
+                {showInfo && (
+                    <div className="program-description">
+                        <p>{program.description}</p>
+                    </div>
                 )}
             </div>
         </div>

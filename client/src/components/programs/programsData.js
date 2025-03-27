@@ -2,8 +2,9 @@ const programs = [
     {
         id: 1,
         name: "Push, Pull, Legs",
+        description: " Build Strength & Balance! – Scientifically proven split for maximum strength and muscle growth. Focus on pushing, pulling, and legs separately for optimal recovery and gains. Includes a structured weekly plan + recipes to fuel your progress!",
         image: "/images/ppl.webp",
-        price: "29,99",
+        price: "9,99",
         days: [
             {
                 day: "Monday - Push",
@@ -94,8 +95,9 @@ const programs = [
     {
         id: 2,
         name: "Upper Lower",
+        description: "Efficient & Powerful! – Train upper and lower body on alternating days, maximizing muscle recovery and workout intensity. Ideal for strength & hypertrophy, with flexibility for busy schedules. Comes with a ready-made weekly plan + nutrition guide!",
         image: "/images/ul.webp",
-        price: "19,99",
+        price: "10,99",
         days: [
             {
                 day: "Monday - Upper",
@@ -193,8 +195,9 @@ const programs = [
     {
         id: 3,
         name: "Full Body",
+        description: "Total Body Transformation! – Perfect for beginners & advanced lifters looking to hit every muscle group multiple times a week. Improve strength, endurance & muscle definition with a structured program & meal plan for optimal results!",
         image: "/images/fb.webp",
-        price: "39,99",
+        price: "8,99",
         days: [
             {
                 day: "Monday - Full Body",
@@ -286,8 +289,9 @@ const programs = [
         {
             id: 4,
             name: "Bro Split",
+            description: "Classic Bodybuilding Routine! – Target one muscle group per day for insane pump and full recovery. Perfect for muscle definition & isolation work. Comes with a structured weekly training guide + meal plan to help you bulk up or shred down!",
             image: "/images/brosplit.webp",
-            price: "29,99",
+            price: "5,99",
             days: [
                 {
                     day: "Monday - Chest",
@@ -376,8 +380,9 @@ const programs = [
         {
             id: 5,
             name: "Arnold Split",
+            description: "Train Like the Legend! – Inspired by Arnold Schwarzenegger’s iconic routine, this high-volume split will sculpt your physique like a champion. Focuses on chest/back, shoulders/arms, legs for maximum muscle growth. Includes a structured weekly plan & nutrition guide!",
             image: "/images/arnold.webp",
-            price: "29,99",
+            price: "11,99",
             days: [
                 {
                     day: "Monday - Chest",
