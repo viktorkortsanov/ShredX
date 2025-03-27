@@ -4,7 +4,7 @@ import './contact.css';
 import { useSelector } from 'react-redux';
 
 const Contact = () => {
-    const userEmail = useSelector((state) => state.auth.user.email);
+    const userEmail = useSelector((state) => state.auth.user?.email);
     console.log(userEmail);
     
     const { values, handleChange, handleSubmit, error } = useForm({

@@ -73,7 +73,7 @@
 }
  
 .save-image-button {
-    background-color: #4CAF50;
+    background-color: #006CFA;
     color: white;
     border: none;
     border-radius: 4px;
@@ -88,7 +88,7 @@
 }
  
 .save-image-button:hover {
-    background-color: #45a049;
+    background-color: #006CFA;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -139,7 +139,7 @@
 .stat-value {
     font-size: 22px;
     font-weight: bold;
-    color: #4CAF50;
+    color: #006CFA;
 }
  
 .stat-label {
@@ -186,7 +186,7 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: #4CAF50;
+    background-color: #006CFA;
 }
  
 .tab-content {
@@ -211,7 +211,7 @@
     left: 0;
     width: 50px;
     height: 3px;
-    background-color: #4CAF50;
+    background-color: #006CFA;
 }
  
 .profile-form {
@@ -256,12 +256,12 @@
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    border-color: #4CAF50;
+    border-color: #006CFA;
 }
  
 .save-profile-btn {
     grid-column: span 2;
-    background-color: #4CAF50;
+    background-color: #006CFA;
     color: white;
     border: none;
     padding: 14px;
@@ -275,7 +275,7 @@
 }
  
 .save-profile-btn:hover {
-    background-color: #45a049;
+    background-color: #006CFA;
     transform: translateY(-2px);
 }
  
@@ -357,7 +357,7 @@
 } */
  
 .save-image-button {
-    background-color: #4CAF50;
+    background-color: #006CFA;
     color: white;
     border: none;
     border-radius: 4px;
@@ -369,7 +369,7 @@
 }
  
 .save-image-button:hover {
-    background-color: #45a049;
+    background-color: #006CFA;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
  

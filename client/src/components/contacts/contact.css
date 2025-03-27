@@ -11,6 +11,7 @@
     background-size: cover;
     background-blend-mode: multiply;
     background-color: rgba(0, 0, 0, 0.5);
+    margin: 100px;
 }
 
 .contact-content {
@@ -117,7 +118,6 @@ label {
     margin-top: 1rem;
 }
 
-/* За по-малки екрани, слагаме информацията и картата едно под друго */
 @media (max-width: 768px) {
     .contact-content {
         flex-direction: column;
