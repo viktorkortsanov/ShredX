@@ -53,6 +53,107 @@
 .no-posts {
     color: white;
 }
+
+/* Стилове за пагинация */
+.posts-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    padding: 12px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.page-numbers {
+    display: flex;
+    gap: 8px;
+    margin: 0 15px;
+}
+
+.page-number {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.page-number.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.page-number:hover:not(.active) {
+    background-color: #e0e0e0;
+}
+
+.pagination-arrow {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    transition: transform 0.2s ease;
+}
+
+.pagination-arrow:hover:not(:disabled) {
+    transform: scale(1.1);
+}
+
+.pagination-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.arrow-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.loading {
+    color: white;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+/* .next-arrow .arrow-icon {
+    transform: rotate(180deg);
+} */
+@media (max-width: 768px) {
+    .pagination {
+        padding: 8px 15px;
+        border-radius: 20px;
+    }
+
+    .page-number {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .arrow-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .forum-container .post-item {
         width: 100%;
