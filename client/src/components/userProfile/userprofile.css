@@ -11,7 +11,7 @@
     margin: 126px auto;
     border: 1px solid rgb(146, 146, 146);
 }
-
+ 
 .profile-header {
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
     margin-bottom: 20px;
     color: white;
 }
-
+ 
 .profile-header img {
     width: 120px;
     height: 120px;
@@ -27,23 +27,24 @@
     object-fit: cover;
     margin-bottom: 10px;
 }
-
+ 
 .profile-header h2 {
+    padding-top: 50px;
     font-size: 24px;
     font-weight: bold;
     color: #ffffff;
 }
-
+ 
 .posts-section {
     width: 100%;
 }
-
+ 
 .posts-section h3 {
     font-size: 22px;
     margin-bottom: 15px;
     color: #ffffff;
 }
-
+ 
 .post-item {
     background-color: #fff;
     border: 1px solid #ffffff;
@@ -52,21 +53,61 @@
     margin-bottom: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
+ 
 .post-item h4 {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
-
+ 
 .no-items {
     font-size: 18px;
     color: #7f7373;
 }
-
+ 
 .programs-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     align-items: center;
+}
+.avatar-container {
+    position: relative;
+    display: inline-block;
+}
+ 
+.user-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+ 
+.user-avatar:hover {
+    opacity: 0.8;
+}
+ 
+.save-image-btn {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+ 
+.save-image-btn:hover {
+    background-color: #45a049;
+}
+ 
+.save-image-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }

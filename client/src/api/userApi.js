@@ -109,7 +109,7 @@ const userApi = {
 
             return response;
         } catch (error) {
-            console.error('Fetch users error:', err);
+            console.error('Fetch users error:', error);
             return null;
         }
     },
