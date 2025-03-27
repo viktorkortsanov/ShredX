@@ -6,6 +6,7 @@
     padding: 48px 0;
     background-color: #282828;
     color: white;
+    min-height: 100vh;
 }
 
 .our-team h2 {

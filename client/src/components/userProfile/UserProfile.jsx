@@ -15,14 +15,10 @@ const UserProfile = () => {
 
     useEffect(() => {
         async function fetchUserData() {
-            try {
                 const userPosts = await postApi.getUserPosts(userId);
                 const likedPosts = await postApi.getLikedPosts(userId);                
                 setUserPosts(userPosts);
                 setLikedPosts(likedPosts);
-            } catch (err) {
-                console.error(err);
-            }
         }
 
         const storedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
