@@ -1,23 +1,29 @@
 header {
     width: 100%;
     text-align: center;
-    background-color: #18181A;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
 }
-
+ 
+header.scrolled nav {
+    background-color: #18181A;
+    border-bottom: 1px solid rgb(146, 146, 146);
+}
+ 
 nav {
     width: 100%;
-    border: 1px solid rgb(146, 146, 146);
-    background-color: #18181A;
+    background-color: rgba(24, 24, 26, 0);
+    border-bottom: 1px solid rgba(146, 146, 146, 0);
     padding: 15px 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.3s ease, border-bottom 0.3s ease;
 }
-
+ 
 ul {
     display: flex;
     justify-content: center;
@@ -27,7 +33,7 @@ ul {
     align-items: center;
     padding: 0;
 }
-
+ 
 nav a {
     color: white;
     text-decoration: none;
@@ -35,7 +41,7 @@ nav a {
     transition: color 0.3s ease, transform 0.3s ease;
     position: relative;
 }
-
+ 
 nav a::after {
     content: "";
     position: absolute;
@@ -47,11 +53,11 @@ nav a::after {
     transform: scaleX(0);
     transition: transform 0.3s ease-in-out;
 }
-
+ 
 nav a:hover::after {
     transform: scaleX(1);
 }
-
+ 
 #nav-logo img, #profile-logo img {
     max-width: 100%;
     max-height: 50px;
@@ -59,32 +65,32 @@ nav a:hover::after {
     display: block;
     margin: 0 30px;
 }
-
+ 
 #nav-logo a, #profile-logo a {
     position: relative;
     display: inline-block;
     align-items: center;
 }
-
+ 
 #nav-logo a::after, #profile-logo a::after {
     content: none;
 }
-
+ 
 #nav-logo:hover::after, #profile-logo:hover::after {
     content: none;
 }
-
+ 
 #profile-logo img {
     max-width: 50px;
     height: auto;
     display: block;
 }
-
+ 
 .user-icon {
     position: relative;
     cursor: pointer;
 }
-
+ 
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -102,17 +108,17 @@ nav a:hover::after {
     transition: opacity 0.3s ease;
     width: 200px;
 }
-
+ 
 .user-icon:hover .dropdown-menu {
     display: block;
     opacity: 1;
 }
-
+ 
 .dropdown-menu li {
     padding: 10px 15px;
     position: relative;
 }
-
+ 
 .dropdown-menu li a {
     text-decoration: none;
     color: #333;
@@ -121,19 +127,24 @@ nav a:hover::after {
     border-radius: 4px;
     transition: background-color 0.3s ease, border 0.3s ease;
 }
-
+ 
 .dropdown-menu li a:hover {
     background-color: #007BFF;
     color: white;
     border: 1px solid #0056b3;
 }
-
+ 
 .user-icon img {
     width: 30px;
     height: auto;
     border-radius: 50%;
 }
-
+ 
+ 
+body {
+    padding-top: 80px; 
+}
+ 
 @media screen and (max-width: 768px) {
     ul {
         flex-direction: column;
@@ -143,5 +154,8 @@ nav a:hover::after {
         position: static;
         box-shadow: none;
         margin-top: 10px;
+    }
+    body {
+        padding-top: 70px; 
     }
 }

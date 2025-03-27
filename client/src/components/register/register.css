@@ -8,6 +8,7 @@
     background-size: cover;
     background-blend-mode: multiply;
     background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 70px;
 }
 
 .register-form {
