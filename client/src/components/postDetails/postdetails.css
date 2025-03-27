@@ -65,6 +65,7 @@
     border-radius: 5px;
     width: 100%;
     text-align: center;
+    overflow-wrap: break-word;
 }
 
 .post-actions {
