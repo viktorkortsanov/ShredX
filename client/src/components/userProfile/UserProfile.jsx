@@ -29,7 +29,7 @@ const UserProfile = () => {
     const username = useSelector(state => state.auth.user?.username);
     const email = useSelector(state => state.auth.user?.email);
     const userId = useSelector(state => state.auth.user?._id);
- 
+
     useEffect(() => {
         async function fetchUserData() {
             try {
