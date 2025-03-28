@@ -1,4 +1,3 @@
-import React from 'react';
 import programs from './programsData.js';
 import Program from './program/ProgramCard.jsx';
 import './programscontainer.css'

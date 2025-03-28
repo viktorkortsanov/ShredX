@@ -126,7 +126,7 @@ export default function AdminPanel() {
 
                 <Link to="/adminpanel/analytics" className="admin-module-card">
                     <div className="module-icon">
-                        <img src="/images/analytics.png" alt="Analytics" />
+                        <img src="/images/analiz.svg"/>
                     </div>
                     <div className="module-content">
                         <h2>Analytics</h2>

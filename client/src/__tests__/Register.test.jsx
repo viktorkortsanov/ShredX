@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { configureStore } from '@reduxjs/toolkit'
 import store from '../store/store.js'
 import Register from '../components/register/Register.jsx'
 import { beforeEach, describe, expect, it } from 'vitest'
