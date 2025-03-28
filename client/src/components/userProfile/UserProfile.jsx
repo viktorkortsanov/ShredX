@@ -4,7 +4,9 @@ import PostItem from '../forum/postItem/PostItem.jsx';
 import ProgramCard from '../programs/program/ProgramCard.jsx';
 import programsData from '../programs/programsData.js';
 import postApi from '../../api/postApi.js';
-import userApi from '../../api/userApi.js';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../config/firebase.js';
+
 import './userprofile.css';
  
 const UserProfile = () => {
@@ -76,19 +78,40 @@ const UserProfile = () => {
  
     const handleSaveImage = async () => {
         if (!selectedFile) return;
- 
+    
         setIsUploading(true);
         try {
-            await userApi.uploadProfileImage(userId, selectedFile);
-            alert('Profile image updated successfully!');
-            setSelectedFile(null); 
+            // Път до изображението в Firebase Storage
+            const imageRef = ref(storage, `profileImages/${userId}/${selectedFile.name}`);
+    
+            // Качване на изображението в Firebase
+            await uploadBytes(imageRef, selectedFile);
+    
+            // Получаване на download URL
+            const downloadURL = await getDownloadURL(imageRef);
+    
+            // Изпращане на URL към сървъра
+            const response = await fetch(`http://localhost:3030/users/${userId}/updateProfileImage`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',  // Качваме само URL, затова 'application/json' е необходим
+                },
+                body: JSON.stringify({ profileImageUrl: downloadURL }),  // Изпращаме URL в JSON формат
+            });
+    
+            if (!response.ok) {
+                throw new Error('Неуспешно обновяване на снимката');
+            }
+    
+            const result = await response.json();
+            console.log('Profile image updated:', result);
         } catch (error) {
-            console.error('Error uploading image:', error);
-            alert('Error uploading image. Please try again.');
+            console.error('Error updating profile image:', error);
         } finally {
             setIsUploading(false);
         }
     };
+    
  
     const handleProfileChange = (e) => {
         const { name, value } = e.target;

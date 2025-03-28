@@ -1,5 +1,6 @@
 import { Router } from "express";
 import userService from "../services/userService.js";
+import User from "../models/user.js";
 
 const userController = Router();
 
@@ -16,19 +17,27 @@ userController.get('/users/:userId', async(req,res) => {
 
 userController.put('/users/:userId/updateProfileImage', async (req, res) => {
     const { userId } = req.params;
-    const { profileImage } = req.body;
+    const { profileImageUrl } = req.body;  // Вземаме URL на снимката от тялото на заявката
 
     try {
-        const updatedUser = await userService.updateProfileImage(userId, profileImage);
-        
-        res.status(200).json({
-            message: 'Профилната снимка е обновена успешно!',
-            profileImage: updatedUser.profileImage,
-        });
+        // Обновяване на профилната снимка в базата данни
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { profileImage: profileImageUrl }, // Тук актуализираме полето profileImage
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Върни актуализираните данни на потребителя
+        res.json(updatedUser);
     } catch (error) {
-        res.status(500).json({ message: 'Грешка при обновяване на профилната снимка.' });
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
     }
 });
+
 
 
 export default userController;

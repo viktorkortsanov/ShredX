@@ -114,6 +114,28 @@ const userApi = {
         }
     },
 
+    updateProfileImage: async (userId, imageUrl) => {
+        try {
+            const response = await fetch(`/api/users/${userId}/updateProfileImage`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ profileImageUrl: imageUrl }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Неуспешно обновяване на снимката');
+            }
+    
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('Error updating profile image:', error);
+            throw error;
+        }
+    }
+
 };
 
 export default userApi;
