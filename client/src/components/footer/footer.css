@@ -1,14 +1,14 @@
 footer {
     position: fixed;
     width: 100%;
-    padding: 20px;
+    padding: 15px;
     background-color: #18181A;
-    border: 1px solid rgb(146, 146, 146);
+    border-top: 1px solid rgb(146, 146, 146);
     color: white;
     text-align: center;
     bottom: 0;
-  }
-  
+    z-index: 100; 
+}
 
 .footer-content {
     max-width: 1200px;
@@ -19,6 +19,10 @@ footer {
 .footer-content p {
     margin: 0;
     font-size: 1rem;
+}
+
+.footer-links {
+    margin-top: 5px;
 }
 
 .footer-links a {
@@ -45,4 +49,58 @@ footer {
 .footer-links a:hover::after {
     width: 100%;
     left: 0;
+}
+@media (max-width: 768px) {
+    .main-container {
+        padding-bottom: 60px; /* По-малък padding за таблети */
+    }
+    
+    footer {
+        padding: 12px;
+    }
+    
+    .footer-content p {
+        font-size: 0.9rem;
+    }
+    
+    .footer-links a {
+        margin: 0 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .footer-links a {
+        margin: 5px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    footer {
+        padding: 10px;
+    }
+    
+    .footer-content {
+        padding: 0 10px;
+    }
+    
+    .footer-content p {
+        font-size: 0.8rem;
+    }
+    
+    .footer-links a {
+        margin: 3px;
+        font-size: 0.8rem;
+        padding-bottom: 3px;
+    }
 }

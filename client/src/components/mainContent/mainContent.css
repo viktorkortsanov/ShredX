@@ -6,4 +6,25 @@
     background-size: cover;
     background-blend-mode: multiply;
     background-color: rgba(0, 0, 0, 0.7);
+    padding-bottom: 100px;
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        padding-bottom: 60px; 
+    }
+
+}
+@media (max-width: 600px) {
+    .main-container {
+        padding-bottom: 80px; 
+    }
+
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding-bottom: 100px; 
+    }
+
 }

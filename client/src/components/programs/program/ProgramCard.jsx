@@ -40,39 +40,40 @@ const ProgramCard = ({ program }) => {
         return <div>Loading...</div>;
     }
 
-    return (
-        <div className="program-card" style={{ backgroundImage: `url(${program.image})` }}>
-            <div className="program-info">
-                <h3 className="program-name">{program.name}</h3>
-                <p className="program-price">${program.price}</p>
 
-                <div className="buttons">
-                    {isPurchased ? (
-                        <Link to={`/programs/${program.id}/details`} className="buy-btn">
-                            Show Program
-                        </Link>
-                    ) : (
-                        <Link to={`/programs/pay/${program.id}`} className="buy-btn">
-                            Buy
-                        </Link>
-                    )}
-                    
-                    <img 
-                        src="/images/program-info.svg" 
-                        alt="Info" 
-                        className="info-icon"
-                        onClick={() => setShowInfo(!showInfo)}
-                    />
-                </div>
+return (
+    <div className="program-card" style={{ backgroundImage: `url(${program.image})` }}>
+        <div className="program-info-card">
+            <h3 className="program-name">{program.name}</h3>
+            <p className="program-price">${program.price}</p>
 
-                {showInfo && (
-                    <div className="program-description">
-                        <p>{program.description}</p>
-                    </div>
+            <div className="buttons">
+                {isPurchased ? (
+                    <Link to={`/programs/${program.id}/details`} className="buy-btn">
+                        Show Program
+                    </Link>
+                ) : (
+                    <Link to={`/programs/pay/${program.id}`} className="buy-btn">
+                        Buy
+                    </Link>
                 )}
+                
+                <img 
+                    src="/images/program-info.svg" 
+                    alt="Info" 
+                    className="info-icon"
+                    onClick={() => setShowInfo(!showInfo)}
+                />
             </div>
+
+            {showInfo && (
+                <div className="program-description-card">
+                    <p>{program.description}</p>
+                </div>
+            )}
         </div>
-    );
+    </div>
+);
 };
 
 export default ProgramCard;

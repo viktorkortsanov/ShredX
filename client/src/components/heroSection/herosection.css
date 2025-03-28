@@ -11,19 +11,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 20px; 
 }
 
+.hero-content {
+    max-width: 1200px; 
+    width: 100%;
+}
 
-div.hero-content h1.hero-title {
+.hero-title {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 5rem;
     margin-bottom: 20px;
+    line-height: 1.2; 
 }
 
 .hero-content p {
     font-size: 1.5rem;
     margin-bottom: 30px;
     opacity: 0.8;
+    max-width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cta-btn {
@@ -34,6 +43,7 @@ div.hero-content h1.hero-title {
     font-size: 1.2rem;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    display: inline-block; 
 }
 
 .cta-btn:hover {
@@ -41,16 +51,80 @@ div.hero-content h1.hero-title {
 }
 
 @media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2rem;
+    .hero-section {
+        height: 70vh;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
     }
 
     .hero-content p {
         font-size: 1.2rem;
+        max-width: 600px;
     }
 
     .cta-btn {
         font-size: 1rem;
         padding: 12px 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-section {
+        height: 60vh;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        height: 50vh;
+        padding: 0 15px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+
+    .cta-btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 320px) {
+    .hero-section {
+        height: 45vh;
+    }
+    
+    .hero-title {
+        font-size: 1.7rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .cta-btn {
+        font-size: 0.8rem;
+        padding: 8px 16px;
     }
 }

@@ -14,29 +14,33 @@
 .post-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
     margin-bottom: 10px;
     color: black;
 }
-
+.post-info-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    width: 100%;
+}
 .user-logo img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-right: 5px;
+    margin-right: 15px;
 }
 
 .username {
     font-weight: bold;
     font-size: 18px;
-    margin-right: 300px;/
+
 }
 
 .post-date {
     font-size: 14px;
     color: #777;
-    text-align: right;
+    margin-left: auto; 
 }
 
 .post-content {

@@ -28,6 +28,7 @@ import UserInfo from "./components/adminPanel/userInfo/UserInfo.jsx";
 import PrivacyPolicy from "./components/privacyPolicy/PrivacyPolicy.jsx";
 import TermsOfService from "./components/termsOfService/TermsOfService.jsx";
 import Contact from "./components/contacts/Contacts.jsx";
+import Analytics from "./components/adminPanel/аnalytics/Analytics.jsx";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
             <Route path="/adminpanel/forummanagement" element={<ForumManagement />} />
             <Route path="/adminpanel/posts/:postId/edit" element={<EditPost />} />
             <Route path="/adminpanel/:userId/info" element={<UserInfo />} />
+            <Route path="/adminpanel/analytics" element={<Analytics />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

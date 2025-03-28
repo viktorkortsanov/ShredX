@@ -1,4 +1,5 @@
 .login-container {
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,20 +76,72 @@
     margin-top: 10px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    .login-container {
+        padding: 15px;
+    }
+    
     .login-form {
-        padding: 20px;
+        padding: 25px;
     }
     
     .login-form h2 {
         font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px;
+    }
+    
+    .login-form {
+        padding: 20px;
+        max-width: 95%;
+    }
+    
+    .login-form h2 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+    
+    .input-group {
+        margin-bottom: 12px;
+    }
+    
+    .input-group label {
+        font-size: 13px;
     }
     
     .input-group input {
+        padding: 8px;
         font-size: 14px;
     }
     
     .submit-btn {
+        padding: 10px;
         font-size: 14px;
+    }
+    
+    .error {
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .login-form {
+        padding: 15px;
+    }
+    
+    .input-group input,
+    .submit-btn {
+        padding: 8px;
+        font-size: 13px;
     }
 }

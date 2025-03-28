@@ -18,7 +18,7 @@
     flex-direction: column;
     justify-content: space-between;
     color: white;
-    padding: 20px;
+    padding: 20px 10px;
     position: relative;
     overflow: hidden;
     transition: transform 0.3s;
@@ -65,4 +65,121 @@
 
 .program-card .buy-btn:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 1024px) {
+    .program-container {
+        padding: 60px 40px;
+        gap: 15px;
+    }
+    
+    .program-card {
+        width: 260px;
+        height: 380px;
+    }
+    
+    .program-name {
+        font-size: 22px;
+    }
+    
+    .program-price {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .program-container {
+        padding: 40px 20px;
+        gap: 15px;
+    }
+    
+    .program-card {
+        width: 240px;
+        height: 350px;
+        padding: 15px;
+    }
+    
+    .program-card .program-details {
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        gap: 8px;
+    }
+    
+    .program-name {
+        font-size: 20px;
+    }
+    
+    .program-price {
+        font-size: 15px;
+    }
+    
+    .program-card .buy-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .program-container {
+        padding: 30px 15px;
+        gap: 12px;
+    }
+    
+    .program-card {
+        width: calc(50% - 15px);
+        min-width: 150px;
+        height: 280px;
+        padding: 12px;
+    }
+    
+    .program-card .program-details {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        gap: 6px;
+    }
+    
+    .program-name {
+        font-size: 18px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    }
+    
+    .program-price {
+        font-size: 14px;
+    }
+    
+    .program-card .buy-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+    .program-container {
+        padding: 20px 10px;
+    }
+    
+    .program-card {
+        width: 100%;
+        height: 250px;
+        margin-bottom: 5px;
+    }
+    
+    .program-name {
+        font-size: 16px;
+    }
+    
+    .program-price {
+        font-size: 13px;
+    }
+    
+    .program-card .buy-btn {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+    
+    .program-card:hover {
+        transform: scale(1.02); 
+    }
 }

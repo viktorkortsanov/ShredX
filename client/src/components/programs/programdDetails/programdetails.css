@@ -1,91 +1,530 @@
-.program-details-container {
-    padding: 20px;
-    background-color: #18181A;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    margin: 20px auto;
-    text-align: center;
+:root {
+    --primary: #006CFA;
+    --primary-light: #4a94ff;
+    --primary-dark: #004fa8;
+    --secondary: #18181A;
+    --secondary-light: #2c2c2e;
+    --secondary-dark: #121214;
+    --accent: #FF4757;
+    --text-light: #e0e0e0;
+    --text-dark: #222;
+    --gray-100: #f5f5f5;
+    --gray-200: #e0e0e0;
+    --gray-300: #cccccc;
+    --gray-400: #999999;
+    --gray-500: #666666;
+    --gray-600: #444444;
+    --gray-700: #333333;
+    --gray-800: #222222;
+    --card-bg: #2a2a2c;
+    --success: #4CAF50;
+    --warning: #FF9800;
+    --danger: #F44336;
+    --info: #2196F3;
+}
+.container-hero{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x)* .5);
+    padding-left: calc(var(--bs-gutter-x)* .5);
+    margin-right: auto;
+    margin-left: auto;
+
+    max-width: 1140px;
+}
+.content{
+    margin-top: 4em;
+}
+.container-programs{
+    width: 100%;
+    max-width: 1200px;
+    margin: 2em auto 7em auto;
+    /* padding: 0 20px; */
 }
 
-.program-details-info {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 8px;
+.program-details-page {
+    background-color: var(--secondary);
+    color: var(--text-light);
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
 }
 
-.program-details-name {
-    font-size: 36px;
-    font-weight: bold;
-    color: #fff;
-    margin-top: 0;
+
+.program-header {
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0 60px;
     text-align: center;
+    position: relative;
+    color: white;
+}
+
+.program-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
     text-transform: uppercase;
 }
 
-.program-details-training-days {
-    margin-top: 40px;
+.program-description {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+    line-height: 1.6;
 }
 
-.program-details-training-day {
-    background-color: #434343;
-    padding: 20px;
+.program-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.program-details-training-day h3 {
-    font-size: 26px;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 15px;
-    text-align: center;
+.program-meta {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
 }
 
-.program-details-training-day ul {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-    margin-left: 30px;
+.program-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
 }
 
-.program-details-training-day li {
-    font-size: 18px;
-    color: #ddd;
-    margin-bottom: 8px;
+.program-meta-item i {
+    font-size: 1.4rem;
+    opacity: 0.9;
 }
 
-.program-details-recipes-container {
-    margin-top: 40px;
+.program-content {
+    padding: 50px 0;
 }
 
-.program-details-recipe {
-    background-color: #333;
-    padding: 25px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
+.program-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 60px; 
+    margin-bottom: 40px;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    padding-bottom: 15px;
 }
 
-.program-details-recipe-image {
+.tab-button-program {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 12px 5px; 
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    opacity: 0.7; 
+}
+
+.tab-button-program::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; 
+    left: 0;
+    width: 100%; 
+    height: 3px;
+    background-color: var(--primary);
+    transform: scaleX(0);
+    transform-origin: center; 
+    transition: transform 0.3s ease;
+}
+
+.tab-button-program.active {
+    color: var(--primary);
+    opacity: 1;
+}
+
+.tab-button-program.active::after {
     width: 100%;
-    height: auto;
-    max-width: 200px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+}
+.tab-button-program.active::after {
+    transform: scaleX(1); 
+}
+.tab-button-program:hover:not(.active) {
+    opacity: 0.9;
+}
+.tab-content {
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-.program-details-recipe-macros,
-.program-details-recipe-ingredients {
-    font-size: 16px;
-    color: #bbb;
-    margin-top: 12px;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.day-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.day-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+}
+
+.day-header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.day-number {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.day-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.exercises-list {
+    padding: 20px;
+}
+
+.exercise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.exercise-item:last-child {
+    border-bottom: none;
+}
+
+.exercise-name {
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.exercise-details {
+    display: flex;
+    gap: 15px;
+}
+
+.sets, .reps {
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--gray-300);
+}
+
+.rest-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    font-size: 1.3rem;
+    color: var(--gray-400);
+    font-style: italic;
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.recipe-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.recipe-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.recipe-card:hover .recipe-image {
+    transform: scale(1.05);
+}
+
+.recipe-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 20px;
+}
+
+.recipe-title {
+    color: white;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.recipe-content {
+    padding: 0;
+}
+
+.macros-strip {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--primary);
+    padding: 12px;
+    color: white;
+}
+
+.macro-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.macro-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.macro-label {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.recipe-details {
+    padding: 20px;
+}
+
+.recipe-details h4 {
+    font-size: 1.1rem;
+    margin: 0 0 15px 0;
+    color: var(--primary-light);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
+}
+
+.ingredients-section {
+    margin-bottom: 25px;
+}
+
+.ingredients-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ingredients-list li {
+    padding: 6px 0;
+    position: relative;
+    padding-left: 20px;
+}
+
+.ingredients-list li::before {
+    content: '•';
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+}
+
+.instructions-section p {
+    margin: 0;
+    line-height: 1.7;
+}
+
+.program-not-found {
+    background-color: var(--secondary);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .program-title {
+        font-size: 3rem;
+    }
+    
+    .program-meta {
+        gap: 30px;
+    }
+    
+    .recipes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .program-header {
+        padding: 70px 0 40px;
+    }
+    
+    .program-title {
+        font-size: 2.5rem;
+    }
+    
+    .program-description {
+        font-size: 1rem;
+    }
+    
+    .program-meta {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .container-hero{
+        margin-top: 4em;
+
+        max-width: 720px;
+    }
+    .program-meta-item {
+        flex-basis: calc(50% - 10px);
+        justify-content: center;
+    }
+    
+    .days-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .recipes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .program-tabs {
+        /* flex-direction: column; */
+        gap: 30px;
+    }
+    .tab-button-program::after {
+        bottom: -1px;
+        height: 2px; 
+    }
+    .tab-button-program {
+        width: 100%;
+        border-radius: 6px;
+        font-size: 1.1rem;
+    }
+    
+    .tab-button-program.active::after {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .program-header {
+        padding: 50px 0 30px;
+    }
+    
+    .program-title {
+        font-size: 2rem;
+    }
+    .program-tabs {
+        /* flex-direction: column; */
+        gap: 20px;
+    }
+    .container-programs {
+        padding: 0 15px;
+    }
+    .container-hero{
+        margin-top: 4em;
+        max-width: 420px;
+    }
+    .program-content {
+        padding: 30px 0;
+    }
+    .tab-button-program::after {
+        width: 100%; 
+    }
+    .day-header {
+        padding: 15px;
+    }
+    
+    .day-number {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    
+    .day-header h3 {
+        font-size: 1.2rem;
+    }
+    
+    .exercises-list {
+        padding: 15px;
+    }
+    
+    .exercise-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .exercise-details {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .macros-strip {
+        flex-wrap: wrap;
+    }
+    
+    .macro-item {
+        flex-basis: 50%;
+        padding: 5px 0;
+    }
+    
+    .recipe-title {
+        font-size: 1.2rem;
+    }
+    
+    .exercise-name {
+        font-size: 1rem;
+    }
 }
