@@ -21,10 +21,10 @@ const Contact = () => {
     return (
         <div className="contact-container">
             <div className="company-info">
-                <h2 className="title">Нашата фирма</h2>
-                <p className="info"><strong>Име:</strong> ShredX</p>
-                <p className="info"><strong>Адрес:</strong> ул. Примерна 123, София, България</p>
-                <p className="info"><strong>Телефон:</strong> +359 888 123 456</p>
+                <h2 className="title">Contacts</h2>
+                <p className="info"><strong>Name:</strong> ShredX</p>
+                <p className="info"><strong>Adress:</strong> Jungle Gym ulitsa "Kamchija", Svilengrad</p>
+                <p className="info"><strong>Phone number:</strong> +359 888 123 456</p>
                 <p className="info"><strong>Email:</strong> contact@shredx.com</p>
             </div>
 
@@ -42,7 +42,7 @@ const Contact = () => {
                 <h2 className="title">Contact us</h2>
                 {error && <p className="error-message">{error}</p>}
                 <form onSubmit={handleSubmit(handleFormSubmit)} className="contact-form">
-                    <div className="form-group">
+                    <div className="form-group-contact">
                         <label htmlFor="name">Subject</label>
                         <input
                             type="text"
@@ -50,10 +50,10 @@ const Contact = () => {
                             name="name"
                             value={values.name}
                             onChange={handleChange}
-                            className="form-input"
+                            className="form-input-contact"
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-contact">
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -61,17 +61,17 @@ const Contact = () => {
                             name="email"
                             defaultValue={userEmail}
                             onChange={handleChange}
-                            className="form-input"
+                            className="form-input-contact"
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-contact">
                         <label htmlFor="message">Message</label>
                         <textarea
                             id="message"
                             name="message"
                             value={values.message}
                             onChange={handleChange}
-                            className="form-textarea"
+                            className="form-textarea-contact"
                         ></textarea>
                     </div>
                     <button type="submit" className="submit-button">Send</button>
