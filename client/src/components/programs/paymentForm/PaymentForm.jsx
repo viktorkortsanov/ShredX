@@ -111,7 +111,7 @@ const PaymentForm = () => {
                             </div>
                         </div>
 
-                        <button className="submit-btn">Submit Payment</button>
+                        <button className="submit-btn-pay">Submit Payment</button>
                     </>
                 )}
             </form>

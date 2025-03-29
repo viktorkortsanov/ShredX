@@ -100,7 +100,7 @@ export default function UserInfo() {
                 <div className="profile-sidebar">
                     <div className="profile-image-wrapper">
                         <div className="profile-image-container">
-                            <img src={user.profileImage} alt="User Avatar" className="user-avatar-large" />
+                            <img src={user.profileImage || "/images/null-profile.png"} alt="User Avatar" className="user-avatar-large" />
                         </div>
                     </div>
 

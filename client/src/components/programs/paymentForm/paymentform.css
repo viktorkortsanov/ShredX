@@ -104,7 +104,7 @@
 }
 
 
-.submit-btn {
+.submit-btn-pay {
     padding: 10px;
     background-color: #006CFA;
     color: white;
@@ -116,6 +116,6 @@
     transition: background-color 0.3s;
 }
 
-.submit-btn:hover {
+.submit-btn-pay:hover {
     background-color: #0056b3;
 }

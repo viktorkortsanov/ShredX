@@ -23,7 +23,7 @@ export default function NavBar() {
         const getUserImage = async () => {
             try {
                 const response = await userApi.getProfileImage(userId);
-                setUserProfileImg(response.profileImage);
+                setUserProfileImg(response?.profileImage);
             } catch (error) {
                 console.error("Failed to fetch user image:", error);
             }

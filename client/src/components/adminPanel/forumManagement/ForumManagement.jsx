@@ -3,6 +3,7 @@ import postApi from "../../../api/postApi.js";
 import { Link } from "react-router-dom";
 import ConfirmationDialog from "../../confirmDialog/ConfirmDialog.jsx";
 import './forummanagement.css';
+import userApi from "../../../api/userApi.js";
 
 export default function ForumManagement() {
     const [posts, setPosts] = useState([]);
@@ -11,6 +12,7 @@ export default function ForumManagement() {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [userImages,setUserImages] = useState({});
 
     const postsPerPage = 3;
 
@@ -19,9 +21,19 @@ export default function ForumManagement() {
             try {
                 setLoading(true);
                 const response = await postApi.getAll();
+                console.log(response);
+                
                 if (response) {
                     setPosts(response);
                 }
+
+                const usersImages = {};
+                for (const post of response) {
+                    const userResponse = await userApi.getProfileImage(post.owner);
+                    usersImages[post.owner] = userResponse.profileImage;
+                }
+
+                setUserImages(usersImages);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching posts:", error);
@@ -159,9 +171,13 @@ export default function ForumManagement() {
 
                                         <div className="table-cell post-author-cell">
                                             <div className="post-author">
-                                                <div className="author-avatar">
-                                                    {post.author.charAt(0).toUpperCase()}
-                                                </div>
+                                            <div className="author-avatar">
+                                            {userImages[post.owner] ? (
+                                                <img src={userImages[post.owner]} className="author-avatar-img"/>
+                                            ) : (
+                                                <span>{post.author.charAt(0).toUpperCase()}</span>
+                                            )}
+                                        </div>
                                                 <span>{post.author}</span>
                                             </div>
                                         </div>

@@ -32,7 +32,7 @@ const PostItem = ({ post }) => {
         <div className="post-item">
             <div className="post-header">
                 <div className="user-logo">
-                    <img src={user.profileImage} alt="user-logo" />
+                    <img src={user.profileImage || '/images/null-profile.png'} alt="user-logo" />
                 </div>
                 <span className="username">{post.author}</span>
                 <span className="post-date">{new Date(post.createdAt).toLocaleDateString()}</span>

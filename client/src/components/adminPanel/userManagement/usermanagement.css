@@ -232,6 +232,15 @@
     justify-content: center;
 }
 
+.user-image {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .user-avatar {
     width: 45px;
     height: 45px;

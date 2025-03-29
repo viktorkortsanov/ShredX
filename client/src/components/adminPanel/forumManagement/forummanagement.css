@@ -1,5 +1,5 @@
 .forum-management-container {
-    padding: 30px;
+    padding-bottom: 100px;
     font-family: 'Poppins', 'Segoe UI', sans-serif;
     color: #e0e0e0;
     max-width: 1200px;
@@ -228,6 +228,15 @@
     align-items: center;
 }
 
+.author-avatar-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .author-avatar {
     width: 30px;
     height: 30px;
@@ -314,9 +323,7 @@
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
 .no-posts-message {
@@ -408,7 +415,7 @@
         flex-direction: row;
         flex-wrap: wrap;
     }
-
+    
     .stat-card {
         width: calc(50% - 10px);
     }
@@ -418,29 +425,28 @@
     .forum-management-container {
         padding: 20px;
     }
-
+    
     .dashboard-title {
         font-size: 2rem;
     }
-
-    .post-date-header,
-    .post-date-cell {
+    
+    .post-date-header, .post-date-cell {
         display: none;
     }
-
+    
     .post-actions-cell {
         flex-direction: column;
         gap: 5px;
     }
-
+    
     .post-action-button {
         width: 100%;
     }
-
+    
     .pagination {
         padding: 5px 10px;
     }
-
+    
     .page-number {
         width: 30px;
         height: 30px;
@@ -449,32 +455,30 @@
 }
 
 @media screen and (max-width: 576px) {
-
-    .post-author-header,
-    .post-author-cell {
+    .post-author-header, .post-author-cell {
         display: none;
     }
-
+    
     .post-action-button span {
         display: none;
     }
-
+    
     .post-action-button {
         padding: 8px;
     }
-
+    
     .stat-card {
         width: 100%;
     }
-
+    
     .dashboard-title {
         font-size: 1.8rem;
     }
-
+    
     .page-numbers {
         gap: 0;
     }
-
+    
     .page-number {
         width: 28px;
         height: 28px;
