@@ -117,7 +117,6 @@ postController.post('/forum/:postId/comment/:commentId/edit', isAuth, async (req
     const postId = req.params.postId;
     const commentId = req.params.commentId;
     const { content } = req.body;
-    console.log(commentId);
 
     try {
         await postService.editComment(postId, commentId, content);
@@ -130,8 +129,6 @@ postController.post('/forum/:postId/comment/:commentId/edit', isAuth, async (req
 
 postController.get('/forum/:postId/comment/:commentId/delete', isAuth, async (req, res) => {
     const { postId, commentId } = req.params;
-    console.log(postId, commentId);
-
 
     try {
         await postService.deleteComment(postId, commentId);

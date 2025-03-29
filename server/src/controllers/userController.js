@@ -17,20 +17,18 @@ userController.get('/users/:userId', async(req,res) => {
 
 userController.put('/users/:userId/updateProfileImage', async (req, res) => {
     const { userId } = req.params;
-    const { profileImageUrl } = req.body;  // Вземаме URL на снимката от тялото на заявката
+    const { profileImageUrl } = req.body;
 
     try {
-        // Обновяване на профилната снимка в базата данни
         const updatedUser = await User.findByIdAndUpdate(
             userId,
-            { profileImage: profileImageUrl }, // Тук актуализираме полето profileImage
+            { profileImage: profileImageUrl },
         );
 
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Върни актуализираните данни на потребителя
         res.json(updatedUser);
     } catch (error) {
         console.error(error);
