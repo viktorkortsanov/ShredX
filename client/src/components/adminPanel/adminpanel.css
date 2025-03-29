@@ -1,4 +1,3 @@
-/* Модерен CSS за админ панела */
 .admin-dashboard {
     padding: 40px 20px;
     max-width: 1200px;
@@ -216,7 +215,6 @@
     transform: translateX(5px);
 }
 
-/* Бадж Coming Soon */
 .coming-soon-badge {
     background: linear-gradient(135deg, #FF7170, #FFE57F);
     color: #000;
@@ -238,8 +236,16 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     border-color: rgba(255, 255, 255, 0.05);
 }
+.admin-additional-modules {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
 
-/* Респонсивни стилове */
+.create-program-card {
+    max-width: 100%;
+    width: 100%;
+}
 @media (max-width: 900px) {
     .admin-header h1 {
         font-size: 2.4rem;

@@ -126,7 +126,7 @@ export default function AdminPanel() {
 
                 <Link to="/adminpanel/analytics" className="admin-module-card">
                     <div className="module-icon">
-                        <img src="/images/analiz.svg"/>
+                        <img src="/images/analytics.png" alt="Analytics" />
                     </div>
                     <div className="module-content">
                         <h2>Analytics</h2>
@@ -138,6 +138,27 @@ export default function AdminPanel() {
                         </ul>
                         <div className="module-action">
                             <span>View Analytics</span>
+                            <i className="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </Link>
+            </div>
+
+            <div className="admin-additional-modules">
+                <Link to="/adminpanel/createprograms" className="admin-module-card create-program-card">
+                    <div className="module-icon">
+                        <img src="/images/add-content.png" alt="Create Programs" />
+                    </div>
+                    <div className="module-content">
+                        <h2>Create Programs</h2>
+                        <p>Create and publish new training programs for users</p>
+                        <ul className="module-features">
+                            <li>Program creator</li>
+                            <li>Workout templates</li>
+                            <li>Pricing management</li>
+                        </ul>
+                        <div className="module-action">
+                            <span>Create Programs</span>
                             <i className="fas fa-arrow-right"></i>
                         </div>
                     </div>

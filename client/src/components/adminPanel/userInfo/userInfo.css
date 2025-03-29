@@ -1,13 +1,256 @@
-.user-info-container {
-    text-align: center;
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.admin-user-dashboard {
+    max-width: 1200px;
+    margin: 12em auto;
+    font-family: 'Arial', sans-serif;
 }
 
-.user-info-container p {
+.back-link {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    text-decoration: none;
+    color: #999; /* Сивкав цвят */
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding-left: 20px; /* По-навътре */
+}
+
+.back-link:hover {
+    color: #006CFA;
+}
+
+.back-arrow {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.user-profile-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    background-color: #18181A;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.profile-sidebar {
+    padding: 30px;
+    background-color: #222224;
+    border-right: 1px solid rgba(146, 146, 146, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.profile-image-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.user-avatar-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-info {
+    text-align: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.user-info h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+/* Нови стилове за структуриране на потребителската информация */
+.user-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(34, 34, 36, 0.7);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.user-detail-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(146, 146, 146, 0.1);
+    padding-bottom: 10px;
+}
+
+.user-detail-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.detail-label {
+    font-size: 12px;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.detail-value {
+    font-size: 14px;
+    color: white;
+    word-break: break-word;
+}
+
+.user-id {
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 15px 0;
+    border-top: 1px solid rgba(146, 146, 146, 0.2);
+    border-bottom: 1px solid rgba(146, 146, 146, 0.2);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: bold;
+    color: #006CFA;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #999;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.profile-content {
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.profile-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(146, 146, 146, 0.2);
+    margin-bottom: 30px;
+}
+
+.tab-button {
+    background-color: transparent;
+    border: none;
+    color: #999;
+    padding: 12px 20px;
     font-size: 16px;
-    color: #222;
-    margin: 5px 0;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.tab-button:hover {
+    color: white;
+}
+
+.tab-button.active {
+    color: white;
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #006CFA;
+}
+
+.tab-content {
+    padding: 20px 0;
+}
+
+.tab-section h3 {
+    font-size: 24px;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.tab-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #006CFA;
+}
+
+.posts-list, .programs-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.no-items {
+    color: #999;
+    font-style: italic;
+    font-size: 16px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    text-align: center;
+}
+
+@media (max-width: 992px) {
+    .user-profile-container {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(146, 146, 146, 0.2);
+        padding-bottom: 20px;
+    }
+
+    .profile-stats {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
 }

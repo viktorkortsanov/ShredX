@@ -29,11 +29,15 @@ import PrivacyPolicy from "./components/privacyPolicy/PrivacyPolicy.jsx";
 import TermsOfService from "./components/termsOfService/TermsOfService.jsx";
 import Contact from "./components/contacts/Contacts.jsx";
 import Analytics from "./components/adminPanel/аnalytics/Analytics.jsx";
+import { AuthProvider } from "./contexts/authContext.jsx";
+import CreateProgram from "./components/adminPanel/createProgram/CreateProgram.jsx";
 
 function App() {
   return (
     <>
       <Provider store={store}>
+
+    <AuthProvider>
         <NavBar />
         <Routes>
           <Route path="/" element={<MainContent />} />
@@ -64,16 +68,20 @@ function App() {
           <Route element={<AdminGuard />}>
             <Route path="/adminpanel" element={<AdminPanel />} />
             <Route path="/adminpanel/usersmanagement" element={<UserManagement />} />
+            <Route path="/adminpanel/analytics" element={<Analytics />} />
             <Route path="/adminpanel/forummanagement" element={<ForumManagement />} />
+            <Route path="/adminpanel/createprograms" element={<CreateProgram />} />
+
             <Route path="/adminpanel/posts/:postId/edit" element={<EditPost />} />
             <Route path="/adminpanel/:userId/info" element={<UserInfo />} />
-            <Route path="/adminpanel/analytics" element={<Analytics />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+      </AuthProvider>
       </Provider>
+
     </>
   );
 }
