@@ -1,6 +1,6 @@
 .confirmation-dialog {
     position: fixed;
-    top: 22%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
@@ -12,10 +12,11 @@
     animation: fadeIn 0.3s forwards;
 }
 
-.confirmation-dialog p {
+.confirm-p {
     font-size: 18px;
     margin-bottom: 20px;
     text-align: center;
+    color: rgb(72, 72, 72);
 }
 
 .buttons {
@@ -24,8 +25,8 @@
     gap: 5px;
 }
 
-.confirm-btn,
-.cancel-btn {
+.confirm-btn-dialog,
+.cancel-btn-dialog {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -34,21 +35,21 @@
     transition: background-color 0.3s ease;
 }
 
-.confirm-btn {
+.confirm-btn-dialog {
     background-color: #006CFA;
     color: white;
 }
 
-.confirm-btn:hover {
+.confirm-btn-dialog:hover {
     background-color: #0056b3;
 }
 
-.cancel-btn {
+.cancel-btn-dialog {
     background-color: #e74c3c;
     color: white;
 }
 
-.cancel-btn:hover {
+.cancel-btn-dialog:hover {
     background-color: #c0392b;
 }
 

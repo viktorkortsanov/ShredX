@@ -9,6 +9,7 @@ export default function EditPost() {
     const { postId } = useParams();
     const navigate = useNavigate();
     const userId = useSelector(state => state.auth.user?._id);
+    const isAdmin = useSelector(state => state.auth.user.isAdmin);
     
     const { values, setValues, handleChange, handleSubmit, error, setError } = useForm({
         title: "",
@@ -20,7 +21,7 @@ export default function EditPost() {
             try {
                 const post = await postApi.get(postId);
 
-                if (post.owner !== userId) {
+                if (post.owner !== userId && !isAdmin) {
                     navigate('/404');
                     return;
                 }

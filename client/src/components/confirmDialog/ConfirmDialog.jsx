@@ -6,10 +6,10 @@ const ConfirmationDialog = ({ onCancel, onConfirm }) => {
         <>
             <div className="overlay"></div>
             <div className="confirmation-dialog">
-                <p>Are you sure you want to delete this post?</p>
+                <p className="confirm-p">Are you sure you want to delete this post?</p>
                 <div className="buttons">
-                    <button className="confirm-btn" onClick={onConfirm}>Delete</button>
-                    <button className="cancel-btn" onClick={onCancel}>Cancel</button>
+                    <button className="confirm-btn-dialog" onClick={onConfirm}>Delete</button>
+                    <button className="cancel-btn-dialog" onClick={onCancel}>Cancel</button>
                 </div>
             </div>
         </>
