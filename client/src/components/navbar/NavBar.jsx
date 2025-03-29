@@ -117,7 +117,7 @@ export default function NavBar() {
                                         </li>
                                         <li>
                                             <Link to="/profile" onClick={handleNavLinkClick}>
-                                                <img src="../../../public/images/profile.svg" alt="Profile Icon" />
+                                                <img src="../../../public/images/user-icon.svg" alt="Profile Icon" />
                                                 PROFILE
                                             </Link>
                                         </li>
