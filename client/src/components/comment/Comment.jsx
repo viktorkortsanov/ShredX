@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./comment.css";
+import userApi from "../../api/userApi";
 
 const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike }) => {
     const isOwner = userId === comment.owner;
     const isLiked = comment.likes.includes(userId);
+    const [userProfileImg,setUserProfileImg] = useState(null);
+
+    useEffect(() => {
+        async function getUserProfileImg() {
+            try{
+                const response = await userApi.getProfileImage(comment.owner);
+                setUserProfileImg(response.profileImage);
+            }catch(error){
+                console.log(error);
+            }
+        }
+
+        getUserProfileImg();
+    })
 
     return (
         <div className="comment-card">
             <div className="comment-header">
                 <div className="user-info">
-                    <img src="/images/user-logo.png" alt="User Logo" className="user-logo" />
+                    <img src={userProfileImg || "/images/null-profile.png"} alt="User Logo" className="user-logo" />
                     <span className="username">{comment.author}</span>
                 </div>
                 <span className="comment-date">

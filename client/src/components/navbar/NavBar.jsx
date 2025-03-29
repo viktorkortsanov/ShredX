@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import './navbar.css';
 import { useDispatch, useSelector } from "react-redux";
 import userApi from "../../api/userApi.js";
@@ -10,12 +10,27 @@ export default function NavBar() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const user = useSelector((state) => state.auth.user);
     const isAdmin = user?.isAdmin;
+    const userId = useSelector((state) => state.auth.user?._id);
     const dispatch = useDispatch();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
+    const [userProfileImg, setUserProfileImg] = useState(null);
+
+    useEffect(() => {
+        const getUserImage = async () => {
+            try {
+                const response = await userApi.getProfileImage(userId);
+                setUserProfileImg(response.profileImage);
+            } catch (error) {
+                console.error("Failed to fetch user image:", error);
+            }
+        };
+    
+        getUserImage();
+    }, [userId]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -34,7 +49,7 @@ export default function NavBar() {
 
         window.addEventListener('scroll', handleScroll);
         document.addEventListener('mousedown', handleClickOutside);
-        
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
             document.removeEventListener('mousedown', handleClickOutside);
@@ -84,16 +99,16 @@ export default function NavBar() {
                             {isAdmin && <li><Link to="/adminpanel" onClick={handleNavLinkClick}>ADMIN</Link></li>}
                             <li className="user-icon" ref={dropdownRef}>
                                 <div onClick={toggleMenu} className="user-profile-trigger">
-                                    <img src="/images/personalization.png" alt="User Icon" />
+                                    <img src={userProfileImg || "/images/null-profile.png"} alt="User Icon" />
                                     <span className="mobile-only">PROFILE</span>
                                 </div>
                                 {isMenuOpen && (
                                     <ul className="dropdown-menu-navi">
                                         <li className="user-info-navi">
-                                            <img 
-                                                src="../../../public/images/user-logo.png"
-                                                alt="User Logo" 
-                                                className="user-logo" 
+                                            <img
+                                                src={userProfileImg || "/images/null-profile.png"}
+                                                alt="User Logo"
+                                                className="user-logo"
                                             />
                                             <div className="user-details-navi">
                                                 <p className="username-navi">{user?.username}</p>

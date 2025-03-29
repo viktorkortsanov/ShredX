@@ -144,7 +144,9 @@ export default function UserManagement() {
                                     <div key={user._id} className="user-row">
                                         <div className="table-cell user-avatar-cell">
                                             <div className="user-avatar">
-                                                {user.username.charAt(0).toUpperCase()}
+                                                {user.profileImage && (
+                                                    <img src={user.profileImage} alt="" />
+                                                )}
                                             </div>
                                         </div>
                                         

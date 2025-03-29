@@ -8,6 +8,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebase.js';
 
 import './userprofile.css';
+import userApi from '../../api/userApi.js';
  
 const UserProfile = () => {
     const [userPosts, setUserPosts] = useState([]);
@@ -29,12 +30,15 @@ const UserProfile = () => {
     const username = useSelector(state => state.auth.user?.username);
     const email = useSelector(state => state.auth.user?.email);
     const userId = useSelector(state => state.auth.user?._id);
+    const [userProfileImg,setUserProfileImg] = useState(null);
 
     useEffect(() => {
         async function fetchUserData() {
             try {
                 const userPosts = await postApi.getUserPosts(userId);
-                const likedPosts = await postApi.getLikedPosts(userId);                
+                const likedPosts = await postApi.getLikedPosts(userId);   
+                const response = await userApi.getProfileImage(userId);
+                setUserProfileImg(response.profileImage);           
                 setUserPosts(userPosts);
                 setLikedPosts(likedPosts);
                 setProfileData(prevData => ({
@@ -81,22 +85,16 @@ const UserProfile = () => {
     
         setIsUploading(true);
         try {
-            // Път до изображението в Firebase Storage
             const imageRef = ref(storage, `profileImages/${userId}/${selectedFile.name}`);
-    
-            // Качване на изображението в Firebase
             await uploadBytes(imageRef, selectedFile);
-    
-            // Получаване на download URL
             const downloadURL = await getDownloadURL(imageRef);
     
-            // Изпращане на URL към сървъра
             const response = await fetch(`http://localhost:3030/users/${userId}/updateProfileImage`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',  // Качваме само URL, затова 'application/json' е необходим
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ profileImageUrl: downloadURL }),  // Изпращаме URL в JSON формат
+                body: JSON.stringify({ profileImageUrl: downloadURL }),
             });
     
             if (!response.ok) {
@@ -246,7 +244,7 @@ const UserProfile = () => {
                 <div className="profile-image-wrapper">
                     <div className="profile-image-container">
                         <img 
-                            src={imagePreview || "../../../public/images/personalization.png"} 
+                            src={imagePreview || userProfileImg || "/images/null-profile.png"} 
                             alt="User Avatar" 
                             className="user-avatar-large" 
                         />

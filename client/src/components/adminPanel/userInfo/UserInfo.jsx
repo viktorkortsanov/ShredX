@@ -24,7 +24,8 @@ export default function UserInfo() {
                 const likedPosts = await postApi.getLikedPosts(userId);
                 const purchasedIds = await userApi.getPurchasedPrograms(userId);
                 const purchasedIdsData = await purchasedIds.json();
-                setUser({ id: userInfo._id, username: userInfo.username, email: userInfo.email });
+                setUser({ id: userInfo._id, username: userInfo.username, email: userInfo.email, profileImage: userInfo.profileImage});
+                
                 setLikedPosts(likedPosts);
                 setUserPosts(userPosts);
                 setPurchasedProgramIds(purchasedIdsData);
@@ -41,7 +42,7 @@ export default function UserInfo() {
     );
 
     const renderTabContent = () => {
-        switch(activeTab) {
+        switch (activeTab) {
             case 'posts':
                 return (
                     <div className="tab-section">
@@ -90,7 +91,7 @@ export default function UserInfo() {
 
     return (
         <div className="admin-user-dashboard">
-            <Link to="/adminpanel/usersmanagement" className="back-link">
+            <Link to="/adminpanel/usersmanagement" className="back-link-userinfo">
                 <img src="/images/back.png" alt="Back Arrow" className="back-arrow" />
                 <span className="back-text">Back to Users Management</span>
             </Link>
@@ -99,24 +100,24 @@ export default function UserInfo() {
                 <div className="profile-sidebar">
                     <div className="profile-image-wrapper">
                         <div className="profile-image-container">
-                            <img src="../../../public/images/personalization.png" alt="User Avatar" className="user-avatar-large" />
+                            <img src={user.profileImage} alt="User Avatar" className="user-avatar-large" />
                         </div>
                     </div>
 
                     <div className="user-info">
                         <h2>{user.username}</h2>
-                        
+
                         <div className="user-details">
                             <div className="user-detail-item">
                                 <span className="detail-label">Email</span>
                                 <span className="detail-value">{user.email}</span>
                             </div>
-                            
+
                             <div className="user-detail-item">
                                 <span className="detail-label">Username</span>
                                 <span className="detail-value">{user.username}</span>
                             </div>
-                            
+
                             <div className="user-detail-item">
                                 <span className="detail-label">ID</span>
                                 <span className="detail-value user-id">{user.id}</span>
@@ -142,19 +143,19 @@ export default function UserInfo() {
 
                 <div className="profile-content">
                     <div className="profile-tabs">
-                        <button 
+                        <button
                             className={`tab-button ${activeTab === 'posts' ? 'active' : ''}`}
                             onClick={() => setActiveTab('posts')}
                         >
                             User Posts
                         </button>
-                        <button 
+                        <button
                             className={`tab-button ${activeTab === 'liked' ? 'active' : ''}`}
                             onClick={() => setActiveTab('liked')}
                         >
                             Liked Posts
                         </button>
-                        <button 
+                        <button
                             className={`tab-button ${activeTab === 'programs' ? 'active' : ''}`}
                             onClick={() => setActiveTab('programs')}
                         >

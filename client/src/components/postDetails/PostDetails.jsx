@@ -5,6 +5,7 @@ import ConfirmationDialog from "../confirmDialog/ConfirmDialog.jsx";
 import Comment from '../comment/Comment.jsx'
 import "./postdetails.css";
 import postApi from "../../api/postApi.js";
+import userApi from "../../api/userApi.js";
 
 const PostDetails = () => {
     const { postId } = useParams();
@@ -13,6 +14,7 @@ const PostDetails = () => {
     const [isLiked, setIsLiked] = useState(false);
     const [isOwner, setIsOwner] = useState(false);
     const [showDialog, setShowDialog] = useState(false);
+    const [userProfileImg,setUserProfileImg] = useState(null);
     const [comments, setComments] = useState([]);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const userId = useSelector(state => state.auth.user?._id);
@@ -22,6 +24,8 @@ const PostDetails = () => {
         const fetchPost = async () => {
             try {
                 const data = await postApi.getDetails(postId);
+                const userProfileImg = await userApi.getProfileImage(data.post.owner);
+                setUserProfileImg(userProfileImg.profileImage);
                 setPost(data.post);
                 setLikesCount(data.post.likes.length);
                 setComments(data.post.comments);
@@ -112,13 +116,13 @@ const PostDetails = () => {
     return (
 
         <div className="post-details">
-            <Link to="/forum" className="back-link">
+            <Link to="/forum" className="back-link-forum">
                 <img src="/images/back.png" alt="Back Arrow" className="back-arrow" />
                 <span className="back-text">Back to Forum</span>
             </Link>
             <div className="post-header">
                 <div className="user-info">
-                    <img src="/images/user-logo.png" alt="User Logo" className="user-logo" />
+                    <img src={userProfileImg || "/images/null-profile.png"} alt="User Logo" className="user-logo" />
                     <span className="username">{post.author}</span>
                 </div>
                 <span className="post-date">{new Date(post.createdAt).toLocaleDateString()}</span>

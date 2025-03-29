@@ -9,11 +9,11 @@ const PostItem = ({ post }) => {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const response = await fetch(`http://localhost:3030/users/${post.owner}`); // предполагам, че използваш API
-                if (!response.ok) { // проверка дали отговорът е успешен
+                const response = await fetch(`http://localhost:3030/users/${post.owner}`);
+                if (!response.ok) { 
                     throw new Error('Грешка при зареждане на данните за потребителя');
                 }
-                const data = await response.json(); // преобразуване в JSON
+                const data = await response.json(); 
                 setUser(data);
             } catch (error) {
                 console.log(error);
@@ -25,7 +25,7 @@ const PostItem = ({ post }) => {
     }, [post.owner]);
 
     if (!user) {
-        return <div>Loading...</div>; // може да върнеш съобщение за зареждане, докато не се зареди потребителят
+        return <div>Loading...</div>;
     }
 
     return (

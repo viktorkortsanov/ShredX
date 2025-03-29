@@ -134,6 +134,24 @@ const userApi = {
             console.error('Error updating profile image:', error);
             throw error;
         }
+    },
+
+    getProfileImage: async (userId) => {
+        try {
+            const response = await fetch(`${baseUrl}/users/${userId}/profileImage`);
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const result = await response.json();
+            console.log(result);
+    
+            return result;
+        } catch (error) {
+            console.error('Error getting profile image:', error);
+            throw error;
+        }
     }
 
 };
