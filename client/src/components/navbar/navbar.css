@@ -5,12 +5,13 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 header.scrolled nav {
     background-color: #18181A;
-    border-bottom: 1px solid rgb(146, 146, 146);
+    border-bottom: 1px solid rgba(146, 146, 146, 0.7);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 nav {
@@ -21,7 +22,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease, border-bottom 0.3s ease;
+    transition: background-color 0.3s ease, border-bottom 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-links {
@@ -49,13 +50,20 @@ nav a::after {
     bottom: -3px;
     width: 100%;
     height: 2px;
-    background-color: white;
+    background: linear-gradient(90deg, #0062ff, #60a5fa);
     transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
+}
+
+nav a:hover {
+    transform: translateY(-2px);
 }
 
 nav a:hover::after {
     transform: scaleX(1);
+    transform-origin: left;
 }
 
 #nav-logo img {
@@ -63,7 +71,11 @@ nav a:hover::after {
     height: auto;
     display: block;
     margin: 0 3em;
+    transition: transform 0.3s ease;
+}
 
+#nav-logo:hover img {
+    transform: scale(1.05);
 }
 
 #nav-logo {
@@ -79,6 +91,11 @@ nav a:hover::after {
 .user-icon {
     position: relative;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.user-icon:hover {
+    transform: translateY(-2px);
 }
 
 .user-profile-trigger {
@@ -97,20 +114,26 @@ nav a:hover::after {
     top: 100%;
     right: 0;
     background-color: white;
-    /* border: 1px solid #ccc; */
     border-radius: 8px;
     list-style-type: none;
-    padding: 0 0px;
+    padding: 0;
     margin: 8px 0 0 0;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
     z-index: 20;
     width: 240px;
-    animation: fadeIn 0.2s ease-in-out;
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
 }
+
 .user-icon:hover .dropdown-menu-navi {
     display: block;
     opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 @keyframes fadeIn {
@@ -123,14 +146,11 @@ nav a:hover::after {
     align-items: center;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(146, 146, 146, 0.3);
     margin-bottom: 8px;
-    /* padding-bottom: 8px; */
     padding: 0.5em 0.5em;
-
     background-color: #222224;
     overflow: hidden;
-
 }
 
 .user-info-navi img {
@@ -139,6 +159,13 @@ nav a:hover::after {
     border-radius: 50%;
     object-fit: cover;
     margin-right: 12px;
+    border: 2px solid rgba(0, 98, 255, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.user-info-navi img:hover {
+    transform: scale(1.05);
+    border-color: #0062ff;
 }
 
 .user-details-navi {
@@ -177,21 +204,42 @@ nav a:hover::after {
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.dropdown-menu-navi li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #0062ff, #60a5fa);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dropdown-menu-navi li a:hover {
     background-color: #f5f5f5;
-    color: #007BFF;
+    color: #0062ff !important;
+    transform: translateX(3px);
 }
 
 .dropdown-menu-navi li a:hover::after {
-    display: none;
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .dropdown-menu-navi li a img {
     width: 18px;
     height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-menu-navi li a:hover img {
+    transform: scale(1.15) rotate(5deg);
 }
 
 .user-icon img {
@@ -199,6 +247,12 @@ nav a:hover::after {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.user-icon:hover img {
+    border-color: rgba(0, 98, 255, 0.6);
 }
 
 body {
@@ -223,7 +277,6 @@ body {
     transition: all 0.3s ease;
 }
 
-
 .hamburger-bar.open:nth-child(1) {
     transform: translateY(8.5px) rotate(45deg);
 }
@@ -245,6 +298,7 @@ body {
     .hamburger-menu {
         display: flex;
     }
+    
     .user-icon img {
         width: 30px;
         height: 30px;
@@ -252,6 +306,7 @@ body {
         object-fit: cover;
         margin-right: 1em;
     }
+    
     .nav-links {
         position: fixed;
         top: 0;
@@ -279,9 +334,11 @@ body {
         text-align: left;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .user-details-navi{
-                color: white;
+    
+    .user-details-navi {
+        color: white;
     }
+    
     .nav-links li:last-child {
         border-bottom: none;
     }
@@ -295,7 +352,8 @@ body {
     }
 
     .nav-links a::after {
-        display: none;
+        display: block;
+        bottom: 8px;
     }
 
     .mobile-only {
@@ -310,8 +368,10 @@ body {
         border: none;
         background-color: white;
         margin: 0;
-        /* border-radius: 0; */
         padding: 0 0 10px 0;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
     }
 
     .user-info-navi {
@@ -320,19 +380,20 @@ body {
     }
 
     .dropdown-menu-navi li a {
-        color: white;
+        color: rgb(0, 0, 0);
         padding: 12px 20px 12px 40px;
         border-radius: 0;
     }
 
     .dropdown-menu-navi li a:hover {
-        background-color: #333336;
-        color: white;
+        background-color: #efefef;
+        color: #0062ff !important;
+        transform: translateX(5px);
     }
 
-    /* .username-navi, .email {
-        color: white;
-    } */
+    .dropdown-menu-navi li a::after {
+        bottom: 0;
+    }
 
     body {
         padding-top: 60px;
