@@ -26,7 +26,7 @@ const programApi = {
 
     getAllPrograms: async () => {
         try {
-            const response = await fetch(`${baseUrl}/programs`, {
+            const response = await fetch(`${baseUrl}/programs/all`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'

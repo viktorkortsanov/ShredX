@@ -24,6 +24,22 @@ const CreateProgram = () => {
     notification
   } = useCreateForm();
 
+  const handleCreateProgram = async () => {
+    try{
+      const response = await fetch('http://localhost:3030/programs/create', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData),
+        credentials: 'include'
+      })
+    }catch(error){
+      console.log(error);
+      
+    }
+  }
+
   return (
     <div className="create-program-container">
       <div className="create-program-header">
@@ -42,7 +58,7 @@ const CreateProgram = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="create-program-form">
+      <form onSubmit={handleSubmit(handleCreateProgram)} className="create-program-form">
         <div className="form-section">
           <h2>Basic Information</h2>
           <div className={`form-group ${errors.name ? 'has-error' : ''}`}>
