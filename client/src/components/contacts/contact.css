@@ -15,8 +15,14 @@
     --input-border: rgba(0, 81, 255, 0.3);
     --input-focus: rgba(0, 81, 255, 0.8);
   }
+
+  .icon-contact {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
   
-  /* Base styles */
   .contact-container {
     display: flex;
     flex-direction: column;
@@ -49,7 +55,6 @@
     z-index: 0;
   }
   
-  /* Company Info Section */
   .company-info {
     width: 45%;
     background-color: var(--surface-primary);
@@ -124,7 +129,6 @@
     color: var(--primary-blue);
   }
   
-  /* Map Container */
   .map-container {
     width: 45%;
     height: 350px;
@@ -156,7 +160,6 @@
     opacity: 0.95;
   }
   
-  /* Contact Form Container */
   .contact-form-container {
     width: 100%;
     max-width: 700px;
@@ -257,7 +260,6 @@
     color: var(--primary-blue);
   }
   
-  /* Animated Submit Button */
   .submit-button {
     padding: 1rem 2rem;
     background: var(--primary-blue);
@@ -319,7 +321,6 @@
     40%, 80% { transform: translateX(5px); }
   }
   
-  /* Layout adjustments */
   @media (min-width: 992px) {
     .contact-container {
       display: grid;
@@ -390,7 +391,6 @@
     }
   }
   
-  /* Animations */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
