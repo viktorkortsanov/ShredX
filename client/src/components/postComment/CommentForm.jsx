@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
 import postApi from '../../api/postApi.js';

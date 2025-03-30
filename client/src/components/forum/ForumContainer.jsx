@@ -10,7 +10,7 @@ export default function ForumContainer() {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   
-  const postsPerPage = 3;
+  const postsPerPage = 2;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,27 +39,39 @@ export default function ForumContainer() {
   const nextPage = () => {
     if (currentPage < Math.ceil(posts.length / postsPerPage)) {
       setCurrentPage(currentPage + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="forum-container">
+      <div className="forum-header">
+        <h1>Community</h1>
+        <p className="forum-subtitle">
+          Join our community, share experiences, ask questions, and connect with other enthusiasts.
+        </p>
+      </div>
+      
       {isAuthenticated && (
-        <Link to="/create" className="add-post-link">
+        <Link to="/create" className="add-post-link" aria-label="Add a new post">
           +
         </Link>
       )}
 
       {loading ? (
-        <p className="loading">Loading posts...</p>
+        <div className="loading">Loading posts...</div>
       ) : (
         <>
           <div className="posts-wrapper">
@@ -68,7 +80,7 @@ export default function ForumContainer() {
                 <PostItem key={post._id || index} post={post} />
               ))
             ) : (
-              <p className="no-posts">No posts available.</p>
+              <p className="no-posts">No posts available at the moment.</p>
             )}
           </div>
 
@@ -78,11 +90,12 @@ export default function ForumContainer() {
                 onClick={prevPage} 
                 disabled={currentPage === 1}
                 className="pagination-arrow prev-arrow"
+                aria-label="Previous page"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="arrow-icon">
                   <polyline id="secondary" points="15.5 5 8.5 12 15.5 19" style={{fill: 'none', stroke: 'rgb(44, 169, 188)', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2}}></polyline>
-                  <polyline id="primary" points="10 19 3 12 10 5" style={{fill: 'none', stroke: 'rgb(0, 0, 0)', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2}}></polyline>
-                  <polyline id="primary-2" points="21 5 14 12 21 19" style={{fill: 'none', stroke: 'rgb(0, 0, 0)', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2}}></polyline>
+                  <polyline id="primary" points="10 19 3 12 10 5" style={{fill: 'none', stroke: 'rgb(255, 255, 255)', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2}}></polyline>
+                  <polyline id="primary-2" points="21 5 14 12 21 19" style={{fill: 'none', stroke: 'rgb(255, 255, 255)', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: 2}}></polyline>
                 </svg>
               </button>
               
@@ -92,6 +105,7 @@ export default function ForumContainer() {
                     key={index}
                     onClick={() => paginate(index + 1)}
                     className={`page-number ${currentPage === index + 1 ? 'active' : ''}`}
+                    aria-label={`Page ${index + 1}`}
                   >
                     {index + 1}
                   </button>
@@ -102,10 +116,11 @@ export default function ForumContainer() {
                 onClick={nextPage} 
                 disabled={currentPage === Math.ceil(posts.length / postsPerPage)}
                 className="pagination-arrow next-arrow"
+                aria-label="Next page"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" id="triple-right-sign" xmlns="http://www.w3.org/2000/svg" className="arrow-icon">
                   <path id="secondary" d="M8.5,20a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42L14.09,12,7.79,5.71A1,1,0,1,1,9.21,4.29l7,7a1,1,0,0,1,0,1.42l-7,7A1,1,0,0,1,8.5,20Z" style={{fill: 'rgb(44, 169, 188)'}}></path>
-                  <path id="primary" d="M14,20a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42L19.59,12l-6.3-6.29a1,1,0,0,1,1.42-1.42l7,7a1,1,0,0,1,0,1.42l-7,7A1,1,0,0,1,14,20ZM3.71,19.71l7-7a1,1,0,0,0,0-1.42l-7-7A1,1,0,0,0,2.29,5.71L8.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0Z" style={{fill: 'rgb(0, 0, 0)'}}></path>
+                  <path id="primary" d="M14,20a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42L19.59,12l-6.3-6.29a1,1,0,0,1,1.42-1.42l7,7a1,1,0,0,1,0,1.42l-7,7A1,1,0,0,1,14,20ZM3.71,19.71l7-7a1,1,0,0,0,0-1.42l-7-7A1,1,0,0,0,2.29,5.71L8.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0Z" style={{fill: 'rgb(255, 255, 255)'}}></path>
                 </svg>
               </button>
             </div>

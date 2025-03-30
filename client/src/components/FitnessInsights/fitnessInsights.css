@@ -1,0 +1,130 @@
+.fitness-insights {
+    padding: 120px 20px;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.insights-title {
+    text-align: center;
+    font-size: 3.5rem;
+    color: white;
+    margin-bottom: 80px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+}
+
+.insights-title::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background: linear-gradient(90deg, #006CFA, #00A3FF);
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 108, 250, 0.5);
+}
+
+.insights-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 150px;
+}
+
+/* Добавяме декоративни елементи */
+.fitness-insights::before {
+    content: '';
+    position: absolute;
+    top: 80px;
+    left: 10%;
+    width: 150px;
+    height: 150px;
+    background-image: url('/images/dumbbell-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.05;
+    transform: rotate(-15deg);
+}
+
+.fitness-insights::after {
+    content: '';
+    position: absolute;
+    bottom: 80px;
+    right: 10%;
+    width: 180px;
+    height: 180px;
+    background-image: url('/images/barbell-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.05;
+    transform: rotate(15deg);
+}
+
+@media (max-width: 768px) {
+    .fitness-insights {
+        padding: 80px 15px;
+    }
+    
+    .insights-title {
+        font-size: 2.8rem;
+        margin-bottom: 60px;
+    }
+    
+    .insights-container {
+        gap: 100px;
+    }
+    
+    .fitness-insights::before,
+    .fitness-insights::after {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    .fitness-insights {
+        padding: 60px 15px;
+    }
+    
+    .insights-title {
+        font-size: 2.2rem;
+        margin-bottom: 50px;
+    }
+    
+    .insights-container {
+        gap: 80px;
+    }
+    
+    .fitness-insights::before,
+    .fitness-insights::after {
+        opacity: 0.03;
+    }
+}
+
+@media (max-width: 480px) {
+    .fitness-insights {
+        padding: 50px 10px;
+    }
+    
+    .insights-title {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+    
+    .insights-title::after {
+        width: 70px;
+        height: 4px;
+        bottom: -15px;
+    }
+    
+    .insights-container {
+        gap: 60px;
+    }
+}

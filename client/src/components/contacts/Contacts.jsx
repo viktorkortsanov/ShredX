@@ -1,4 +1,3 @@
-import React from 'react';
 import useForm from '../../hooks/useForm';
 import './contact.css';
 import { useSelector } from 'react-redux';

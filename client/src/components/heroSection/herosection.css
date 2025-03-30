@@ -1,22 +1,53 @@
 .hero-section {
-    height: 110vh;
-    background: url("../../../public/images/hero-img.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply;
-    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    position: relative;
     color: white;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px; 
+    padding: 0 20px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -2;
+}
+
+.video-background iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 177.77777778vh; 
+    height: 56.25vw; 
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
 }
 
 .hero-content {
     max-width: 1200px; 
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-title {

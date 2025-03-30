@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import PostItem from '../forum/postItem/PostItem.jsx';
 import ProgramCard from '../programs/program/ProgramCard.jsx';

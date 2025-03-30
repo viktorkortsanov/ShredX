@@ -66,7 +66,139 @@
 .program-card .buy-btn:hover {
     background-color: #0056b3;
 }
-
+.programs-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .programs-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .programs-pagination:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+  
+  .programs-page-numbers {
+    display: flex;
+    gap: 10px;
+    margin: 0 20px;
+  }
+  
+  .programs-page-number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .programs-page-number.active {
+    background: linear-gradient(135deg, #3498db, #1abc9c);
+    color: white;
+    box-shadow: 0 6px 15px rgba(26, 188, 156, 0.3);
+    border: none;
+  }
+  
+  .programs-page-number:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+  
+  .programs-pagination-arrow {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .programs-pagination-arrow:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+  }
+  
+  .programs-pagination-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  
+  .programs-arrow-icon {
+    width: 26px;
+    height: 26px;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+  }
+  
+  @media (max-width: 768px) {
+    .programs-pagination {
+      padding: 10px 15px;
+      border-radius: 30px;
+    }
+  
+    .programs-page-number {
+      width: 35px;
+      height: 35px;
+      font-size: 14px;
+    }
+  
+    .programs-arrow-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .programs-pagination {
+      padding: 8px 12px;
+      border-radius: 25px;
+      margin-top: 25px;
+    }
+  
+    .programs-page-number {
+      width: 30px;
+      height: 30px;
+      font-size: 12px;
+    }
+    
+    .programs-pagination-arrow {
+      width: 35px;
+      height: 35px;
+    }
+  
+    .programs-arrow-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
 @media (max-width: 1024px) {
     .program-container {
         padding: 60px 40px;

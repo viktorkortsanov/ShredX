@@ -9,15 +9,13 @@ footer {
     bottom: 0;
     z-index: 100; 
 }
-
+body.hide-footer footer {
+    display: none;
+}
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
 }
 
 .footer-content p {
@@ -54,49 +52,13 @@ footer {
     width: 100%;
     left: 0;
 }
-
-/* Стилове за логотата на социални мрежи */
-.footer-logos {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.footer-logos a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    overflow: hidden;
-    transition: transform 0.5s ease, background-color 0.3s ease;
-}
-
-.footer-logos a:hover {
-    transform: rotate(360deg);
-    background-color: #3b7cff;
-}
-
-.footer-logos img {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-}
-
 @media (max-width: 768px) {
     .main-container {
-        padding-bottom: 60px; /* По-малък padding за таблети */
+        padding-bottom: 60px;
     }
     
     footer {
         padding: 12px;
-    }
-    
-    .footer-content {
-        flex-direction: column;
-        gap: 10px;
     }
     
     .footer-content p {
@@ -107,19 +69,10 @@ footer {
         margin: 0 10px;
         font-size: 0.9rem;
     }
-    
-    .footer-logos a {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .footer-logos img {
-        width: 18px;
-        height: 18px;
-    }
 }
 
 @media (max-width: 600px) {
+
     .footer-links {
         display: flex;
         flex-wrap: wrap;
@@ -134,6 +87,7 @@ footer {
 }
 
 @media (max-width: 480px) {
+
     footer {
         padding: 10px;
     }
@@ -150,15 +104,5 @@ footer {
         margin: 3px;
         font-size: 0.8rem;
         padding-bottom: 3px;
-    }
-    
-    .footer-logos a {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .footer-logos img {
-        width: 16px;
-        height: 16px;
     }
 }

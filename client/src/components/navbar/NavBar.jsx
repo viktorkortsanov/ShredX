@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { data, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './navbar.css';
 import { useDispatch, useSelector } from "react-redux";
 import userApi from "../../api/userApi.js";
 import { logout as logoutAction } from "../../store/authSlice.js";
-// import '../../../public/images/profile.png';
 
 export default function NavBar() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);

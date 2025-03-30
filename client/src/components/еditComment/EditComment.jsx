@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
 import postApi from '../../api/postApi.js';

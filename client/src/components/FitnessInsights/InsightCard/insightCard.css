@@ -1,0 +1,305 @@
+.insight-card {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 6em;
+    padding: 20px;
+}
+
+.insight-card.right {
+    flex-direction: row-reverse;
+}
+
+.insight-image-container {
+    position: relative;
+    width: 350px;
+    height: 450px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transform: rotate(-2deg);
+    transition: transform 0.5s ease;
+}
+
+.insight-card.right .insight-image-container {
+    transform: rotate(2deg);
+}
+
+.insight-image-container:hover {
+    transform: rotate(0) scale(1.02);
+}
+
+.insight-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.insight-image-container:hover .insight-image {
+    transform: scale(1.05);
+}
+
+.trainer-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+    padding: 40px 20px 20px;
+    transition: all 0.3s ease;
+}
+
+.trainer-name {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 12px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.trainer-socials {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.insight-content {
+    background: rgba(24, 24, 26, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    margin-left: -80px;
+    z-index: 1;
+    flex-grow: 1;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.insight-card.right .insight-content {
+    margin-left: 0;
+    margin-right: -80px;
+}
+
+.quote-container {
+    position: relative;
+    padding-left: 30px;
+}
+
+.quote-icon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -25px;
+    left: 0;
+    color: #006CFA;
+    opacity: 0.7;
+}
+
+.quote-text {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: white;
+    font-style: italic;
+    font-weight: 300;
+    margin: 0;
+    position: relative;
+}
+
+.insight-accent {
+    position: absolute;
+    top: 30px;
+    bottom: 30px;
+    width: 4px;
+    border-radius: 2px;
+    background: linear-gradient(to bottom, #006CFA, #00A3FF);
+}
+
+.insight-card .insight-accent {
+    left: 0;
+}
+
+.insight-card.right .insight-accent {
+    right: 0;
+    left: auto;
+}
+
+/* Добавяме ефект на сияние */
+.glow-effect {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 108, 250, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+    filter: blur(20px);
+    z-index: -1;
+}
+
+.insight-card .glow-effect {
+    top: 20px;
+    left: 30px;
+}
+
+.insight-card.right .glow-effect {
+    top: 20px;
+    right: 30px;
+    left: auto;
+    background: radial-gradient(circle, rgba(0, 175, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* Анимация при извикване на компонента */
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.insight-card {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.insight-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.insight-card:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.insight-card:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+@media (max-width: 900px) {
+    .insight-card, .insight-card.right {
+        flex-direction: column;
+        align-items: center;
+        gap: 3em;
+    }
+    
+    .insight-image-container, .insight-card.right .insight-image-container {
+        width: 300px;
+        height: 380px;
+        margin-bottom: -40px;
+        transform: rotate(0);
+    }
+    
+    .insight-content {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 60px 30px 40px;
+        width: 90%;
+    }
+    
+    .insight-card.right .insight-content {
+        margin-right: 0;
+    }
+    
+    .quote-text {
+        font-size: 1.3rem;
+    }
+    
+    .trainer-socials {
+        margin-top: 8px;
+    }
+    
+    .social-link {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .social-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .insight-image-container, .insight-card.right .insight-image-container {
+        width: 250px;
+        height: 320px;
+    }
+    
+    .insight-content {
+        padding: 50px 25px 30px;
+    }
+    
+    .quote-text {
+        font-size: 1.2rem;
+    }
+    
+    .trainer-name {
+        font-size: 1.3rem;
+    }
+    
+    .social-link {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .social-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .insight-image-container, .insight-card.right .insight-image-container {
+        width: 220px;
+        height: 280px;
+    }
+    
+    .insight-content {
+        padding: 45px 20px 25px;
+        width: 95%;
+    }
+    
+    .quote-text {
+        font-size: 1.1rem;
+    }
+    
+    .quote-icon {
+        width: 20px;
+        height: 20px;
+        top: -20px;
+    }
+    
+    .trainer-name {
+        font-size: 1.2rem;
+    }
+}

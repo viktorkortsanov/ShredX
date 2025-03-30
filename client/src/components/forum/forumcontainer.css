@@ -2,57 +2,95 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 100px;
-    background-color: #fafafa;
+    padding: 80px 20px;
     min-height: 100vh;
-    background-image: url(https://i.pinimg.com/736x/2a/a7/8a/2aa78a2c8fbe91b37bfed0fbb32fae82.jpg);
+    background-image: url(/images/fitnes-forum-woman.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     background-blend-mode: multiply;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     position: relative;
 }
 
+.forum-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.8) 100%);
+    z-index: 1;
+}
+
+.forum-container > * {
+    position: relative;
+    z-index: 2;
+}
 
 .forum-container h1 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 2.8rem;
+    color: white;
+    margin-bottom: 30px;
     text-align: center;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.6);
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .forum-container .post-item {
-    width: 80%;
-    max-width: 800px;
-    margin-bottom: 20px;
+    width: 85%;
+    max-width: 900px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+.forum-container .post-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .add-post-link {
-    position: absolute;
-    top: 100px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
+    position: fixed;
+    top: 210px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background-color: #007bff;
+    background: linear-gradient(135deg, #3498db, #1abc9c);
     color: white;
-    font-size: 24px;
+    font-size: 30px;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 1001;
 }
 
 .add-post-link:hover {
-    background-color: #0056b3;
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
 }
 
 .no-posts {
     color: white;
+    font-size: 1.3rem;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+    border-radius: 12px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .posts-wrapper {
@@ -67,54 +105,73 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
-    padding: 12px 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 40px;
+    margin-bottom: 30px;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.pagination:hover {
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .page-numbers {
     display: flex;
-    gap: 8px;
-    margin: 0 15px;
+    gap: 10px;
+    margin: 0 20px;
 }
 
 .page-number {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f0f0f0;
-    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     cursor: pointer;
-    font-size: 14px;
-    color: #333;
-    transition: all 0.2s ease;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .page-number.active {
-    background-color: #007bff;
+    background: linear-gradient(135deg, #3498db, #1abc9c);
     color: white;
+    box-shadow: 0 6px 15px rgba(26, 188, 156, 0.3);
+    border: none;
 }
 
 .page-number:hover:not(.active) {
-    background-color: #e0e0e0;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
 }
 
 .pagination-arrow {
-    background: transparent;
-    border: none;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 5px;
-    transition: transform 0.2s ease;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s ease;
 }
 
 .pagination-arrow:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
     transform: scale(1.1);
 }
 
@@ -124,23 +181,125 @@
 }
 
 .arrow-icon {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
 }
 
 .loading {
     color: white;
-    font-size: 18px;
-    margin-top: 50px;
+    font-size: 20px;
+    margin-top: 70px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    animation: pulse 2s infinite;
 }
 
-/* .next-arrow .arrow-icon {
-    transform: rotate(180deg);
-} */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+.forum-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.forum-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+    .forum-container {
+        padding: 60px 15px;
+    }
+    
+    .forum-container h1 {
+        font-size: 2.3rem;
+    }
+    
+    .pagination {
+        padding: 12px 20px;
+    }
+    
+    .page-numbers {
+        gap: 8px;
+    }
+    
+    .page-number {
+        width: 38px;
+        height: 38px;
+    }
+}
+
 @media (max-width: 768px) {
     .pagination {
-        padding: 8px 15px;
-        border-radius: 20px;
+        padding: 10px 15px;
+        border-radius: 30px;
+    }
+
+    .page-number {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .arrow-icon {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .forum-container .post-item {
+        width: 95%;
+    }
+
+    .forum-container h1 {
+        font-size: 2rem;
+    }
+
+    .add-post-link {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        bottom: 30px;
+        right: 30px;
+    }
+    
+    .forum-subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .forum-container {
+        padding: 40px 10px;
+    }
+    
+    .forum-container h1 {
+        font-size: 1.7rem;
+    }
+    
+    .pagination {
+        padding: 8px 12px;
+        border-radius: 25px;
+        margin-top: 25px;
     }
 
     .page-number {
@@ -148,27 +307,33 @@
         height: 30px;
         font-size: 12px;
     }
+    
+    .pagination-arrow {
+        width: 35px;
+        height: 35px;
+    }
 
     .arrow-icon {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
-}
-
-@media (max-width: 768px) {
-    .forum-container .post-item {
-        width: 100%;
-    }
-
-    .forum-container h1 {
-        font-size: 1.5rem;
-    }
-
+    
     .add-post-link {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
         font-size: 20px;
-        top: 10px;
-        right: 10px;
+        bottom: 25px;
+        right: 25px;
+    }
+    
+    .loading {
+        font-size: 16px;
+        padding: 15px 20px;
+        margin-top: 50px;
+    }
+    
+    .no-posts {
+        font-size: 1rem;
+        padding: 15px 20px;
     }
 }
