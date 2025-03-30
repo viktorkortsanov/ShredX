@@ -2,16 +2,17 @@ import { useRef, useEffect } from "react";
 import HeroSection from "../heroSection/HeroSection.jsx";
 import CardContainer from "../cardContainer/CardContainer.jsx";
 import MyCarousel from "../carousel/Carousel.jsx";
+import FitnessInsights from "../FitnessInsights/FitnessInsights.jsx";
 import './mainContent.css';
 
 export default function MainContent() {
     const heroRef = useRef(null);
 
     useEffect(() => {
-        
+
         const observer = new IntersectionObserver(
             ([entry]) => {
-           
+
                 if (entry.isIntersecting) {
                     document.body.classList.add('hide-footer');
                 } else {
@@ -19,7 +20,7 @@ export default function MainContent() {
                 }
             },
             {
-                threshold: 0.3 
+                threshold: 0.3
             }
         );
 
@@ -41,6 +42,7 @@ export default function MainContent() {
                 <div ref={heroRef}>
                     <HeroSection />
                 </div>
+                <FitnessInsights />
                 <CardContainer />
                 <MyCarousel />
             </article>
