@@ -10,6 +10,7 @@
     background-blend-mode: multiply;
     background-color: rgba(0, 0, 0, 0.5);
     margin-top: 70px;
+    overflow-x: hidden; /* Добавено за да скрие съдържанието извън контейнера */
 }
 
 .register-form {
@@ -20,6 +21,19 @@
     width: 100%;
     max-width: 400px;
     text-align: center;
+    animation: slideFromRight 0.8s ease-out forwards; /* Добавена анимация */
+}
+
+/* Дефиниране на анимацията */
+@keyframes slideFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .register-form h2 {
