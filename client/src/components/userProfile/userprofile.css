@@ -220,24 +220,24 @@
     gap: 20px;
 }
  
-.form-group {
+.form-group-user {
     display: flex;
     flex-direction: column;
 }
  
-.form-group:nth-child(5) {
+.form-group-user:nth-child(5) {
     grid-column: span 2;
 }
  
-.form-group label {
+.form-group-user label {
     font-size: 14px;
     margin-bottom: 8px;
     color: #999;
 }
  
-.form-group input,
-.form-group textarea,
-.form-group select {
+.form-group-user input,
+.form-group-user textarea,
+.form-group-user select {
     padding: 12px;
     background-color: #2A2A2C;
     border: 1px solid rgba(146, 146, 146, 0.3);
@@ -248,14 +248,14 @@
     transition: border-color 0.3s ease;
 }
  
-.form-group textarea {
+.form-group-user textarea {
     min-height: 100px;
     resize: vertical;
 }
  
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
+.form-group-user input:focus,
+.form-group-user textarea:focus,
+.form-group-user select:focus {
     border-color: #006CFA;
 }
  

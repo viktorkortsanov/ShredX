@@ -132,7 +132,7 @@ const UserProfile = () => {
                     <div className="profile-form-container">
                         <h3>Edit Profile Information</h3>
                         <form onSubmit={handleProfileSubmit} className="profile-form">
-                            <div className="form-group">
+                            <div className="form-group-user">
                                 <label htmlFor="username">Username</label>
                                 <input 
                                     type="text" 
@@ -142,7 +142,7 @@ const UserProfile = () => {
                                     onChange={handleProfileChange}
                                 />
                             </div>
-                            <div className="form-group">
+                            <div className="form-group-user">
                                 <label htmlFor="email">Email</label>
                                 <input 
                                     type="email" 
@@ -151,42 +151,6 @@ const UserProfile = () => {
                                     value={profileData.email}
                                     onChange={handleProfileChange}
                                 />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="phone">Phone</label>
-                                <input 
-                                    type="tel" 
-                                    id="phone" 
-                                    name="phone" 
-                                    value={profileData.phone}
-                                    onChange={handleProfileChange}
-                                    placeholder="Enter your phone number"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="address">Address</label>
-                                <textarea 
-                                    id="address" 
-                                    name="address" 
-                                    value={profileData.address}
-                                    onChange={handleProfileChange}
-                                    placeholder="Enter your address"
-                                ></textarea>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="gender">Gender</label>
-                                <select 
-                                    id="gender" 
-                                    name="gender" 
-                                    value={profileData.gender}
-                                    onChange={handleProfileChange}
-                                >
-                                    <option value="">Select gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                    <option value="prefer-not-to-say">Prefer not to say</option>
-                                </select>
                             </div>
                             <button type="submit" className="save-profile-btn">Save Changes</button>
                         </form>
