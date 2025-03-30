@@ -102,7 +102,7 @@
     transition: transform var(--transition-smooth), background-color var(--transition-normal);
 }
 
-a {
+#features-section a {
     text-decoration: none;
 }
 
