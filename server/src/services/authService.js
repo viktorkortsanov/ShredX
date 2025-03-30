@@ -1,8 +1,7 @@
-import User from '../models/user.js';
+import User from "../models/user.js";
 import jsonwebtoken from 'jsonwebtoken';
-import { JWT_SECRET } from '../constants.js';
-import bcrypt from 'bcrypt';
-import { isAdmin } from '../middlewares/authMiddleware.js';
+import { JWT_SECRET } from "../constants.js";
+import bcrypt from 'bcrypt'
 
 const authService = {
     async register(username, email, password, rePassword) {
@@ -16,19 +15,19 @@ const authService = {
             throw new Error('User already exists');
         }
 
-        const isAdmin = email === 'shredxadmin@gmail.com' && password === 'admin123456';
+        const isAdmin = email === "shredxadmin@gmail.com" && password === "admin123456";
 
         const newUser = await User.create({
             username,
             email,
             password,
-            isAdmin,
+            isAdmin
         });
 
         const token = await this.generateToken(newUser);
         return {
             token,
-            user: { _id: newUser._id, email: newUser.email, username: newUser.username, isAdmin: newUser.isAdmin },
+            user: { _id: newUser._id, email: newUser.email, username: newUser.username, isAdmin: newUser.isAdmin }
         };
     },
 
@@ -39,7 +38,7 @@ const authService = {
             throw new Error('Invalid user');
         }
 
-        const isValid = await bcrypt.compare(password, user.password);
+        const isValid = await bcrypt.compare(password, user.password)
 
         if (!isValid) {
             throw new Error('Invalid email or password');
@@ -49,7 +48,7 @@ const authService = {
 
         return {
             token,
-            user: { _id: user._id, email: user.email, username: user.username, isAdmin: user.isAdmin },
+            user: { _id: user._id, email: user.email, username: user.username, isAdmin: user.isAdmin }
         };
     },
 
@@ -57,13 +56,12 @@ const authService = {
         const payload = {
             _id: user._id,
             email: user.email,
-            username: user.username,
-            isAdmin: user.isAdmin,
+            username: user.username
         };
 
         const token = await jsonwebtoken.sign(payload, JWT_SECRET, { expiresIn: '14d' });
         return token;
-    },
+    }
 };
 
 export default authService;
