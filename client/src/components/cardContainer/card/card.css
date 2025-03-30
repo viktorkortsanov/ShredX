@@ -1,18 +1,222 @@
-.custom-card-title {
-    color: #006CFA;
-}
-
-.custom-card-text {
-    color: white;
-    word-break: break-all;
-    overflow-wrap: break-word;
-    width: 200px;
-
-}
-
-.custom-card-prop {
+/* Основни променливи */
+:root {
+    --primary-blue: #006CFA;
+    --primary-blue-hover: #0056d6;
+    --primary-blue-glow: rgba(0, 108, 250, 0.4);
+    --card-bg: #222224;
+    --dark-bg: #18181A;
+    --text-white: #ffffff;
+    --text-light: #e0e0e0;
+    --text-blue: #89c4ff;
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    --hover-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    --transition-normal: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-spring: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    --border-radius: 12px;
+  }
+  
+  /* Стилове за картичките */
+  .custom-card-prop {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 25px 20px;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-spring);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    min-height: 250px;
+    width: 250px;
+    z-index: 1;
+  }
+  
+  /* Ефект при hover */
+  .custom-card-prop:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--hover-shadow);
+  }
+  
+  /* Светящ борд при hover */
+  .custom-card-prop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: var(--primary-blue);
+    transition: var(--transition-normal);
+  }
+  
+  .custom-card-prop:hover::before {
+    height: 100%;
+    box-shadow: 0 0 15px var(--primary-blue-glow);
+  }
+  
+  /* Градиентна линия на дъното */
+  .custom-card-prop::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-blue), transparent);
+    transition: var(--transition-normal);
+  }
+  
+  .custom-card-prop:hover::after {
+    width: 100%;
+  }
+  
+  /* Стил за заглавие */
+  .custom-card-title {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+    position: relative;
+    transition: var(--transition-normal);
+  }
+  
+  .custom-card-prop:hover .custom-card-title {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(0, 108, 250, 0.3);
+  }
+
+  /* Стил за текст */
+  .custom-card-text {
+    color: var(--text-white);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    transition: var(--transition-normal);
+  }
+  
+  .custom-card-prop:hover .custom-card-text {
+    color: var(--text-light);
+  }
+  
+  /* Стил за иконата (ако има такава) */
+  .custom-card-icon {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+    transition: var(--transition-spring);
+  }
+  
+  .custom-card-prop:hover .custom-card-icon {
+    transform: scale(1.2) rotate(5deg);
+  }
+  
+  /* Стил за изображението (ако има такова) */
+  .custom-card-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    transition: var(--transition-spring);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+  }
+  
+  .custom-card-prop:hover .custom-card-image {
+    transform: scale(1.1);
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.3));
+  }
+  
+  /* Стил за бутона (ако има такъв) */
+  .custom-card-button {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  
+  .custom-card-prop:hover .custom-card-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .custom-card-button:hover {
+    background-color: var(--primary-blue-hover);
+    box-shadow: 0 0 15px var(--primary-blue-glow);
+  }
+  
+  /* Анимация при зареждане */
+  @keyframes cardFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .custom-card-prop {
+    animation: cardFadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+  
+  /* Анимация с различно закъснение за всяка картичка */
+  .custom-card-prop:nth-child(1) { animation-delay: 0.1s; }
+  .custom-card-prop:nth-child(2) { animation-delay: 0.2s; }
+  .custom-card-prop:nth-child(3) { animation-delay: 0.3s; }
+  .custom-card-prop:nth-child(4) { animation-delay: 0.4s; }
+  .custom-card-prop:nth-child(5) { animation-delay: 0.5s; }
+  .custom-card-prop:nth-child(6) { animation-delay: 0.6s; }
+  
+  /* Пулсираща анимация при фокус */
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 var(--primary-blue-glow); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 108, 250, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 108, 250, 0); }
+  }
+  
+  .custom-card-prop:focus-within {
+    animation: pulse 2s infinite;
+  }
+  
+  /* Медия заявки за отзивчивост */
+  @media (max-width: 768px) {
+    .custom-card-prop {
+      width: 220px;
+      min-height: 220px;
+      padding: 20px 15px;
+    }
+    
+    .custom-card-title {
+      font-size: 1.3rem;
+    }
+    
+    .custom-card-text {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .custom-card-prop {
+      width: 100%;
+      max-width: 280px;
+      min-height: 200px;
+    }
+  }
