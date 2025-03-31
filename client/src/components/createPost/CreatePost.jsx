@@ -43,7 +43,6 @@ export default function CreatePost() {
                             value={values.title}
                             onChange={handleChange}
                             placeholder="Enter post title"
-                            required
                         />
                     </div>
 
@@ -55,7 +54,6 @@ export default function CreatePost() {
                             value={values.content}
                             onChange={handleChange}
                             placeholder="Write your post content"
-                            required
                         ></textarea>
                     </div>
 

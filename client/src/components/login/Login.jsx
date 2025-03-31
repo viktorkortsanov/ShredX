@@ -31,7 +31,7 @@ export default function Login() {
 
         {error && <p className="error">{error}</p>}
 
-        <div className="input-group">
+        <div className="input-group-login">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -43,7 +43,7 @@ export default function Login() {
           />
         </div>
 
-        <div className="input-group">
+        <div className="input-group-login">
           <label htmlFor="password">Password</label>
           <input
             type="password"

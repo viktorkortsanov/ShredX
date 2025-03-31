@@ -45,19 +45,19 @@
     color: #333;
 }
 
-.input-group {
+.input-group-regiser {
     margin-bottom: 20px;
     text-align: left;
 }
 
-.input-group label {
+.input-group-regiser label {
     display: block;
     font-size: 14px;
     color: #666;
     margin-bottom: 5px;
 }
 
-.input-group input {
+.input-group-regiser input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -66,7 +66,7 @@
     box-sizing: border-box;
 }
 
-.input-group input:focus {
+.input-group-regiser input:focus {
     border-color: #006CFA;
     outline: none;
 }

@@ -48,7 +48,7 @@ export default function Register() {
 
                 {error && <p className="error">{error}</p>}
 
-                <div className="input-group">
+                <div className="input-group-regiser">
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -60,7 +60,7 @@ export default function Register() {
                     />
                 </div>
 
-                <div className="input-group">
+                <div className="input-group-regiser">
                     <label htmlFor="email">Email</label>
                     <input
                         type="email"
@@ -72,7 +72,7 @@ export default function Register() {
                     />
                 </div>
 
-                <div className="input-group">
+                <div className="input-group-regiser">
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -84,7 +84,7 @@ export default function Register() {
                     />
                 </div>
 
-                <div className="input-group">
+                <div className="input-group-regiser">
                     <label htmlFor="rePassword">Confirm Password</label>
                     <input
                         type="password"
