@@ -1,43 +1,114 @@
-.news-ticker-container {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-    background-color: black;
-    color: white;
-    font-size: 18px;
-    padding: 10px 0;
+.news-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background-color: #000;
+}
+
+.news-ticker {
+  display: flex;
+  animation: scroll 40s linear infinite;
+  gap: 0;
+}
+
+.news-item {
+  min-width: 300px;
+  height: 150px;
+  position: relative;
+  margin: 0 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.news-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4);
+  transition: transform 0.3s ease;
+}
+
+.news-item:hover .news-background-image {
+  transform: scale(1.05);
+}
+
+.news-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  color: #fff;
+  z-index: 2;
+  text-align: left;
+  backdrop-filter: blur(2px);
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+}
+
+.news-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.3;
+}
+
+.news-source {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 5px;
+  display: block;
+}
+
+.news-link {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.news-loading, .news-error {
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.news-error {
+  color: #ff6b6b;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
   }
-  
-  .news-ticker {
-    display: flex;
-    animation: scrollNews 20s linear infinite;
+  100% {
+    transform: translateX(-50%);
   }
-  
+}
+
+@media (max-width: 768px) {
   .news-item {
-    margin-right: 50px;
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
+    min-width: 250px;
+    height: 120px;
   }
   
-  .news-item img {
-    width: 50px;
-    height: 50px;
-    margin-right: 15px;
-    object-fit: cover;
+  .news-title {
+    font-size: 14px;
   }
   
-  .news-item a {
-    text-decoration: none;
-    color: white;
+  .news-source {
+    font-size: 10px;
   }
-  
-  @keyframes scrollNews {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-  
+}
