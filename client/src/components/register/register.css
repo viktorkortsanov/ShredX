@@ -10,7 +10,8 @@
     background-blend-mode: multiply;
     background-color: rgba(0, 0, 0, 0.5);
     margin-top: 70px;
-    overflow-x: hidden; /* Добавено за да скрие съдържанието извън контейнера */
+    overflow-x: hidden;
+    /* Добавено за да скрие съдържанието извън контейнера */
 }
 
 .register-form {
@@ -21,7 +22,8 @@
     width: 100%;
     max-width: 400px;
     text-align: center;
-    animation: slideFromRight 0.8s ease-out forwards; /* Добавена анимация */
+    animation: slideFromRight 0.8s ease-out forwards;
+    /* Добавена анимация */
 }
 
 /* Дефиниране на анимацията */
@@ -30,6 +32,7 @@
         transform: translateX(100%);
         opacity: 0;
     }
+
     100% {
         transform: translateX(0);
         opacity: 1;
@@ -88,6 +91,10 @@
     color: red;
     font-size: 14px;
     margin-top: 10px;
+}
+
+.login-link a {
+    text-decoration: none;
 }
 
 

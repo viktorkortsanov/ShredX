@@ -5,7 +5,7 @@ const insightsData = [
     {
         trainer: {
             name: "Viktor Kortsanov",
-            image: "/images/viktork.jpg",
+            image: "/images/viko.jpg",
             socials: {
                 facebook: "https://www.facebook.com/profile.php?id=100015649865699",
                 instagram: "https://www.instagram.com/v_kortsanov",

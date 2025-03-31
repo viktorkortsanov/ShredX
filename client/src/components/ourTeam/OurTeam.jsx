@@ -4,7 +4,7 @@ import './ourteam.css'
 const trainers = [
     {
         name: "Viktor Kortsanov",
-        image: "/images/viktork.jpg",
+        image: "/images/viko.jpg",
         description: "Viktor Kortsanov is the ShredX team leader, young and motivated, always ready to help others achieve their fitness goals with enthusiasm and dedication.",
         socials: {
             facebook: "https://www.facebook.com/profile.php?id=100015649865699",

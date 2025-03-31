@@ -80,6 +80,10 @@
     transition: background-color 0.3s ease;
 }
 
+.register-link a{
+    text-decoration: none;
+}
+
 .submit-btn:hover {
     background-color: #004196;
 }
