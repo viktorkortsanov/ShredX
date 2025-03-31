@@ -144,7 +144,7 @@ export default function UserManagement() {
                                     <div key={user._id} className="user-row">
                                         <div className="table-cell user-avatar-cell">
                                             <div className="user-avatar">
-                                                <div className="user-avatar">
+                                                <div className="user-avatar-admin">
                                                     {user.profileImage ? (
                                                         <img src={user.profileImage} alt="User Avatar" className="user-image" />
                                                     ) : (

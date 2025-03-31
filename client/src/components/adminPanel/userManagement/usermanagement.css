@@ -232,7 +232,7 @@
     justify-content: center;
 }
 
-.user-image {
+.user-image-admin {
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -241,9 +241,9 @@
     justify-content: center;
 }
 
-.user-avatar {
-    width: 45px;
-    height: 45px;
+.user-avatar-admin {
+    width: 47px;
+    height: 47px;
     border-radius: 50%;
     background: linear-gradient(135deg, #3C8CE7, #00EAFF);
     display: flex;
