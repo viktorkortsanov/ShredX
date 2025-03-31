@@ -123,11 +123,11 @@ const userApi = {
                 },
                 body: JSON.stringify({ profileImageUrl: imageUrl }),
             });
-    
+
             if (!response.ok) {
                 throw new Error('Неуспешно обновяване на снимката');
             }
-    
+
             const result = await response.json();
             return result;
         } catch (error) {
@@ -137,19 +137,9 @@ const userApi = {
     },
 
     getProfileImage: async (userId) => {
-        try {
-            const response = await fetch(`${baseUrl}/users/${userId}/profileImage`);
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-    
-            const result = await response.json();    
-            return result;
-        } catch (error) {
-            console.error('Error getting profile image:', error);
-            throw error;
-        }
+        const response = await fetch(`${baseUrl}/users/${userId}/profileImage`);
+        const result = await response.json();
+        return result;
     }
 
 };

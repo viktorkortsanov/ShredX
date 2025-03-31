@@ -20,14 +20,11 @@ export default function NavBar() {
 
     useEffect(() => {
         const getUserImage = async () => {
-            try {
-                const response = await userApi.getProfileImage(userId);
-                setUserProfileImg(response?.profileImage);
-            } catch (error) {
-                console.error("Failed to fetch user image:", error);
-            }
+                if (userId) {
+                    const response = await userApi.getProfileImage(userId);
+                    setUserProfileImg(response?.profileImage);
+                }
         };
-    
         getUserImage();
     }, [userId]);
 
