@@ -11,6 +11,11 @@
     z-index: 1;
 }
 
+.title-word {
+    font-size: 100px;
+    color: #006CFA;
+}
+
 .video-background {
     position: absolute;
     top: 0;

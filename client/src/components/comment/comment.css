@@ -1,96 +1,169 @@
 .comment-card {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
     position: relative;
+}
+
+.comment-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
 }
 
 .comment-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .user-info {
+    margin: initial !important;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
-.comments-section {
+.user-logo {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.username {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+}
+
+.comment-date {
+    text-align: right;
     width: 100%;
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
 }
 
-.comments-list {
+.comment-content {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    padding: 5px 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.comment-actions {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-h3 {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
+.action-btn {
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #3498db, #1abc9c);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.2);
+}
+
+.action-btn:hover {
+    background: linear-gradient(135deg, #2980b9, #16a085);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    transform: translateY(-1px);
+}
+
+.action-btn.edit {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.action-btn.delete {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
 .action-btn.like {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: #006CFA;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.action-btn.like:hover {
-    background: #004196;
+    background: linear-gradient(135deg, #3498db, #1abc9c);
 }
 
 .comment-likes {
-    position: absolute;
-    bottom: 8px;
-    right: 10px;
     display: flex;
     align-items: center;
     gap: 5px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
 }
 
 .like-img {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
+    opacity: 0.8;
 }
 
 .like-count {
-    font-size: 14px;
-    font-weight: bold;
-    color: #555;
+    font-weight: 500;
 }
 
-.edit {
-    background-color: #006CFA;
-    color: white;
+/* Медиа заявки за отзивчивост */
+@media (max-width: 768px) {
+    .comment-card {
+        padding: 12px;
+    }
+
+    .comment-content {
+        font-size: 13px;
+    }
+
+    .action-btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
 }
 
-.edit:hover {
-    background-color: #004196;
-}
+@media (max-width: 480px) {
+    .user-logo {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        min-height: 30px;
+    }
 
-.delete {
-    background-color: #FF4D4D;
-    color: white;
-}
+    .username {
+        font-size: 14px;
+    }
 
-.delete:hover {
-    background-color: #CC0000;
+    .comment-date {
+        font-size: 11px;
+    }
+
+    .comment-content {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .action-btn {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
 }

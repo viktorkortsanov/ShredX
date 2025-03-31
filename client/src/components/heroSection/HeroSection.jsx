@@ -17,7 +17,7 @@ export default function HeroSection() {
             </div>
             <div className="hero-overlay"></div>
             <div className="hero-content">
-                <h1 className='hero-title'>Welcome to ShredX</h1>
+                <h1 className='hero-title'>Welcome to Shred<strong className='title-word'>X</strong></h1>
                 <p>The Ultimate Fitness App for Workouts and Community Support.</p>
                 <Link to="/register" className="cta-btn">GET STARTED</Link>
             </div>

@@ -2,29 +2,93 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
-    background-image: url(https://i.pinimg.com/736x/2a/a7/8a/2aa78a2c8fbe91b37bfed0fbb32fae82.jpg);
+    min-height: 100vh;
+    background-image: url('/images/fitnes-forum-woman.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-blend-mode: multiply;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    position: relative;
+}
+
+.create-post-wrapper {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+}
+
+.back-link-create-post {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    width: fit-content;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 16px;
+    border-radius: 30px;
+}
+
+.back-link-create-post:hover {
+    color: white;
+    transform: translateX(-5px);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.back-arrow {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.back-link-create-post:hover .back-arrow {
+    transform: translateX(-5px);
 }
 
 .create-post-form {
-    background-color: #ffffff;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    color: white;
     width: 100%;
-    max-width: 400px;
-    text-align: center;
-    margin-top: 3em;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .create-post-form h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+    color: white;
+    position: relative;
+    padding-bottom: 15px;
+    font-weight: 600;
+}
+
+.create-post-form h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(135deg, #3498db, #1abc9c);
+    border-radius: 3px;
 }
 
 .input-group {
@@ -35,68 +99,153 @@
 .input-group label {
     display: block;
     font-size: 14px;
-    color: #666;
-    margin-bottom: 5px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
 .input-group input,
 .input-group textarea {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
     box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
 .input-group textarea {
-    height: 150px;
+    height: 180px;
     resize: vertical;
+    line-height: 1.5;
 }
 
 .input-group input:focus,
 .input-group textarea:focus {
-    border-color: #006CFA;
+    border-color: #3498db;
     outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.submit-btn, .cancel-btn {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: a30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
 }
 
 .submit-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #006CFA;
+    background: linear-gradient(135deg, #3498db, #1abc9c);
     color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
 }
 
 .submit-btn:hover {
-    background-color: #004196;
+    background: linear-gradient(135deg, #2980b9, #16a085);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 .error-message {
-    color: red;
+    color: #ff6b6b;
     font-size: 14px;
-    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: rgba(231, 76, 60, 0.2);
+    border-radius: 5px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .create-post-form {
+        padding: 25px;
+    }
+    
+    .create-post-form h2 {
+        font-size: 24px;
+    }
+    
+    .input-group input,
+    .input-group textarea {
+        padding: 12px;
+    }
+    
+    .submit-btn, .cancel-btn {
+        padding: 12px 18px;
+        font-size: 13px;
+    }
 }
 
 @media (max-width: 480px) {
+    .create-post-wrapper {
+        max-width: 100%;
+    }
+    
     .create-post-form {
         padding: 20px;
     }
     
     .create-post-form h2 {
-        font-size: 20px;
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
     }
     
     .input-group input,
     .input-group textarea {
+        padding: 10px;
         font-size: 14px;
     }
     
+    .input-group textarea {
+        height: 150px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .submit-btn, .cancel-btn {
+        width: 100%;
+        padding: 12px;
+    }
+    
     .submit-btn {
-        font-size: 14px;
+        margin-bottom: 10px;
     }
 }

@@ -4,6 +4,7 @@ import CardContainer from "../cardContainer/CardContainer.jsx";
 import MyCarousel from "../carousel/Carousel.jsx";
 import FitnessInsights from "../FitnessInsights/FitnessInsights.jsx";
 import './mainContent.css';
+import Sponsors from "../sponsors/Sponsors.jsx";
 
 export default function MainContent() {
     const heroRef = useRef(null);
@@ -43,6 +44,7 @@ export default function MainContent() {
                     <HeroSection />
                 </div>
                 <FitnessInsights />
+                <Sponsors />
                 <CardContainer />
                 <MyCarousel />
             </article>
