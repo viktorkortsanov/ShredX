@@ -1,0 +1,43 @@
+{
+    "common": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "delete": "Delete",
+        "back": "Back"
+    },
+    "navigation": {
+        "home": "HOME",
+        "programs": "PROGRAMS",
+        "forum": "FORUM",
+        "profile": "PROFILE",
+        "login": "LOGIN",
+        "register": "REGISTER",
+        "logout": "LOGOUT",
+        "ourTeam": "OUR TEAM",
+        "admin": "ADMIN"
+    },
+    "forum": {
+        "createPost": "Create Post",
+        "postComment": "Post Comment",
+        "editComment": "Edit Comment",
+        "like": "Like",
+        "unlike": "Unlike",
+        "comment": "Comment",
+        "comments": "Comments",
+        "noComments": "No comments yet"
+    },
+    "forms": {
+        "title": "Title",
+        "content": "Content",
+        "enterTitle": "Enter post title",
+        "writeContent": "Write your post content",
+        "shareThoughts": "Share your thoughts...",
+        "required": "This field is required"
+    },
+    "hero_section": {
+        "title_1_text": "Welcome to",
+        "title_2_text": "The Ultimate Fitness App for Workouts and Community Support.",
+        "button": "GET STARTED"
+    }
+}

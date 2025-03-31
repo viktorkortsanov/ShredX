@@ -15,6 +15,7 @@ header.scrolled nav {
 }
 
 nav {
+    position: relative;
     width: 100%;
     background-color: rgba(24, 24, 26, 0);
     border-bottom: 1px solid rgba(146, 146, 146, 0);
@@ -23,6 +24,11 @@ nav {
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s ease, border-bottom 0.3s ease, box-shadow 0.3s ease;
+}
+
+.language-switcher {
+    position: absolute;
+    right: 20px;
 }
 
 .nav-links {
@@ -137,8 +143,15 @@ nav a:hover::after {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .user-info-navi {
@@ -298,7 +311,7 @@ body {
     .hamburger-menu {
         display: flex;
     }
-    
+
     .user-icon img {
         width: 30px;
         height: 30px;
@@ -306,7 +319,7 @@ body {
         object-fit: cover;
         margin-right: 1em;
     }
-    
+
     .nav-links {
         position: fixed;
         top: 0;
@@ -334,16 +347,16 @@ body {
         text-align: left;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .user-details-navi {
         color: white;
     }
-    
+
     .nav-links li:last-child {
         border-bottom: none;
     }
 
-    .nav-links a, 
+    .nav-links a,
     .user-profile-trigger {
         display: block;
         padding: 15px 20px;

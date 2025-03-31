@@ -31,10 +31,13 @@ import Contact from "./components/contacts/Contacts.jsx";
 import Analytics from "./components/adminPanel/аnalytics/Analytics.jsx";
 import { AuthProvider } from "./contexts/authContext.jsx";
 import CreateProgram from "./components/adminPanel/createProgram/CreateProgram.jsx";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n.js";
 
 function App() {
   return (
     <>
+      <I18nextProvider i18n={i18n}>
       <Provider store={store}>
 
     <AuthProvider>
@@ -81,7 +84,7 @@ function App() {
         <Footer />
       </AuthProvider>
       </Provider>
-
+      </I18nextProvider>
     </>
   );
 }

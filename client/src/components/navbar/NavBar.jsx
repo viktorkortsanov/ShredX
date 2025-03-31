@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import './navbar.css';
 import { useDispatch, useSelector } from "react-redux";
 import userApi from "../../api/userApi.js";
 import { logout as logoutAction } from "../../store/authSlice.js";
+import LanguageSwitcher from "../../LanguageSwitcher/LanguageSwitcher.jsx";
 
 export default function NavBar() {
+    const { t } = useTranslation();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const user = useSelector((state) => state.auth.user);
     const isAdmin = user?.isAdmin;
@@ -20,10 +23,10 @@ export default function NavBar() {
 
     useEffect(() => {
         const getUserImage = async () => {
-                if (userId) {
-                    const response = await userApi.getProfileImage(userId);
-                    setUserProfileImg(response?.profileImage);
-                }
+            if (userId) {
+                const response = await userApi.getProfileImage(userId);
+                setUserProfileImg(response?.profileImage);
+            }
         };
         getUserImage();
     }, [userId]);
@@ -86,17 +89,17 @@ export default function NavBar() {
                 </div>
 
                 <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
-                    <li><Link to="/" onClick={handleNavLinkClick}>HOME</Link></li>
-                    <li><Link to="/forum" onClick={handleNavLinkClick}>FORUM</Link></li>
-                    <li><Link to="/ourteam" onClick={handleNavLinkClick}>OUR TEAM</Link></li>
+                    <li><Link to="/" onClick={handleNavLinkClick}>{t('navigation.home')}</Link></li>
+                    <li><Link to="/forum" onClick={handleNavLinkClick}>{t('navigation.forum')}</Link></li>
+                    <li><Link to="/ourteam" onClick={handleNavLinkClick}>{t('navigation.ourTeam')}</Link></li>
                     {isAuthenticated ? (
                         <>
-                            <li><Link to="/programs" onClick={handleNavLinkClick}>PROGRAMS</Link></li>
-                            {isAdmin && <li><Link to="/adminpanel" onClick={handleNavLinkClick}>ADMIN</Link></li>}
+                            <li><Link to="/programs" onClick={handleNavLinkClick}>{t('navigation.programs')}</Link></li>
+                            {isAdmin && <li><Link to="/adminpanel" onClick={handleNavLinkClick}>{t('navigation.admin')}</Link></li>}
                             <li className="user-icon" ref={dropdownRef}>
                                 <div onClick={toggleMenu} className="user-profile-trigger">
                                     <img src={userProfileImg || "/images/null-profile.png"} alt="User Icon" />
-                                    <span className="mobile-only">PROFILE</span>
+                                    <span className="mobile-only">{t('navigation.profile')}</span>
                                 </div>
                                 {isMenuOpen && (
                                     <ul className="dropdown-menu-navi">
@@ -114,13 +117,13 @@ export default function NavBar() {
                                         <li>
                                             <Link to="/profile" onClick={handleNavLinkClick}>
                                                 <img src="../../../public/images/user-icon.svg" alt="Profile Icon" />
-                                                PROFILE
+                                                {t('navigation.profile')}
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/logout" onClick={handleLogout}>
                                                 <img src="../../../public/images/logout.svg" alt="Logout Icon" />
-                                                LOGOUT
+                                                {t('navigation.logout')}
                                             </Link>
                                         </li>
                                     </ul>
@@ -129,11 +132,13 @@ export default function NavBar() {
                         </>
                     ) : (
                         <>
-                            <li><Link to="/login" onClick={handleNavLinkClick}>LOGIN</Link></li>
-                            <li><Link to="/register" onClick={handleNavLinkClick}>REGISTER</Link></li>
+                            <li><Link to="/login" onClick={handleNavLinkClick}>{t('navigation.login')}</Link></li>
+                            <li><Link to="/register" onClick={handleNavLinkClick}>{t('navigation.register')}</Link></li>
                         </>
                     )}
                 </ul>
+
+                <LanguageSwitcher />
             </nav>
         </header>
     );
