@@ -2,13 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import PostItem from '../forum/postItem/PostItem.jsx';
 import ProgramCard from '../programs/program/ProgramCard.jsx';
-import programsData from '../programs/programsData.js';
 import postApi from '../../api/postApi.js';
+import userApi from '../../api/userApi.js';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebase.js';
-
 import './userprofile.css';
-import userApi from '../../api/userApi.js';
+import { useAuth } from '../../contexts/authContext.jsx';
  
 const UserProfile = () => {
     const [userPosts, setUserPosts] = useState([]);
@@ -25,20 +24,26 @@ const UserProfile = () => {
         address: '',
         gender: ''
     });
+    const [userProfileImg, setUserProfileImg] = useState(null);
+    const { getAllPrograms } = useAuth();
  
     const fileInputRef = useRef(null);
     const username = useSelector(state => state.auth.user?.username);
     const email = useSelector(state => state.auth.user?.email);
     const userId = useSelector(state => state.auth.user?._id);
-    const [userProfileImg,setUserProfileImg] = useState(null);
-
+    useEffect(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }, []);
     useEffect(() => {
         async function fetchUserData() {
             try {
                 const userPosts = await postApi.getUserPosts(userId);
-                const likedPosts = await postApi.getLikedPosts(userId);   
+                const likedPosts = await postApi.getLikedPosts(userId);  
                 const response = await userApi.getProfileImage(userId);
-                setUserProfileImg(response.profileImage);           
+                setUserProfileImg(response.profileImage);             
                 setUserPosts(userPosts);
                 setLikedPosts(likedPosts);
                 setProfileData(prevData => ({
@@ -46,21 +51,39 @@ const UserProfile = () => {
                     username: username || '',
                     email: email || ''
                 }));
+                
+                try {
+                    // Получаваме IDs на закупените програми от localStorage
+                    const storedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
+                    
+                    if (storedPrograms.length > 0) {
+                        // Зареждаме всички програми от API
+                        const allPrograms = await getAllPrograms();
+                        
+                        // Филтрираме само закупените програми
+                        const purchasedProgramsData = allPrograms.filter(program =>
+                            storedPrograms.includes(program.id.toString())
+                        );
+                        
+                        setPurchasedPrograms(purchasedProgramsData);
+                    } else {
+                        setPurchasedPrograms([]);
+                    }
+                } catch (error) {
+                    console.error('Error fetching purchased programs:', error);
+                    setPurchasedPrograms([]);
+                }
             } catch (err) {
                 console.error(err);
             }
         }
  
-        const storedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
-        const purchasedProgramsData = programsData.filter(program =>
-            storedPrograms.includes(program.id.toString())
-        );
-        setPurchasedPrograms(purchasedProgramsData);
-        fetchUserData();
-    }, [userId, username, email]);
+        if (userId) {
+            fetchUserData();
+        }
+    }, [userId, username, email, getAllPrograms]);
  
     const handleAvatarClick = () => {
- 
         if (fileInputRef.current) {
             fileInputRef.current.click();
         } else {
@@ -88,7 +111,7 @@ const UserProfile = () => {
             const imageRef = ref(storage, `profileImages/${userId}/${selectedFile.name}`);
             await uploadBytes(imageRef, selectedFile);
             const downloadURL = await getDownloadURL(imageRef);
-    
+
             const response = await fetch(`http://localhost:3030/users/${userId}/updateProfileImage`, {
                 method: 'PUT',
                 headers: {
@@ -98,18 +121,22 @@ const UserProfile = () => {
             });
     
             if (!response.ok) {
-                throw new Error('Неуспешно обновяване на снимката');
+                throw new Error('Failed to update profile image');
             }
     
             const result = await response.json();
             console.log('Profile image updated:', result);
+
+            setUserProfileImg(downloadURL);
+            setSelectedFile(null);
+            alert('Profile image updated successfully!');
         } catch (error) {
             console.error('Error updating profile image:', error);
+            alert('Error updating profile image. Please try again.');
         } finally {
             setIsUploading(false);
         }
     };
-    
  
     const handleProfileChange = (e) => {
         const { name, value } = e.target;
@@ -121,7 +148,7 @@ const UserProfile = () => {
  
     const handleProfileSubmit = async (e) => {
         e.preventDefault();
-          console.log('Saving profile data:', profileData);
+        console.log('Saving profile data:', profileData);
         alert('Profile information updated successfully!');
     };
  
@@ -132,7 +159,7 @@ const UserProfile = () => {
                     <div className="profile-form-container">
                         <h3>Edit Profile Information</h3>
                         <form onSubmit={handleProfileSubmit} className="profile-form">
-                            <div className="form-group-user">
+                            <div className="form-group">
                                 <label htmlFor="username">Username</label>
                                 <input 
                                     type="text" 
@@ -142,7 +169,7 @@ const UserProfile = () => {
                                     onChange={handleProfileChange}
                                 />
                             </div>
-                            <div className="form-group-user">
+                            <div className="form-group">
                                 <label htmlFor="email">Email</label>
                                 <input 
                                     type="email" 
@@ -151,6 +178,42 @@ const UserProfile = () => {
                                     value={profileData.email}
                                     onChange={handleProfileChange}
                                 />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="phone">Phone</label>
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    name="phone" 
+                                    value={profileData.phone}
+                                    onChange={handleProfileChange}
+                                    placeholder="Enter your phone number"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="address">Address</label>
+                                <textarea 
+                                    id="address" 
+                                    name="address" 
+                                    value={profileData.address}
+                                    onChange={handleProfileChange}
+                                    placeholder="Enter your address"
+                                ></textarea>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="gender">Gender</label>
+                                <select 
+                                    id="gender" 
+                                    name="gender" 
+                                    value={profileData.gender}
+                                    onChange={handleProfileChange}
+                                >
+                                    <option value="">Select gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
                             </div>
                             <button type="submit" className="save-profile-btn">Save Changes</button>
                         </form>
@@ -230,14 +293,6 @@ const UserProfile = () => {
                     </div>
  
                     <div className="image-buttons">
-                        {/* <button 
-                            type="button"
-                            className="choose-image-button" 
-                            onClick={handleAvatarClick}
-                        >
-                            Choose Image
-                        </button>
-                         */}
                         {selectedFile && (
                             <button 
                                 className="save-image-button" 
@@ -252,8 +307,25 @@ const UserProfile = () => {
  
                 <div className="user-info">
                     <h2>{username}</h2>
-                    <p className="user-email">{email}</p>
+                    
+                    <div className="user-details">
+                        <div className="user-detail-item">
+                            <span className="detail-label">Email</span>
+                            <span className="detail-value">{email}</span>
+                        </div>
+                        
+                        <div className="user-detail-item">
+                            <span className="detail-label">Username</span>
+                            <span className="detail-value">{username}</span>
+                        </div>
+                        
+                        <div className="user-detail-item">
+                            <span className="detail-label">ID</span>
+                            <span className="detail-value user-id">{userId}</span>
+                        </div>
+                    </div>
                 </div>
+                
                 <div className="profile-stats">
                     <div className="stat-item">
                         <span className="stat-value">{userPosts.length}</span>

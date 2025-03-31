@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/authContext';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../config/firebase';
 
 export const useCreateForm = () => {
   const { onSubmitProgram } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadingImages, setUploadingImages] = useState(false);
   const [errors, setErrors] = useState({});
   const [notification, setNotification] = useState(null);
+
+  const [programImageFile, setProgramImageFile] = useState(null);
+  const [programImagePreview, setProgramImagePreview] = useState(null);
+  const [recipeImageFiles, setRecipeImageFiles] = useState({});
+  const [recipeImagePreviews, setRecipeImagePreviews] = useState({});
 
   const [formData, setFormData] = useState({
     name: '',
@@ -39,27 +47,27 @@ export const useCreateForm = () => {
   useEffect(() => {
     // Проверка дали има грешки и тяхното изчистване при коригиране
   
-const validateField = (name, value) => {
-    let fieldErrors = {};
-    
-    if (name === 'name') {
-      if (value.trim().length < 3) {
-        fieldErrors.name = 'Program name must be at least 3 characters';
+    const validateField = (name, value) => {
+      let fieldErrors = {};
+      
+      if (name === 'name') {
+        if (value.trim().length < 3) {
+          fieldErrors.name = 'Program name must be at least 3 characters';
+        }
+      } else if (name === 'description') {
+        const wordCount = value.trim().split(/\s+/).filter(Boolean).length;
+        if (wordCount < 5) {
+          fieldErrors.description = 'Description must contain at least 5 words';
+        }
+      } else if (name === 'price') {
+        if (isNaN(parseFloat(value.replace(',', '.')))) {
+          fieldErrors.price = 'Price must be a number';
+        }
       }
-    } else if (name === 'description') {
-      const wordCount = value.trim().split(/\s+/).filter(Boolean).length;
-      if (wordCount < 5) {
-        fieldErrors.description = 'Description must contain at least 5 words';
-      }
-    } else if (name === 'price') {
-      if (isNaN(parseFloat(value.replace(',', '.')))) {
-        fieldErrors.price = 'Price must be a number';
-      }
-    }
-    
-    return fieldErrors;
-  };
-    
+      
+      return fieldErrors;
+    };
+      
     // Валидираme всяко поле и актуализирай грешките
     let newErrors = {};
     
@@ -80,6 +88,55 @@ const validateField = (name, value) => {
     
     setErrors(newErrors);
   }, [formData]);
+
+  // Обработка на избор на изображение за програмата
+  const handleProgramImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProgramImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProgramImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Обработка на избор на изображение за рецепта
+  const handleRecipeImageChange = (recipeIndex, e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setRecipeImageFiles(prev => ({
+        ...prev,
+        [recipeIndex]: file
+      }));
+      
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setRecipeImagePreviews(prev => ({
+          ...prev,
+          [recipeIndex]: reader.result
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Функция за качване на изображение във Firebase
+  const uploadImageToFirebase = async (file, folder) => {
+    try {
+      const timestamp = new Date().getTime();
+      const fileName = `${timestamp}_${file.name}`;
+      const storageRef = ref(storage, `${folder}/${fileName}`);
+      
+      await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(storageRef);
+      return downloadURL;
+    } catch (error) {
+      console.error('Error uploading file to Firebase:', error);
+      throw error;
+    }
+  };
 
   const showNotification = (message, type = 'error') => {
     setNotification({ message, type });
@@ -299,8 +356,9 @@ const validateField = (name, value) => {
       }
     }
     
-    if (!formData.image.trim()) {
-      formErrors.image = 'Image URL is required';
+    // Проверяваме дали имаме URL или файл
+    if (!formData.image.trim() && !programImageFile) {
+      formErrors.image = 'Program image is required (URL or file)';
     }
     
     if (!formData.price) {
@@ -361,8 +419,9 @@ const validateField = (name, value) => {
         recipeError.name = 'Recipe name is required';
       }
       
-      if (!recipe.image.trim()) {
-        recipeError.image = 'Recipe image URL is required';
+      // Проверяваме дали имаме URL или файл за рецептата
+      if (!recipe.image.trim() && !recipeImageFiles[recipeIndex]) {
+        recipeError.image = 'Recipe image is required (URL or file)';
       }
       
       if (!recipe.instructions.trim()) {
@@ -409,11 +468,36 @@ const validateField = (name, value) => {
     
     try {
       setIsLoading(true);
+      setUploadingImages(true);
       
-      // Трансформиране на данни ако е необходимо
+      // Подготвяме копие на данните
+      let updatedFormData = { ...formData };
+      
+      // Качваме изображенията във Firebase ако има избрани файлове
+      if (programImageFile) {
+        const programImageUrl = await uploadImageToFirebase(programImageFile, 'program-images');
+        updatedFormData.image = programImageUrl;
+      }
+      
+      // Качваме изображенията на рецептите
+      if (Object.keys(recipeImageFiles).length > 0) {
+        const updatedRecipes = [...formData.recipes];
+        
+        for (const [index, file] of Object.entries(recipeImageFiles)) {
+          const recipeImageUrl = await uploadImageToFirebase(file, 'recipe-images');
+          updatedRecipes[index] = {
+            ...updatedRecipes[index],
+            image: recipeImageUrl
+          };
+        }
+        
+        updatedFormData.recipes = updatedRecipes;
+      }
+      
+      // Трансформиране на данни преди изпращане
       const processedData = {
-        ...formData,
-        price: formData.price.toString()
+        ...updatedFormData,
+        price: updatedFormData.price.toString()
       };
       
       await onSubmitProgram(processedData);
@@ -451,11 +535,18 @@ const validateField = (name, value) => {
         ]
       });
       
+
+      setProgramImageFile(null);
+      setProgramImagePreview(null);
+      setRecipeImageFiles({});
+      setRecipeImagePreviews({});
+      
     } catch (err) {
-      // Показваме нотификация за грешка
+
       showNotification(err.message || 'Error creating program', 'error');
     } finally {
       setIsLoading(false);
+      setUploadingImages(false);
     }
   };
 
@@ -476,7 +567,15 @@ const validateField = (name, value) => {
     removeRecipe,
     handleSubmit,
     isLoading,
+    uploadingImages,
     errors,
-    notification
+    notification,
+
+    programImageFile,
+    programImagePreview,
+    handleProgramImageChange,
+    recipeImageFiles,
+    recipeImagePreviews,
+    handleRecipeImageChange
   };
 };

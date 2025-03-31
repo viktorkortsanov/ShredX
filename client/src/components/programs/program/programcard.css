@@ -1,102 +1,325 @@
-.programs-container {
+.programs-container-main {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
     justify-content: center;
-    margin: 73px;
+    margin: 80px auto;
     padding: 30px;
+    max-width: 1600px;
 }
 
 .program-card {
-    width: 250px;
-    height: 350px;
-    border-radius: 10px;
+    width: 300px;
+    height: 420px;
+    border-radius: 16px;
     background-size: cover;
     background-position: center;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    flex-direction: column;
     cursor: pointer;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translateY(20px);
+    opacity: 0;
 }
 
+.program-card.animate {
+    transform: translateY(0);
+    opacity: 1;
+}
 
-.info-icon {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    z-index: 2;
-    margin: 0; 
+.program-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.program-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 0, 0, 0) 100%);
+    z-index: 1;
+}
+
+.program-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #0077FF, #00C2FF);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 3;
+    box-shadow: 0 4px 10px rgba(0, 108, 250, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 108, 250, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 108, 250, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 108, 250, 0);
+    }
 }
 
 .program-info-card {
-    min-height: 80%;
     width: 100%;
     text-align: center;
-    padding: 10px;
+    padding: 30px 20px 20px;
     color: white;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    position: relative; 
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
 }
+
+.program-card:hover .program-info-card {
+    transform: translateY(-5px);
+}
+
+.program-name {
+    margin-top: 2em;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.program-rating {
+    margin-bottom: 15px;
+}
+
+.star-icon {
+    color: #FFD700;
+    font-size: 16px;
+    margin: 0 2px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.program-price {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 5px 0 15px;
+    color: #00E0FF;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.program-features {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.program-features span {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
 .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin: 10px 0;
-    z-index: 2; 
-    position: relative; 
-}
-.program-description-card {
-    margin-top: 10px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px!important;
+    gap: 15px;
+    margin: 5px 0 15px;
+    z-index: 2;
     position: relative;
-    z-index: 1;
-}
-.program-name {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.program-price {
-    font-size: 18px;
-    margin: 10px 0;
 }
 
 .buy-btn {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #006CFA;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #006CFA, #0056b3);
     color: white;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 30px;
     font-weight: bold;
     text-align: center;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 108, 250, 0.3);
+    border: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
 }
 
 .buy-btn:hover {
-    background-color: #0056b3;
+    background: linear-gradient(135deg, #0077FF, #0062cc);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 108, 250, 0.4);
 }
 
+.info-button-card {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.info-button-card:hover {
+    background-color: rgba(0, 108, 250, 0.3);
+    border-color: #006CFA;
+}
+
+.info-button-card.active {
+    background-color: #006CFA;
+    border-color: white;
+    transform: rotate(180deg);
+}
+
+.info-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.program-description-card {
+    margin-top: 0;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    position: absolute;
+    z-index: 1;
+    left: 20px;
+    right: 20px;
+    bottom: -2  00px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-height: 0;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.program-description-card.show {
+    opacity: 1;
+    bottom: 110px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(30, 30, 35, 0.7);
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: #006CFA;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+
 @media (max-width: 1024px) {
-    .programs-container {
-        margin: 50px;
+    .programs-container-main {
+        margin: 60px auto;
         padding: 20px;
+        gap: 20px;
+    }
+    
+    .program-card {
+        width: 280px;
+        height: 380px;
+    }
+    
+    .program-name {
+        font-size: 22px;
+    }
+    
+    .program-price {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .programs-container-main {
+        margin: 40px auto;
+        padding: 15px;
         gap: 15px;
     }
     
     .program-card {
-        width: 230px;
+        width: 240px;
+        height: 340px;
+    }
+    
+    .program-name {
+        font-size: 20px;
+    }
+    
+    .program-info-card {
+        padding: 20px 15px 15px;
+    }
+    
+    .buy-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .info-button-card {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .info-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .program-features {
+        gap: 10px;
+        font-size: 12px;
+    }
+    
+    .program-description-card.show {
+        bottom: 110px;
+    }
+}
+
+@media (max-width: 600px) {
+    .programs-container-main {
+        margin: 30px auto;
+        padding: 10px;
+        gap: 12px;
+    }
+    
+    .program-card {
+        width: calc(50% - 15px);
+        min-width: 160px;
         height: 320px;
     }
     
@@ -105,85 +328,56 @@
     }
     
     .program-price {
-        font-size: 16px;
+        font-size: 18px;
+        margin: 5px 0 10px;
     }
     
-    .program-description-card {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 768px) {
-    .programs-container {
-        margin: 30px;
-        padding: 15px;
-        gap: 15px;
+    .program-features {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 15px;
     }
     
-    .program-card {
-        width: 210px;
-        height: 300px;
+    .program-features span {
+        font-size: 11px;
+        padding: 4px 8px;
     }
     
-    .info-icon {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .program-info-card {
-        padding: 8px;
+    .buttons {
+        gap: 10px;
     }
     
     .buy-btn {
         padding: 8px 16px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 600px) {
-    .programs-container {
-        margin: 20px;
-        padding: 10px;
-        gap: 12px;
+        font-size: 12px;
     }
     
-    .program-card {
-        width: calc(50% - 15px);
-        min-width: 160px;
-        height: 280px;
-    }
-    
-    .program-name {
-        font-size: 16px;
-    }
-    
-    .program-price {
-        font-size: 15px;
-        margin: 8px 0;
+    .info-button-card {
+        width: 32px;
+        height: 32px;
     }
     
     .program-description-card {
         font-size: 12px;
-        margin-top: 10px;
-        padding: 8px;
+        padding: 10px;
     }
     
-    .buy-btn {
-        padding: 7px 14px;
-        font-size: 13px;
-    }
-    .program-info {
-        padding: 8px;
+    .program-description-card.show {
+        bottom: 110px;
     }
     
-    .buttons {
-        margin: 8px 0;
+    .program-badge {
+        top: 10px;
+        right: 10px;
+        padding: 4px 8px;
+        font-size: 12px;
     }
 }
 
 @media (max-width: 480px) {
-    .programs-container {
-        margin: 10px;
+    .programs-container-main {
+        margin: 20px auto;
         padding: 10px;
         gap: 10px;
     }
@@ -191,64 +385,79 @@
     .program-card {
         width: calc(50% - 10px);
         min-width: 140px;
-        height: 250px;
+        height: 280px;
     }
     
     .program-info-card {
-        padding: 6px;
+        padding: 15px 10px 10px;
     }
     
     .program-name {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    
+    .program-rating {
+        margin-bottom: 8px;
+    }
+    
+    .star-icon {
         font-size: 14px;
     }
     
     .program-price {
-        font-size: 13px;
-        margin: 6px 0;
-    }
-    
-    .program-description-card {
-        font-size: 11px;
-        margin-top: 8px;
-        padding: 6px;
+        font-size: 16px;
+        margin: 5px 0 8px;
     }
     
     .buy-btn {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-    .program-info {
-        padding: 6px;
+        padding: 7px 14px;
+        font-size: 11px;
     }
     
-    .buttons {
-        margin: 6px 0;
+    .info-button-card {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .info-icon {
+        width: 16px;
+        height: 16px;
     }
 }
 
 @media (max-width: 350px) {
-    .programs-container {
-        margin: 5px;
+    .programs-container-main {
+        margin: 10px auto;
         padding: 5px;
         gap: 8px;
     }
     
     .program-card {
         width: 100%;
-        height: 230px;
+        height: 260px;
         margin-bottom: 5px;
     }
     
     .program-name {
-        font-size: 13px;
+        font-size: 15px;
     }
     
-    .program-info-card {
-        max-width: 90%;
+    .program-price {
+        font-size: 15px;
     }
     
-    .info-icon {
-        width: 18px;
-        height: 18px;
+    .program-features {
+        margin-bottom: 10px;
+    }
+    
+    .program-features span {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    .buy-btn {
+        padding: 6px 12px;
+        font-size: 10px;
     }
 }

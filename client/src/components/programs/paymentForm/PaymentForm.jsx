@@ -1,14 +1,50 @@
 import { useState, useEffect } from 'react';
 import useForm from '../../../hooks/useForm.js';
-import programs from '../programsData.js';
+// import programs from '../programsData.js';
 import './PaymentForm.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../../../contexts/authContext.jsx';
 
 const PaymentForm = () => {
+    const { programs, getAllPrograms, initiatePaymentForProgram } = useAuth();
     const { programId } = useParams();
-    const program = programs.find(prog => prog.id.toString() === programId.toString());
+    const [program, setProgram] = useState(null);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const loadProgram = async () => {
+            try {
+                setLoading(true);
+                if (!programs || programs.length === 0) {
+                    const fetchedPrograms = await getAllPrograms();
+                    const foundProgram = fetchedPrograms.find(prog => prog.id.toString() === programId.toString());
+                    if (foundProgram) {
+                        setProgram(foundProgram);
+                    } else {
+                        navigate('/programs');
+                    }
+                } else {
+    
+                    const foundProgram = programs.find(prog => prog.id.toString() === programId.toString());
+                    if (foundProgram) {
+                        setProgram(foundProgram);
+                    } else {
+                        navigate('/programs');
+                    }
+                }
+            } catch (error) {
+                console.error("Error loading program:", error);
+                navigate('/programs');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadProgram();
+    }, [programId, programs, getAllPrograms, navigate]);
+
+    
     const { values, setValues, handleChange, handleSubmit, error, setError } = useForm({
         cardNumber: '',
         expirationDate: '',
@@ -76,6 +112,7 @@ const PaymentForm = () => {
 
             if (formattedValue.length > 0) {
                 if (formattedValue.length <= 2) {
+                    //....
                 } else {
                     formattedValue = `${formattedValue.substring(0, 2)}/${formattedValue.substring(2, 4)}`;
                 }
@@ -99,59 +136,74 @@ const PaymentForm = () => {
     };
 
     const submitPayment = async () => {
-      
+
         if (!values.nameOnCard) {
             setError('Please enter the name on card');
             return;
         }
-
+    
         if (!values.cardNumber || values.cardNumber.replace(/\s/g, '').length < 16) {
             setError('Please enter a valid card number');
             return;
         }
-
+    
         if (!values.expirationDate || values.expirationDate.length < 5) {
             setError('Please enter a valid expiration date (MM/YY)');
             return;
         }
-
+    
         if (!values.cvv || values.cvv.length < 3) {
             setError('Please enter a valid CVV code');
             return;
         }
 
+        const paymentData = {
+            nameOnCard: values.nameOnCard,
+            cardNumber: values.cardNumber.replace(/\s/g, ''),
+            expirationDate: values.expirationDate,
+            cvv: values.cvv,
+            securityCode: values.securityCode,
+            amount: program.price,
+            programName: program.name
+        };
+    
         try {
-  
-            const purchasedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
-            purchasedPrograms.push(programId);
-            localStorage.setItem('purchasedPrograms', JSON.stringify(purchasedPrograms));
 
-            const purchaseDates = JSON.parse(localStorage.getItem('purchaseDates')) || {};
-            purchaseDates[programId] = new Date().toISOString();
-            localStorage.setItem('purchaseDates', JSON.stringify(purchaseDates));
+            const result = await initiatePaymentForProgram(programId, paymentData);
+            
+            if (result && result.success) {
 
-            const response = await fetch(`http://localhost:3030/programs/pay/${programId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify({ programId }),
-            });
-
-            if (response.ok) {
+                const purchasedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
+                if (!purchasedPrograms.includes(programId)) {
+                    purchasedPrograms.push(programId);
+                    localStorage.setItem('purchasedPrograms', JSON.stringify(purchasedPrograms));
+                }
+    
+                const purchaseDates = JSON.parse(localStorage.getItem('purchaseDates')) || {};
+                purchaseDates[programId] = new Date().toISOString();
+                localStorage.setItem('purchaseDates', JSON.stringify(purchaseDates));
+    
                 setIsPaymentSuccessful(true);
-                setTimeout(() => {
-                    navigate('/programs');
-                }, 2000);
+                navigate('/programs');
+
             } else {
-                setError('Payment failed. Please try again.');
+                setError(result?.message || 'Payment failed. Please try again.');
             }
         } catch (err) {
             console.error(err);
-            setError('Error processing payment. Please try again later.');
+            setError(err.message || 'Error processing payment. Please try again later.');
         }
     };
+
+    // Показваме зареждане докато програмата не е готова
+    if (loading) {
+        return <div className="loading">Loading program details...</div>;
+    }
+    
+    // Проверка дали програмата е намерена и заредена
+    if (!program) {
+        return <div className="error">Program not found</div>;
+    }
 
     return (
         <div className="payment-main-container">

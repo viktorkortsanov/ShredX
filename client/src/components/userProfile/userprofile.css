@@ -284,6 +284,7 @@
 }
  
 .posts-list, .programs-list {
+    padding: 3em 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;

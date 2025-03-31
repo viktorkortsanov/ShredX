@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import './createProgram.css';
 import { useCreateForm } from '../../../hooks/useCreateForm';
-import { FaTrash, FaPlus, FaArrowLeft } from 'react-icons/fa';
+import { FaTrash, FaPlus, FaArrowLeft, FaUpload } from 'react-icons/fa';
+import { useEffect } from 'react';
+
 const CreateProgram = () => {
   const {
     formData,
@@ -20,26 +22,24 @@ const CreateProgram = () => {
     removeRecipe,
     handleSubmit,
     isLoading,
+    uploadingImages,
     errors,
-    notification
+    notification,
+    programImageFile,
+    programImagePreview,
+    handleProgramImageChange,
+    recipeImageFiles,
+    recipeImagePreviews,
+    handleRecipeImageChange
   } = useCreateForm();
 
-  const handleCreateProgram = async () => {
-    try{
-      const response = await fetch('http://localhost:3030/programs/create', {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData),
-        credentials: 'include'
-      })
-    }catch(error){
-      console.log(error);
-      
-    }
-  }
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
+  
   return (
     <div className="create-program-container">
       <div className="create-program-header">
@@ -58,7 +58,7 @@ const CreateProgram = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit(handleCreateProgram)} className="create-program-form">
+      <form onSubmit={handleSubmit} className="create-program-form">
         <div className="form-section">
           <h2>Basic Information</h2>
           <div className={`form-group ${errors.name ? 'has-error' : ''}`}>
@@ -89,18 +89,35 @@ const CreateProgram = () => {
           </div>
 
           <div className={`form-group ${errors.image ? 'has-error' : ''}`}>
-            <label htmlFor="image">Image URL</label>
-            <input
-              type="text"
-              id="image"
-              name="image"
-              value={formData.image}
-              onChange={handleInputChange}
-              placeholder="/images/program.jpg"
-              required
-            />
+            <label htmlFor="image">Program Image</label>
+            <div className="file-upload-container">
+              <input
+                type="file"
+                id="program-image-file"
+                onChange={handleProgramImageChange}
+                accept="image/*"
+                className="file-input"
+              />
+              <label htmlFor="program-image-file" className="file-upload-label">
+                <FaUpload /> {programImageFile ? programImageFile.name : 'Choose Image'}
+              </label>
+              
+              <input
+                type="text"
+                id="image"
+                name="image"
+                value={formData.image}
+                onChange={handleInputChange}
+                placeholder="Or enter image URL"
+                className={programImageFile ? 'hidden' : ''}
+              />
+            </div>
             {errors.image && <div className="error-text">{errors.image}</div>}
-            {formData.image && (
+            {programImagePreview ? (
+              <div className="image-preview">
+                <img src={programImagePreview} alt="Program preview" />
+              </div>
+            ) : formData.image && (
               <div className="image-preview">
                 <img src={formData.image} alt="Program preview" />
               </div>
@@ -272,19 +289,36 @@ const CreateProgram = () => {
               </div>
 
               <div className={`form-group ${errors.recipes && errors.recipes[recipeIndex] && errors.recipes[recipeIndex].image ? 'has-error' : ''}`}>
-                <label htmlFor={`recipe-image-${recipeIndex}`}>Image URL</label>
-                <input
-                  type="text"
-                  id={`recipe-image-${recipeIndex}`}
-                  value={recipe.image}
-                  onChange={(e) => handleRecipeChange(recipeIndex, 'image', e.target.value)}
-                  placeholder="/images/smoothie.jpg"
-                  required
-                />
+                <label htmlFor={`recipe-image-${recipeIndex}`}>Recipe Image</label>
+                <div className="file-upload-container">
+                  <input
+                    type="file"
+                    id={`recipe-image-file-${recipeIndex}`}
+                    onChange={(e) => handleRecipeImageChange(recipeIndex, e)}
+                    accept="image/*"
+                    className="file-input"
+                  />
+                  <label htmlFor={`recipe-image-file-${recipeIndex}`} className="file-upload-label">
+                    <FaUpload /> {recipeImageFiles[recipeIndex] ? recipeImageFiles[recipeIndex].name : 'Choose Image'}
+                  </label>
+                  
+                  <input
+                    type="text"
+                    id={`recipe-image-${recipeIndex}`}
+                    value={recipe.image}
+                    onChange={(e) => handleRecipeChange(recipeIndex, 'image', e.target.value)}
+                    placeholder="Or enter image URL"
+                    className={recipeImageFiles[recipeIndex] ? 'hidden' : ''}
+                  />
+                </div>
                 {errors.recipes && errors.recipes[recipeIndex] && errors.recipes[recipeIndex].image && (
                   <div className="error-text">{errors.recipes[recipeIndex].image}</div>
                 )}
-                {recipe.image && (
+                {recipeImagePreviews[recipeIndex] ? (
+                  <div className="image-preview small">
+                    <img src={recipeImagePreviews[recipeIndex]} alt="Recipe preview" />
+                  </div>
+                ) : recipe.image && (
                   <div className="image-preview small">
                     <img src={recipe.image} alt="Recipe preview" />
                   </div>
@@ -406,9 +440,9 @@ const CreateProgram = () => {
           <button 
             type="submit" 
             className="submit-btn"
-            disabled={isLoading}
+            disabled={isLoading || uploadingImages}
           >
-            {isLoading ? 'Creating...' : 'Create Program'}
+            {isLoading || uploadingImages ? 'Creating...' : 'Create Program'}
           </button>
           <Link to="/adminpanel" className="cancel-btn">
             Cancel

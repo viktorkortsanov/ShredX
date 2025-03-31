@@ -1,12 +1,57 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import programs from '../programsData.js';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../contexts/authContext.jsx';
 import './programdetails.css';
 
 const ProgramDetails = () => {
     const { programId } = useParams();
-    const program = programs.find((prog) => prog.id.toString() === programId);
+    const { programs, getAllPrograms } = useAuth();
+    const [program, setProgram] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('schedule');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const loadProgram = async () => {
+            try {
+                setLoading(true);
+                if (!programs || programs.length === 0) {
+                    const fetchedPrograms = await getAllPrograms();
+                    const foundProgram = fetchedPrograms.find(prog => prog.id.toString() === programId.toString());
+                    if (foundProgram) {
+                        setProgram(foundProgram);
+                    } else {
+                        navigate('/programs');
+                    }
+                } else {
+                    const foundProgram = programs.find(prog => prog.id.toString() === programId.toString());
+                    if (foundProgram) {
+                        setProgram(foundProgram);
+                    } else {
+                        navigate('/programs');
+                    }
+                }
+            } catch (error) {
+                console.error("Error loading program:", error);
+                navigate('/programs');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadProgram();
+    }, [programId, programs, getAllPrograms, navigate]);
+
+    if (loading) {
+        return (
+            <div className="program-loading">
+                <div className="container">
+                    <h1>Loading Program...</h1>
+                    <div className="loading-spinner"></div>
+                </div>
+            </div>
+        );
+    }
 
     if (!program) {
         return (
@@ -32,7 +77,7 @@ const ProgramDetails = () => {
         <div className="program-details-page">
             <div className="program-header" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${program.background || '/images/fitness-bg.jpg'})`}}>
                 <div className="container-hero">
-                    <div className="program-badge" style={{backgroundColor: difficulty.color}}>
+                    <div className="program-badge-details" style={{backgroundColor: difficulty.color}}>
                         {difficulty.label}
                     </div>
                     <h1 className="program-title">{program.name}</h1>

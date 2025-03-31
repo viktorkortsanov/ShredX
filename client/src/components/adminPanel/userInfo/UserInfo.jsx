@@ -1,12 +1,13 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import userApi from "../../../api/userApi";
 import { useParams } from "react-router-dom";
 import ProgramCard from "../../programs/program/ProgramCard.jsx";
 import postApi from "../../../api/postApi";
-import programsData from "../../programs/programsData";
 import PostItem from "../../forum/postItem/PostItem";
 import { Link } from "react-router-dom";
 import './userinfo.css';
+import { useAuth } from "../../../contexts/authContext";
 
 export default function UserInfo() {
     const { userId } = useParams();
@@ -14,7 +15,16 @@ export default function UserInfo() {
     const [likedPosts, setLikedPosts] = useState([]);
     const [userPosts, setUserPosts] = useState([]);
     const [purchasedProgramIds, setPurchasedProgramIds] = useState([]);
+    const [purchasedPrograms, setPurchasedPrograms] = useState([]);
     const [activeTab, setActiveTab] = useState('posts');
+    const { getAllPrograms } = useAuth();
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, []);
 
     useEffect(() => {
         async function getUserInfo() {
@@ -24,22 +34,34 @@ export default function UserInfo() {
                 const likedPosts = await postApi.getLikedPosts(userId);
                 const purchasedIds = await userApi.getPurchasedPrograms(userId);
                 const purchasedIdsData = await purchasedIds.json();
-                setUser({ id: userInfo._id, username: userInfo.username, email: userInfo.email, profileImage: userInfo.profileImage});
+                
+                setUser({ 
+                    id: userInfo._id, 
+                    username: userInfo.username, 
+                    email: userInfo.email, 
+                    profileImage: userInfo.profileImage
+                });
                 
                 setLikedPosts(likedPosts);
                 setUserPosts(userPosts);
                 setPurchasedProgramIds(purchasedIdsData);
 
+                // Зареждане на програмите от API вместо от мокнати данни
+                if (purchasedIdsData.length > 0) {
+                    const allPrograms = await getAllPrograms();
+                    const userPrograms = allPrograms.filter(program => 
+                        purchasedIdsData.includes(program.id.toString())
+                    );
+                    setPurchasedPrograms(userPrograms);
+                } else {
+                    setPurchasedPrograms([]);
+                }
             } catch (error) {
                 console.log(error);
             }
         }
         getUserInfo();
-    }, [userId]);
-
-    const purchasedPrograms = programsData.filter(program =>
-        purchasedProgramIds.includes(program.id.toString())
-    );
+    }, [userId, getAllPrograms]);
 
     const renderTabContent = () => {
         switch (activeTab) {

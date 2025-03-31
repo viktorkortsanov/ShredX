@@ -77,7 +77,7 @@
     line-height: 1.6;
 }
 
-.program-badge {
+.program-badge-details {
     display: inline-block;
     padding: 6px 16px;
     border-radius: 20px;
@@ -85,7 +85,9 @@
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 20px;
+    top: 70px;
+    left: 700px;
+    position: absolute;
 }
 
 .program-meta {

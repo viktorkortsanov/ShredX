@@ -1,12 +1,14 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import { 
     LineChart, Line, BarChart, Bar, PieChart, Pie, AreaChart, Area,
     XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
     Cell, RadialBarChart, RadialBar
 } from 'recharts';
-import './Analytics.css';
+import './analytics.css';
 import userApi from "../../../api/userApi.js"; 
 import postApi from "../../../api/postApi.js";
+import programApi from "../../../api/programApi.js"; 
 
 const Analytics = () => {
     const [timeRange, setTimeRange] = useState('week');
@@ -28,6 +30,7 @@ const Analytics = () => {
                 
                 const users = await userApi.getAll();
                 const posts = await postApi.getAll();
+                const programs = await programApi.getAllPrograms(); 
                 
                 setUsersCount(users.length);
                 setPostsCount(posts.length);
@@ -35,12 +38,11 @@ const Analytics = () => {
                 const storedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
                 setProgramSales(storedPrograms.length);
                 
-                generateDataFromRealStats(users.length, posts.length, storedPrograms.length, timeRange);
+                generateDataFromRealStats(users, posts, storedPrograms, programs, timeRange);
                 
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching analytics data:", error);
-                generateMockData(timeRange);
                 setLoading(false);
             }
         }
@@ -48,60 +50,117 @@ const Analytics = () => {
         fetchData();
     }, [timeRange]);
     
-    const generateDataFromRealStats = (usersNum, postsNum, salesNum, range) => {
-        const userActivity = generateTimeSeriesData(range, Math.max(1, Math.floor(usersNum * 0.2)), usersNum);
-        setUsersData(userActivity);
+    const generateDataFromRealStats = (users, posts, storedPrograms, allPrograms, range) => {
+        // Подготвяме данни за активност на потребители
+        const userRegistrationDates = users.map(user => new Date(user.createdAt || Date.now()));
+        const userActivityData = prepareTimeSeriesData(userRegistrationDates, range, 'users');
+        setUsersData(userActivityData);
         
-        const postActivity = [
-            { name: 'Program A', value: Math.max(1, Math.floor(postsNum * 0.3)) },
-            { name: 'Program B', value: Math.max(1, Math.floor(postsNum * 0.25)) },
-            { name: 'Program C', value: Math.max(1, Math.floor(postsNum * 0.15)) },
-            { name: 'Program D', value: Math.max(1, Math.floor(postsNum * 0.2)) },
-            { name: 'Program E', value: Math.max(1, Math.floor(postsNum * 0.1)) },
+        // Подготвяме данни за популярност на програмите
+        const programStats = populateProgramStats(storedPrograms, allPrograms);
+        
+        // Ако няма данни за програмите, използваме мокнати данни
+        if (programStats.length === 0 || programStats.every(item => item.value === 0)) {
+            const mockProgramData = [
+                { name: 'Push, Pull, Legs', value: 35 },
+                { name: 'Upper Lower', value: 25 },
+                { name: 'Full Body', value: 20 },
+                { name: 'Bro Split', value: 15 },
+                { name: 'Arnold Split', value: 5 }
+            ];
+            setPostsData(mockProgramData);
+        } else {
+            setPostsData(programStats);
+        }
+        
+        // Подготвяме данни за продажби на програми
+        const purchaseDates = JSON.parse(localStorage.getItem('purchaseDates')) || {};
+        
+        const programPurchaseDates = storedPrograms.map(programId => {
+            const purchaseDate = purchaseDates[programId] || new Date().toISOString();
+            return new Date(purchaseDate);
+        });
+        
+        const programSalesData = prepareTimeSeriesData(programPurchaseDates, range, 'posts');
+        setProgramsData(programSalesData);
+        
+        // Подготвяме данни за ефективност на платформата
+        const performanceMetrics = calculatePerformance(users, posts, storedPrograms, allPrograms);
+        setPerformanceData(performanceMetrics);
+    };
+
+    // Функция за изчисляване на статистика за програмите
+    const populateProgramStats = (purchasedPrograms, allPrograms) => {
+        // Броим колко пъти е закупена всяка програма
+        const programCounts = {};
+        
+        purchasedPrograms.forEach(programId => {
+            programCounts[programId] = (programCounts[programId] || 0) + 1;
+        });
+        
+        // Преобразуваме в масив за диаграмата
+        const result = allPrograms.map(program => {
+            const programId = program.id ? program.id.toString() : '';
+            return {
+                name: program.name || 'Unnamed Program',
+                value: programCounts[programId] || 0
+            };
+        });
+        
+        // Ако нямаме програми със закупувания, показваме всички с 0
+        if (result.every(item => item.value === 0) && result.length > 0) {
+            return result;
+        }
+        
+        // Филтрираме и сортираме само програмите, които имат поне една покупка
+        const filteredResult = result.filter(item => item.value > 0);
+        return filteredResult.length > 0 ? filteredResult.sort((a, b) => b.value - a.value) : result;
+    };
+
+    // Изчисляване на ефективност на платформата
+    const calculatePerformance = (users, posts, purchasedPrograms, allPrograms) => {
+        const totalUsers = users.length;
+        const totalPosts = posts.length;
+        const totalPurchases = purchasedPrograms.length;
+        const totalPrograms = allPrograms.length;
+        
+        // Потребителска активност: съотношение постове/потребители
+        const userEngagementPercentage = totalUsers > 0 
+            ? Math.min(95, Math.round((totalPosts / totalUsers) * 100))
+            : 0;
+        
+        // Продажба на програми: съотношение продажби/програми
+        let programAdoptionPercentage = 0;
+        if (totalUsers > 0 && totalPrograms > 0) {
+            // Максимално възможни продажби биха били, ако всеки потребител купи всяка програма
+            const maxPossibleSales = totalUsers * totalPrograms;
+            programAdoptionPercentage = Math.min(95, Math.round((totalPurchases / maxPossibleSales) * 100 * 5));
+        }
+        
+        // Активност на форума: колко от постовете имат коментари
+        const forumActivityPercentage = totalPosts > 0
+            ? Math.min(95, Math.round((posts.filter(p => p.comments && p.comments.length > 0).length / totalPosts) * 100) || 50)
+            : 0;
+        
+        // Общностна метрика: средно от всички метрики
+        const communityScore = Math.min(95, Math.round(
+            (userEngagementPercentage + programAdoptionPercentage + forumActivityPercentage) / 3
+        ));
+        
+        return [
+            { name: 'Programs', value: programAdoptionPercentage || 40, fill: '#8884d8' },
+            { name: 'Forum', value: forumActivityPercentage || 30, fill: '#83a6ed' },
+            { name: 'Users', value: userEngagementPercentage || 50, fill: '#8dd1e1' },
+            { name: 'Community', value: communityScore || 40, fill: '#82ca9d' },
         ];
-        setPostsData(postActivity);
-        
-        const programSales = generateTimeSeriesData(range, 0, salesNum);
-        setProgramsData(programSales);
-        
-        const userEngagement = Math.min(95, Math.floor((postsNum / Math.max(1, usersNum)) * 100));
-        const performance = [
-            { name: 'Programs', value: salesNum > 0 ? 85 : 40, fill: '#8884d8' },
-            { name: 'Forum', value: postsNum > 0 ? userEngagement : 30, fill: '#83a6ed' },
-            { name: 'Users', value: usersNum > 10 ? 78 : usersNum * 5, fill: '#8dd1e1' },
-            { name: 'Community', value: (usersNum + postsNum) > 20 ? 92 : 50, fill: '#82ca9d' },
-        ];
-        setPerformanceData(performance);
     };
     
-    const generateMockData = (range) => {
-        const userActivity = generateTimeSeriesData(range, 20, 150);
-        setUsersData(userActivity);
-        
-        const postActivity = [
-            { name: 'Program A', value: 35 },
-            { name: 'Program B', value: 45 },
-            { name: 'Program C', value: 15 },
-            { name: 'Program D', value: 25 },
-            { name: 'Program E', value: 20 },
-        ];
-        setPostsData(postActivity);
-        
-        const programSales = generateTimeSeriesData(range, 5, 30);
-        setProgramsData(programSales);
-        
-        const performance = [
-            { name: 'Programs', value: 85, fill: '#8884d8' },
-            { name: 'Forum', value: 65, fill: '#83a6ed' },
-            { name: 'Users', value: 78, fill: '#8dd1e1' },
-            { name: 'Community', value: 92, fill: '#82ca9d' },
-        ];
-        setPerformanceData(performance);
-    };
+    const prepareTimeSeriesData = (dates, range, dataKey) => {
     
-    const generateTimeSeriesData = (range, min, max) => {
+        const today = new Date();
         let days = 7;
         let increment = 1;
+        let formatType = 'day'; 
         
         switch(range) {
             case 'month':
@@ -110,34 +169,96 @@ const Analytics = () => {
             case 'quarter':
                 days = 90;
                 increment = 7;
+                formatType = 'week';
                 break;
             case 'year':
                 days = 12;
+                formatType = 'month';
                 break;
             default: // week
                 days = 7;
+                break;
         }
         
-        const data = [];
-        const today = new Date();
+        // Създаваме обект с ключове по дати и нулеви стойности за всички дати в диапазона
+        const dataByDate = {};
         
         for (let i = 0; i < days; i += increment) {
-            const date = new Date();
-            date.setDate(today.getDate() - (days - i));
+            let date = new Date();
             
-            const formattedDate = range === 'year' 
-                ? new Date(today.getFullYear(), i, 1).toLocaleString('en', { month: 'short' })
-                : date.toLocaleString('en', { weekday: 'short', day: '2-digit' });
-            
-            data.push({
-                name: formattedDate,
-                value: Math.floor(Math.random() * (max - min + 1)) + min,
-                users: Math.floor(Math.random() * (max - min + 1)) + min,
-                posts: Math.floor(Math.random() * (max/2 - min + 1)) + min,
-            });
+            if (formatType === 'month') {
+                //  годишен изглед
+                date = new Date(today.getFullYear(), today.getMonth() - (days - i - 1), 1);
+                const formattedDate = date.toLocaleString('en', { month: 'short' });
+                dataByDate[formattedDate] = {
+                    name: formattedDate,
+                    users: 0,
+                    posts: 0,
+                    value: 0,
+                    date: new Date(date) // Запазваме датата за сортиране
+                };
+            } else if (formatType === 'week') {
+                // тримесечен изглед
+                date.setDate(today.getDate() - (days - i));
+                const weekStart = new Date(date);
+                weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+                const weekEnd = new Date(weekStart);
+                weekEnd.setDate(weekStart.getDate() + 6);
+                
+                const formattedDate = `${weekStart.toLocaleString('en', { month: 'short', day: '2-digit' })} - ${weekEnd.toLocaleString('en', { month: 'short', day: '2-digit' })}`;
+                dataByDate[formattedDate] = {
+                    name: formattedDate,
+                    users: 0,
+                    posts: 0,
+                    value: 0,
+                    date: new Date(date) 
+                };
+            } else {
+                // месечен изглед
+                date.setDate(today.getDate() - (days - i - 1));
+                const formattedDate = date.toLocaleString('en', { weekday: 'short', day: '2-digit' });
+                dataByDate[formattedDate] = {
+                    name: formattedDate,
+                    users: 0,
+                    posts: 0,
+                    value: 0,
+                    date: new Date(date)
+                };
+            }
         }
         
-        return data;
+        // Попълваме данните според реалните дати
+        dates.forEach(date => {
+            let formattedDate;
+            
+            if (formatType === 'month') {
+                formattedDate = date.toLocaleString('en', { month: 'short' });
+            } else if (formatType === 'week') {
+                const weekStart = new Date(date);
+                weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+                const weekEnd = new Date(weekStart);
+                weekEnd.setDate(weekStart.getDate() + 6);
+                
+                formattedDate = `${weekStart.toLocaleString('en', { month: 'short', day: '2-digit' })} - ${weekEnd.toLocaleString('en', { month: 'short', day: '2-digit' })}`;
+            } else {
+                formattedDate = date.toLocaleString('en', { weekday: 'short', day: '2-digit' });
+            }
+            
+            // Проверяваме дали датата е в нашия диапазон
+            if (dataByDate[formattedDate]) {
+                dataByDate[formattedDate][dataKey] += 1;
+                dataByDate[formattedDate].value += 1;
+            }
+        });
+        
+        // Преобразуваме обекта в масив и сортираме по дата
+        const sortedData = Object.values(dataByDate).sort((a, b) => a.date - b.date);
+        
+        // Премахваме допълнителното поле date, използвано само за сортиране
+        return sortedData.map(item => {
+            const { date, ...rest } = item;
+            return rest;
+        });
     };
     
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
@@ -181,6 +302,7 @@ const Analytics = () => {
                 </div>
             ) : (
                 <div className="analytics-grid">
+                    {/* потребителска активност */}
                     <div className="analytics-card user-activity">
                         <h2>User Activity</h2>
                         <p className="card-description">Track daily active users over time</p>
@@ -235,6 +357,7 @@ const Analytics = () => {
                         </div>
                     </div>
                     
+                    {/* популярни програми */}
                     <div className="analytics-card popular-programs">
                         <h2>Popular Programs</h2>
                         <p className="card-description">Distribution of program popularity</p>
@@ -276,6 +399,7 @@ const Analytics = () => {
                         </div>
                     </div>
                     
+                    {/* продажби на програми */}
                     <div className="analytics-card program-sales">
                         <h2>Program Sales</h2>
                         <p className="card-description">Track program sales over time</p>
@@ -320,6 +444,7 @@ const Analytics = () => {
                         </div>
                     </div>
                     
+                    {/* ефективност на платформата */}
                     <div className="analytics-card platform-performance">
                         <h2>Platform Performance</h2>
                         <p className="card-description">Section effectiveness metrics (percentage)</p>
@@ -360,7 +485,7 @@ const Analytics = () => {
                             
                             <div className="chart-summary">
                                 <div className="summary-stat">
-                                    <h3>{performanceData.reduce((acc, item) => acc + item.value, 0) / performanceData.length}%</h3>
+                                    <h3>{Math.round(performanceData.reduce((acc, item) => acc + item.value, 0) / performanceData.length)}%</h3>
                                     <p>Average Performance</p>
                                 </div>
                             </div>
@@ -371,4 +496,5 @@ const Analytics = () => {
         </div>
     );
 };
+
 export default Analytics;
