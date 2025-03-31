@@ -77,7 +77,7 @@ const Contact = () => {
                             type="email"
                             id="email"
                             name="email"
-                            defaultValue={user.email}
+                            defaultValue={user?.email}
                             onChange={handleChange}
                             className="form-input-contact"
                         />
