@@ -28,3 +28,69 @@
     }
 
 }
+/* Стрелка за връщане към началото */
+.scroll-to-top-button {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-10px) scale(1.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-to-top-button .arrow-icon {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.scroll-to-top-button:hover .arrow-icon {
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top-button {
+        width: 45px;
+        height: 45px;
+        bottom: 30px;
+        right: 30px;
+    }
+    
+    .scroll-to-top-button .arrow-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .scroll-to-top-button {
+        width: 40px;
+        height: 40px;
+        bottom: 25px;
+        right: 25px;
+    }
+    
+    .scroll-to-top-button .arrow-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
