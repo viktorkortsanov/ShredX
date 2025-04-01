@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/authContext';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../config/firebase';
+import { useTranslation } from 'react-i18next';
 
 export const useCreateForm = () => {
+  const { t } = useTranslation();
   const { onSubmitProgram } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [uploadingImages, setUploadingImages] = useState(false);
@@ -20,9 +22,11 @@ export const useCreateForm = () => {
     description: '',
     image: '',
     price: '',
+    difficulty: 'beginner',
     days: [
       {
         day: 'Day 1',
+        isRestDay: false,
         exercises: [
           { name: '', sets: 0, reps: 0 }
         ]
@@ -45,30 +49,28 @@ export const useCreateForm = () => {
   });
 
   useEffect(() => {
-    // Проверка дали има грешки и тяхното изчистване при коригиране
   
     const validateField = (name, value) => {
       let fieldErrors = {};
       
       if (name === 'name') {
         if (value.trim().length < 3) {
-          fieldErrors.name = 'Program name must be at least 3 characters';
+          fieldErrors.name = t('validation.program.name.minLength');
         }
       } else if (name === 'description') {
         const wordCount = value.trim().split(/\s+/).filter(Boolean).length;
         if (wordCount < 5) {
-          fieldErrors.description = 'Description must contain at least 5 words';
+          fieldErrors.description = t('validation.program.description.minWords');
         }
       } else if (name === 'price') {
         if (isNaN(parseFloat(value.replace(',', '.')))) {
-          fieldErrors.price = 'Price must be a number';
+          fieldErrors.price = t('validation.program.price.numeric');
         }
       }
       
       return fieldErrors;
     };
-      
-    // Валидираme всяко поле и актуализирай грешките
+
     let newErrors = {};
     
     if (formData.name) {
@@ -87,9 +89,8 @@ export const useCreateForm = () => {
     }
     
     setErrors(newErrors);
-  }, [formData]);
+  }, [formData, t]);
 
-  // Обработка на избор на изображение за програмата
   const handleProgramImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -102,7 +103,6 @@ export const useCreateForm = () => {
     }
   };
 
-  // Обработка на избор на изображение за рецепта
   const handleRecipeImageChange = (recipeIndex, e) => {
     const file = e.target.files[0];
     if (file) {
@@ -122,7 +122,6 @@ export const useCreateForm = () => {
     }
   };
 
-  // Функция за качване на изображение във Firebase
   const uploadImageToFirebase = async (file, folder) => {
     try {
       const timestamp = new Date().getTime();
@@ -140,8 +139,7 @@ export const useCreateForm = () => {
 
   const showNotification = (message, type = 'error') => {
     setNotification({ message, type });
-    
-    // Автоматично скриваmе нотификацията след 5 секунди
+
     setTimeout(() => {
       setNotification(null);
     }, 5000);
@@ -165,7 +163,6 @@ export const useCreateForm = () => {
     }
   };
 
-  // Обновяваме  ден
   const handleDayChange = (index, field, value) => {
     const updatedDays = [...formData.days];
     updatedDays[index] = {
@@ -178,7 +175,6 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Добавяне на нов ден
   const addDay = () => {
     setFormData(prev => ({
       ...prev,
@@ -186,13 +182,13 @@ export const useCreateForm = () => {
         ...prev.days,
         {
           day: `Day ${prev.days.length + 1}`,
+          isRestDay: false,
           exercises: []
         }
       ]
     }));
   };
 
-  // Премахване на ден
   const removeDay = (index) => {
     const updatedDays = [...formData.days];
     updatedDays.splice(index, 1);
@@ -202,7 +198,6 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Обновяване на упражнение
   const handleExerciseChange = (dayIndex, exerciseIndex, field, value) => {
     const updatedDays = [...formData.days];
     
@@ -223,7 +218,6 @@ export const useCreateForm = () => {
     }));
   };
 
-  // ново упражнение
   const addExercise = (dayIndex) => {
     const updatedDays = [...formData.days];
     updatedDays[dayIndex].exercises.push({ name: '', sets: 0, reps: 0 });
@@ -233,7 +227,6 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Премахване на упражнение
   const removeExercise = (dayIndex, exerciseIndex) => {
     const updatedDays = [...formData.days];
     updatedDays[dayIndex].exercises.splice(exerciseIndex, 1);
@@ -243,14 +236,12 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Обновяване на рецепта
   const handleRecipeChange = (index, field, value) => {
     const updatedRecipes = [...formData.recipes];
     
     if (field.includes('macros.')) {
       const macroField = field.split('.')[1];
-      
-      // За макросите приемаме само числови стойности
+
       value = value.replace(/[^0-9]/g, '');
       value = parseInt(value) || 0;
       
@@ -274,7 +265,6 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Обновяване на съставки на рецепта
   const handleIngredientChange = (recipeIndex, ingredientIndex, value) => {
     const updatedRecipes = [...formData.recipes];
     updatedRecipes[recipeIndex].ingredients[ingredientIndex] = value;
@@ -284,7 +274,6 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Добавяне на нова съставка
   const addIngredient = (recipeIndex) => {
     const updatedRecipes = [...formData.recipes];
     updatedRecipes[recipeIndex].ingredients.push('');
@@ -294,7 +283,6 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Премахване на съставка
   const removeIngredient = (recipeIndex, ingredientIndex) => {
     const updatedRecipes = [...formData.recipes];
     updatedRecipes[recipeIndex].ingredients.splice(ingredientIndex, 1);
@@ -304,7 +292,6 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Добавяне на нова рецепта
   const addRecipe = () => {
     setFormData(prev => ({
       ...prev,
@@ -326,7 +313,6 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Премахване на рецепта
   const removeRecipe = (index) => {
     const updatedRecipes = [...formData.recipes];
     updatedRecipes.splice(index, 1);
@@ -336,66 +322,68 @@ export const useCreateForm = () => {
     }));
   };
 
-  // Валидация на цялата форма
   const validateForm = () => {
     let formErrors = {};
-    
-    // Валидация на основните полета
+
     if (!formData.name.trim()) {
-      formErrors.name = 'Program name is required';
+      formErrors.name = t('validation.program.name.required');
     } else if (formData.name.trim().length < 3) {
-      formErrors.name = 'Program name must be at least 3 characters';
+      formErrors.name = t('validation.program.name.minLength');
     }
     
     if (!formData.description.trim()) {
-      formErrors.description = 'Description is required';
+      formErrors.description = t('validation.program.description.required');
     } else {
       const wordCount = formData.description.trim().split(/\s+/).filter(Boolean).length;
       if (wordCount < 5) {
-        formErrors.description = 'Description must contain at least 5 words';
+        formErrors.description = t('validation.program.description.minWords');
       }
     }
-    
-    // Проверяваме дали имаме URL или файл
+
     if (!formData.image.trim() && !programImageFile) {
-      formErrors.image = 'Program image is required (URL or file)';
+      formErrors.image = t('validation.program.image.required');
     }
     
     if (!formData.price) {
-      formErrors.price = 'Price is required';
+      formErrors.price = t('validation.program.price.required');
     } else if (isNaN(parseFloat(formData.price.replace(',', '.')))) {
-      formErrors.price = 'Price must be a number';
+      formErrors.price = t('validation.program.price.numeric');
     }
     
-    // Валидация на дните и упражненията
+    if (!formData.difficulty) {
+      formErrors.difficulty = t('validation.program.difficulty.required');
+    }
+
     let dayErrors = [];
     formData.days.forEach((day, dayIndex) => {
       let dayError = {};
       
       if (!day.day.trim()) {
-        dayError.day = 'Day name is required';
+        dayError.day = t('validation.program.day.required');
       }
       
       let exerciseErrors = [];
-      day.exercises.forEach((exercise, exerciseIndex) => {
-        let exerciseError = {};
-        
-        if (!exercise.name.trim()) {
-          exerciseError.name = 'Exercise name is required';
-        }
-        
-        if (exercise.sets <= 0) {
-          exerciseError.sets = 'Sets must be greater than 0';
-        }
-        
-        if (exercise.reps <= 0) {
-          exerciseError.reps = 'Reps must be greater than 0';
-        }
-        
-        if (Object.keys(exerciseError).length > 0) {
-          exerciseErrors[exerciseIndex] = exerciseError;
-        }
-      });
+      if (!day.isRestDay) {
+        day.exercises.forEach((exercise, exerciseIndex) => {
+          let exerciseError = {};
+          
+          if (!exercise.name.trim()) {
+            exerciseError.name = t('validation.program.exercise.name');
+          }
+          
+          if (exercise.sets <= 0) {
+            exerciseError.sets = t('validation.program.exercise.sets');
+          }
+          
+          if (exercise.reps <= 0) {
+            exerciseError.reps = t('validation.program.exercise.reps');
+          }
+          
+          if (Object.keys(exerciseError).length > 0) {
+            exerciseErrors[exerciseIndex] = exerciseError;
+          }
+        });
+      }
       
       if (exerciseErrors.length > 0) {
         dayError.exercises = exerciseErrors;
@@ -409,29 +397,27 @@ export const useCreateForm = () => {
     if (dayErrors.length > 0) {
       formErrors.days = dayErrors;
     }
-    
-    // Валидация на рецептите
+
     let recipeErrors = [];
     formData.recipes.forEach((recipe, recipeIndex) => {
       let recipeError = {};
       
       if (!recipe.name.trim()) {
-        recipeError.name = 'Recipe name is required';
+        recipeError.name = t('validation.program.recipe.name');
       }
       
-      // Проверяваме дали имаме URL или файл за рецептата
       if (!recipe.image.trim() && !recipeImageFiles[recipeIndex]) {
-        recipeError.image = 'Recipe image is required (URL or file)';
+        recipeError.image = t('validation.program.recipe.image');
       }
       
       if (!recipe.instructions.trim()) {
-        recipeError.instructions = 'Instructions are required';
+        recipeError.instructions = t('validation.program.recipe.instructions');
       }
       
       let ingredientErrors = [];
       recipe.ingredients.forEach((ingredient, ingredientIndex) => {
         if (!ingredient.trim()) {
-          ingredientErrors[ingredientIndex] = 'Ingredient is required';
+          ingredientErrors[ingredientIndex] = t('validation.program.recipe.ingredient');
         }
       });
       
@@ -451,35 +437,29 @@ export const useCreateForm = () => {
     return formErrors;
   };
 
-  // Подаване на формата
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Валидирай формата преди изпращане
+
     const formErrors = validateForm();
     
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
-      
-      // Показваме нотификация за грешка
-      showNotification('Please fix the errors in the form before submitting', 'error');
+
+      showNotification(t('validation.program.form.fixErrors'), 'error');
       return;
     }
     
     try {
       setIsLoading(true);
       setUploadingImages(true);
-      
-      // Подготвяме копие на данните
+
       let updatedFormData = { ...formData };
-      
-      // Качваме изображенията във Firebase ако има избрани файлове
+
       if (programImageFile) {
         const programImageUrl = await uploadImageToFirebase(programImageFile, 'program-images');
         updatedFormData.image = programImageUrl;
       }
-      
-      // Качваме изображенията на рецептите
+
       if (Object.keys(recipeImageFiles).length > 0) {
         const updatedRecipes = [...formData.recipes];
         
@@ -493,27 +473,26 @@ export const useCreateForm = () => {
         
         updatedFormData.recipes = updatedRecipes;
       }
-      
-      // Трансформиране на данни преди изпращане
+
       const processedData = {
         ...updatedFormData,
         price: updatedFormData.price.toString()
       };
       
       await onSubmitProgram(processedData);
+
+      showNotification(t('validation.program.form.success'), 'success');
       
-      // Показваме нотификация за успех
-      showNotification('Program created successfully!', 'success');
-      
-      // Ресетване на формата след успешно изпращане
       setFormData({
         name: '',
         description: '',
         image: '',
         price: '',
+        difficulty: 'beginner',
         days: [
           {
             day: 'Day 1',
+            isRestDay: false,
             exercises: [
               { name: '', sets: 0, reps: 0 }
             ]
@@ -543,7 +522,7 @@ export const useCreateForm = () => {
       
     } catch (err) {
 
-      showNotification(err.message || 'Error creating program', 'error');
+      showNotification(err.message || t('validation.program.form.error'), 'error');
     } finally {
       setIsLoading(false);
       setUploadingImages(false);
