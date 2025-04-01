@@ -43,7 +43,7 @@ const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike })
                 {isOwner ? (
                     <>
                         <Link to={`/forum/${postId}/comment/${comment._id}/edit`} className="action-btn edit">
-                            {t('forum.editPost')}
+                            {t('common.edit')}
                         </Link>
                         <button className="action-btn delete" onClick={() => onDelete(comment._id)}>
                             {t('forum.deletePost')}

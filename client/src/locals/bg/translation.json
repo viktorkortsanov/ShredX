@@ -187,7 +187,7 @@
       "createProgram": "Създай програма"
     },
     "nutrition": {
-      "cal": "кал",
+      "calories": "калории",
       "protein": "протеин",
       "carbs": "въглехидрати",
       "fat": "мазнини",

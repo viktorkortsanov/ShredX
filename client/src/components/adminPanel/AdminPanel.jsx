@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import './adminpanel.css';
 import userApi from "../../api/userApi.js";
 import postApi from "../../api/postApi.js";
+import { useTranslation } from 'react-i18next';
 
 export default function AdminPanel() {
+    const { t } = useTranslation();
     const [usersCount, setUsersCount] = useState(0);
     const [postsCount, setPostsCount] = useState(0);
     const [programSales, setProgramSales] = useState(0);
@@ -37,8 +39,8 @@ export default function AdminPanel() {
     return (
         <div className="admin-dashboard">
             <div className="admin-header">
-                <h1>Admin Dashboard</h1>
-                <p className="admin-subtitle">Manage your platform with powerful tools</p>
+                <h1>{t('admin.dashboard')}</h1>
+                <p className="admin-subtitle">{t('admin.subtitle')}</p>
             </div>
 
             <div className="admin-stats">
@@ -52,7 +54,7 @@ export default function AdminPanel() {
                         ) : (
                             <h3>{usersCount}</h3>
                         )}
-                        <p>Total Users</p>
+                        <p>{t('admin.stats.totalUsers')}</p>
                     </div>
                 </div>
 
@@ -66,7 +68,7 @@ export default function AdminPanel() {
                         ) : (
                             <h3>{postsCount}</h3>
                         )}
-                        <p>Forum Posts</p>
+                        <p>{t('admin.stats.forumPosts')}</p>
                     </div>
                 </div>
 
@@ -80,7 +82,7 @@ export default function AdminPanel() {
                         ) : (
                             <h3>{programSales}</h3>
                         )}
-                        <p>Program Sales</p>
+                        <p>{t('admin.stats.programSales')}</p>
                     </div>
                 </div>
             </div>
@@ -88,18 +90,18 @@ export default function AdminPanel() {
             <div className="admin-modules">
                 <Link to="/adminpanel/usersmanagement" className="admin-module-card">
                     <div className="module-icon">
-                        <img src="/images/user-settings.png" alt="User Management" />
+                        <img src="/images/user-settings.png" alt={t('admin.modules.userManagement.alt')} />
                     </div>
                     <div className="module-content">
-                        <h2>User Management</h2>
-                        <p>Manage users, permissions, and account details</p>
+                        <h2>{t('admin.modules.userManagement.title')}</h2>
+                        <p>{t('admin.modules.userManagement.description')}</p>
                         <ul className="module-features">
-                            <li>User accounts</li>
-                            <li>Profile verification</li>
-                            <li>User privileges</li>
+                            <li>{t('admin.modules.userManagement.features.accounts')}</li>
+                            <li>{t('admin.modules.userManagement.features.verification')}</li>
+                            <li>{t('admin.modules.userManagement.features.privileges')}</li>
                         </ul>
                         <div className="module-action">
-                            <span>Manage Users</span>
+                            <span>{t('admin.modules.userManagement.action')}</span>
                             <i className="fas fa-arrow-right"></i>
                         </div>
                     </div>
@@ -107,18 +109,18 @@ export default function AdminPanel() {
 
                 <Link to="/adminpanel/forummanagement" className="admin-module-card">
                     <div className="module-icon">
-                        <img src="/images/settings.png" alt="Forum Management" />
+                        <img src="/images/settings.png" alt={t('admin.modules.forumManagement.alt')} />
                     </div>
                     <div className="module-content">
-                        <h2>Forum Management</h2>
-                        <p>Moderate discussions, posts and community content</p>
+                        <h2>{t('admin.modules.forumManagement.title')}</h2>
+                        <p>{t('admin.modules.forumManagement.description')}</p>
                         <ul className="module-features">
-                            <li>Post moderation</li>
-                            <li>Comment management</li>
-                            <li>Content filtering</li>
+                            <li>{t('admin.modules.forumManagement.features.moderation')}</li>
+                            <li>{t('admin.modules.forumManagement.features.comments')}</li>
+                            <li>{t('admin.modules.forumManagement.features.filtering')}</li>
                         </ul>
                         <div className="module-action">
-                            <span>Manage Forum</span>
+                            <span>{t('admin.modules.forumManagement.action')}</span>
                             <i className="fas fa-arrow-right"></i>
                         </div>
                     </div>
@@ -126,18 +128,18 @@ export default function AdminPanel() {
 
                 <Link to="/adminpanel/analytics" className="admin-module-card">
                     <div className="module-icon">
-                        <img src="/images/analytics.png" alt="Analytics" />
+                        <img src="/images/analytics.png" alt={t('admin.modules.analytics.alt')} />
                     </div>
                     <div className="module-content">
-                        <h2>Analytics</h2>
-                        <p>View platform statistics and performance metrics</p>
+                        <h2>{t('admin.modules.analytics.title')}</h2>
+                        <p>{t('admin.modules.analytics.description')}</p>
                         <ul className="module-features">
-                            <li>User activity trends</li>
-                            <li>Program sales metrics</li>
-                            <li>Platform performance</li>
+                            <li>{t('admin.modules.analytics.features.userTrends')}</li>
+                            <li>{t('admin.modules.analytics.features.salesMetrics')}</li>
+                            <li>{t('admin.modules.analytics.features.performance')}</li>
                         </ul>
                         <div className="module-action">
-                            <span>View Analytics</span>
+                            <span>{t('admin.modules.analytics.action')}</span>
                             <i className="fas fa-arrow-right"></i>
                         </div>
                     </div>
@@ -147,18 +149,18 @@ export default function AdminPanel() {
             <div className="admin-additional-modules">
                 <Link to="/adminpanel/createprograms" className="admin-module-card create-program-card">
                     <div className="module-icon">
-                        <img src="/images/add-content.png" alt="Create Programs" />
+                        <img src="/images/add-content.png" alt={t('admin.modules.createPrograms.alt')} />
                     </div>
                     <div className="module-content">
-                        <h2>Create Programs</h2>
-                        <p>Create and publish new training programs for users</p>
+                        <h2>{t('admin.modules.createPrograms.title')}</h2>
+                        <p>{t('admin.modules.createPrograms.description')}</p>
                         <ul className="module-features">
-                            <li>Program creator</li>
-                            <li>Workout templates</li>
-                            <li>Pricing management</li>
+                            <li>{t('admin.modules.createPrograms.features.creator')}</li>
+                            <li>{t('admin.modules.createPrograms.features.templates')}</li>
+                            <li>{t('admin.modules.createPrograms.features.pricing')}</li>
                         </ul>
                         <div className="module-action">
-                            <span>Create Programs</span>
+                            <span>{t('admin.modules.createPrograms.action')}</span>
                             <i className="fas fa-arrow-right"></i>
                         </div>
                     </div>

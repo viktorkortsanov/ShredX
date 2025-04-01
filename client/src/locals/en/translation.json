@@ -188,7 +188,7 @@
             "getStarted": "Get Started"
         },
         "nutrition": {
-            "cal": "cal",
+            "calories": "calories",
             "protein": "protein",
             "carbs": "carbs",
             "fat": "fat",

@@ -177,7 +177,7 @@ const PostDetails = () => {
                     {isOwner && (
                         <div className="owner-actions">
                             <Link to={`/forum/${postId}/edit`} className="action-btn edit-btn">
-                                <i className="fas fa-edit"></i> {t('forum.editPost')}
+                                <i className="fas fa-edit"></i> {t('common.edit')}
                             </Link>
                             <button className="action-btn delete-btn" onClick={() => setShowDialog(true)}>
                                 <i className="fas fa-trash"></i> {t('forum.deletePost')}
