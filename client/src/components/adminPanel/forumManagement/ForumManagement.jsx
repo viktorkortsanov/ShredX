@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import ConfirmationDialog from "../../confirmDialog/ConfirmDialog.jsx";
 import './forummanagement.css';
 import userApi from "../../../api/userApi.js";
+import { useTranslation } from 'react-i18next';
 
 export default function ForumManagement() {
+    const { t } = useTranslation();
     const [posts, setPosts] = useState([]);
     const [showDialog, setShowDialog] = useState(false);
     const [postIdToDelete, setPostIdToDelete] = useState(null);
@@ -98,9 +100,9 @@ export default function ForumManagement() {
                         <path fill="none" d="M0 0h24v24H0z" />
                         <path d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z" fill="currentColor" />
                     </svg>
-                    <span>Back to Dashboard</span>
+                    <span>{t('admin.backToDashboard')}</span>
                 </Link>
-                <h1 className="dashboard-title">Forum Management</h1>
+                <h1 className="dashboard-title">{t('admin.forumManagement.title')}</h1>
                 <div className="stats-cards">
                     <div className="stat-card">
                         <div className="stat-icon posts-icon">
@@ -111,7 +113,7 @@ export default function ForumManagement() {
                         </div>
                         <div className="stat-info">
                             <h3>{posts.length}</h3>
-                            <p>Total Posts</p>
+                            <p>{t('admin.forumManagement.totalPosts')}</p>
                         </div>
                     </div>
                     <div className="stat-card">
@@ -123,7 +125,7 @@ export default function ForumManagement() {
                         </div>
                         <div className="stat-info">
                             <h3>{new Set(posts.map(post => post.author)).size}</h3>
-                            <p>Unique Authors</p>
+                            <p>{t('admin.forumManagement.uniqueAuthors')}</p>
                         </div>
                     </div>
                 </div>
@@ -137,7 +139,7 @@ export default function ForumManagement() {
                     </svg>
                     <input
                         type="text"
-                        placeholder="Search by title or author..."
+                        placeholder={t('admin.forumManagement.searchPlaceholder')}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="search-input"
@@ -148,16 +150,16 @@ export default function ForumManagement() {
             {loading ? (
                 <div className="loader-container">
                     <div className="loader"></div>
-                    <p>Loading posts...</p>
+                    <p>{t('admin.forumManagement.loadingPosts')}</p>
                 </div>
             ) : (
                 <>
                     <div className="posts-table-container">
                         <div className="posts-table-header">
-                            <div className="table-cell post-title-header">Title</div>
-                            <div className="table-cell post-author-header">Author</div>
-                            <div className="table-cell post-date-header">Date</div>
-                            <div className="table-cell post-actions-header">Actions</div>
+                            <div className="table-cell post-title-header">{t('admin.forumManagement.table.title')}</div>
+                            <div className="table-cell post-author-header">{t('admin.forumManagement.table.author')}</div>
+                            <div className="table-cell post-date-header">{t('admin.forumManagement.table.date')}</div>
+                            <div className="table-cell post-actions-header">{t('admin.forumManagement.table.actions')}</div>
                         </div>
 
                         {currentPosts.length > 0 ? (
@@ -173,7 +175,7 @@ export default function ForumManagement() {
                                             <div className="post-author">
                                             <div className="author-avatar">
                                             {userImages[post.owner] ? (
-                                                <img src={userImages[post.owner]} className="author-avatar-img"/>
+                                                <img src={userImages[post.owner]} className="author-avatar-img" alt={t('admin.forumManagement.authorAvatar')} />
                                             ) : (
                                                 <span>{post.author.charAt(0).toUpperCase()}</span>
                                             )}
@@ -192,14 +194,14 @@ export default function ForumManagement() {
                                                     <path fill="none" d="M0 0h24v24H0z" />
                                                     <path d="M15.728 9.686l-1.414-1.414L5 17.586V19h1.414l9.314-9.314zm1.414-1.414l1.414-1.414-1.414-1.414-1.414 1.414 1.414 1.414zM7.242 21H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 21z" fill="currentColor" />
                                                 </svg>
-                                                <span>Edit</span>
+                                                <span>{t('admin.forumManagement.actions.edit')}</span>
                                             </Link>
                                             <button onClick={() => handleDeleteClick(post._id)} className="post-action-button delete-button">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                                                     <path fill="none" d="M0 0h24v24H0z" />
                                                     <path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-9 3h2v6H9v-6zm4 0h2v6h-2v-6zM9 4v2h6V4H9z" fill="currentColor" />
                                                 </svg>
-                                                <span>Delete</span>
+                                                <span>{t('admin.forumManagement.actions.delete')}</span>
                                             </button>
                                         </div>
                                     </div>
@@ -211,7 +213,7 @@ export default function ForumManagement() {
                                     <path fill="none" d="M0 0h24v24H0z" />
                                     <path d="M20 22H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1zm-1-2V4H5v16h14zM8 7h8v2H8V7zm0 4h8v2H8v-2zm0 4h8v2H8v-2z" fill="currentColor" />
                                 </svg>
-                                <p>No posts found matching your search criteria</p>
+                                <p>{t('admin.forumManagement.noPostsFound')}</p>
                             </div>
                         )}
                     </div>

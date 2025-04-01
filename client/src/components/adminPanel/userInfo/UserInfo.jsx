@@ -8,8 +8,10 @@ import PostItem from "../../forum/postItem/PostItem";
 import { Link } from "react-router-dom";
 import './userinfo.css';
 import { useAuth } from "../../../contexts/authContext";
+import { useTranslation } from "react-i18next";
 
 export default function UserInfo() {
+    const { t } = useTranslation();
     const { userId } = useParams();
     const [user, setUser] = useState({ id: "", username: "", email: "" });
     const [likedPosts, setLikedPosts] = useState([]);
@@ -68,10 +70,10 @@ export default function UserInfo() {
             case 'posts':
                 return (
                     <div className="tab-section">
-                        <h3>User Posts</h3>
+                        <h3>{t('admin.userInfo.userPosts')}</h3>
                         <div className="posts-list">
                             {userPosts.length === 0 ? (
-                                <p className='no-items'>No posts yet.</p>
+                                <p className='no-items'>{t('admin.userInfo.noPosts')}</p>
                             ) : (
                                 userPosts.map((post) => <PostItem key={post._id} post={post} />)
                             )}
@@ -81,10 +83,10 @@ export default function UserInfo() {
             case 'liked':
                 return (
                     <div className="tab-section">
-                        <h3>User Liked Posts</h3>
+                        <h3>{t('admin.userInfo.userLikedPosts')}</h3>
                         <div className="posts-list">
                             {likedPosts.length === 0 ? (
-                                <p className='no-items'>This user hasn't liked any posts yet.</p>
+                                <p className='no-items'>{t('admin.userInfo.noLikedPosts')}</p>
                             ) : (
                                 likedPosts.map((post) => <PostItem key={post._id} post={post} />)
                             )}
@@ -94,10 +96,10 @@ export default function UserInfo() {
             case 'programs':
                 return (
                     <div className="tab-section">
-                        <h3>User Bought Programs</h3>
+                        <h3>{t('admin.userInfo.userBoughtPrograms')}</h3>
                         <div className="programs-list">
                             {purchasedPrograms.length === 0 ? (
-                                <p className='no-items'>This user hasn't bought any programs yet.</p>
+                                <p className='no-items'>{t('admin.userInfo.noPrograms')}</p>
                             ) : (
                                 purchasedPrograms.map((program) => (
                                     <ProgramCard key={program.id} program={program} />
@@ -114,15 +116,15 @@ export default function UserInfo() {
     return (
         <div className="admin-user-dashboard">
             <Link to="/adminpanel/usersmanagement" className="back-link-userinfo">
-                <img src="/images/back.png" alt="Back Arrow" className="back-arrow" />
-                <span className="back-text">Back to Users Management</span>
+                <img src="/images/back.png" alt={t('common.backArrow')} className="back-arrow" />
+                <span className="back-text">{t('admin.userInfo.backToUsers')}</span>
             </Link>
 
             <div className="user-profile-container">
                 <div className="profile-sidebar">
                     <div className="profile-image-wrapper">
                         <div className="profile-image-container">
-                            <img src={user.profileImage || "/images/null-profile.png"} alt="User Avatar" className="user-avatar-large" />
+                            <img src={user.profileImage || "/images/null-profile.png"} alt={t('admin.userInfo.userAvatar')} className="user-avatar-large" />
                         </div>
                     </div>
 
@@ -131,17 +133,17 @@ export default function UserInfo() {
 
                         <div className="user-details">
                             <div className="user-detail-item">
-                                <span className="detail-label">Email</span>
+                                <span className="detail-label">{t('common.email')}</span>
                                 <span className="detail-value">{user.email}</span>
                             </div>
 
                             <div className="user-detail-item">
-                                <span className="detail-label">Username</span>
+                                <span className="detail-label">{t('common.username')}</span>
                                 <span className="detail-value">{user.username}</span>
                             </div>
 
                             <div className="user-detail-item">
-                                <span className="detail-label">ID</span>
+                                <span className="detail-label">{t('profile.id')}</span>
                                 <span className="detail-value user-id">{user.id}</span>
                             </div>
                         </div>
@@ -150,15 +152,15 @@ export default function UserInfo() {
                     <div className="profile-stats">
                         <div className="stat-item">
                             <span className="stat-value">{userPosts.length}</span>
-                            <span className="stat-label">Posts</span>
+                            <span className="stat-label">{t('profile.stats.posts')}</span>
                         </div>
                         <div className="stat-item">
                             <span className="stat-value">{likedPosts.length}</span>
-                            <span className="stat-label">Likes</span>
+                            <span className="stat-label">{t('profile.stats.likes')}</span>
                         </div>
                         <div className="stat-item">
                             <span className="stat-value">{purchasedPrograms.length}</span>
-                            <span className="stat-label">Programs</span>
+                            <span className="stat-label">{t('profile.stats.programs')}</span>
                         </div>
                     </div>
                 </div>
@@ -169,19 +171,19 @@ export default function UserInfo() {
                             className={`tab-button ${activeTab === 'posts' ? 'active' : ''}`}
                             onClick={() => setActiveTab('posts')}
                         >
-                            User Posts
+                            {t('admin.userInfo.tabs.posts')}
                         </button>
                         <button
                             className={`tab-button ${activeTab === 'liked' ? 'active' : ''}`}
                             onClick={() => setActiveTab('liked')}
                         >
-                            Liked Posts
+                            {t('admin.userInfo.tabs.likedPosts')}
                         </button>
                         <button
                             className={`tab-button ${activeTab === 'programs' ? 'active' : ''}`}
                             onClick={() => setActiveTab('programs')}
                         >
-                            Bought Programs
+                            {t('admin.userInfo.tabs.boughtPrograms')}
                         </button>
                     </div>
 

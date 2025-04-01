@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import userApi from "../../../api/userApi";
 import "./usermanagement.css";
+import { useTranslation } from 'react-i18next';
 
 export default function UserManagement() {
+    const { t } = useTranslation();
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -65,9 +67,9 @@ export default function UserManagement() {
                         <path fill="none" d="M0 0h24v24H0z" />
                         <path d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z" fill="currentColor" />
                     </svg>
-                    <span>Back to Dashboard</span>
+                    <span>{t('admin.backToDashboard')}</span>
                 </Link>
-                <h1 className="dashboard-title">User Management</h1>
+                <h1 className="dashboard-title">{t('admin.userManagement.title')}</h1>
                 <div className="stats-cards">
                     <div className="stat-card">
                         <div className="stat-icon users-icon">
@@ -78,7 +80,7 @@ export default function UserManagement() {
                         </div>
                         <div className="stat-info">
                             <h3>{users.length}</h3>
-                            <p>Total Users</p>
+                            <p>{t('admin.stats.totalUsers')}</p>
                         </div>
                     </div>
                     <div className="stat-card">
@@ -90,7 +92,7 @@ export default function UserManagement() {
                         </div>
                         <div className="stat-info">
                             <h3>{users.filter(user => user.isAdmin).length}</h3>
-                            <p>Admins</p>
+                            <p>{t('admin.userManagement.admins')}</p>
                         </div>
                     </div>
                 </div>
@@ -104,7 +106,7 @@ export default function UserManagement() {
                     </svg>
                     <input
                         type="text"
-                        placeholder="Search users..."
+                        placeholder={t('admin.userManagement.searchPlaceholder')}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="search-input"
@@ -116,9 +118,9 @@ export default function UserManagement() {
                         onChange={(e) => setSelectedRole(e.target.value)}
                         className="role-filter"
                     >
-                        <option value="all">All Roles</option>
-                        <option value="admin">Admins</option>
-                        <option value="user">Regular Users</option>
+                        <option value="all">{t('admin.userManagement.filters.allRoles')}</option>
+                        <option value="admin">{t('admin.userManagement.filters.admins')}</option>
+                        <option value="user">{t('admin.userManagement.filters.regularUsers')}</option>
                     </select>
                 </div>
             </div>
@@ -126,16 +128,16 @@ export default function UserManagement() {
             {loading ? (
                 <div className="loader-container">
                     <div className="loader"></div>
-                    <p>Loading users...</p>
+                    <p>{t('admin.userManagement.loadingUsers')}</p>
                 </div>
             ) : (
                 <>
                     <div className="users-table-container">
                         <div className="users-table-header">
-                            <div className="table-cell user-avatar-header">Profile</div>
-                            <div className="table-cell user-info-header">User Information</div>
-                            <div className="table-cell user-status-header">Status</div>
-                            <div className="table-cell user-actions-header">Actions</div>
+                            <div className="table-cell user-avatar-header">{t('admin.userManagement.table.profile')}</div>
+                            <div className="table-cell user-info-header">{t('admin.userManagement.table.userInfo')}</div>
+                            <div className="table-cell user-status-header">{t('admin.userManagement.table.status')}</div>
+                            <div className="table-cell user-actions-header">{t('admin.userManagement.table.actions')}</div>
                         </div>
 
                         {currentUsers.length > 0 ? (
@@ -146,7 +148,7 @@ export default function UserManagement() {
                                             <div className="user-avatar">
                                                 <div className="user-avatar-admin">
                                                     {user.profileImage ? (
-                                                        <img src={user.profileImage} alt="User Avatar" className="user-image" />
+                                                        <img src={user.profileImage} alt={t('admin.userManagement.userAvatar')} className="user-image" />
                                                     ) : (
                                                         <span className="user-initial">{user.username.charAt(0).toUpperCase()}</span>
                                                     )}
@@ -162,7 +164,7 @@ export default function UserManagement() {
 
                                         <div className="table-cell user-status-cell">
                                             <span className={`status-badge ${user.isAdmin ? 'admin-badge' : 'user-badge'}`}>
-                                                {user.isAdmin ? 'Admin' : 'User'}
+                                                {user.isAdmin ? t('admin.userManagement.roles.admin') : t('admin.userManagement.roles.user')}
                                             </span>
                                         </div>
 
@@ -172,7 +174,7 @@ export default function UserManagement() {
                                                     <path fill="none" d="M0 0h24v24H0z" />
                                                     <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM11 7h2v2h-2V7zm0 4h2v6h-2v-6z" fill="currentColor" />
                                                 </svg>
-                                                <span>Details</span>
+                                                <span>{t('admin.userManagement.details')}</span>
                                             </Link>
                                         </div>
                                     </div>
@@ -184,7 +186,7 @@ export default function UserManagement() {
                                     <path fill="none" d="M0 0h24v24H0z" />
                                     <path d="M18 18v2H6v-2h12zm3-7v5H3v-5h18zm-2-6v3H5V5h14z" fill="currentColor" />
                                 </svg>
-                                <p>No users found matching your search criteria</p>
+                                <p>{t('admin.userManagement.noUsersFound')}</p>
                             </div>
                         )}
                     </div>

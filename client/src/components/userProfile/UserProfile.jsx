@@ -8,8 +8,10 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebase.js';
 import './userprofile.css';
 import { useAuth } from '../../contexts/authContext.jsx';
+import { useTranslation } from 'react-i18next';
  
 const UserProfile = () => {
+    const { t } = useTranslation();
     const [userPosts, setUserPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
     const [purchasedPrograms, setPurchasedPrograms] = useState([]);
@@ -53,14 +55,13 @@ const UserProfile = () => {
                 }));
                 
                 try {
-                    // Получаваме IDs на закупените програми от localStorage
+
                     const storedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
                     
                     if (storedPrograms.length > 0) {
-                        // Зареждаме всички програми от API
+
                         const allPrograms = await getAllPrograms();
-                        
-                        // Филтрираме само закупените програми
+
                         const purchasedProgramsData = allPrograms.filter(program =>
                             storedPrograms.includes(program.id.toString())
                         );
@@ -129,10 +130,10 @@ const UserProfile = () => {
 
             setUserProfileImg(downloadURL);
             setSelectedFile(null);
-            alert('Profile image updated successfully!');
+            alert(t('profile.alerts.imageUpdated'));
         } catch (error) {
             console.error('Error updating profile image:', error);
-            alert('Error updating profile image. Please try again.');
+            alert(t('profile.alerts.imageError'));
         } finally {
             setIsUploading(false);
         }
@@ -149,7 +150,7 @@ const UserProfile = () => {
     const handleProfileSubmit = async (e) => {
         e.preventDefault();
         console.log('Saving profile data:', profileData);
-        alert('Profile information updated successfully!');
+        alert(t('profile.alerts.profileUpdated'));
     };
  
     const renderTabContent = () => {
@@ -157,10 +158,10 @@ const UserProfile = () => {
             case 'profile':
                 return (
                     <div className="profile-form-container">
-                        <h3>Edit Profile Information</h3>
+                        <h3>{t('profile.editInfo')}</h3>
                         <form onSubmit={handleProfileSubmit} className="profile-form">
                             <div className="form-group">
-                                <label htmlFor="username">Username</label>
+                                <label htmlFor="username">{t('common.username')}</label>
                                 <input 
                                     type="text" 
                                     id="username" 
@@ -170,7 +171,7 @@ const UserProfile = () => {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">{t('common.email')}</label>
                                 <input 
                                     type="email" 
                                     id="email" 
@@ -180,52 +181,52 @@ const UserProfile = () => {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="phone">Phone</label>
+                                <label htmlFor="phone">{t('profile.phone')}</label>
                                 <input 
                                     type="tel" 
                                     id="phone" 
                                     name="phone" 
                                     value={profileData.phone}
                                     onChange={handleProfileChange}
-                                    placeholder="Enter your phone number"
+                                    placeholder={t('profile.placeholders.phone')}
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="address">Address</label>
+                                <label htmlFor="address">{t('profile.address')}</label>
                                 <textarea 
                                     id="address" 
                                     name="address" 
                                     value={profileData.address}
                                     onChange={handleProfileChange}
-                                    placeholder="Enter your address"
+                                    placeholder={t('profile.placeholders.address')}
                                 ></textarea>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="gender">Gender</label>
+                                <label htmlFor="gender">{t('profile.gender')}</label>
                                 <select 
                                     id="gender" 
                                     name="gender" 
                                     value={profileData.gender}
                                     onChange={handleProfileChange}
                                 >
-                                    <option value="">Select gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                    <option value="">{t('profile.genderOptions.select')}</option>
+                                    <option value="male">{t('profile.genderOptions.male')}</option>
+                                    <option value="female">{t('profile.genderOptions.female')}</option>
+                                    <option value="other">{t('profile.genderOptions.other')}</option>
+                                    <option value="prefer-not-to-say">{t('profile.genderOptions.preferNotToSay')}</option>
                                 </select>
                             </div>
-                            <button type="submit" className="save-profile-btn">Save Changes</button>
+                            <button type="submit" className="save-profile-btn">{t('profile.saveChanges')}</button>
                         </form>
                     </div>
                 );
             case 'posts':
                 return (
                     <div className="posts-section">
-                        <h3>Your Posts</h3>
+                        <h3>{t('profile.tabs.yourPosts')}</h3>
                         <div className="posts-list">
                             {userPosts.length === 0 ? (
-                                <p className='no-items'>No posts yet.</p>
+                                <p className='no-items'>{t('profile.noPosts')}</p>
                             ) : (
                                 userPosts.map((post) => <PostItem key={post._id} post={post} />)
                             )}
@@ -235,10 +236,10 @@ const UserProfile = () => {
             case 'liked':
                 return (
                     <div className="posts-section">
-                        <h3>Liked Posts</h3>
+                        <h3>{t('profile.tabs.likedPosts')}</h3>
                         <div className="posts-list">
                             {likedPosts.length === 0 ? (
-                                <p className='no-items'>You haven't liked any posts yet.</p>
+                                <p className='no-items'>{t('profile.noLikedPosts')}</p>
                             ) : (
                                 likedPosts.map((post) => <PostItem key={post._id} post={post} />)
                             )}
@@ -248,10 +249,10 @@ const UserProfile = () => {
             case 'programs':
                 return (
                     <div className="posts-section">
-                        <h3>Bought Programs</h3>
+                        <h3>{t('profile.tabs.boughtPrograms')}</h3>
                         <div className="programs-list">
                             {purchasedPrograms.length === 0 ? (
-                                <p className='no-items'>You haven't bought any programs yet.</p>
+                                <p className='no-items'>{t('profile.noPrograms')}</p>
                             ) : (
                                 purchasedPrograms.map((program) => (
                                     <ProgramCard key={program.id} program={program} />
@@ -272,14 +273,14 @@ const UserProfile = () => {
                     <div className="profile-image-container">
                         <img 
                             src={imagePreview || userProfileImg || "/images/null-profile.png"} 
-                            alt="User Avatar" 
+                            alt={t('profile.avatar')} 
                             className="user-avatar-large" 
                         />
                         <div 
                             className="image-overlay"
                             onClick={handleAvatarClick}
                         >
-                            <span>Click to change photo</span>
+                            <span>{t('profile.clickToChangePhoto')}</span>
                         </div>
  
                         <input 
@@ -299,7 +300,7 @@ const UserProfile = () => {
                                 onClick={handleSaveImage}
                                 disabled={isUploading}
                             >
-                                {isUploading ? 'Saving...' : 'Save'}
+                                {isUploading ? t('common.saving') : t('common.save')}
                             </button>
                         )}
                     </div>
@@ -310,17 +311,17 @@ const UserProfile = () => {
                     
                     <div className="user-details">
                         <div className="user-detail-item">
-                            <span className="detail-label">Email</span>
+                            <span className="detail-label">{t('common.email')}</span>
                             <span className="detail-value">{email}</span>
                         </div>
                         
                         <div className="user-detail-item">
-                            <span className="detail-label">Username</span>
+                            <span className="detail-label">{t('common.username')}</span>
                             <span className="detail-value">{username}</span>
                         </div>
                         
                         <div className="user-detail-item">
-                            <span className="detail-label">ID</span>
+                            <span className="detail-label">{t('profile.id')}</span>
                             <span className="detail-value user-id">{userId}</span>
                         </div>
                     </div>
@@ -329,15 +330,15 @@ const UserProfile = () => {
                 <div className="profile-stats">
                     <div className="stat-item">
                         <span className="stat-value">{userPosts.length}</span>
-                        <span className="stat-label">Posts</span>
+                        <span className="stat-label">{t('profile.stats.posts')}</span>
                     </div>
                     <div className="stat-item">
                         <span className="stat-value">{likedPosts.length}</span>
-                        <span className="stat-label">Likes</span>
+                        <span className="stat-label">{t('profile.stats.likes')}</span>
                     </div>
                     <div className="stat-item">
                         <span className="stat-value">{purchasedPrograms.length}</span>
-                        <span className="stat-label">Programs</span>
+                        <span className="stat-label">{t('profile.stats.programs')}</span>
                     </div>
                 </div>
             </div>
@@ -348,25 +349,25 @@ const UserProfile = () => {
                         className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`}
                         onClick={() => setActiveTab('profile')}
                     >
-                        Profile Info
+                        {t('profile.tabs.profileInfo')}
                     </button>
                     <button 
                         className={`tab-button ${activeTab === 'posts' ? 'active' : ''}`}
                         onClick={() => setActiveTab('posts')}
                     >
-                        Your Posts
+                        {t('profile.tabs.yourPosts')}
                     </button>
                     <button 
                         className={`tab-button ${activeTab === 'liked' ? 'active' : ''}`}
                         onClick={() => setActiveTab('liked')}
                     >
-                        Liked Posts
+                        {t('profile.tabs.likedPosts')}
                     </button>
                     <button 
                         className={`tab-button ${activeTab === 'programs' ? 'active' : ''}`}
                         onClick={() => setActiveTab('programs')}
                     >
-                        Bought Programs
+                        {t('profile.tabs.boughtPrograms')}
                     </button>
                 </div>
  

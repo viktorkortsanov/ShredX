@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './programcard.css';
 import { useSelector } from 'react-redux';
 import userApi from '../../../api/userApi';
 
 const ProgramCard = ({ program }) => {
+    const { t } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [purchasedPrograms, setPurchasedPrograms] = useState([]);
     const [showInfo, setShowInfo] = useState(false);
@@ -66,7 +68,7 @@ const ProgramCard = ({ program }) => {
             
             {isPurchased && (
                 <div className="program-badge">
-                    <span>Purchased</span>
+                    <span>{t('programs.card.purchased')}</span>
                 </div>
             )}
             
@@ -80,19 +82,19 @@ const ProgramCard = ({ program }) => {
                 <p className="program-price">${program.price}</p>
 
                 <div className="program-features">
-                    <span>{program.days.length} Days</span>
-                    <span>{program.days.reduce((total, day) => total + day.exercises.length, 0)} Exercises</span>
-                    <span>{program.recipes.length} Recipes</span>
+                    <span>{program.days.length} {t('programs.days')}</span>
+                    <span>{program.days.reduce((total, day) => total + day.exercises.length, 0)} {t('programs.card.exercises')}</span>
+                    <span>{program.recipes.length} {t('programs.card.recipes')}</span>
                 </div>
 
                 <div className="buttons">
                     {isPurchased ? (
                         <Link to={`/programs/${program.id}/details`} className="buy-btn">
-                            Start Workout
+                            {t('programs.card.startWorkout')}
                         </Link>
                     ) : (
                         <Link to={`/programs/pay/${program.id}`} className="buy-btn">
-                            Get Started
+                            {t('programs.card.getStarted')}
                         </Link>
                     )}
                     
@@ -102,7 +104,7 @@ const ProgramCard = ({ program }) => {
                     >
                         <img 
                             src="/images/program-info.svg" 
-                            alt="Info" 
+                            alt={t('common.info')} 
                             className="info-icon"
                         />
                     </button>

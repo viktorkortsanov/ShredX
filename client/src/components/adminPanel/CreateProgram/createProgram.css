@@ -36,6 +36,7 @@
 }
 
 .create-program-header h1 {
+    padding-top: 2em;
     font-size: 2.4rem;
     color: white;
     margin-bottom: 10px;
@@ -201,7 +202,7 @@
 }
 
 .form-group-small {
-    width: 100px;
+    width: 135px;
 }
 
 .image-preview {
@@ -446,7 +447,7 @@
 @media (max-width: 768px) {
     .create-program-container {
         padding: 20px;
-        margin: 2em auto;
+        margin: 6em auto 11em;
     }
 
     .create-program-header h1 {
@@ -469,7 +470,7 @@
     }
 
     .macros-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr ;
     }
 
     .form-actions {

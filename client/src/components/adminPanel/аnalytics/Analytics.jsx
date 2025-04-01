@@ -10,8 +10,10 @@ import './analytics.css';
 import userApi from "../../../api/userApi.js";
 import postApi from "../../../api/postApi.js";
 import programApi from "../../../api/programApi.js";
+import { useTranslation } from 'react-i18next';
 
 const Analytics = () => {
+    const { t } = useTranslation();
     const [timeRange, setTimeRange] = useState('week');
     const [loading, setLoading] = useState(true);
 
@@ -149,10 +151,10 @@ const Analytics = () => {
         ));
 
         return [
-            { name: 'Programs', value: programAdoptionPercentage || 40, fill: '#8884d8' },
-            { name: 'Forum', value: forumActivityPercentage || 30, fill: '#83a6ed' },
-            { name: 'Users', value: userEngagementPercentage || 50, fill: '#8dd1e1' },
-            { name: 'Community', value: communityScore || 40, fill: '#82ca9d' },
+            { name: t('admin.analytics.metrics.programs'), value: programAdoptionPercentage || 40, fill: '#8884d8' },
+            { name: t('admin.analytics.metrics.forum'), value: forumActivityPercentage || 30, fill: '#83a6ed' },
+            { name: t('admin.analytics.metrics.users'), value: userEngagementPercentage || 50, fill: '#8dd1e1' },
+            { name: t('admin.analytics.metrics.community'), value: communityScore || 40, fill: '#82ca9d' },
         ];
     };
 
@@ -272,33 +274,33 @@ const Analytics = () => {
                         <path fill="none" d="M0 0h24v24H0z" />
                         <path d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z" fill="currentColor" />
                     </svg>
-                    <span>Back to Dashboard</span>
+                    <span>{t('admin.backToDashboard')}</span>
                 </Link>
-                <h1>Analytics Dashboard</h1>
+                <h1>{t('admin.analytics.title')}</h1>
                 <div className="time-range-selector">
                     <button
                         className={timeRange === 'week' ? 'active' : ''}
                         onClick={() => setTimeRange('week')}
                     >
-                        Week
+                        {t('admin.analytics.timeRanges.week')}
                     </button>
                     <button
                         className={timeRange === 'month' ? 'active' : ''}
                         onClick={() => setTimeRange('month')}
                     >
-                        Month
+                        {t('admin.analytics.timeRanges.month')}
                     </button>
                     <button
                         className={timeRange === 'quarter' ? 'active' : ''}
                         onClick={() => setTimeRange('quarter')}
                     >
-                        Quarter
+                        {t('admin.analytics.timeRanges.quarter')}
                     </button>
                     <button
                         className={timeRange === 'year' ? 'active' : ''}
                         onClick={() => setTimeRange('year')}
                     >
-                        Year
+                        {t('admin.analytics.timeRanges.year')}
                     </button>
                 </div>
             </div>
@@ -306,14 +308,14 @@ const Analytics = () => {
             {loading ? (
                 <div className="analytics-loading">
                     <div className="spinner"></div>
-                    <p>Loading analytics data...</p>
+                    <p>{t('admin.analytics.loadingData')}</p>
                 </div>
             ) : (
                 <div className="analytics-grid">
                     {/* потребителска активност */}
                     <div className="analytics-card user-activity">
-                        <h2>User Activity</h2>
-                        <p className="card-description">Track daily active users over time</p>
+                        <h2>{t('admin.analytics.cards.userActivity.title')}</h2>
+                        <p className="card-description">{t('admin.analytics.cards.userActivity.description')}</p>
 
                         <div className="chart-container">
                             <ResponsiveContainer width="100%" height={300}>
@@ -351,15 +353,15 @@ const Analytics = () => {
                             <div className="chart-summary">
                                 <div className="summary-stat">
                                     <h3>{usersData.length > 0 ? usersData[usersData.length - 1].users : 0}</h3>
-                                    <p>Today</p>
+                                    <p>{t('admin.analytics.today')}</p>
                                 </div>
                                 <div className="summary-stat">
                                     <h3>{Math.round(usersData.reduce((acc, item) => acc + item.users, 0) / usersData.length)}</h3>
-                                    <p>Average</p>
+                                    <p>{t('admin.analytics.average')}</p>
                                 </div>
                                 <div className="summary-stat">
                                     <h3>{usersCount}</h3>
-                                    <p>Total Users</p>
+                                    <p>{t('admin.stats.totalUsers')}</p>
                                 </div>
                             </div>
                         </div>
@@ -367,8 +369,8 @@ const Analytics = () => {
 
                     {/* популярни програми */}
                     <div className="analytics-card popular-programs">
-                        <h2>Popular Programs</h2>
-                        <p className="card-description">Distribution of program popularity</p>
+                        <h2>{t('admin.analytics.cards.popularPrograms.title')}</h2>
+                        <p className="card-description">{t('admin.analytics.cards.popularPrograms.description')}</p>
 
                         <div className="chart-container">
                             <ResponsiveContainer width="100%" height={300}>
@@ -401,7 +403,7 @@ const Analytics = () => {
                             <div className="chart-summary">
                                 <div className="summary-stat">
                                     <h3>{postsCount}</h3>
-                                    <p>Total Posts</p>
+                                    <p>{t('admin.stats.forumPosts')}</p>
                                 </div>
                             </div>
                         </div>
@@ -409,8 +411,8 @@ const Analytics = () => {
 
                     {/* продажби на програми */}
                     <div className="analytics-card program-sales">
-                        <h2>Program Sales</h2>
-                        <p className="card-description">Track program sales over time</p>
+                        <h2>{t('admin.analytics.cards.programSales.title')}</h2>
+                        <p className="card-description">{t('admin.analytics.cards.programSales.description')}</p>
 
                         <div className="chart-container">
                             <ResponsiveContainer width="100%" height={300}>
@@ -432,7 +434,7 @@ const Analytics = () => {
                                     <Legend />
                                     <Bar
                                         dataKey="posts"
-                                        name="Sales"
+                                        name={t('admin.analytics.sales')}
                                         fill="#82ca9d"
                                         radius={[4, 4, 0, 0]}
                                     />
@@ -442,11 +444,11 @@ const Analytics = () => {
                             <div className="chart-summary">
                                 <div className="summary-stat">
                                     <h3>{programsData.reduce((acc, item) => acc + item.posts, 0)}</h3>
-                                    <p>Period Sales</p>
+                                    <p>{t('admin.analytics.periodSales')}</p>
                                 </div>
                                 <div className="summary-stat">
                                     <h3>{programSales}</h3>
-                                    <p>Total Sales</p>
+                                    <p>{t('admin.analytics.totalSales')}</p>
                                 </div>
                             </div>
                         </div>
@@ -454,8 +456,8 @@ const Analytics = () => {
 
                     {/* ефективност на платформата */}
                     <div className="analytics-card platform-performance">
-                        <h2>Platform Performance</h2>
-                        <p className="card-description">Section effectiveness metrics (percentage)</p>
+                        <h2>{t('admin.analytics.cards.platformPerformance.title')}</h2>
+                        <p className="card-description">{t('admin.analytics.cards.platformPerformance.description')}</p>
 
                         <div className="chart-container">
                             <ResponsiveContainer width="100%" height={300}>
@@ -494,7 +496,7 @@ const Analytics = () => {
                             <div className="chart-summary">
                                 <div className="summary-stat">
                                     <h3>{Math.round(performanceData.reduce((acc, item) => acc + item.value, 0) / performanceData.length)}%</h3>
-                                    <p>Average Performance</p>
+                                    <p>{t('admin.analytics.averagePerformance')}</p>
                                 </div>
                             </div>
                         </div>
