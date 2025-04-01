@@ -9,9 +9,11 @@ const programs = [
             ' Build Strength & Balance! – Scientifically proven split for maximum strength and muscle growth. Focus on pushing, pulling, and legs separately for optimal recovery and gains. Includes a structured weekly plan + recipes to fuel your progress!',
         image: '/images/ppl.webp',
         price: '9,99',
+        difficulty: 'intermediate',
         days: [
             {
                 day: 'Monday - Push',
+                isRestDay: false,
                 exercises: [
                     { name: 'Bench Press', sets: 4, reps: 8 },
                     { name: 'Overhead Press', sets: 4, reps: 8 },
@@ -22,6 +24,7 @@ const programs = [
             },
             {
                 day: 'Tuesday - Pull',
+                isRestDay: false,
                 exercises: [
                     { name: 'Deadlift', sets: 4, reps: 6 },
                     { name: 'Pull-Ups', sets: 4, reps: 8 },
@@ -32,10 +35,12 @@ const programs = [
             },
             {
                 day: 'Wednesday - Rest',
+                isRestDay: true,
                 exercises: [],
             },
             {
                 day: 'Thursday - Legs',
+                isRestDay: false,
                 exercises: [
                     { name: 'Squats', sets: 4, reps: 8 },
                     { name: 'Leg Press', sets: 4, reps: 10 },
@@ -46,6 +51,7 @@ const programs = [
             },
             {
                 day: 'Friday - Push',
+                isRestDay: false,
                 exercises: [
                     { name: 'Flat Barbell Press', sets: 4, reps: 8 },
                     { name: 'Dumbbell Shoulder Press', sets: 3, reps: 10 },
@@ -56,6 +62,7 @@ const programs = [
             },
             {
                 day: 'Saturday - Pull',
+                isRestDay: false,
                 exercises: [
                     { name: 'Barbell Rows', sets: 4, reps: 8 },
                     { name: 'Lat Pulldown', sets: 4, reps: 8 },
@@ -66,6 +73,7 @@ const programs = [
             },
             {
                 day: 'Sunday - Rest',
+                isRestDay: true,
                 exercises: [],
             },
         ],
@@ -102,9 +110,11 @@ const programs = [
             'Efficient & Powerful! – Train upper and lower body on alternating days, maximizing muscle recovery and workout intensity. Ideal for strength & hypertrophy, with flexibility for busy schedules. Comes with a ready-made weekly plan + nutrition guide!',
         image: '/images/ul.webp',
         price: '10,99',
+        difficulty: 'intermediate',
         days: [
             {
                 day: 'Monday - Upper',
+                isRestDay: false,
                 exercises: [
                     { name: 'Overhead Press', sets: 4, reps: 8 },
                     { name: 'Bench Press', sets: 4, reps: 8 },
@@ -115,6 +125,7 @@ const programs = [
             },
             {
                 day: 'Tuesday - Lower',
+                isRestDay: false,
                 exercises: [
                     { name: 'Squats', sets: 4, reps: 8 },
                     { name: 'Leg Press', sets: 4, reps: 10 },
@@ -125,6 +136,7 @@ const programs = [
             },
             {
                 day: 'Wednesday - Upper',
+                isRestDay: false,
                 exercises: [
                     { name: 'Dumbbell Shoulder Press', sets: 4, reps: 8 },
                     { name: 'Pull-Ups', sets: 4, reps: 8 },
@@ -135,6 +147,7 @@ const programs = [
             },
             {
                 day: 'Thursday - Lower',
+                isRestDay: false,
                 exercises: [
                     { name: 'Deadlift', sets: 4, reps: 6 },
                     { name: 'Squat', sets: 4, reps: 8 },
@@ -145,6 +158,7 @@ const programs = [
             },
             {
                 day: 'Friday - Upper',
+                isRestDay: false,
                 exercises: [
                     { name: 'Barbell Rows', sets: 4, reps: 8 },
                     { name: 'Chest Fly', sets: 3, reps: 12 },
@@ -154,17 +168,13 @@ const programs = [
                 ],
             },
             {
-                day: 'Saturday - Lower',
-                exercises: [
-                    { name: 'Squats', sets: 4, reps: 8 },
-                    { name: 'Leg Press', sets: 4, reps: 10 },
-                    { name: 'Deadlifts', sets: 4, reps: 6 },
-                    { name: 'Hip Thrusts', sets: 3, reps: 10 },
-                    { name: 'Glute Bridges', sets: 3, reps: 12 },
-                ],
+                day: 'Saturday - Rest',
+                isRestDay: true,
+                exercises: [],
             },
             {
                 day: 'Sunday - Rest',
+                isRestDay: true,
                 exercises: [],
             },
         ],
@@ -201,9 +211,11 @@ const programs = [
             'Total Body Transformation! – Perfect for beginners & advanced lifters looking to hit every muscle group multiple times a week. Improve strength, endurance & muscle definition with a structured program & meal plan for optimal results!',
         image: '/images/fb.webp',
         price: '8,99',
+        difficulty: 'beginner',
         days: [
             {
                 day: 'Monday - Full Body',
+                isRestDay: false,
                 exercises: [
                     { name: 'Deadlift', sets: 4, reps: 6 },
                     { name: 'Squats', sets: 4, reps: 8 },
@@ -214,6 +226,7 @@ const programs = [
             },
             {
                 day: 'Tuesday - Full Body',
+                isRestDay: false,
                 exercises: [
                     { name: 'Romanian Deadlifts', sets: 4, reps: 8 },
                     { name: 'Barbell Rows', sets: 4, reps: 8 },
@@ -224,6 +237,7 @@ const programs = [
             },
             {
                 day: 'Wednesday - Full Body',
+                isRestDay: false,
                 exercises: [
                     { name: 'Squats', sets: 4, reps: 8 },
                     { name: 'Deadlifts', sets: 4, reps: 6 },
@@ -234,6 +248,7 @@ const programs = [
             },
             {
                 day: 'Thursday - Full Body',
+                isRestDay: false,
                 exercises: [
                     { name: 'Leg Press', sets: 4, reps: 10 },
                     { name: 'T-Bar Row', sets: 3, reps: 10 },
@@ -244,6 +259,7 @@ const programs = [
             },
             {
                 day: 'Friday - Full Body',
+                isRestDay: false,
                 exercises: [
                     { name: 'Squats', sets: 4, reps: 8 },
                     { name: 'Deadlift', sets: 4, reps: 6 },
@@ -256,10 +272,12 @@ const programs = [
             },
             {
                 day: 'Saturday - Rest Day',
+                isRestDay: true,
                 exercises: [],
             },
             {
                 day: 'Sunday - Rest Day',
+                isRestDay: true,
                 exercises: [],
             },
         ],
@@ -296,9 +314,11 @@ const programs = [
             'Classic Bodybuilding Routine! – Target one muscle group per day for insane pump and full recovery. Perfect for muscle definition & isolation work. Comes with a structured weekly training guide + meal plan to help you bulk up or shred down!',
         image: '/images/brosplit.webp',
         price: '5,99',
+        difficulty: 'intermediate',
         days: [
             {
                 day: 'Monday - Chest',
+                isRestDay: false,
                 exercises: [
                     { name: 'Bench Press', sets: 4, reps: 8 },
                     { name: 'Incline Dumbbell Press', sets: 3, reps: 10 },
@@ -309,6 +329,7 @@ const programs = [
             },
             {
                 day: 'Tuesday - Back',
+                isRestDay: false,
                 exercises: [
                     { name: 'Pull-Ups', sets: 4, reps: 8 },
                     { name: 'Barbell Rows', sets: 4, reps: 8 },
@@ -319,6 +340,7 @@ const programs = [
             },
             {
                 day: 'Wednesday - Shoulders',
+                isRestDay: false,
                 exercises: [
                     { name: 'Overhead Press', sets: 4, reps: 8 },
                     { name: 'Lateral Raises', sets: 3, reps: 12 },
@@ -328,6 +350,7 @@ const programs = [
             },
             {
                 day: 'Thursday - Arms',
+                isRestDay: false,
                 exercises: [
                     { name: 'Bicep Curls', sets: 4, reps: 10 },
                     { name: 'Triceps Dips', sets: 3, reps: 12 },
@@ -337,6 +360,7 @@ const programs = [
             },
             {
                 day: 'Friday - Legs',
+                isRestDay: false,
                 exercises: [
                     { name: 'Squats', sets: 4, reps: 8 },
                     { name: 'Leg Press', sets: 4, reps: 10 },
@@ -347,10 +371,12 @@ const programs = [
             },
             {
                 day: 'Saturday - Rest',
+                isRestDay: true,
                 exercises: [],
             },
             {
                 day: 'Sunday - Rest',
+                isRestDay: true,
                 exercises: [],
             },
         ],
@@ -387,9 +413,11 @@ const programs = [
             'Train Like the Legend! – Inspired by Arnold Schwarzenegger’s iconic routine, this high-volume split will sculpt your physique like a champion. Focuses on chest/back, shoulders/arms, legs for maximum muscle growth. Includes a structured weekly plan & nutrition guide!',
         image: '/images/arnold.webp',
         price: '11,99',
+        difficulty: 'advanced',
         days: [
             {
                 day: 'Monday - Chest',
+                isRestDay: false,
                 exercises: [
                     { name: 'Bench Press', sets: 4, reps: 8 },
                     { name: 'Incline Dumbbell Press', sets: 3, reps: 10 },
@@ -400,6 +428,7 @@ const programs = [
             },
             {
                 day: 'Tuesday - Back',
+                isRestDay: false,
                 exercises: [
                     { name: 'Pull-Ups', sets: 4, reps: 8 },
                     { name: 'Barbell Rows', sets: 4, reps: 8 },
@@ -410,6 +439,7 @@ const programs = [
             },
             {
                 day: 'Wednesday - Shoulders',
+                isRestDay: false,
                 exercises: [
                     { name: 'Overhead Press', sets: 4, reps: 8 },
                     { name: 'Lateral Raises', sets: 3, reps: 12 },
@@ -419,6 +449,7 @@ const programs = [
             },
             {
                 day: 'Thursday - Arms',
+                isRestDay: false,
                 exercises: [
                     { name: 'Bicep Curls', sets: 4, reps: 10 },
                     { name: 'Triceps Dips', sets: 3, reps: 12 },
@@ -428,6 +459,7 @@ const programs = [
             },
             {
                 day: 'Friday - Legs',
+                isRestDay: false,
                 exercises: [
                     { name: 'Squats', sets: 4, reps: 8 },
                     { name: 'Leg Press', sets: 4, reps: 10 },
@@ -438,10 +470,12 @@ const programs = [
             },
             {
                 day: 'Saturday - Rest',
+                isRestDay: true,
                 exercises: [],
             },
             {
                 day: 'Sunday - Rest',
+                isRestDay: true,
                 exercises: [],
             },
         ],
@@ -468,6 +502,95 @@ const programs = [
                     protein: 15,
                     fat: 12,
                     carbs: 40,
+                },
+            },
+        ],
+    },
+    {
+        name: '3-Day Fundamentals',
+        description:
+            'Perfect for Everyone! – A well-balanced 3-day full-body program that adapts to all fitness levels. Master the fundamental movements with progressive overload options. Includes detailed form guidance and a flexible schedule. Great for busy people who want maximum results with minimal time investment!',
+        image: '/images/fb.webp',
+        price: '7,99',
+        difficulty: 'allLevels',
+        days: [
+            {
+                day: 'Monday - Full Body A',
+                isRestDay: false,
+                exercises: [
+                    { name: 'Squats', sets: 3, reps: 10 },
+                    { name: 'Push-Ups', sets: 3, reps: 12 },
+                    { name: 'Dumbbell Rows', sets: 3, reps: 12 },
+                    { name: 'Shoulder Press', sets: 3, reps: 10 },
+                    { name: 'Plank', sets: 3, reps: 30 },
+                ],
+            },
+            {
+                day: 'Tuesday - Rest',
+                isRestDay: true,
+                exercises: [],
+            },
+            {
+                day: 'Wednesday - Full Body B',
+                isRestDay: false,
+                exercises: [
+                    { name: 'Romanian Deadlifts', sets: 3, reps: 10 },
+                    { name: 'Bench Press', sets: 3, reps: 10 },
+                    { name: 'Lat Pulldown', sets: 3, reps: 12 },
+                    { name: 'Lunges', sets: 3, reps: 10 },
+                    { name: 'Face Pulls', sets: 3, reps: 15 },
+                ],
+            },
+            {
+                day: 'Thursday - Rest',
+                isRestDay: true,
+                exercises: [],
+            },
+            {
+                day: 'Friday - Full Body C',
+                isRestDay: false,
+                exercises: [
+                    { name: 'Deadlifts', sets: 3, reps: 8 },
+                    { name: 'Incline Dumbbell Press', sets: 3, reps: 12 },
+                    { name: 'Pull-Ups or Assisted Pull-Ups', sets: 3, reps: 8 },
+                    { name: 'Leg Press', sets: 3, reps: 12 },
+                    { name: 'Lateral Raises', sets: 3, reps: 15 },
+                ],
+            },
+            {
+                day: 'Saturday - Rest',
+                isRestDay: true,
+                exercises: [],
+            },
+            {
+                day: 'Sunday - Rest',
+                isRestDay: true,
+                exercises: [],
+            },
+        ],
+        recipes: [
+            {
+                name: 'Protein Smoothie',
+                image: '/images/protein-smoothie.jpg',
+                ingredients: ['1 banana', '1 scoop whey protein', '200 ml almond milk'],
+                instructions: 'Blend all ingredients together for a delicious smoothie.',
+                macros: {
+                    calories: 250,
+                    protein: 20,
+                    fat: 7,
+                    carbs: 30,
+                },
+            },
+            {
+                name: 'Grilled Chicken Salad',
+                image: '/images/grilled-chicken-salad.jpg',
+                ingredients: ['200g chicken breast', 'mixed greens', 'olive oil'],
+                instructions: 'Grill the chicken, chop veggies, and mix together with olive oil.',
+                macros: {
+                    calories: 350,
+                    protein: 30,
+                    fat: 18,
+                    carbs: 10,
                 },
             },
         ],

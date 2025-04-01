@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import User from '../models/user.js';
 import Program from '../models/program.js';
-import { isAdmin,isAuth  } from '../middlewares/authMiddleware.js';
+import { isAuth } from '../middlewares/authMiddleware.js';
 
 const programController = Router();
 
-programController.post('/programs/pay/:programId',isAuth , async (req, res) => {
+programController.post('/programs/pay/:programId', isAuth, async (req, res) => {
     const { programId } = req.params;
     const userId = req.user._id;
 

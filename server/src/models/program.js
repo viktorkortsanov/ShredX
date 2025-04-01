@@ -20,11 +20,20 @@ const programsSchema = new mongoose.Schema(
             get: (v) => v.toFixed(2),
             set: (v) => parseFloat(v.toString().replace(',', '.')),
         },
+        difficulty: {
+            type: String,
+            trim: true,
+            enum: ['beginner', 'intermediate', 'advanced', 'allLevels'],
+            default: 'beginner',
+        },
         days: [
             {
                 day: {
                     type: String,
                     trim: true,
+                },
+                isRestDay: {
+                    type: Boolean,
                 },
                 exercises: [
                     {
