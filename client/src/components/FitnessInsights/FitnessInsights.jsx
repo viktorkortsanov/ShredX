@@ -1,10 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import './fitnessInsights.css';
 import InsightCard from './InsightCard/InsightCard';
 
 const insightsData = [
     {
         trainer: {
-            name: "Viktor Kortsanov",
+            nameKey: "name1",
             image: "/images/viko.jpg",
             socials: {
                 facebook: "https://www.facebook.com/profile.php?id=100015649865699",
@@ -12,12 +13,12 @@ const insightsData = [
                 youtube: "https://www.youtube.com/@Viktor-rf4jx",
             },
         },
-        quote: "Consistency is key. It's better to train moderately four times a week for a year than intensely every day for a month and then quit.",
+        quoteKey: "quote1",
         position: "left"
     },
     {
         trainer: {
-            name: "Viktor Taskov",
+            nameKey: "name2",
             image: "/images/vtask.jpg",
             socials: {
                 facebook: "https://www.facebook.com/viktor.cappie",
@@ -25,12 +26,12 @@ const insightsData = [
                 youtube: "https://www.youtube.com/@MichelleVtaskFitnessJourney",
             },
         },
-        quote: "Your body achieves what your mind believes. Set clear goals, visualize your success, and let your determination fuel your transformation.",
+        quoteKey: "quote2",
         position: "right"
     },
     {
         trainer: {
-            name: "Georgi Krustev",
+            nameKey: "name3",
             image: "/images/georgikk.jpg",
             socials: {
                 facebook: "https://www.facebook.com/gkkcoaching",
@@ -38,12 +39,12 @@ const insightsData = [
                 youtube: "https://www.youtube.com/@georgiikk",
             },
         },
-        quote: "The weight room is not just about building muscles, it's about building discipline, resilience, and character that extends beyond fitness.",
+        quoteKey: "quote3",
         position: "left"
     },
     {
         trainer: {
-            name: "Valentin Petrov",
+            nameKey: "name4",
             image: "/images/valentin-petrov.jpg",
             socials: {
                 facebook: "https://www.facebook.com/ifbbprovalentin",
@@ -51,21 +52,26 @@ const insightsData = [
                 youtube: "https://www.youtube.com/@IFBBValentinPetrov",
             },
         },
-        quote: "Progress happens when you step outside your comfort zone. Challenge yourself with each workout, and your body will respond with growth.",
+        quoteKey: "quote4",
         position: "right"
     }
 ];
 
 const FitnessInsights = () => {
+    const { t } = useTranslation();
+
     return (
         <section className="fitness-insights">
-            <h2 className="insights-title">Wisdom From Our Experts</h2>
+            <h2 className="insights-title">{t("fitness_insights.title")}</h2>
             <div className="insights-container">
                 {insightsData.map((insight, index) => (
-                    <InsightCard 
+                    <InsightCard
                         key={index} 
-                        trainer={insight.trainer} 
-                        quote={insight.quote} 
+                        trainer={{
+                            ...insight.trainer,
+                            name: t(`fitness_insights.${insight.trainer.nameKey}`)
+                        }}
+                        quote={t(`fitness_insights.${insight.quoteKey}`)}
                         position={insight.position}
                     />
                 ))}
@@ -73,5 +79,4 @@ const FitnessInsights = () => {
         </section>
     );
 };
-
 export default FitnessInsights;

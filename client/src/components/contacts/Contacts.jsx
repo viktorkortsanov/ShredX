@@ -2,9 +2,11 @@ import useForm from '../../hooks/useForm';
 import './contact.css';
 import { useSelector } from 'react-redux';
 import emailjs from 'emailjs-com'
+import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
     const user = useSelector((state) => state.auth?.user);
+    const { t } = useTranslation();
 
     const { values, handleChange, handleSubmit, error } = useForm({
         name: '',
@@ -40,8 +42,8 @@ const Contact = () => {
     return (
         <div className="contact-container">
             <div className="company-info">
-                <h2 className="title">Contacts</h2>
-                <p className="info"><img src="/images/adress.svg" alt="adress" className='icon-contact' />Jungle Gym ulitsa "Kamchija", Svilengrad</p>
+                <h2 className="title">{t('footer.contact')}</h2>
+                <p className="info"><img src="/images/adress.svg" alt="adress" className='icon-contact' />{t('contacts.address')}</p>
                 <p className="info"><img src="/images/phone.svg" alt="adress" className='icon-contact' />+359 888 123 456</p>
                 <p className="info"><img src="/images/email.svg" alt="adress" className='icon-contact' />shredxcontact@gmail.com</p>
             </div>
@@ -57,11 +59,11 @@ const Contact = () => {
             </div>
 
             <div className="contact-form-container">
-                <h2 className="title">Contact us</h2>
+                <h2 className="title">{t('contacts.contactUs')}</h2>
                 {error && <p className="error-message">{error}</p>}
                 <form onSubmit={handleSubmit(handleFormSubmit)} className="contact-form">
                     <div className="form-group-contact">
-                        <label htmlFor="name">Subject</label>
+                        <label htmlFor="name">{t('contacts.subject')}</label>
                         <input
                             type="text"
                             id="name"
@@ -72,7 +74,7 @@ const Contact = () => {
                         />
                     </div>
                     <div className="form-group-contact">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">{t('register.email')}</label>
                         <input
                             type="email"
                             id="email"
@@ -83,7 +85,7 @@ const Contact = () => {
                         />
                     </div>
                     <div className="form-group-contact">
-                        <label htmlFor="message">Message</label>
+                        <label htmlFor="message">{t('contacts.message')}</label>
                         <textarea
                             id="message"
                             name="message"
@@ -92,7 +94,7 @@ const Contact = () => {
                             className="form-textarea-contact"
                         ></textarea>
                     </div>
-                    <button type="submit" className="submit-button">Send</button>
+                    <button type="submit" className="submit-button">{t('contacts.button')}</button>
                 </form>
             </div>
         </div>

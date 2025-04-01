@@ -4,13 +4,15 @@ import useForm from "../../hooks/useForm.js";
 import postApi from "../../api/postApi.js";
 import "./editpost.css";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function EditPost() {
     const { postId } = useParams();
     const navigate = useNavigate();
     const userId = useSelector(state => state.auth.user?._id);
     const isAdmin = useSelector(state => state.auth.user.isAdmin);
-    
+    const { t } = useTranslation();
+
     const { values, setValues, handleChange, handleSubmit, error, setError } = useForm({
         title: "",
         content: "",
@@ -48,34 +50,41 @@ export default function EditPost() {
     return (
         <div className="create-post-container">
             <form className="create-post-form" onSubmit={handleSubmit(submitPost)} method="POST">
-                <h2>Edit Post</h2>
+                <h2>{t('forum.editPostForm')}</h2>
 
                 {error && <p className="error-message">{error}</p>}
 
                 <div className="input-group">
-                    <label htmlFor="title">Title:</label>
+                    <label htmlFor="title">{t('forum.editFormTitle')}:</label>
                     <input
                         id="title"
                         type="text"
                         name="title"
                         value={values.title}
                         onChange={handleChange}
-                        placeholder="Enter post title"
+                        placeholder={t('forum.editFormTitlePlaceholder')}
                     />
                 </div>
 
                 <div className="input-group">
-                    <label htmlFor="content">Content:</label>
+                    <label htmlFor="content">{t('forum.editFormContent')}:</label>
                     <textarea
                         id="content"
                         name="content"
                         value={values.content}
                         onChange={handleChange}
-                        placeholder="Write your post content"
+                        placeholder={t('forum.editFormContentPlaceholder')}
                     ></textarea>
                 </div>
 
-                <button className="submit-btn" type="submit">Update Post</button>
+                <button className="submit-btn" type="submit">{t('forum.editFormButtons')}</button>
+                <button
+                    type="button"
+                    className="cancel-btn"
+                    onClick={() => navigate(`/forum/${postId}/details`)}
+                >
+                    {t('confirmDialog.cancel')}
+                </button>
             </form>
         </div>
     );

@@ -1,11 +1,12 @@
 import TrainerCard from "./trainerCard/TrainerCard.jsx";
+import { useTranslation } from "react-i18next";
 import './ourteam.css'
 
 const trainers = [
     {
-        name: "Viktor Kortsanov",
+        nameKey: "name1",
         image: "/images/viko.jpg",
-        description: "Viktor Kortsanov is the ShredX team leader, young and motivated, always ready to help others achieve their fitness goals with enthusiasm and dedication.",
+        descriptionKey: "desc1",
         socials: {
             facebook: "https://www.facebook.com/profile.php?id=100015649865699",
             instagram: "https://www.instagram.com/v_kortsanov",
@@ -13,9 +14,9 @@ const trainers = [
         },
     },
     {
-        name: "Viktor Taskov",
+        nameKey: "name2",
         image: "/images/vtask.jpg",
-        description: "Viktor Taskov is a part of the team at ShredX. As a coach, his mission is to reach as wide an audience as possible and help them achieve their goals in a quick and safe manner.",
+        descriptionKey: "desc2",
         socials: {
             facebook: "https://www.facebook.com/viktor.cappie",
             instagram: "https://www.instagram.com/thevtask",
@@ -23,9 +24,9 @@ const trainers = [
         },
     },
     {
-        name: "Georgi Krustev",
+        nameKey: "name3",
         image: "/images/georgikk.jpg",
-        description: "Georgi Krastsev is a 32-year-old Senior Full Stack Developer and professional bodybuilder with over 14 years of fitness experience, believing in discipline and consistency to achieve goals.",
+        descriptionKey: "desc3",
         socials: {
             facebook: "https://www.facebook.com/gkkcoaching",
             instagram: "https://www.instagram.com/georgiikk",
@@ -33,9 +34,9 @@ const trainers = [
         },
     },
     {
-        name: "Valentin Petrov",
+        nameKey: "name4",
         image: "/images/valentin-petrov.jpg",
-        description: "Valentin Petrov is a professional bodybuilder with years of experience and a certified trainer. Passionate about fitness, he combines his expertise in bodybuilding with coaching, helping others achieve their goals through discipline and dedication.",
+        descriptionKey: "desc4",
         socials: {
             facebook: "https://www.facebook.com/ifbbprovalentin",
             instagram: "https://www.instagram.com/valentinpetrov_ifbbpro",
@@ -44,12 +45,22 @@ const trainers = [
     }
 ];
 
+
 const OurTeam = () => {
+    const { t } = useTranslation();
+
     return (
         <section className="our-team">
             <div className="team-container">
                 {trainers.map((trainer, index) => (
-                    <TrainerCard key={index} trainer={trainer} />
+                    <TrainerCard
+                        key={index}
+                        trainer={{
+                            ...trainer,
+                            name: t(`our_team.${trainer.nameKey}`),
+                            description: t(`our_team.${trainer.descriptionKey}`)
+                        }}
+                    />
                 ))}
             </div>
         </section>

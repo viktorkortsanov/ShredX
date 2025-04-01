@@ -6,6 +6,7 @@ import Comment from '../comment/Comment.jsx';
 import "./postdetails.css";
 import postApi from "../../api/postApi.js";
 import userApi from "../../api/userApi.js";
+import { useTranslation } from "react-i18next";
 
 const PostDetails = () => {
     const { postId } = useParams();
@@ -18,6 +19,7 @@ const PostDetails = () => {
     const [comments, setComments] = useState([]);
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const userId = useSelector(state => state.auth.user?._id);
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -116,14 +118,14 @@ const PostDetails = () => {
     };
 
     if (!post) {
-        return <div className="loading-container">Loading...</div>;
+        return <div className="loading-container"></div>;
     }
 
     return (
         <div className="post-details-container">
             <Link to="/forum" className="back-link-forum">
                 <img src="/images/back.png" alt="Back Arrow" className="back-arrow" />
-                <span className="back-text">Back to Forum</span>
+                <span className="back-text">{t('forum.backToForum')}</span>
             </Link>
 
             <div className="post-details-card">
@@ -164,10 +166,10 @@ const PostDetails = () => {
                                 onClick={handleLikeToggle}
                                 className={`action-btn like-btn ${isLiked ? 'liked' : ''}`}
                             >
-                                {isLiked ? 'Unlike' : 'Like'}
+                                {isLiked ? t('forum.unlike') : t('forum.like')}
                             </button>
                             <Link to={`/forum/${postId}/comment`} className="action-btn comment-btn">
-                                Comment
+                                {t('forum.comment')}
                             </Link>
                         </div>
                     )}
@@ -175,10 +177,10 @@ const PostDetails = () => {
                     {isOwner && (
                         <div className="owner-actions">
                             <Link to={`/forum/${postId}/edit`} className="action-btn edit-btn">
-                                <i className="fas fa-edit"></i> Edit
+                                <i className="fas fa-edit"></i> {t('forum.editPost')}
                             </Link>
                             <button className="action-btn delete-btn" onClick={() => setShowDialog(true)}>
-                                <i className="fas fa-trash"></i> Delete
+                                <i className="fas fa-trash"></i> {t('forum.deletePost')}
                             </button>
                         </div>
                     )}
@@ -187,7 +189,7 @@ const PostDetails = () => {
 
             {comments.length > 0 && (
                 <div className="comments-section">
-                    <h3>Comments ({comments.length})</h3>
+                    <h3>{t('forum.comments')} ({comments.length})</h3>
                     <div className="comments-list">
                         {comments.map((comment) => (
                             <Comment

@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./comment.css";
 import userApi from "../../api/userApi";
+import { useTranslation } from "react-i18next";
 
 const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike }) => {
     const isOwner = userId === comment.owner;
     const isLiked = comment.likes.includes(userId);
-    const [userProfileImg,setUserProfileImg] = useState(null);
+    const [userProfileImg, setUserProfileImg] = useState(null);
+    const { t } = useTranslation();
 
     useEffect(() => {
         async function getUserProfileImg() {
-            try{
+            try {
                 const response = await userApi.getProfileImage(comment.owner);
                 setUserProfileImg(response.profileImage);
-            }catch(error){
+            } catch (error) {
                 console.log(error);
             }
         }
@@ -41,25 +43,25 @@ const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike })
                 {isOwner ? (
                     <>
                         <Link to={`/forum/${postId}/comment/${comment._id}/edit`} className="action-btn edit">
-                            Edit
+                            {t('forum.editPost')}
                         </Link>
                         <button className="action-btn delete" onClick={() => onDelete(comment._id)}>
-                            Delete
+                            {t('forum.deletePost')}
                         </button>
                     </>
                 ) : (
                     isAuthenticated && (
                         <button className="action-btn like" onClick={() => onLike(comment._id)}>
-                            {isLiked ? "Unlike" : "Like"}
+                            {isLiked ? t('forum.unlike') : t('forum.like')}
                         </button>
                     )
                 )}
             </div>
 
             <div className="comment-likes">
-                <img 
-                    src="/images/like.png" 
-                    alt="Like" 
+                <img
+                    src="/images/like.png"
+                    alt="Like"
                     className="like-img"
                 />
                 <span className="like-count">{comment.likes.length}</span>

@@ -1,20 +1,21 @@
 import { Link } from 'react-router-dom';
 import './PostItem.css';
-import {useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 
 const PostItem = ({ post }) => {
-  
     const [user, setUser] = useState(null);
+    const { t } = useTranslation();
     useEffect(() => {
         const getUser = async () => {
             try {
                 const response = await fetch(`http://localhost:3030/users/${post.owner}`);
                 console.log('Getting user', response);
-                if (!response.ok) { 
+                if (!response.ok) {
                     throw new Error('Грешка при зареждане на данните за потребителя');
                 }
-                const data = await response.json(); 
+                const data = await response.json();
                 setUser(data);
             } catch (error) {
                 console.log(error);
@@ -26,13 +27,13 @@ const PostItem = ({ post }) => {
     }, [post.owner]);
 
     if (!user) {
-        return <div>Loading...</div>;
+        return <div>{t('forum.loadingPost')}</div>;
     }
     return (
         <div className="post-item">
             <div className="post-header">
                 <div className="user-avatar">
-                <img src={user.profileImage || '/images/null-profile.png'} alt="user-logo" />
+                    <img src={user.profileImage || '/images/null-profile.png'} alt="user-logo" />
                 </div>
                 <div className="post-info">
                     <h3 className="username">{post.author}</h3>
@@ -46,7 +47,7 @@ const PostItem = ({ post }) => {
                     {post.content && post.content.length > 120 ? '...' : ''}
                 </p>
                 <Link to={`/forum/${post._id}/details`} className="read-post-link">
-                    Reade more... 
+                    {t('forum.readMore')}...
                 </Link>
             </div>
         </div>

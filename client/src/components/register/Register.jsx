@@ -4,9 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
 import userApi from '../../api/userApi.js';
 import emailjs from 'emailjs-com'
+import { useTranslation } from 'react-i18next';
 import './register.css';
 
 export default function Register() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { values, handleChange, handleSubmit, error, setError } = useForm({
@@ -40,67 +42,66 @@ export default function Register() {
         }
     };
 
-
     return (
         <div className="register-container">
             <form className="register-form" method="POST" onSubmit={handleSubmit(handleRegister)}>
-                <h2>Create an Account</h2>
+                <h2>{t('register.create_account')}</h2>
 
                 {error && <p className="error">{error}</p>}
 
                 <div className="input-group-regiser">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username">{t('register.username')}</label>
                     <input
                         type="text"
                         id="username"
                         name="username"
                         value={values.username}
-                        placeholder="Enter your username"
+                        placeholder={t('register.username_placeholder')}
                         onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-group-regiser">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">{t('register.email')}</label>
                     <input
                         type="email"
                         id="email"
                         name="email"
                         value={values.email}
-                        placeholder="Enter your email"
+                        placeholder={t('register.email_placeholder')}
                         onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-group-regiser">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">{t('register.password')}</label>
                     <input
                         type="password"
                         id="password"
                         name="password"
                         value={values.password}
-                        placeholder="Enter your password"
+                        placeholder={t('register.password_placeholder')}
                         onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-group-regiser">
-                    <label htmlFor="rePassword">Confirm Password</label>
+                    <label htmlFor="rePassword">{t('register.confirm_password')}</label>
                     <input
                         type="password"
                         id="rePassword"
                         name="rePassword"
                         value={values.rePassword}
-                        placeholder="Confirm your password"
+                        placeholder={t('register.confirm_password_placeholder')}
                         onChange={handleChange}
                     />
                 </div>
 
                 <div className="login-link">
-                    <p>Already have an account? <Link to="/login">Login here</Link></p>
+                    <p>{t('register.already_have_account')} <Link to="/login">{t('register.login_here')}</Link></p>
                 </div>
 
-                <button type="submit" className="submit-btn">Register</button>
+                <button type="submit" className="submit-btn">{t('register.register_button')}</button>
             </form>
         </div>
     );
