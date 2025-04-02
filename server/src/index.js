@@ -5,13 +5,12 @@ import { authMiddleware } from './middlewares/authMiddleware.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { runSeeder } from './seeder.js';
-
 const app = express();
 
 app.use(
     cors({
         credentials: true,
-        origin: ['http://localhost:5173', 'http://localhost:5174'],
+        origin: ['http://localhost:5173', 'http://localhost:5174', "https://shredx-4d3e7.web.app"],
         optionsSuccessStatus: 200,
     })
 );
@@ -20,7 +19,10 @@ app.use(
 const url = 'mongodb://127.0.0.1:27017';
 
 mongoose
-    .connect(url, { dbName: 'shredx' })
+    .connect(url, { 
+        dbName: 'shredx',
+        useUnifiedTopology: true
+    })
     .then(async () => {
         console.log('Connected to DB');
         await runSeeder();
@@ -33,3 +35,5 @@ app.use(authMiddleware);
 app.use(routes);
 
 app.listen(3030, () => console.log('App is listening on http://localhost:3030'));
+
+export default app;
