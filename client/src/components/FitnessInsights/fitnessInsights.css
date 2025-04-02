@@ -1,5 +1,5 @@
 .fitness-insights {
-    padding: 120px 20px;
+    padding: 250px 20px;
     position: relative;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.3);
@@ -38,7 +38,6 @@
     gap: 150px;
 }
 
-/* Добавяме декоративни елементи */
 .fitness-insights::before {
     content: '';
     position: absolute;
