@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import "./comment.css";
 import userApi from "../../api/userApi";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike }) => {
     const isOwner = userId === comment.owner;
     const isLiked = comment.likes.includes(userId);
+    const isAdmin = useSelector((state) => state.auth.user.isAdmin);
+    console.log(isAdmin);
+
     const [userProfileImg, setUserProfileImg] = useState(null);
     const { t } = useTranslation();
 
@@ -40,7 +44,19 @@ const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike })
             </div>
 
             <div className="comment-actions">
-                {isOwner ? (
+                {isAdmin ? (
+                    <>
+                        <Link to={`/forum/${postId}/comment/${comment._id}/edit`} className="action-btn edit">
+                            {t('common.edit')}
+                        </Link>
+                        <button className="action-btn delete" onClick={() => onDelete(comment._id)}>
+                            {t('forum.deletePost')}
+                        </button>
+                        <button className="action-btn like" onClick={() => onLike(comment._id)}>
+                            {isLiked ? t('forum.unlike') : t('forum.like')}
+                        </button>
+                    </>
+                ) : isOwner ? (
                     <>
                         <Link to={`/forum/${postId}/comment/${comment._id}/edit`} className="action-btn edit">
                             {t('common.edit')}
@@ -49,13 +65,13 @@ const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike })
                             {t('forum.deletePost')}
                         </button>
                     </>
-                ) : (
-                    isAuthenticated && (
-                        <button className="action-btn like" onClick={() => onLike(comment._id)}>
-                            {isLiked ? t('forum.unlike') : t('forum.like')}
-                        </button>
-                    )
+                ) : isAuthenticated && (
+                    <button className="action-btn like" onClick={() => onLike(comment._id)}>
+                        {isLiked ? t('forum.unlike') : t('forum.like')}
+                    </button>
                 )}
+
+
             </div>
 
             <div className="comment-likes">
