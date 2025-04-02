@@ -10,21 +10,21 @@ export default function CardContainer() {
         <article id="features-section">
             <Link to="/programs">
                 <Card
-                    img="../../../public/images/personalization.png"
+                    img="/images/personalization.png"
                     title={t("features.title_1_text")}
                     text={t("features.text_1_description")}
                 />
             </Link>
             <Link to="/forum">
                 <Card
-                    img="../../../public/images/community.png"
+                    img="/images/community.png"
                     title={t("features.title_2_text")}
                     text={t("features.text_2_description")}
                 />
             </Link>
             <Link to="/">
                 <Card
-                    img="../../../public/images/task.png"
+                    img="/images/task.png"
                     title={t("features.title_3_text")}
                     text={t("features.text_3_description")}
                 />

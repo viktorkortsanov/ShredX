@@ -4,10 +4,6 @@
     justify-content: center;
     align-items: center;
     min-height: 80vh;
-    background-image: url(https://i.pinimg.com/736x/2a/a7/8a/2aa78a2c8fbe91b37bfed0fbb32fae82.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-blend-mode: multiply;
     background-color: rgba(0, 0, 0, 0.5);
     margin-top: 70px;
     overflow-x: hidden;
