@@ -148,7 +148,6 @@ export const useCreateForm = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     
-    // prowerqwame cenata dali e 4islo  s regex
     if (name === 'price') {
       const priceValue = value.replace(/[^0-9.,]/g, '');
       setFormData(prev => ({

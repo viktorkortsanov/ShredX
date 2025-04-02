@@ -1,7 +1,9 @@
+const baseUrl = 'http://localhost:3030';
+
 const postApi = {
     getAll: async () => {
         try {
-            const response = await fetch('http://localhost:3030/forum', {
+            const response = await fetch(`${baseUrl}/forum`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -21,7 +23,7 @@ const postApi = {
     },
     create: async (postData) => {
         try {
-            const response = await fetch("http://localhost:3030/create", {
+            const response = await fetch(`${baseUrl}/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -42,7 +44,7 @@ const postApi = {
     },
     get: async (id) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${id}`, {
+            const response = await fetch(`${baseUrl}/forum/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -62,7 +64,7 @@ const postApi = {
     },
     edit: async (id, postData) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${id}/edit`, {
+            const response = await fetch(`${baseUrl}/forum/${id}/edit`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -83,7 +85,7 @@ const postApi = {
     },
     delete: async (id) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${id}/delete`, {
+            const response = await fetch(`${baseUrl}/forum/${id}/delete`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -103,7 +105,7 @@ const postApi = {
     },
     like: async (postId, userId) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${postId}/like`, {
+            const response = await fetch(`${baseUrl}/forum/${postId}/like`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -126,7 +128,7 @@ const postApi = {
 
     comment: async (postId, content) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${postId}/comment`, {
+            const response = await fetch(`${baseUrl}/forum/${postId}/comment`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -148,7 +150,7 @@ const postApi = {
 
     editComment: async (postId, commentId, content) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${postId}/comment/${commentId}/edit`, {
+            const response = await fetch(`${baseUrl}/forum/${postId}/comment/${commentId}/edit`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -170,7 +172,7 @@ const postApi = {
 
     deleteComment: async (postId, commentId) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${postId}/comment/${commentId}/delete`, {
+            const response = await fetch(`${baseUrl}/forum/${postId}/comment/${commentId}/delete`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -191,7 +193,7 @@ const postApi = {
 
     getUserPosts: async (userId) => {
         try {
-            const response = await fetch(`http://localhost:3030/user/${userId}/posts`, {
+            const response = await fetch(`${baseUrl}/user/${userId}/posts`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -212,7 +214,7 @@ const postApi = {
     },
     getDetails: async (id) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${id}/details`, {
+            const response = await fetch(`${baseUrl}/forum/${id}/details`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -233,7 +235,7 @@ const postApi = {
 
     likeToggle: async (id) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${id}/like-toggle`, {
+            const response = await fetch(`${baseUrl}/forum/${id}/like-toggle`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -254,7 +256,7 @@ const postApi = {
 
     likeComment: async (postId, commentId) => {
         try {
-            const response = await fetch(`http://localhost:3030/forum/${postId}/comment/${commentId}/like`, {
+            const response = await fetch(`${baseUrl}/forum/${postId}/comment/${commentId}/like`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -275,7 +277,7 @@ const postApi = {
 
     getLikedPosts: async (userId) => {
         try {
-            const response = await fetch(`http://localhost:3030/users/${userId}/posts/liked`, {
+            const response = await fetch(`${baseUrl}/users/${userId}/posts/liked`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

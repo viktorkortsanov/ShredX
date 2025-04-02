@@ -157,8 +157,6 @@ const programApi = {
     },
     initiatePayment: async (programId, paymentData, token) => {
         try {
-            console.log('Using token for payment:', token); // За дебъгване
-
             const response = await fetch(`${baseUrl}/programs/pay/${programId}`, {
                 method: 'POST',
                 headers: {

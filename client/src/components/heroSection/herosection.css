@@ -22,7 +22,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    object-fit: cover; /* Разтяга видеото, без да се деформира */
+    object-fit: cover;
     pointer-events: none;
     overflow: hidden;
     z-index: -2;

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import userApi from "../../../api/userApi";
 import { useParams } from "react-router-dom";
@@ -48,7 +47,6 @@ export default function UserInfo() {
                 setUserPosts(userPosts);
                 setPurchasedProgramIds(purchasedIdsData);
 
-                // Зареждане на програмите от API вместо от мокнати данни
                 if (purchasedIdsData.length > 0) {
                     const allPrograms = await getAllPrograms();
                     const userPrograms = allPrograms.filter(program => 

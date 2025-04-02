@@ -3,7 +3,7 @@
     overflow: hidden;
     position: relative;
     padding: 20px 0;
-    background: linear-gradient(135deg, #001f3f, #0059b3, #001f3f); /* Син градиент */
+    background: linear-gradient(135deg, #001f3f, #0059b3, #001f3f);
 }
 
 .sponsors-ticker {

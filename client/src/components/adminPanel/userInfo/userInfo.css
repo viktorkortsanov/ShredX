@@ -10,10 +10,10 @@
     margin-bottom: 20px;
     margin-left: 15px;
     text-decoration: none;
-    color: #999; /* Сивкав цвят */
+    color: #999;
     font-weight: 500;
     transition: color 0.3s ease;
-    padding-left: 20px; /* По-навътре */
+    padding-left: 20px;
 }
 
 .back-link:hover {
@@ -80,7 +80,6 @@
     color: white;
 }
 
-/* Нови стилове за структуриране на потребителската информация */
 .user-details {
     display: flex;
     flex-direction: column;

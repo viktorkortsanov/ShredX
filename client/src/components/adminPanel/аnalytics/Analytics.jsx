@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import {
     LineChart, Line, BarChart, Bar, PieChart, Pie, AreaChart, Area,

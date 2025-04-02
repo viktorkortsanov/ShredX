@@ -10,7 +10,8 @@
         "email": "Email",
         "save": "Save",
         "saving": "Saving...",
-        "backArrow": "Back Arrow"
+        "backArrow": "Back Arrow",
+        "loading": "Loading news"
     },
     "navigation": {
         "home": "HOME",

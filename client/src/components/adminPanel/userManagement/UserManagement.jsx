@@ -190,8 +190,6 @@ export default function UserManagement() {
                             </div>
                         )}
                     </div>
-
-                    {/* Пагинация */}
                     {filteredUsers.length > usersPerPage && (
                         <div className="pagination">
                             <button

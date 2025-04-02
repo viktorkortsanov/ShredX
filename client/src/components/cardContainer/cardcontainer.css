@@ -1,4 +1,3 @@
-/* Основни променливи */
 :root {
     --primary-blue: #2563eb;
     --secondary-blue: #1d4ed8;
@@ -16,7 +15,6 @@
     --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Основна секция */
 #features-section {
     width: 100%;
     padding: 60px 30px;
@@ -31,7 +29,6 @@
     overflow: hidden;
 }
 
-/* Синя градиентна светлина във фона */
 #features-section::before {
     content: '';
     position: absolute;
@@ -46,7 +43,6 @@
     filter: blur(50px);
 }
 
-/* Стилове за картичките */
 .feature-card {
     background-color: var(--card-bg);
     border-radius: var(--card-radius);
@@ -70,7 +66,6 @@
     box-shadow: var(--shadow-hover);
 }
 
-/* Синя горна линия на картичките */
 .feature-card::before {
     content: '';
     position: absolute;
@@ -88,7 +83,6 @@
     transform: scaleX(1);
 }
 
-/* Стилове за иконите */
 .feature-icon {
     width: 80px;
     height: 80px;
@@ -123,7 +117,6 @@
     filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.5));
 }
 
-/* Заглавия */
 .feature-title {
     font-size: 22px;
     font-weight: 700;
@@ -137,7 +130,6 @@
     color: var(--light-blue);
 }
 
-/* Описания */
 .feature-description {
     font-size: 16px;
     line-height: 1.6;
@@ -145,7 +137,6 @@
     margin-bottom: 25px;
 }
 
-/* Стил за бутона */
 .feature-button {
     padding: 10px 22px;
     background-color: transparent;
@@ -165,7 +156,6 @@
     color: var(--text-primary);
 }
 
-/* Анимации при зареждане */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -195,7 +185,6 @@
     animation-delay: 0.3s;
 }
 
-/* Пулсиращ ефект за иконите */
 @keyframes pulseBlue {
     0% {
         box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
@@ -214,7 +203,6 @@
     animation: pulseBlue 2s infinite;
 }
 
-/* Отзивчив дизайн */
 @media (max-width: 1024px) {
     #features-section {
         padding: 50px 25px;

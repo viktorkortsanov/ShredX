@@ -197,12 +197,9 @@ const PaymentForm = () => {
         }
     };
 
-    // Показваме зареждане докато програмата не е готова
     if (loading) {
         return <div className="loading">Loading program details...</div>;
     }
-
-    // Проверка дали програмата е намерена и заредена
     if (!program) {
         return <div className="error">Program not found</div>;
     }

@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import './news.css';
+import { useTranslation } from 'react-i18next';
 
 const News = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -36,7 +38,7 @@ const News = () => {
   };
 
   if (loading) {
-    return <div className="news-loading">Loading news.....</div>;
+    return <div className="news-loading">{t('common.loading')}.....</div>;
   }
 
   if (error) {
@@ -51,9 +53,9 @@ const News = () => {
         {duplicatedArticles.map((article, index) => (
           <div key={index} className="news-item">
             <a href={article.url} target="_blank" rel="noopener noreferrer" className="news-link">
-              <img 
-                src={article.urlToImage} 
-                alt={article.title} 
+              <img
+                src={article.urlToImage}
+                alt={article.title}
                 className="news-background-image"
               />
               <div className="news-content">

@@ -496,19 +496,6 @@
         width: calc(100% - 60px);
         padding-right: 60px;
     }
-    /* .pagination {
-        padding: 5px 10px;
-    }
-    
-    .page-number {
-        width: 30px;
-        height: 30px;
-        font-size: 14px;
-    }
-    
-    .pagination-arrow {
-        font-size: 18px;
-    } */
 }
 
 @media screen and (max-width: 576px) {
@@ -528,14 +515,3 @@
         font-size: 1.8rem;
     }
 }
-/* @media (max-width: 480px) {
-    .page-numbers {
-        gap: 0;
-    }
-    
-    .page-number {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
-    }
-} */

@@ -12,7 +12,6 @@ export default function MainContent() {
     const [showScrollTop, setShowScrollTop] = useState(false);
 
     useEffect(() => {
-        // Observer за Hero секцията (за скриване на футера)
         const heroObserver = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -81,8 +80,7 @@ export default function MainContent() {
                 <Sponsors />
                 <CardContainer />
                 <MyCarousel />
-                
-                {/* Стрелка за връщане към началото */}
+
                 {showScrollTop && (
                     <button 
                         className="scroll-to-top-button"

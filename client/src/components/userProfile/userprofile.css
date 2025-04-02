@@ -335,27 +335,6 @@
         font-size: 14px;
     }
 }
-/* .image-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-} */
- 
-/* .choose-image-button {
-    background-color: #2c2c2e;
-    color: white;
-    border: 1px solid rgba(146, 146, 146, 0.3);
-    border-radius: 4px;
-    padding: 8px 15px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
- 
-.choose-image-button:hover {
-    background-color: #3a3a3c;
-    border-color: rgba(146, 146, 146, 0.5);
-} */
  
 .save-image-button {
     background-color: #006CFA;

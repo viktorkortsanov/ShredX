@@ -18,7 +18,7 @@ const UserProfile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
-    const [activeTab, setActiveTab] = useState('posts'); // Changed default tab to 'posts'
+    const [activeTab, setActiveTab] = useState('posts');
     const [profileData, setProfileData] = useState({
         username: '',
         email: '',
@@ -264,7 +264,6 @@ const UserProfile = () => {
  
             <div className="profile-content">
                 <div className="profile-tabs">
-                    {/* Profile tab button removed */}
                     <button 
                         className={`tab-button ${activeTab === 'posts' ? 'active' : ''}`}
                         onClick={() => setActiveTab('posts')}
