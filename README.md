@@ -134,6 +134,7 @@ Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
   <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-original.svg" width="40" height="40"/>
   <img src="https://github.com/devicons/devicon/blob/master/icons/bootstrap/bootstrap-original.svg" width="40" height="40"/>
   <img src="https://github.com/devicons/devicon/blob/master/icons/firebase/firebase-plain.svg" width="40" height="40"/>
+    <img src="https://github.com/devicons/devicon/blob/master/icons/vitest/vitest-original.svg" width="40" height="40"/>
 </p>
 
 ---
@@ -146,3 +147,7 @@ Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
 - **Mongoose**: For interacting with MongoDB in the backend
 - **JsonWebToken**: For creating and verifying JSON Web Tokens
 - **Cors**: For enabling Cross-Origin Resource Sharing (CORS)
+- **Firebase**:  A platform for hosting, authentication, and real-time database services
+- **Recharts**: A React-based charting library for building data visualizations
+- **i18next**: A library for internationalization and translation management
+- **React Icons**: A collection of icons for easy integration into React applications
