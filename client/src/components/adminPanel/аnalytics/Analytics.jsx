@@ -391,7 +391,7 @@ const Analytics = () => {
                                     </Pie>
                                     <Tooltip
                                         contentStyle={{
-                                            backgroundColor: '#2a2a2c',
+                                            backgroundColor: 'white',
                                             border: 'none',
                                             borderRadius: '8px',
                                             color: 'white'
@@ -478,10 +478,10 @@ const Analytics = () => {
                                     />
                                     <Tooltip
                                         contentStyle={{
-                                            backgroundColor: '#2a2a2c',
+                                            backgroundColor: 'white',
                                             border: 'none',
                                             borderRadius: '8px',
-                                            color: 'white'
+                                            color: 'black'
                                         }}
                                     />
                                     <Legend
