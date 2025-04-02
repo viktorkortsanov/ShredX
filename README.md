@@ -102,14 +102,23 @@ The pages accessible to guests (admin users) are:
 Download MongoDB from here **[MongoDB Community Edition](https://www.mongodb.com/try/download/community)**.
 Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
 
-1. **Navigate to the Server Directory**:  
+1. **Create new terminal**:  
+
+2. **Navigate to the Project Directory**:  
+   Go to the server directory:
+
+   ```bash
+   cd shredx
+   ```
+
+3. **Navigate to the Server Directory**:  
    Go to the server directory:
 
    ```bash
    cd server
-   ```
+   ```   
 
-2. **Install Server Dependencies and Start the Server**:  
+4. **Install Server Dependencies and Start the Server**:  
    Execute the following commands in order to start the server.
 
    ```bash
@@ -117,7 +126,7 @@ Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
    npm start
    ```
 
-3. **Running the Server**:  
+5. **Running the Server**:  
    Once the server is started, it will listen for requests on:  
    `http://localhost:3030/`
 
