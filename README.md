@@ -4,7 +4,7 @@
 ✍️ **App Overview**  
 ShredX is a web application designed to offer a fitness forum and training programs. It provides users with an interactive community for discussing fitness topics and access to various workout programs to help them achieve their fitness goals. The application features both public and private sections, with personalized profiles and exclusive content for registered users.
 
-![](./client/public/images/shredx-main.png)
+![](./client/public/images/shredx-readme.png)
 
 Users can register for an account, participate in the forum discussions and browse fitness programs.With a focus on both social interaction and structured workout plans, ShredX aims to create an engaging fitness experience for all users.
 
