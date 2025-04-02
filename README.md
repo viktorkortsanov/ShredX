@@ -121,6 +121,7 @@ Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
    Once the server is started, it will listen for requests on:  
    `http://localhost:3030/`
 
+   ❗ If you have problems connecting to the data base change the url in index.js ❗
 ---
 ### **Client Tests Setup**
 
