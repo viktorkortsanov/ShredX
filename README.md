@@ -121,6 +121,24 @@ Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
    `http://localhost:3030/`
 
 ---
+### **Client Tests Setup**
+
+1. **Navigate to the Client Directory**:  
+   Go to the client directory.
+
+   ```bash
+   cd client
+   ```
+
+2. **Choose the file you want to test**:
+
+   For example:
+
+   ```bash
+   npm test Login.test.jsx
+   ```
+
+---
 
 🛠️ **Technologies and Tools**  
 
@@ -149,5 +167,6 @@ Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
 - **Cors**: For enabling Cross-Origin Resource Sharing (CORS)
 - **Firebase**:  A platform for hosting, authentication, and real-time database services
 - **Recharts**: A React-based charting library for building data visualizations
+- **Vitest**: A fast and lightweight testing framework for modern JavaScript and TypeScript projects, designed as a Vite-native alternative to Jest.
 - **i18next**: A library for internationalization and translation management
 - **React Icons**: A collection of icons for easy integration into React applications
