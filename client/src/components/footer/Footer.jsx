@@ -13,6 +13,7 @@ export default function Footer() {
                     <Link to="/privacy-policy">{t('footer.privacy_policy')}</Link>
                     <Link to="/terms-of-service">{t('footer.terms_of_service')}</Link>
                     <Link to="/contact">{t('footer.contact')}</Link>
+                    <Link to="/faq">{t('footer.faq')}</Link>
                 </div>
                 <div className='footer-logos'>
                     <Link to="https://www.facebook.com/groups/654526977191660">

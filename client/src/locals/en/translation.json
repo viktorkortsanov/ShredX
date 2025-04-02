@@ -97,7 +97,8 @@
         "copyright": "All rights reserved.",
         "privacy_policy": "Privacy Policy",
         "terms_of_service": "Terms of Service",
-        "contact": "Contact"
+        "contact": "Contact",
+        "faq": "FAQ"
     },
     "login": {
         "email": "Email",
@@ -542,5 +543,18 @@
         "button": "Complete Payment",
         "exp_date": "MM/YY",
         "payment_text": "Secure payment - Your data is protected"
+    },
+    "faq": {
+        "title": "Frequently asked questions",
+        "question1": "What is ShredX?",
+        "answer1": "ShredX is a fitness platform offering personalized workout programs for various levels and goals. It includes strength, endurance, and flexibility training. ShredX also has a community support forum where users can discuss programs, progress, and get advice from other community members.",
+        "question2": "How can I start using ShredX?",
+        "answer2": "To get started, you need to sign up for ShredX by creating a profile. Once registered, you will have access to all available programs and features of the platform.",
+        "question3": "How can I participate in the ShredX forum?",
+        "answer3": "To participate in the forum, you need to create a profile on ShredX. Once logged in, you'll have access to all discussions and be able to create new threads and comment.",
+        "question4": "What payment methods are used in ShredX?",
+        "answer4": "Payments for the programs in ShredX are made only with credit or debit cards. You can use Visa, MasterCard, and other popular cards.",
+        "question5": "Can I get a refund after purchasing a program?",
+        "answer5": "Once you purchase a program, refunds are not offered. Please make sure that the program meets your needs before making a purchase."
     }
 }
