@@ -16,19 +16,24 @@ The pages accessible to guests (non-logged-in users) are:
 - Forum
 - Register
 - Login
+- Privacy Policy
+- Terms of Service
+- Contact
+- FAQ
 
 👤 **Private Part**  
 The pages accessible to logged-in users are:
-- Programs (Fitness Programs)
-- User Profile (View posts in forum an liked posts)
+- Programs (Buy fitness programs)
+- User Profile (View posts in forum ,liked posts and bought programs)
 - Logout
 
 ---
 🔐 **Admin Part**  
 The pages accessible to guests (admin users) are:
 - Admin Panel
-- Forum Management(edit and delete posts)
-- Users Management(access to user info)'
+- User Management(user accounts ,profile verification ,user privileges)
+- Forum Management(post moderation ,comment management ,content filtering)
+- Analytics(User activity trends ,program sales metrics ,platform performance)
 
 **❗ To access the admin panel, you first need to create a user profile with the following credentials:**
 
@@ -38,8 +43,8 @@ The pages accessible to guests (admin users) are:
 
 🧑 **User Features**  
 - Access to fitness programs
-- View user profile(Posts in forum, liked posts and bought programs);
-- Forum participation(Create post, like post and comment);
+- View user profile(Posts in forum, liked posts and bought programs)
+- Forum participation(Create post ,delete post, like post, comment ,like comment and delete comment)
 - Logout functionality
 
 ---
@@ -91,9 +96,10 @@ The pages accessible to guests (admin users) are:
 
 ### **Server Part Setup**
 
-**Before setup the server part download MongoDB**
+**Before setup the server part download MongoDB and Node.JS**
 
-Download from here **[MongoDB Community Edition](https://www.mongodb.com/try/download/community)**.
+Download MongoDB from here **[MongoDB Community Edition](https://www.mongodb.com/try/download/community)**.
+Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
 
 1. **Navigate to the Server Directory**:  
    Go to the server directory:
@@ -117,7 +123,7 @@ Download from here **[MongoDB Community Edition](https://www.mongodb.com/try/dow
 ---
 
 🛠️ **Technologies and Tools**
-- ![React](https://img.shields.io/badge/React-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)
+- ![React](https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg)
 - ![Node.js](https://img.shields.io/badge/Node.js-%23339933.svg?style=flat&logo=node.js&logoColor=white)
 - ![Express](https://img.shields.io/badge/Express-%23404d59.svg?style=flat&logo=express&logoColor=white)
 - ![MongoDB](https://img.shields.io/badge/MongoDB-%233F9B3D.svg?style=flat&logo=mongodb&logoColor=white)
