@@ -21,7 +21,7 @@ export default function Register() {
     const handleRegister = async (userData) => {
         try {
             const { token, user } = await userApi.register(userData);
-            dispatch(login({ id: user._id, email: user.email, username: user.username, isAdmin: user.isAdmin }));
+            dispatch(login({ _id: user._id, email: user.email, username: user.username, isAdmin: user.isAdmin }));
             localStorage.setItem('token', token);
 
             const templateParams = {

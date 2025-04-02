@@ -33,6 +33,8 @@ const UserProfile = () => {
     const username = useSelector(state => state.auth.user?.username);
     const email = useSelector(state => state.auth.user?.email);
     const userId = useSelector(state => state.auth.user?._id);
+    console.log(userId);
+    
     useEffect(() => {
         window.scrollTo({
           top: 0,
@@ -107,6 +109,8 @@ const UserProfile = () => {
     
         setIsUploading(true);
         try {
+            console.log(userId);
+            
             const imageRef = ref(storage, `profileImages/${userId}/${selectedFile.name}`);
             await uploadBytes(imageRef, selectedFile);
             const downloadURL = await getDownloadURL(imageRef);
