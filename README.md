@@ -123,14 +123,10 @@ Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
 ---
 
 🛠️ **Technologies and Tools**
-- ![React](https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg)
-- ![Node.js](https://img.shields.io/badge/Node.js-%23339933.svg?style=flat&logo=node.js&logoColor=white)
-- ![Express](https://img.shields.io/badge/Express-%23404d59.svg?style=flat&logo=express&logoColor=white)
-- ![MongoDB](https://img.shields.io/badge/MongoDB-%233F9B3D.svg?style=flat&logo=mongodb&logoColor=white)
-- ![Redux](https://img.shields.io/badge/Redux-%2320232a.svg?style=flat&logo=redux&logoColor=%2361DAFB)
-- ![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?style=flat&logo=html5&logoColor=white)
-- ![CSS](https://img.shields.io/badge/CSS-%231572B6.svg?style=flat&logo=css3&logoColor=white)
-- ![Bootstrap](https://img.shields.io/badge/Bootstrap-%23563D7C.svg?style=flat&logo=bootstrap&logoColor=white)
+<img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" width="40" height="40" />
+<img src="https://github.com/devicons/devicon/blob/master/icons/nodejs/nodejs-original.svg" width="40" height="40" />
+<img src="https://github.com/devicons/devicon/blob/master/icons/mongodb/mongodb-original.svg" width="40" height="40" />
+<img src="https://github.com/devicons/devicon/blob/master/icons/redux/redux-original.svg" width="40" height="40" />
 
 ---
 
