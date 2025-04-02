@@ -4,6 +4,7 @@ import useForm from '../../../hooks/useForm.js';
 import './PaymentForm.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../../contexts/authContext.jsx';
+import { useTranslation } from 'react-i18next';
 
 const PaymentForm = () => {
     const { programs, getAllPrograms, initiatePaymentForProgram } = useAuth();
@@ -11,6 +12,7 @@ const PaymentForm = () => {
     const [program, setProgram] = useState(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const loadProgram = async () => {
@@ -25,7 +27,7 @@ const PaymentForm = () => {
                         navigate('/programs');
                     }
                 } else {
-    
+
                     const foundProgram = programs.find(prog => prog.id.toString() === programId.toString());
                     if (foundProgram) {
                         setProgram(foundProgram);
@@ -44,7 +46,7 @@ const PaymentForm = () => {
         loadProgram();
     }, [programId, programs, getAllPrograms, navigate]);
 
-    
+
     const { values, setValues, handleChange, handleSubmit, error, setError } = useForm({
         cardNumber: '',
         expirationDate: '',
@@ -123,7 +125,7 @@ const PaymentForm = () => {
                 [name]: formattedValue
             });
         } else if (name === 'cvv' || name === 'securityCode') {
-   
+
             const formattedValue = value.replace(/\D/g, '').substring(0, 4);
 
             setValues({
@@ -141,17 +143,17 @@ const PaymentForm = () => {
             setError('Please enter the name on card');
             return;
         }
-    
+
         if (!values.cardNumber || values.cardNumber.replace(/\s/g, '').length < 16) {
             setError('Please enter a valid card number');
             return;
         }
-    
+
         if (!values.expirationDate || values.expirationDate.length < 5) {
             setError('Please enter a valid expiration date (MM/YY)');
             return;
         }
-    
+
         if (!values.cvv || values.cvv.length < 3) {
             setError('Please enter a valid CVV code');
             return;
@@ -166,11 +168,11 @@ const PaymentForm = () => {
             amount: program.price,
             programName: program.name
         };
-    
+
         try {
 
             const result = await initiatePaymentForProgram(programId, paymentData);
-            
+
             if (result && result.success) {
 
                 const purchasedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
@@ -178,11 +180,11 @@ const PaymentForm = () => {
                     purchasedPrograms.push(programId);
                     localStorage.setItem('purchasedPrograms', JSON.stringify(purchasedPrograms));
                 }
-    
+
                 const purchaseDates = JSON.parse(localStorage.getItem('purchaseDates')) || {};
                 purchaseDates[programId] = new Date().toISOString();
                 localStorage.setItem('purchaseDates', JSON.stringify(purchaseDates));
-    
+
                 setIsPaymentSuccessful(true);
                 navigate('/programs');
 
@@ -199,7 +201,7 @@ const PaymentForm = () => {
     if (loading) {
         return <div className="loading">Loading program details...</div>;
     }
-    
+
     // Проверка дали програмата е намерена и заредена
     if (!program) {
         return <div className="error">Program not found</div>;
@@ -221,7 +223,7 @@ const PaymentForm = () => {
                 </div>
 
                 <div className="payment-form-container">
-                    <h2 className="payment-form-title">Payment Details</h2>
+                    <h2 className="payment-form-title">{t('payment_form.payment_details')}</h2>
 
                     <form className="payment-form-element" onSubmit={handleSubmit(submitPayment)} method="POST">
                         <div className="payment-card-icons">
@@ -259,7 +261,7 @@ const PaymentForm = () => {
                             <>
                                 <div className="payment-form-fields">
                                     <div className="payment-form-group">
-                                        <label htmlFor="nameOnCard">Name on Card</label>
+                                        <label htmlFor="nameOnCard">{t('payment_form.name_on_card')}</label>
                                         <input
                                             type="text"
                                             id="nameOnCard"
@@ -272,7 +274,7 @@ const PaymentForm = () => {
                                     </div>
 
                                     <div className="payment-form-group">
-                                        <label htmlFor="cardNumber">Card Number</label>
+                                        <label htmlFor="cardNumber">{t('payment_form.card_number')}</label>
                                         <input
                                             type="text"
                                             id="cardNumber"
@@ -287,12 +289,11 @@ const PaymentForm = () => {
 
                                     <div className="payment-inline-fields">
                                         <div className="payment-form-group">
-                                            <label htmlFor="expirationDate">Expiration Date</label>
                                             <input
                                                 type="text"
                                                 id="expirationDate"
                                                 name="expirationDate"
-                                                placeholder="MM/YY"
+                                                placeholder={t('payment_form.exp_date')}
                                                 value={values.expirationDate}
                                                 onChange={handleFormattedChange}
                                                 maxLength="5"
@@ -301,12 +302,11 @@ const PaymentForm = () => {
                                         </div>
 
                                         <div className="payment-form-group">
-                                            <label htmlFor="cvv">CVV</label>
                                             <input
                                                 type="text"
                                                 id="cvv"
                                                 name="cvv"
-                                                placeholder="123"
+                                                placeholder="CVV"
                                                 value={values.cvv}
                                                 onChange={handleFormattedChange}
                                                 maxLength="4"
@@ -314,12 +314,11 @@ const PaymentForm = () => {
                                             />
                                         </div>
                                         <div className="payment-form-group">
-                                            <label htmlFor="securityCode">Security Code</label>
                                             <input
                                                 type="text"
                                                 id="securityCode"
                                                 name="securityCode"
-                                                placeholder="1234"
+                                                placeholder="CVC"
                                                 value={values.securityCode}
                                                 onChange={handleFormattedChange}
                                                 maxLength="4"
@@ -331,24 +330,24 @@ const PaymentForm = () => {
 
                                 <div className="payment-summary-box">
                                     <div className="payment-summary-row">
-                                        <span>Program price:</span>
+                                        <span>{t('payment_form.program_price')}:</span>
                                         <span>${program.price}</span>
                                     </div>
                                     <div className="payment-summary-row">
-                                        <span>Tax:</span>
+                                        <span>{t('payment_form.tax')}:</span>
                                         <span>$0.00</span>
                                     </div>
                                     <div className="payment-summary-row payment-summary-total">
-                                        <span>Total:</span>
+                                        <span>{t('payment_form.total')}:</span>
                                         <span>${program.price}</span>
                                     </div>
                                 </div>
 
-                                <button className="payment-submit-btn">Complete Payment</button>
+                                <button className="payment-submit-btn">{t('payment_form.button')}</button>
 
                                 <div className="payment-secure-notice">
                                     <i className="fas fa-lock"></i>
-                                    <span>Secure payment - Your data is protected</span>
+                                    <span>{t('payment_form.payment_text')}</span>
                                 </div>
                             </>
                         )}

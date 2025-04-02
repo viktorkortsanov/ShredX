@@ -75,10 +75,10 @@
     },
     "fitness_insights": {
         "title": "Wisdom from our experts",
-        "name1":"Viktor Kortsanov",
+        "name1": "Viktor Kortsanov",
         "name2": "Viktor Taskov",
-        "name3":"Georgi Krustev",
-        "name4": "Valentin Petrov", 
+        "name3": "Georgi Krustev",
+        "name4": "Valentin Petrov",
         "quote1": "Consistency is key. It's better to train moderately four times a week for a year than intensely every day for a month and then quit.",
         "quote2": "Your body achieves what your mind believes. Set clear goals, visualize your success, and let your determination fuel your transformation.",
         "quote3": "The weight room is not just about building muscles, it's about building discipline, resilience, and character that extends beyond fitness.",
@@ -522,14 +522,22 @@
     "our_team": {
         "name1": "Viktor Kortsanov",
         "desc1": "Viktor Kortsanov is the ShredX team leader, young and motivated, always ready to help others achieve their fitness goals with enthusiasm and dedication.",
-        
         "name2": "Viktor Taskov",
         "desc2": "Viktor Taskov is a part of the team at ShredX. As a coach, his mission is to reach as wide an audience as possible and help them achieve their goals in a quick and safe manner.",
-        
         "name3": "Georgi Krustev",
         "desc3": "Georgi Krastsev is a 32-year-old Senior Full Stack Developer and professional bodybuilder with over 14 years of fitness experience, believing in discipline and consistency to achieve goals.",
-        
         "name4": "Valentin Petrov",
         "desc4": "Valentin Petrov is a professional bodybuilder with years of experience and a certified trainer. Passionate about fitness, he combines his expertise in bodybuilding with coaching, helping others achieve their goals through discipline and dedication."
+    },
+    "payment_form": {
+        "payment_details": "Payment Details",
+        "name_on_card": "Name on Card",
+        "card_number": "Card Number",
+        "program_price": "Program price",
+        "tax": "Tax",
+        "total": "Total",
+        "button": "Complete Payment",
+        "exp_date": "MM/YY",
+        "payment_text": "Secure payment - Your data is protected"
     }
 }
