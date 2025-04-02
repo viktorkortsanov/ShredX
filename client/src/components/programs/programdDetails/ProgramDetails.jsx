@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/authContext.jsx';
 import './programdetails.css';
+import { useTranslation } from 'react-i18next';
 
 const ProgramDetails = () => {
     const { programId } = useParams();
@@ -9,6 +10,7 @@ const ProgramDetails = () => {
     const [program, setProgram] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('schedule');
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,7 +48,7 @@ const ProgramDetails = () => {
         return (
             <div className="program-loading">
                 <div className="container">
-                    <h1>Loading Program...</h1>
+                    <h1>{t('program.loadingProgram')}...</h1>
                     <div className="loading-spinner"></div>
                 </div>
             </div>
@@ -57,36 +59,36 @@ const ProgramDetails = () => {
         return (
             <div className="program-not-found">
                 <div className="container">
-                    <h1>Program Not Found</h1>
-                    <p>The program you are looking for does not exist.</p>
+                    <h1>{t('program.programNotFound')}</h1>
+                    <p>{t('program.programNotExist')}</p>
                 </div>
             </div>
         );
     }
 
     const getDifficultyLabel = () => {
-        if (program.difficulty === 'beginner') return { label: 'Beginner', color: '#4CAF50' };
-        if (program.difficulty === 'intermediate') return { label: 'Intermediate', color: '#FF9800' };
-        if (program.difficulty === 'advanced') return { label: 'Advanced', color: '#F44336' };
-        return { label: 'All Levels', color: '#2196F3' };
+        if (program.difficulty === 'beginner') return { label: t('programs.difficulty.beginner'), color: '#4CAF50' };
+        if (program.difficulty === 'intermediate') return { label: t('programs.difficulty.intermediate'), color: '#FF9800' };
+        if (program.difficulty === 'advanced') return { label: t('programs.difficulty.advanced'), color: '#F44336' };
+        return { label: t('programs.difficulty.allLevels'), color: '#2196F3' };
     };
 
     const difficulty = getDifficultyLabel();
 
     return (
         <div className="program-details-page">
-            <div className="program-header" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${program.background || '/images/fitness-bg.jpg'})`}}>
+            <div className="program-header" style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${program.background || '/images/fitness-bg.jpg'})` }}>
                 <div className="container-hero">
-                    <div className="program-badge-details" style={{backgroundColor: difficulty.color}}>
+                    <div className="program-badge-details" style={{ backgroundColor: difficulty.color }}>
                         {difficulty.label}
                     </div>
                     <h1 className="program-title">{program.name}</h1>
                     <p className="program-description">{program.description}</p>
-                    
+
                     <div className="program-meta">
                         <div className="program-meta-item">
                             <i className="far fa-calendar-alt"></i>
-                            <span>{program.days.length} Days</span>
+                            <span>{program.days.length} {t('programs.days')}</span>
                         </div>
                         <div className="program-meta-item">
                             <i className="fas fa-fire-alt"></i>
@@ -94,7 +96,7 @@ const ProgramDetails = () => {
                         </div>
                         <div className="program-meta-item">
                             <i className="fas fa-stopwatch"></i>
-                            <span>{program.duration || '4-6'} weeks</span>
+                            <span>{program.duration || '4-6'} {t('programs.weeks')}</span>
                         </div>
                     </div>
                 </div>
@@ -103,17 +105,17 @@ const ProgramDetails = () => {
             <div className="program-content">
                 <div className="container-programs">
                     <div className="program-tabs">
-                        <button 
+                        <button
                             className={`tab-button-program ${activeTab === 'schedule' ? 'active' : ''}`}
                             onClick={() => setActiveTab('schedule')}
                         >
-                            Training Schedule
+                            {t('programs.tabs.trainingSchedule')}
                         </button>
-                        <button 
+                        <button
                             className={`tab-button-program ${activeTab === 'nutrition' ? 'active' : ''}`}
                             onClick={() => setActiveTab('nutrition')}
                         >
-                            Nutrition Plan
+                            {t('programs.tabs.nutritionPlan')}
                         </button>
                     </div>
 
@@ -133,15 +135,15 @@ const ProgramDetails = () => {
                                                         <div key={idx} className="exercise-item">
                                                             <div className="exercise-name">{exercise.name}</div>
                                                             <div className="exercise-details">
-                                                                <span className="sets">{exercise.sets} sets</span>
-                                                                <span className="reps">{exercise.reps} reps</span>
+                                                                <span className="sets">{exercise.sets} {t('programs.sets')}</span>
+                                                                <span className="reps">{exercise.reps} {t('programs.reps')}</span>
                                                             </div>
                                                         </div>
                                                     ))}
                                                 </div>
                                             ) : (
                                                 <div className="rest-day">
-                                                    <span>Rest Day</span>
+                                                    <span>{t('programs.restDay')}</span>
                                                 </div>
                                             )}
                                         </div>
@@ -161,7 +163,7 @@ const ProgramDetails = () => {
                                                     <h3 className="recipe-title">{recipe.name}</h3>
                                                 </div>
                                             </div>
-                                            
+
                                             <div className="recipe-content">
                                                 <div className="macros-strip">
                                                     <div className="macro-item">
@@ -170,30 +172,30 @@ const ProgramDetails = () => {
                                                     </div>
                                                     <div className="macro-item">
                                                         <span className="macro-value">{recipe.macros.protein}g</span>
-                                                        <span className="macro-label">protein</span>
+                                                        <span className="macro-label">{t('programs.nutrition.protein')}</span>
                                                     </div>
                                                     <div className="macro-item">
                                                         <span className="macro-value">{recipe.macros.carbs}g</span>
-                                                        <span className="macro-label">carbs</span>
+                                                        <span className="macro-label">{t('programs.nutrition.carbs')}</span>
                                                     </div>
                                                     <div className="macro-item">
                                                         <span className="macro-value">{recipe.macros.fat}g</span>
-                                                        <span className="macro-label">fat</span>
+                                                        <span className="macro-label">{t('programs.nutrition.fat')}</span>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div className="recipe-details">
                                                     <div className="ingredients-section">
-                                                        <h4>Ingredients</h4>
+                                                        <h4>{t('programs.nutrition.ingredients')}</h4>
                                                         <ul className="ingredients-list">
                                                             {recipe.ingredients.map((ingredient, idx) => (
                                                                 <li key={idx}>{ingredient}</li>
                                                             ))}
                                                         </ul>
                                                     </div>
-                                                    
+
                                                     <div className="instructions-section">
-                                                        <h4>Instructions</h4>
+                                                        <h4>{t('programs.nutrition.instructions')}</h4>
                                                         <p>{recipe.instructions}</p>
                                                     </div>
                                                 </div>
