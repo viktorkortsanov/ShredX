@@ -31,60 +31,63 @@ import Contact from "./components/contacts/Contacts.jsx";
 import Analytics from "./components/adminPanel/аnalytics/Analytics.jsx";
 import { AuthProvider } from "./contexts/authContext.jsx";
 import CreateProgram from "./components/adminPanel/createProgram/CreateProgram.jsx";
+import ErrorBoundary from "./components/errorBoundary/ErrorBoundary.jsx";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n.js";
 
 function App() {
   return (
     <>
-      <I18nextProvider i18n={i18n}>
-      <Provider store={store}>
+      <ErrorBoundary>
+        <I18nextProvider i18n={i18n}>
+          <Provider store={store}>
+            <AuthProvider>
+              <NavBar />
+              <Routes>
+                <Route path="/" element={<MainContent />} />
+                <Route path="/" element={<MainContent />} />
+                <Route path="/forum" element={<ForumContainer />} />
+                <Route path="/404" element={<NotFound />} />
+                <Route path="/forum/:postId/details" element={<PostDetails />} />
+                <Route path="/ourteam" element={<OurTeam />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
+                <Route path="/contact" element={<Contact />} />
 
-    <AuthProvider>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<MainContent />} />
-          <Route path="/forum" element={<ForumContainer />} />
-          <Route path="/404" element={<NotFound />} />
-          <Route path="/forum/:postId/details" element={<PostDetails />} />
-          <Route path="/ourteam" element={<OurTeam />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/contact" element={<Contact />} />
+                <Route element={<PublicGuard />}>
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/login" element={<Login />} />
+                </Route>
 
-          <Route element={<PublicGuard />}>
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
+                <Route element={<PrivateGuard />}>
+                  <Route path="/create" element={<CreatePost />} />
+                  <Route path="/forum/:postId/edit" element={<EditPost />} />
+                  <Route path="/forum/:postId/comment" element={<CommentForm />} />
+                  <Route path="/profile" element={<UserProfile />} />
+                  <Route path="/programs" element={<ProgramsContainer />} />
+                  <Route path="/forum/:postId/comment/:commentId/edit" element={<EditCommentForm />} />
+                  <Route path="/programs/pay/:programId" element={<PaymentForm />} />
+                  <Route path="/programs/:programId/details" element={<ProgramDetails />} />
+                </Route>
 
-          <Route element={<PrivateGuard />}>
-            <Route path="/create" element={<CreatePost />} />
-            <Route path="/forum/:postId/edit" element={<EditPost />} />
-            <Route path="/forum/:postId/comment" element={<CommentForm />} />
-            <Route path="/profile" element={<UserProfile />} />
-            <Route path="/programs" element={<ProgramsContainer />} />
-            <Route path="/forum/:postId/comment/:commentId/edit" element={<EditCommentForm />} />
-            <Route path="/programs/pay/:programId" element={<PaymentForm />} />
-            <Route path="/programs/:programId/details" element={<ProgramDetails />} />
-          </Route>
+                <Route element={<AdminGuard />}>
+                  <Route path="/adminpanel" element={<AdminPanel />} />
+                  <Route path="/adminpanel/usersmanagement" element={<UserManagement />} />
+                  <Route path="/adminpanel/analytics" element={<Analytics />} />
+                  <Route path="/adminpanel/forummanagement" element={<ForumManagement />} />
+                  <Route path="/adminpanel/createprograms" element={<CreateProgram />} />
 
-          <Route element={<AdminGuard />}>
-            <Route path="/adminpanel" element={<AdminPanel />} />
-            <Route path="/adminpanel/usersmanagement" element={<UserManagement />} />
-            <Route path="/adminpanel/analytics" element={<Analytics />} />
-            <Route path="/adminpanel/forummanagement" element={<ForumManagement />} />
-            <Route path="/adminpanel/createprograms" element={<CreateProgram />} />
+                  <Route path="/adminpanel/posts/:postId/edit" element={<EditPost />} />
+                  <Route path="/adminpanel/:userId/info" element={<UserInfo />} />
+                </Route>
 
-            <Route path="/adminpanel/posts/:postId/edit" element={<EditPost />} />
-            <Route path="/adminpanel/:userId/info" element={<UserInfo />} />
-          </Route>
-
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </AuthProvider>
-      </Provider>
-      </I18nextProvider>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <Footer />
+            </AuthProvider>
+          </Provider>
+        </I18nextProvider>
+      </ErrorBoundary>
     </>
   );
 }
