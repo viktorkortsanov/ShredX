@@ -5,6 +5,7 @@ import MyCarousel from "../carousel/Carousel.jsx";
 import FitnessInsights from "../FitnessInsights/FitnessInsights.jsx";
 import './mainContent.css';
 import Sponsors from "../sponsors/Sponsors.jsx";
+import News from "../news/News.jsx";
 
 export default function MainContent() {
     const heroRef = useRef(null);
@@ -80,6 +81,7 @@ export default function MainContent() {
                 <Sponsors />
                 <CardContainer />
                 <MyCarousel />
+                <News/>
 
                 {showScrollTop && (
                     <button 
