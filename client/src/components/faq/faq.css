@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap');
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  font-family: 'Raleway', sans-serif;
+}
+
+.faq-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 2.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.faq-title::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #a0b5cb);
+  left: 50%;
+  bottom: -12px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.faq-item {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 6px 25px rgba(52, 152, 219, 0.15);
+  transform: translateY(-2px);
+}
+
+.faq-question-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  background: linear-gradient(to right, #f8f9fa, #f1f3f5);
+  border-left: 4px solid #3498db;
+  transition: all 0.3s ease;
+}
+
+.faq-question-container:hover {
+  background: linear-gradient(to right, #f1f3f5, #e9ecef);
+}
+
+.faq-question {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  transition: color 0.3s ease;
+}
+
+.faq-question-container:hover .faq-question {
+  color: #3498db;
+}
+
+.faq-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #f8f9fa;
+  transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  color: #3498db;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.faq-arrow.active {
+  background-color: #3498db;
+  color: white;
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+  background-color: #fff;
+  padding: 0 1.5rem;
+}
+
+.faq-answer.active {
+  max-height: 1000px;
+  transition: max-height 1s ease-in-out;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.faq-answer p {
+  color: #596575;
+  line-height: 1.7;
+  margin-top: 1rem;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+  .faq-container {
+    padding: 2rem 1rem;
+  }
+  
+  .faq-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .faq-question {
+    font-size: 1rem;
+  }
+  
+  .faq-question-container {
+    padding: 1rem 1.2rem;
+  }
+  
+  .faq-arrow {
+    width: 30px;
+    height: 30px;
+  }
+}

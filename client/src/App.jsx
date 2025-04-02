@@ -32,6 +32,7 @@ import Analytics from "./components/adminPanel/аnalytics/Analytics.jsx";
 import { AuthProvider } from "./contexts/authContext.jsx";
 import CreateProgram from "./components/adminPanel/createProgram/CreateProgram.jsx";
 import ErrorBoundary from "./components/errorBoundary/ErrorBoundary.jsx";
+import FAQ from "./components/faq/Faq.jsx";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./config/i18n.js";
 
@@ -53,6 +54,7 @@ function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/faq" element={<FAQ />} />
 
                 <Route element={<PublicGuard />}>
                   <Route path="/register" element={<Register />} />
