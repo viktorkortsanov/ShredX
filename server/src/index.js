@@ -21,7 +21,6 @@ const url = 'mongodb://127.0.0.1:27017';
 mongoose
     .connect(url, { 
         dbName: 'shredx',
-        useUnifiedTopology: true
     })
     .then(async () => {
         console.log('Connected to DB');
