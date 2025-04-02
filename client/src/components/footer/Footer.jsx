@@ -16,15 +16,15 @@ export default function Footer() {
                     <Link to="/faq">{t('footer.faq')}</Link>
                 </div>
                 <div className='footer-logos'>
-                    <Link to="https://www.facebook.com/groups/654526977191660">
+                    <a href="https://www.facebook.com/groups/654526977191660" target="_blank" rel="noopener noreferrer">
                         <img src="/images/facebook.png" alt="Facebook" />
-                    </Link>
-                    <Link to="https://www.instagram.com/shredx2025/">
+                    </a>
+                    <a href="https://www.instagram.com/shredx2025/" target="_blank" rel="noopener noreferrer">
                         <img src="/images/instagram.webp" alt="Instagram" />
-                    </Link>
-                    <Link to="https://www.tiktok.com/@shredx2025">
+                    </a>
+                    <a href="https://www.tiktok.com/@shredx2025" target="_blank" rel="noopener noreferrer">
                         <img src="/images/tiktok.webp" alt="TikTok" />
-                    </Link>
+                    </a>
                 </div>
             </div>
         </footer>
