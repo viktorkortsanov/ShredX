@@ -105,7 +105,7 @@ Download Node.JS from here **[Node.JS](https://nodejs.org/en/download)**.
 1. **Create new terminal**:  
 
 2. **Navigate to the Project Directory**:  
-   Go to the server directory:
+   Go to the project directory:
 
    ```bash
    cd shredx
