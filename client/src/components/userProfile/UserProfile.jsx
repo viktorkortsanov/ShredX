@@ -18,7 +18,7 @@ const UserProfile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
-    const [activeTab, setActiveTab] = useState('profile');
+    const [activeTab, setActiveTab] = useState('posts'); // Changed default tab to 'posts'
     const [profileData, setProfileData] = useState({
         username: '',
         email: '',
@@ -55,11 +55,9 @@ const UserProfile = () => {
                 }));
                 
                 try {
-
                     const storedPrograms = JSON.parse(localStorage.getItem('purchasedPrograms')) || [];
                     
                     if (storedPrograms.length > 0) {
-
                         const allPrograms = await getAllPrograms();
 
                         const purchasedProgramsData = allPrograms.filter(program =>
@@ -139,87 +137,8 @@ const UserProfile = () => {
         }
     };
  
-    const handleProfileChange = (e) => {
-        const { name, value } = e.target;
-        setProfileData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
- 
-    const handleProfileSubmit = async (e) => {
-        e.preventDefault();
-        console.log('Saving profile data:', profileData);
-        alert(t('profile.alerts.profileUpdated'));
-    };
- 
     const renderTabContent = () => {
         switch(activeTab) {
-            case 'profile':
-                return (
-                    <div className="profile-form-container">
-                        <h3>{t('profile.editInfo')}</h3>
-                        <form onSubmit={handleProfileSubmit} className="profile-form">
-                            <div className="form-group">
-                                <label htmlFor="username">{t('common.username')}</label>
-                                <input 
-                                    type="text" 
-                                    id="username" 
-                                    name="username" 
-                                    value={profileData.username}
-                                    onChange={handleProfileChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email">{t('common.email')}</label>
-                                <input 
-                                    type="email" 
-                                    id="email" 
-                                    name="email" 
-                                    value={profileData.email}
-                                    onChange={handleProfileChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="phone">{t('profile.phone')}</label>
-                                <input 
-                                    type="tel" 
-                                    id="phone" 
-                                    name="phone" 
-                                    value={profileData.phone}
-                                    onChange={handleProfileChange}
-                                    placeholder={t('profile.placeholders.phone')}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="address">{t('profile.address')}</label>
-                                <textarea 
-                                    id="address" 
-                                    name="address" 
-                                    value={profileData.address}
-                                    onChange={handleProfileChange}
-                                    placeholder={t('profile.placeholders.address')}
-                                ></textarea>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="gender">{t('profile.gender')}</label>
-                                <select 
-                                    id="gender" 
-                                    name="gender" 
-                                    value={profileData.gender}
-                                    onChange={handleProfileChange}
-                                >
-                                    <option value="">{t('profile.genderOptions.select')}</option>
-                                    <option value="male">{t('profile.genderOptions.male')}</option>
-                                    <option value="female">{t('profile.genderOptions.female')}</option>
-                                    <option value="other">{t('profile.genderOptions.other')}</option>
-                                    <option value="prefer-not-to-say">{t('profile.genderOptions.preferNotToSay')}</option>
-                                </select>
-                            </div>
-                            <button type="submit" className="save-profile-btn">{t('profile.saveChanges')}</button>
-                        </form>
-                    </div>
-                );
             case 'posts':
                 return (
                     <div className="posts-section">
@@ -345,12 +264,7 @@ const UserProfile = () => {
  
             <div className="profile-content">
                 <div className="profile-tabs">
-                    <button 
-                        className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('profile')}
-                    >
-                        {t('profile.tabs.profileInfo')}
-                    </button>
+                    {/* Profile tab button removed */}
                     <button 
                         className={`tab-button ${activeTab === 'posts' ? 'active' : ''}`}
                         onClick={() => setActiveTab('posts')}
