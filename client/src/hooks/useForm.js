@@ -1,19 +1,21 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function useForm(initialState) {
     const [values, setValues] = useState(initialState);
     const [error, setError] = useState("");
+    const { t } = useTranslation();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-    
+
         if (name === "cardNumber") {
             if (!/^\d*$/.test(value)) return;
             if (value.length > 16) return;
         }
-    
+
         setValues((prev) => ({ ...prev, [name]: value }));
-    
+
         if (name === "cardNumber") {
             if (value.length !== 16) {
                 setError("Card number must be 16 digits long");
@@ -27,21 +29,21 @@ export default function useForm(initialState) {
                 setError("Expiration date must be in MM/YY format.");
                 return;
             }
-        
+
             const [month, year] = value.split("/").map(Number);
             const currentYear = new Date().getFullYear() % 100;
             const currentMonth = new Date().getMonth() + 1;
-        
+
             if (month < 1 || month > 12) {
                 setError("Month must be between 01 and 12.");
                 return;
             }
-        
+
             if (year < currentYear || (year === currentYear && month < currentMonth)) {
                 setError("Expiration date must be in the future.");
                 return;
             }
-        
+
             setError("");
         }
 
@@ -52,9 +54,9 @@ export default function useForm(initialState) {
             }
             setError("");
         }
-        
+
     };
-    
+
 
     const handleSubmit = (callback) => async (e) => {
         e.preventDefault();
@@ -62,7 +64,7 @@ export default function useForm(initialState) {
         const hasEmptyFields = Object.values(values).some(value => !value.trim());
 
         if (hasEmptyFields) {
-            setError("All fields are required.");
+            setError(t('errors.text'));
             return;
         }
 

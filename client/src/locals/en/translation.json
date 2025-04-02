@@ -529,6 +529,9 @@
         "name4": "Valentin Petrov",
         "desc4": "Valentin Petrov is a professional bodybuilder with years of experience and a certified trainer. Passionate about fitness, he combines his expertise in bodybuilding with coaching, helping others achieve their goals through discipline and dedication."
     },
+    "errors": {
+        "text": "All fields are required."
+    },
     "payment_form": {
         "payment_details": "Payment Details",
         "name_on_card": "Name on Card",

@@ -33,7 +33,7 @@ import { AuthProvider } from "./contexts/authContext.jsx";
 import CreateProgram from "./components/adminPanel/createProgram/CreateProgram.jsx";
 import ErrorBoundary from "./components/errorBoundary/ErrorBoundary.jsx";
 import { I18nextProvider } from "react-i18next";
-import i18n from "./i18n.js";
+import i18n from "./config/i18n.js";
 
 function App() {
   return (

@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import store from '../store/store.js';
 import Register from '../components/register/Register.jsx';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { I18nextProvider } from 'react-i18next';
+import i18n from '../config/i18n.js';
 
 describe('Register component', () => {
     let usernameInput;
@@ -14,11 +16,13 @@ describe('Register component', () => {
 
     beforeEach(() => {
         render(
-            <Provider store={store}>
-                <BrowserRouter>
-                    <Register />
-                </BrowserRouter>
-            </Provider>
+            <I18nextProvider i18n={i18n}>
+                <Provider store={store}>
+                    <BrowserRouter>
+                        <Register />
+                    </BrowserRouter>
+                </Provider>
+            </I18nextProvider>
         );
 
         usernameInput = screen.getByPlaceholderText('Enter your username');
@@ -82,5 +86,5 @@ describe('Register component', () => {
         expect(screen.findByText('Passwords do not match')).toBeTruthy();
 
     });
-    
+
 });

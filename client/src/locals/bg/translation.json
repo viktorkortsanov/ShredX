@@ -121,6 +121,9 @@
     "password_placeholder": "Въведете парола",
     "confirm_password_placeholder": "Потвърдете паролата"
   },
+  "errors": {
+    "text": "Нужни са всички полета."
+  },
   "programs": {
     "loadingProgram": "Зареждане на програма...",
     "programNotFound": "Програмата не е намерена",

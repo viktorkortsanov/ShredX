@@ -37,7 +37,6 @@ const CommentForm = () => {
                             value={values.content}
                             onChange={handleChange}
                             placeholder={t('forum.editCommentPlaceholder')}
-                            required
                         />
                     </div>
                     <div className="form-actions">

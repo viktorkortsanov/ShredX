@@ -5,7 +5,7 @@ import './navbar.css';
 import { useDispatch, useSelector } from "react-redux";
 import userApi from "../../api/userApi.js";
 import { logout as logoutAction } from "../../store/authSlice.js";
-import LanguageSwitcher from "../../LanguageSwitcher/LanguageSwitcher.jsx";
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher.jsx";
 
 export default function NavBar() {
     const { t } = useTranslation();
