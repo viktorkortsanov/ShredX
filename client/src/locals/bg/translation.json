@@ -130,6 +130,8 @@
     "loadingProgram": "Зареждане на програма...",
     "programNotFound": "Програмата не е намерена",
     "programNotExist": "Програмата, която търсите, не съществува.",
+    "loadingPrograms": "Програмите зареждат",
+    "noPrograms": "В момента няма налични програми",
     "difficulty": {
       "beginner": "Начинаещ",
       "intermediate": "Среднo ниво",
