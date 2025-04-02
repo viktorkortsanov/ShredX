@@ -16,6 +16,7 @@ The pages accessible to guests (non-logged-in users) are:
 - Forum
 - Register
 - Login
+- Our team
 - Privacy Policy
 - Terms of Service
 - Contact
