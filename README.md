@@ -43,7 +43,7 @@ The pages accessible to guests (admin users) are:
 
 🧑 **User Features**  
 - Access to fitness programs
-- View user profile(Posts in forum, liked posts and bought programs)
+- View user profile(Posts in forum, liked posts and bought programs.Users can also change and upload their profile picture)
 - Forum participation(Create post ,delete post, like post, comment ,like comment and delete comment)
 - Logout functionality
 
