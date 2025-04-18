@@ -89,7 +89,7 @@ const CreateProgram = () => {
               <option value="beginner">{t('programs.difficulty.beginner')}</option>
               <option value="intermediate">{t('programs.difficulty.intermediate')}</option>
               <option value="advanced">{t('programs.difficulty.advanced')}</option>
-              <option value="all">{t('programs.difficulty.allLevels')}</option>
+              <option value="allLevels">{t('programs.difficulty.allLevels')}</option>
             </select>
             {errors.difficulty && <div className="error-text">{errors.difficulty}</div>}
           </div>

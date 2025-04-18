@@ -1,8 +1,9 @@
 import useForm from '../../hooks/useForm';
 import './contact.css';
 import { useSelector } from 'react-redux';
-import emailjs from 'emailjs-com'
+import emailjs from 'emailjs-com';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 const Contact = () => {
     const user = useSelector((state) => state.auth?.user);
@@ -14,8 +15,13 @@ const Contact = () => {
         message: '',
     });
 
-    const handleFormSubmit = async () => {
+    useEffect(() => {
+        if (user?.email) {
+            handleChange({ target: { name: 'email', value: user.email } });
+        }
+    }, [user]);
 
+    const handleFormSubmit = async () => {
         const templateParams = {
             username: user.username,
             email: values.email,
@@ -29,13 +35,8 @@ const Contact = () => {
                 templateParams,
                 'mxz5zqh2O_h0HA_5_'
             );
-
-            if (response.ok) {
-                console.log(Success);
-            }
         } catch (error) {
             console.log(error);
-
         }
     };
 
@@ -43,9 +44,18 @@ const Contact = () => {
         <div className="contact-container">
             <div className="company-info">
                 <h2 className="title">{t('footer.contact')}</h2>
-                <p className="info"><img src="/images/adress.svg" alt="adress" className='icon-contact' />{t('contacts.address')}</p>
-                <p className="info"><img src="/images/phone.svg" alt="adress" className='icon-contact' />+359 888 123 456</p>
-                <p className="info"><img src="/images/email.svg" alt="adress" className='icon-contact' />shredxcontact@gmail.com</p>
+                <p className="info">
+                    <img src="/images/adress.svg" alt="adress" className='icon-contact' />
+                    {t('contacts.address')}
+                </p>
+                <p className="info">
+                    <img src="/images/phone.svg" alt="phone" className='icon-contact' />
+                    +359 888 123 456
+                </p>
+                <p className="info">
+                    <img src="/images/email.svg" alt="email" className='icon-contact' />
+                    shredxcontact@gmail.com
+                </p>
             </div>
 
             <div className="map-container">
@@ -79,7 +89,7 @@ const Contact = () => {
                             type="email"
                             id="email"
                             name="email"
-                            defaultValue={user?.email}
+                            value={values.email}
                             onChange={handleChange}
                             className="form-input-contact"
                         />

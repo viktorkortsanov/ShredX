@@ -39,16 +39,15 @@ import i18n from "./config/i18n.js";
 function App() {
   return (
     <>
-      <ErrorBoundary>
         <I18nextProvider i18n={i18n}>
           <Provider store={store}>
             <AuthProvider>
               <NavBar />
+              <ErrorBoundary fallback={<NotFound />}>
               <Routes>
                 <Route path="/" element={<MainContent />} />
-                <Route path="/" element={<MainContent />} />
                 <Route path="/forum" element={<ForumContainer />} />
-                <Route path="/404" element={<NotFound />} />
+                <Route path="/404/*" element={<NotFound />} />
                 <Route path="/forum/:postId/details" element={<PostDetails />} />
                 <Route path="/ourteam" element={<OurTeam />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -85,11 +84,11 @@ function App() {
 
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              </ErrorBoundary>
               <Footer />
-            </AuthProvider>
-          </Provider>
-        </I18nextProvider>
-      </ErrorBoundary>
+          </AuthProvider>
+        </Provider>
+      </I18nextProvider>
     </>
   );
 }

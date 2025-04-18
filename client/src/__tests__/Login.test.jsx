@@ -7,7 +7,7 @@ import Login from '../components/login/Login.jsx';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../config/i18n.js';
-
+import ErrorBoundary from '../components/errorBoundary/ErrorBoundary.jsx';
 describe('Login component', () => {
     let emailInput;
     let passwordInput;
@@ -17,7 +17,9 @@ describe('Login component', () => {
             <I18nextProvider i18n={i18n}>
                 <Provider store={store}>
                     <BrowserRouter>
-                        <Login />
+                        <ErrorBoundary>
+                            <Login />
+                        </ErrorBoundary>
                     </BrowserRouter>
                 </Provider>
             </I18nextProvider>

@@ -1,8 +1,6 @@
 import { Component } from "react";
-import { Navigate } from "react-router-dom";
 
 export default class ErrorBoundary extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -16,11 +14,12 @@ export default class ErrorBoundary extends Component {
 
     componentDidCatch(error, errorInfo) {
         console.error("Error caught by ErrorBoundary:", error, errorInfo);
+        window.history.replaceState({}, "", "/404")
     }
 
     render() {
         if (this.state.hasError) {
-            return <Navigate to="/404" replace={true} />;
+            return this.props.fallback || <div>Something went wrong.</div>
         }
 
         return this.props.children;

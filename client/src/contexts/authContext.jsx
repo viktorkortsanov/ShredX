@@ -44,7 +44,6 @@ export const AuthProvider = ({ children }) => {
 
                 if (storedUser) {
                     const userObj = JSON.parse(storedUser);
-                    console.log('Setting user from localStorage:', userObj);
                     setUser(userObj);
 
                     if (userObj.isAdmin) {

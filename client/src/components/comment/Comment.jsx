@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const Comment = ({ comment, userId, isAuthenticated, postId, onDelete, onLike }) => {
     const isOwner = userId === comment.owner;
     const isLiked = comment.likes.includes(userId);
-    const isAdmin = useSelector((state) => state.auth.user.isAdmin);
+    const isAdmin = useSelector((state) => state.auth.user?.isAdmin);
     console.log(isAdmin);
 
     const [userProfileImg, setUserProfileImg] = useState(null);
