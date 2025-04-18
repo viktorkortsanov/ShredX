@@ -60,12 +60,16 @@ const Contact = () => {
 
             <div className="map-container">
                 <iframe
-                    className="google-map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2943.184673041617!2d26.212789767483915!3d41.763043579694354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b46f8f8f8f8f8f%3A0x1234567890abcdef!2sYour+Location!5e0!3m2!1sbg!2sbg!4v1711467890123"
-                    allowFullScreen=""
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2976.0296483416255!2d26.21022557589871!3d41.76301857125457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b2cf9a4b87d0eb%3A0xec9794e7b9362420!2sJungle%20Gym!5e0!3m2!1sbg!2sbg!4v1744993894564!5m2!1sbg!2sbg"
+                    width="600"
+                    height="450"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
                     loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+                    referrerPolicy="no-referrer-when-downgrade">
+                </iframe>
+
+
             </div>
 
             <div className="contact-form-container">
