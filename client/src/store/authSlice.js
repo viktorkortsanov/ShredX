@@ -21,9 +21,14 @@ const authSlice = createSlice({
       localStorage.removeItem('token');
       localStorage.removeItem('likedPosts');
       localStorage.removeItem('purchasedPrograms');
+      localStorage.removeItem('profileImg');
     },
+    setProfileImg: (state, action) => {
+      state.profileImg = action.payload.profileImg;
+      localStorage.setItem('profileImg', action.payload.profileImg);
+    }
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, setProfileImg } = authSlice.actions;
 export default authSlice.reducer;

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import './navbar.css';
 import { useDispatch, useSelector } from "react-redux";
 import userApi from "../../api/userApi.js";
-import { logout as logoutAction } from "../../store/authSlice.js";
+import { logout as logoutAction, setProfileImg } from "../../store/authSlice.js";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher.jsx";
 
 export default function NavBar() {
@@ -20,16 +20,31 @@ export default function NavBar() {
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
     const [userProfileImg, setUserProfileImg] = useState(null);
-
+    const profileImg = useSelector((state) => state.auth?.profileImg);
+ 
     useEffect(() => {
         const getUserImage = async () => {
-            if (userId) {
+            if (!userId) return;
+            const cachedImg = localStorage.getItem('profileImg');
+
+            if (cachedImg === null) {
+                setUserProfileImg(null);
+                return;
+            }
+
+            try {
                 const response = await userApi.getProfileImage(userId);
-                setUserProfileImg(response?.profileImage);
+                if (response?.profileImage) {
+                    setUserProfileImg(response.profileImage);
+                    localStorage.setItem('profileImg', response.profileImage);
+                }
+            } catch (error) {
+                console.error("Грешка при взимане на снимка:", error);
             }
         };
+
         getUserImage();
-    }, [userId]);
+    }, [userId, profileImg]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -67,6 +82,7 @@ export default function NavBar() {
         e.preventDefault();
         await userApi.logout();
         dispatch(logoutAction());
+        dispatch(setProfileImg({ profileImg: null }));
         navigate('/');
         setIsMobileMenuOpen(false);
     };

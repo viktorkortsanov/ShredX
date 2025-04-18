@@ -9,6 +9,8 @@ import { storage } from '../../config/firebase.js';
 import './userprofile.css';
 import { useAuth } from '../../contexts/authContext.jsx';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { setProfileImg } from '../../store/authSlice.js';
  
 const UserProfile = () => {
     const { t } = useTranslation();
@@ -28,6 +30,7 @@ const UserProfile = () => {
     });
     const [userProfileImg, setUserProfileImg] = useState(null);
     const { getAllPrograms } = useAuth();
+    const dispatch = useDispatch();
  
     const fileInputRef = useRef(null);
     const username = useSelector(state => state.auth.user?.username);
@@ -114,7 +117,6 @@ const UserProfile = () => {
             const imageRef = ref(storage, `profileImages/${userId}/${selectedFile.name}`);
             await uploadBytes(imageRef, selectedFile);
             const downloadURL = await getDownloadURL(imageRef);
-
             const response = await fetch(`http://localhost:3030/users/${userId}/updateProfileImage`, {
                 method: 'PUT',
                 headers: {
@@ -131,6 +133,7 @@ const UserProfile = () => {
             console.log('Profile image updated:', result);
 
             setUserProfileImg(downloadURL);
+            dispatch(setProfileImg({profileImg: downloadURL}));
             setSelectedFile(null);
             alert(t('profile.alerts.imageUpdated'));
         } catch (error) {

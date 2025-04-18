@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/authSlice.js';
 import { Link, useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.js';
@@ -11,6 +11,7 @@ export default function Register() {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const profileImg = useSelector((state) => state.auth?.profileImg);
     const { values, handleChange, handleSubmit, error, setError } = useForm({
         username: '',
         email: '',
