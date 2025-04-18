@@ -21,21 +21,16 @@ export default function NavBar() {
     const dropdownRef = useRef(null);
     const [userProfileImg, setUserProfileImg] = useState(null);
     const profileImg = useSelector((state) => state.auth?.profileImg);
- 
+    
     useEffect(() => {
         const getUserImage = async () => {
             if (!userId) return;
-            const cachedImg = localStorage.getItem('profileImg');
-
-            if (cachedImg === null) {
-                setUserProfileImg(null);
-                return;
-            }
 
             try {
                 const response = await userApi.getProfileImage(userId);
                 if (response?.profileImage) {
                     setUserProfileImg(response.profileImage);
+                    dispatch(setProfileImg({profileImg: response.profileImage}));
                     localStorage.setItem('profileImg', response.profileImage);
                 }
             } catch (error) {
@@ -114,14 +109,14 @@ export default function NavBar() {
                             {isAdmin && <li><Link to="/adminpanel" onClick={handleNavLinkClick}>{t('navigation.admin')}</Link></li>}
                             <li className="user-icon" ref={dropdownRef}>
                                 <div onClick={toggleMenu} className="user-profile-trigger">
-                                    <img src={userProfileImg || "/images/null-profile.png"} alt="User Icon" />
+                                    <img src={profileImg || "/images/null-profile.png"} alt="User Icon" />
                                     <span className="mobile-only">{t('navigation.profile')}</span>
                                 </div>
                                 {isMenuOpen && (
                                     <ul className="dropdown-menu-navi">
                                         <li className="user-info-navi">
                                             <img
-                                                src={userProfileImg || "/images/null-profile.png"}
+                                                src={profileImg || "/images/null-profile.png"}
                                                 alt="User Logo"
                                                 className="user-logo"
                                             />
