@@ -30,7 +30,7 @@ The pages accessible to logged-in users are:
 
 ---
 🔐 **Admin Part**  
-The pages accessible to guests (admin users) are:
+The pages accessible to admins (admin users) are:
 - Admin Panel
 - User Management(user accounts ,profile verification ,user privileges)
 - Forum Management(post moderation ,comment management ,content filtering)
