@@ -36,6 +36,7 @@ import FAQ from "./components/faq/Faq.jsx";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./config/i18n.js";
 import OurStory from "./components/ourStory/ourStory.jsx";
+import CookieConsentFooter from "./components/cookieConsent/CookieConsent.jsx";
 
 function App() {
   return (
@@ -87,6 +88,7 @@ function App() {
                 <Route path="*" element={<NotFound />} />
               </Routes>
               </ErrorBoundary>
+              <CookieConsentFooter />
               <Footer />
           </AuthProvider>
         </Provider>

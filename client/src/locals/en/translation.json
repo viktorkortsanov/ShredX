@@ -11,7 +11,8 @@
         "save": "Save",
         "saving": "Saving...",
         "backArrow": "Back Arrow",
-        "loading": "Loading news"
+        "loading": "Loading news",
+        "accept": "Accept"
     },
     "navigation": {
         "home": "HOME",
@@ -576,5 +577,9 @@
         "roadp2": "Over the years, our community has grown with us. From the initial few members, today we are proud to have thousands of satisfied customers who call ShredX their second home. Every success story, every transformation, every smile on the face of a member of our community motivates us to keep going.",
         "roadp3": "Our path hasn't always been easy, but our passion for what we do has never waned. We've overcome challenges together and celebrated our victories as one. And today, we look to the future, with the ambition to expand our community and bring the benefits of an active lifestyle to even more people.",
         "roadp4": "We thank everyone who has been a part of our journey so far, and we look forward to welcoming many more new faces to our ever-growing ShredX community."    
+    },
+    "cookie": {
+        "text": "This site uses cookies to provide you with the best user experience. By continuing to use the site, you agree to our cookie policy",
+        "text2": " Read more."
     }
 }
