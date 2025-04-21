@@ -485,11 +485,10 @@ body {
         box-shadow: none;
         border: none;
         background-color: rgba(255, 255, 255, 0.05);
-        margin: 0;
+        margin: 0 0 1em 9em;
         padding: 0 0 10px 0;
         opacity: 1;
         visibility: visible;
-        transform: none;
     }
 
     .dropdown-menu-about li a {
@@ -532,7 +531,6 @@ body {
     .dropdown-menu-navi li a:hover {
         background-color: #efefef;
         color: #0062ff !important;
-        transform: translateX(5px);
     }
 
     .dropdown-menu-navi li a::after {
