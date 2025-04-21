@@ -94,7 +94,6 @@ nav a:hover::after {
     content: none;
 }
 
-/* About Us Dropdown Styles */
 .about-dropdown {
     position: relative;
     cursor: pointer;
@@ -194,8 +193,6 @@ nav a:hover::after {
     transform: scaleX(1);
     transform-origin: left;
 }
-
-/* End About Us Dropdown Styles */
 
 .user-icon {
     position: relative;
@@ -478,7 +475,6 @@ body {
         color: white;
     }
 
-    /* Mobile About Dropdown */
     .dropdown-menu-about {
         position: static;
         width: 100%;
@@ -502,7 +498,6 @@ body {
         background-color: rgba(255, 255, 255, 0.1);
         color: #60a5fa !important;
     }
-    /* End Mobile About Dropdown */
 
     .dropdown-menu-navi {
         position: static;
