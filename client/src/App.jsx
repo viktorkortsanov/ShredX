@@ -35,6 +35,7 @@ import ErrorBoundary from "./components/errorBoundary/ErrorBoundary.jsx";
 import FAQ from "./components/faq/Faq.jsx";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./config/i18n.js";
+import OurStory from "./components/ourStory/ourStory.jsx";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
                 <Route path="/404/*" element={<NotFound />} />
                 <Route path="/forum/:postId/details" element={<PostDetails />} />
                 <Route path="/ourteam" element={<OurTeam />} />
+                <Route path="/ourstory" element={<OurStory />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/contact" element={<Contact />} />

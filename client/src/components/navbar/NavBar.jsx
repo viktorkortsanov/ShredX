@@ -15,10 +15,12 @@ export default function NavBar() {
     const userId = useSelector((state) => state.auth.user?._id);
     const dispatch = useDispatch();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAboutMenuOpen, setIsAboutMenuOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const navigate = useNavigate();
-    const dropdownRef = useRef(null);
+    const userDropdownRef = useRef(null);
+    const aboutDropdownRef = useRef(null);
     const [userProfileImg, setUserProfileImg] = useState(null);
     const profileImg = useSelector((state) => state.auth?.profileImg);
     
@@ -51,8 +53,11 @@ export default function NavBar() {
         };
 
         const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
                 setIsMenuOpen(false);
+            }
+            if (aboutDropdownRef.current && !aboutDropdownRef.current.contains(event.target)) {
+                setIsAboutMenuOpen(false);
             }
         };
 
@@ -67,6 +72,10 @@ export default function NavBar() {
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const toggleAboutMenu = () => {
+        setIsAboutMenuOpen(!isAboutMenuOpen);
     };
 
     const toggleMobileMenu = () => {
@@ -84,6 +93,7 @@ export default function NavBar() {
 
     const handleNavLinkClick = () => {
         setIsMobileMenuOpen(false);
+        setIsAboutMenuOpen(false);
     };
 
     return (
@@ -102,12 +112,33 @@ export default function NavBar() {
                 <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
                     <li><Link to="/" onClick={handleNavLinkClick}>{t('navigation.home')}</Link></li>
                     <li><Link to="/forum" onClick={handleNavLinkClick}>{t('navigation.forum')}</Link></li>
-                    <li><Link to="/ourteam" onClick={handleNavLinkClick}>{t('navigation.ourTeam')}</Link></li>
+                    
+                    {/* About Us Dropdown */}
+                    <li className="about-dropdown" ref={aboutDropdownRef}>
+                        <div onClick={toggleAboutMenu} className="about-menu-trigger">
+                            {t('navigation.aboutUs')} <span className="dropdown-arrow">▼</span>
+                        </div>
+                        {isAboutMenuOpen && (
+                            <ul className="dropdown-menu-about">
+                                <li>
+                                    <Link to="/ourteam" onClick={handleNavLinkClick}>
+                                        {t('navigation.ourTeam')}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/ourstory" onClick={handleNavLinkClick}>
+                                        {t('navigation.ourStory')}
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}
+                    </li>
+                    
                     {isAuthenticated ? (
                         <>
                             <li><Link to="/programs" onClick={handleNavLinkClick}>{t('navigation.programs')}</Link></li>
                             {isAdmin && <li><Link to="/adminpanel" onClick={handleNavLinkClick}>{t('navigation.admin')}</Link></li>}
-                            <li className="user-icon" ref={dropdownRef}>
+                            <li className="user-icon" ref={userDropdownRef}>
                                 <div onClick={toggleMenu} className="user-profile-trigger">
                                     <img src={profileImg || "/images/null-profile.png"} alt="User Icon" />
                                     <span className="mobile-only">{t('navigation.profile')}</span>

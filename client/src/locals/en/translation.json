@@ -22,7 +22,9 @@
         "register": "REGISTER",
         "logout": "LOGOUT",
         "ourTeam": "OUR TEAM",
-        "admin": "ADMIN"
+        "admin": "ADMIN",
+        "ourStory": "OUR STORY",
+        "aboutUs": "ABOUT US"
     },
     "forum": {
         "createPost": "Create Post",
@@ -560,5 +562,19 @@
         "answer4": "Payments for the programs in ShredX are made only with credit or debit cards. You can use Visa, MasterCard, and other popular cards.",
         "question5": "Can I get a refund after purchasing a program?",
         "answer5": "Once you purchase a program, refunds are not offered. Please make sure that the program meets your needs before making a purchase."
+    },
+    "ourstory": {
+        "about": "About",
+        "mission": "Our Mission",
+        "jorney": "Our Jorney",
+        "aboutp1": "ShredX was born from a passion for fitness and the belief that everyone deserves to discover the best version of themselves. Founded in 2020 by a group of enthusiasts, our journey began as a small gym in the heart of the city and grew into a community of people united by a common goal - a healthier and more balanced lifestyle.",
+        "aboutp2": "Our team of experienced trainers and nutritionists are dedicated to providing personalized programs and professional advice tailored to each person's individual needs and goals. We stand out for our holistic approach to fitness, which includes not only physical activity, but also healthy eating, mental well-being and sustainable habits.",
+        "missionp1": "ShredX's mission is to inspire and support people on their journey to a healthier and more active lifestyle. We believe that fitness should be accessible and enjoyable for everyone, regardless of age, experience, or physical condition.",
+        "missionp2": "Our mission is to create a friendly and motivating environment where everyone feels welcome and supported. We strive to help our members not only achieve their fitness goals, but also build sustainable habits that will serve them throughout their lives.",
+        "missionp3": "We strive to constantly improve our services and programs, following the latest scientific research and trends in the fitness industry, to offer the best to our community.",
+        "roadp1": "The story of ShredX began with a vision - to create more than just a gym. We wanted to create a community where people not only transform their bodies, but also find new friendships, confidence, and the joy of movement.",
+        "roadp2": "Over the years, our community has grown with us. From the initial few members, today we are proud to have thousands of satisfied customers who call ShredX their second home. Every success story, every transformation, every smile on the face of a member of our community motivates us to keep going.",
+        "roadp3": "Our path hasn't always been easy, but our passion for what we do has never waned. We've overcome challenges together and celebrated our victories as one. And today, we look to the future, with the ambition to expand our community and bring the benefits of an active lifestyle to even more people.",
+        "roadp4": "We thank everyone who has been a part of our journey so far, and we look forward to welcoming many more new faces to our ever-growing ShredX community."    
     }
 }
